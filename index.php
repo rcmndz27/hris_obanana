@@ -105,6 +105,7 @@ if (empty($_SESSION['userid'])) {
     <link type='image/x-png' rel='icon' href='img/ob_icon.png'>
     <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel='stylesheet' href='css/login.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
       <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Dosis:300,400,500,,600,700,700i|Lato:300,300i,400,400i,700,700i" rel="stylesheet">
@@ -331,83 +332,86 @@ ul{
 <!-- end of style -->
     
 </head>
-<body>
+<body class="login-page">
 <div id = "myDiv" style="display:none;" class="loader"></div>
 <!-- end of code -->
-    <div class="container form-signin bgform">
-        <form class="container" method="post" action="" name="login">
-            <div class="row">
-                <div class="col">
-                    <img class="mb-4 img-fluid mx-auto d-block" src="img/obananahris.png" alt="">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col" id="usr_field">
-                    <div class="form-group">
-                        <label for="username"><b>EMPLOYEE CODE:</b></label>
-                        <input type="text" name="userid" id="userid" class="form-control" placeholder="OBN000000" autocomplete="off" onkeyup="this.value = this.value.toUpperCase();">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col" id="pass_field">
-                    <div class="form-group">
-                        <label for="password"><b>PASSWORD:</b></label>
-                        <input type="password" name="password" id="password" placeholder="***********" class="form-control" autocomplete="off">
-                    </div>
-                </div>
-            </div>
-<!--             <div class="form-row" >
-                <div class='col-lg-12'>
-                    <small><?php echo $errorMsgLogin; ?></small>
-                </div>
-            </div> -->
-             <div class="form-row">
-                   <div class="col-lg-12">              
-                        <i class="fas fa-sign-in-alt"></i><input type="submit" class="lgnbut" name="loginSubmit" value="LOG-IN" onclick="show()">
-                    </div>
-                 <div class="col-lg-4"> </div>                       
-                        <div class="col-lg-5">  
-                        <div class="form-group">                    
-                            <!-- <label><a href="" class="">FORGOT PASSWORD?</label> -->
-                        </div> 
-                        </div>   
-                 <div class="col-lg-3"></div>                     
+<div class="login-box">
+      <!-- /.login-logo -->
+      <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+            
+            <a href="#" class="h5">
+            <img class="mb-4 img-fluid mx-auto d-block" height="50" width="50" src="img/ob_icon.png" alt="">    
+            <b>Human Resource Information System</b> </a>
+        </div>
+        <div class="card-body">
+          <!-- <p class="login-box-msg">Sign in to start your session</p> -->
 
-                    <?php 
-                     if(isset($_SESSION['msg_error']) && $_SESSION['msg_error'] != ''){
-                        echo'<body onload="showWrongPass()"></body>';
-                      unset($_SESSION['msg_error']);
-                      }
-                    ?>
+          <form action="" method="post" name="login">
+            <div class="input-group mb-3">
+              <input type="text" name="userid" id="userid" class="form-control" placeholder="Emp. Code Ex. OBN000000" autocomplete="off" onkeyup="this.value = this.value.toUpperCase();"/>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fa fa-user"></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input
+                type="password" name="password" id="password" class="form-control" placeholder="Password" autocomplete="off"
+              />
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fa fa-lock"></span>
+                </div>
+              </div>
+            </div>
+            <?php 
+                if(isset($_SESSION['msg_error']) && $_SESSION['msg_error'] != ''){
+                echo'<body onload="showWrongPass()"></body>';
+                unset($_SESSION['msg_error']);
+                }
+            ?>
 
-                    <?php 
-                     if(isset($_SESSION['msg_blocked']) && $_SESSION['msg_blocked'] != ''){
-                        echo'<body onload="showBlocked()"></body>';
-                      unset($_SESSION['msg_blocked']);
-                      }
-                    ?>
-                                       
-                   <div class="col-lg-6">
-                     <div class="form-group">                      
-                            <button class="deactv" />
-                                <a href='newhireaccess/newemployee_entry.php' class="blk" onclick="show()"><img src="img/newemp.png" class="imgsze">NEW EMPLOYEE</a>
-                            </button> 
-                        </div>
-                    </div> 
-                   <div class="col-lg-6">
-                     <div class="form-group">                      
-                                <button class="deactv" />
-                                    <a href='applicantprofile/applicant_entry.php' class="blk" onclick="show()">
-                                        <img src="img/applicant.png" class="imgsze">
-                                    APPLICANT
-                                    </a>
-                                </button>
-                        </div>
-                    </div>                                                                                      
-                </div> <!-- form row closing -->
-        </form>
+            <?php 
+                if(isset($_SESSION['msg_blocked']) && $_SESSION['msg_blocked'] != ''){
+                echo'<body onload="showBlocked()"></body>';
+                unset($_SESSION['msg_blocked']);
+                }
+            ?>
+          <div class="social-auth-links text-center mt-2 mb-3">
+            <input type="submit" class="btn btn-login btn-block" name="loginSubmit" value="Login" onclick="show()">
+            <div class="row">
+                <div class="col-sm-6">
+                    <a href="newhireaccess/newemployee_entry.php" class="btn btn-block btn-login-emp mt-2">
+                        <i class="fas fa-users"></i> New Employee
+                    </a>
+                </div>
+                <div class="col-sm-6">
+                    <a href="applicantprofile/applicant_entry.php" class="btn btn-block btn-login-emp mt-2">
+                        <i class="fas fa-file "></i> Applicant
+                    </a>
+                </div>
+            </div>
+          </div>
+          </form>
+            
+          <!-- /.social-auth-links -->
+
+          <!-- <p class="mb-1">
+            <a href="forgot-password.html">I forgot my password</a>
+          </p>
+          <p class="mb-0">
+            <a href="register.html" class="text-center"
+              >Register a new membership</a
+            >
+          </p> -->
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
     </div>
+    <!-- /.login-box -->
 <script type="text/javascript">
 
     function showWrongPass() {
