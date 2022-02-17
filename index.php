@@ -341,7 +341,7 @@ ul{
         <div class="card-header text-center">
             
             <a href="#" class="h5">
-            <img class="mb-4 img-fluid mx-auto d-block" height="50" width="50" src="img/ob_icon.png" alt="">    
+            <img class="mb-4 img-fluid mx-auto d-block" src="img/obanana.png" alt="">    
             <b>Human Resource Information System</b> </a>
         </div>
         <div class="card-body">
