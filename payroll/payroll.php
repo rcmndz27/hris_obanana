@@ -14,8 +14,13 @@ function GetPayrollList($action, $dtFrom, $dtTo,$location,$empCode){
             $rd_ot = 0;
             $rh_ot = 0;
             $sh_ot = 0;
+<<<<<<< HEAD
             $spr_ot  = 0;
             $adj_ot  = 0;
+=======
+            $spr_ot = 0;
+            $adj_ot = 0;
+>>>>>>> login
 
             $qins = 'INSERT INTO dbo.payroll_period_logs (emp_code,period_from,period_to,location) 
             VALUES (:emp_code,:period_from,:period_to,:location)';
@@ -40,7 +45,7 @@ function GetPayrollList($action, $dtFrom, $dtTo,$location,$empCode){
             <table id='payrollList' class='table table-striped table-sm' cellpadding='0' cellspacing='0'> 
                 <thead>
                     <tr>
-                        <th colspan='11' class='paytop'>Payroll Period of ".$location." from ".$dtFrom." to ".$dtTo."  </th>
+                        <th colspan='13' class='paytop'>Payroll Period of ".$location." from ".$dtFrom." to ".$dtTo."  </th>
                     </tr>
                     <tr class='noExl'>
                         <th>Employee Name</th>
@@ -53,9 +58,15 @@ function GetPayrollList($action, $dtFrom, $dtTo,$location,$empCode){
                         <th>Regular Overtime (Hrs)</th>
                         <th>Rest Day Overtime (Hrs)</th>
                         <th>Regular Holiday Overtime (Hrs)</th>
+<<<<<<< HEAD
                         <th>Special Holiday Overtime (Hrs)</th>
                         <th>Special Holiday Rest Day Overtime (Hrs)</th> 
                         <th>OT Adjustment (Amount)</th>             
+=======
+                        <th>Special Holiday Overtime (Hrs)</th> 
+                        <th>Special Holiday Rest Day Overtime (Hrs)</th>
+                        <th>OT Adjustment (PHP)</th>            
+>>>>>>> login
                     </tr>
                 </thead>
                 <tbody>";
@@ -86,8 +97,13 @@ function GetPayrollList($action, $dtFrom, $dtTo,$location,$empCode){
                                 $rd_ot += round($r['tot_overtime_rest'] , 2);
                                 $rh_ot += round($r['tot_overtime_regholiday'], 2);
                                 $sh_ot += round($r['tot_overtime_spholiday'] , 2);
+<<<<<<< HEAD
                                 $spr_ot += round($r['tot_overtime_sprestholiday'], 2);
                                 $adj_ot += round($r['ot_adjustment'] , 2);                               
+=======
+                                $spr_ot += round($r['tot_overtime_regholiday'], 2);
+                                $adj_ot += round($r['tot_overtime_spholiday'] , 2);
+>>>>>>> login
                 
                                
                    } while($r = $stmt->fetch(PDO::FETCH_ASSOC));
@@ -109,7 +125,10 @@ function GetPayrollList($action, $dtFrom, $dtTo,$location,$empCode){
                                     $dtt_l = ($dtt === false) ? '0000-00-00' : $dtt;
                                     $loc_l = ($rs['location'] === false) ? '0000-00-00' : $rs['location'];
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> login
                                        echo"</tbody>";
                                        echo "<tfoot>
                                             <tr>".
@@ -123,7 +142,11 @@ function GetPayrollList($action, $dtFrom, $dtTo,$location,$empCode){
                                                 "<td class='bg-success'><b>" . $rh_ot . "</b></td>".
                                                 "<td class='bg-success'><b>" . $sh_ot . "</b></td>".
                                                 "<td class='bg-success'><b>" . $spr_ot . "</b></td>".
+<<<<<<< HEAD
                                                 "<td class='bg-success'><b>" . $adj_ot . "</b></td>".                                                
+=======
+                                                "<td class='bg-success'><b>" . $adj_ot . "</b></td>".
+>>>>>>> login
                                                 "</tr><tr>";
                                             if($dtf_l == $dtFrom and $dtt_l == $dtTo and 
                                                 ucwords(strtolower($loc_l)) == ucwords(strtolower($location))){
@@ -149,9 +172,13 @@ function GetPayrollList($action, $dtFrom, $dtTo,$location,$empCode){
                                             "<td class='bg-success'><b>" . $rh_ot . "</b></td>".
                                             "<td class='bg-success'><b>" . $sh_ot . "</b></td>".
                                             "<td class='bg-success'><b>" . $spr_ot . "</b></td>".
+<<<<<<< HEAD
                                             "<td class='bg-success'><b>" . $adj_ot . "</b></td>".                                            
+=======
+                                            "<td class='bg-success'><b>" . $adj_ot . "</b></td>".
+>>>>>>> login
                                             "</tr><tr>"; 
-                                            echo"<td colspan='11' class='paytop'>".
+                                            echo"<td colspan='13' class='paytop'>".
                                             "<div class='mt-3 d-flex justify-content-center'><button id='btnApproveView' class='svepyrll' onmousedown='javascript:ApprovePayView()'><i class='fas fa-save'></i> SAVE PAYROLL</button></div></td>".
                                             "</tr></tfoot>";  
                                         
@@ -159,7 +186,7 @@ function GetPayrollList($action, $dtFrom, $dtTo,$location,$empCode){
 
             
                 }else { 
-                    echo '<tfoot><tr><td colspan="11" class="paytop">No Results Found</td></tr></tfoot>'; 
+                    echo '<tfoot><tr><td colspan="13" class="paytop">No Results Found</td></tr></tfoot>'; 
                 }
     
             echo"</table>"; 
