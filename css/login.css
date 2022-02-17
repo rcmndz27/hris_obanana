@@ -18,6 +18,20 @@ body {
   font-family: 'Dosis', sans-serif;
 }
 
+.login-page {
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #e9ecef;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100vh;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+
 .deactv {
   width: 100%;
   background-color: #fbec1e;
