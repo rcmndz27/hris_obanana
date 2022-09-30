@@ -1,12 +1,20 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//Load Composer's autoloader
+require '../vendor/autoload.php';
+
     Class OvertimeApproval{
 
         function GetOTSummary($empCode){
 
             global $connL;
+
             
-            $query = "SELECT SUM(a.ot_req_hrs) as ot_req_hrs,b.firstname,b.middlename,b.lastname,a.emp_code from tr_overtime a left join employee_profile b on a.emp_code = b.emp_code  WHERE b.reporting_to = :reporting_to and status = 1 GROUP BY b.firstname,b.middlename,b.lastname,a.emp_code";
+            $query = "SELECT  SUM(a.ot_req_hrs) as ot_req_hrs,max(a.rowid) as otrid,b.firstname,b.middlename,b.lastname,a.emp_code from tr_overtime a left join employee_profile b on a.emp_code = b.emp_code WHERE a.reporting_to = :reporting_to and status = 1 GROUP BY b.firstname,b.middlename,b.lastname,a.emp_code";
             $stmt =$connL->prepare($query);
             $param = array(":reporting_to" => $empCode);
             $stmt->execute($param);
@@ -24,13 +32,13 @@
             ";
             if($result){
                 do{
-                    $otFiled = (isset($result['ot_req_hrs']) ? $result['ot_req_hrs'] : 0);
+                    $otFiled = (isset($result['ot_req_hrs']) ? round($result['ot_req_hrs'],2) : 0);
                     $otFiled = ($otFiled === ".00" ? 0 : $otFiled);
                     echo"
                         <tr>
                             <td>".$result['lastname'].",".$result['firstname']." ".$result['middlename']."</td>
-                            <td>"."<button style='width: 9.375rem;' class='penLeave btnPending' id='".$result['emp_code']."' type='submit'>".$otFiled."</button>
-                            <button id='alertot' value='".$otFiled."' hidden></button></td>
+                            <td>"."<button style='width: 9.375rem;' class='penLeave btnPending ".$result['otrid']." ' id='".$result['emp_code']."' type='submit'>".$result['ot_req_hrs']."</button>
+                            <button id='alertot".$result['otrid']."' value='".$otFiled."' hidden></button></td>
                         </tr>";
                 } while($result = $stmt->fetch());
 
@@ -46,7 +54,7 @@
 
             global $connL;
 
-            $query = "SELECT a.ot_req_hrs,a.ot_date,a.ot_ren_hrs,b.firstname,b.middlename,b.lastname,a.emp_code,a.remarks,a.rowid from tr_overtime a left join employee_profile b on a.emp_code = b.emp_code WHERE a.reporting_to = :reporting_to AND a.emp_code = :emp_code and status = 1";
+            $query = "SELECT a.ot_req_hrs,a.ot_date,a.ot_ren_hrs,b.firstname,b.middlename,b.lastname,a.emp_code,a.remarks,a.rowid,a.reporting_to from tr_overtime a left join employee_profile b on a.emp_code = b.emp_code WHERE a.reporting_to = :reporting_to AND a.emp_code = :emp_code and status = 1";
             $stmt =$connL->prepare($query);
             $param = array(":reporting_to" => $empReportingTo , ":emp_code" => $empId );
             $stmt->execute($param);
@@ -75,16 +83,24 @@
                     $actualOT = (isset($result['ot_req_hrs']) ? $result['ot_req_hrs'] : 0);
 
                     echo"
-                        <tr>
-                            <td>".date('m-d-Y',strtotime($result['ot_date']))."</td>
+                        <tr id='clv".$result['rowid']."'>
+                            <td>".date('F d, Y',strtotime($result['ot_date']))."</td>
                             <td>".$result['remarks']."</td>
                             <td>".$result['ot_req_hrs']."</td>
                             <td>".$result['ot_ren_hrs']."</td>
-                            <td>"."<input type='number' style='width: 9.375rem;' class='form-control' value='".round($actualOT,2)."'>"."</td>
+                            <td>"."<input type='number' id='ac".$result['rowid']."' class='form-control' value='".round($actualOT,2)."' max='".round($actualOT,2)."' onkeydown='return false' min='0.5' step='0.5'>"."</td>
+                            <td hidden>"."<input type='text' class='form-control' value='".$result['reporting_to']."' >"."</td>
                             <td>".
-                                "<button class='chckbt btnApproved' id='".$result['rowid']."'><i class='fas fa-check'></i></button> &nbsp".
-                                "<button class='rejbt btnRejectd' id='".$result['rowid']."'><i class='fas fa-times'></i></button>"."</td>
-                        </tr>";
+                                "<button class='btn btn-success btn-sm btnApproved' id='".$result['rowid']."'><i class='fas fa-check'></i></button> &nbsp;".
+                                "<button class='btn btn-danger btn-sm btnRejectd' id='".$result['rowid']."'><i class='fas fa-times'></i></button> &nbsp;";
+
+                           if($result['reporting_to'] == 'OBN20000205') {
+
+                           }else{
+                            echo '<button class="btn btn-warning btn-sm btnFwd" id="'.$result['rowid'].'" value="'.$result['rowid'].'"><i class="fas fa-arrow-right"></i><button id="empcode" value="'.$result['emp_code'].'" hidden></button>';
+                           }    
+                        
+                        echo"</td></tr>";
                 } while($result = $stmt->fetch());
                 echo "</tbody>";
             }else{
@@ -98,7 +114,45 @@
 
             global $connL;
 
-            $query = " UPDATE tr_overtime SET ot_apprv_hrs = :ot_apvd,ot_req_hrs = :ot_rqd,  status = :apvd_stat, audituser = :audituser, auditdate = :auditdate 
+
+          $rquery = "SELECT firstname+' '+lastname as [fullname],emailaddress FROM employee_profile 
+            WHERE emp_code = :empcode";
+            $rparam = array(':empcode' => $empId);
+            $rstmt =$connL->prepare($rquery);
+            $rstmt->execute($rparam);
+            $rresult = $rstmt->fetch();
+            $e_req = $rresult['emailaddress'];
+            $n_req = $rresult['fullname'];
+
+            $query = "SELECT firstname+' '+lastname as [fullname],emailaddress FROM employee_profile WHERE emp_code = :approver";
+            $param = array(':approver' => $empReportingTo);
+            $stmt =$connL->prepare($query);
+            $stmt->execute($param);
+            $result = $stmt->fetch();
+            $e_appr = $result['emailaddress'];
+            $n_appr = $result['fullname'];
+            $apprv_name = $result['fullname'];
+
+
+            $querys = "INSERT INTO logs_ot (ot_id,emp_code,emp_name,remarks,audituser,auditdate) 
+            VALUES(:ot_id, :emp_code,:emp_name,:remarks,:audituser, :auditdate) ";
+
+            $stmts =$connL->prepare($querys);
+
+            $params = array(
+                ":ot_id" => $rowid,
+                ":emp_code"=> $empId,
+                ":emp_name"=> $apprv_name,
+                ":remarks" => 'Approved '.$apvdot.' hr/s by '.$apprv_name,
+                ":audituser" => $empReportingTo,
+                ":auditdate"=>date('m-d-Y H:i:s')
+            );
+
+            $results = $stmts->execute($params);
+
+            echo $results;
+
+            $query = "UPDATE tr_overtime SET ot_apprv_hrs = :ot_apvd,ot_req_hrs = :ot_rqd,  status = :apvd_stat, audituser = :audituser, auditdate = :auditdate 
             WHERE reporting_to = :reporting_to AND emp_code = :emp_code AND rowid = :rowid";
 
             $stmt =$connL->prepare($query);
@@ -118,12 +172,92 @@
 
             echo $result;
 
+        $erequester = $e_req;
+        $nrequester = $n_req;
+        $eapprover = $e_appr;
+        $napprover = $n_appr;
+
+        $mail = new PHPMailer(true);
+        try {
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;      
+        $mail->isSMTP();                                           
+        $mail->Host       = 'mail.obanana.com'; 
+        $mail->SMTPAuth   = true;                                   
+        $mail->Username   = 'hris-support@obanana.com';        
+        $mail->Password   = '@dmin123@dmin123';                              
+        $mail->SMTPSecure = 'tls';            
+        $mail->Port       = 587;                                   
+
+        $mail->setFrom('hris-support@obanana.com','HRIS-NOREPLY');
+        $mail->addAddress($erequester,'Requester');    
+
+        $mail->isHTML(true);                          
+        $mail->Subject = 'Approved Overtime Request  ';
+        $mail->Body    = '<h1>Hi '.$nrequester.' </b>,</h1>Your overtime request #'.$rowid.' has been approved.<br><br>
+                        <h2>From: '.$napprover.' <br><br></h2>
+                        <h2>Check the request in :
+                        <a href="http://124.6.185.87:6868/overtime/ot_app_view.php">Overtime Request List</a> 
+                        <br><br></h2>
+
+                        Thank you for using our application! <br>
+                        Regards, <br>
+                        Human Resource Information System <br> <br>
+
+                        <h6>If you are having trouble clicking the "Overtime Request List" button, copy and paste the URL below into your web browser: http://124.6.185.87:6868/overtime/ot_app_view.php <h6>
+                       ';
+            $mail->send();
+            // echo 'Message has been sent';
+            } catch (Exception $e) {
+            // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+         
+
+
              
         }
 
         function RejectOT($empReportingTo,$empId,$rjctRsn,$rowid){
 
             global $connL;
+
+
+         $rquery = "SELECT firstname+' '+lastname as [fullname],emailaddress FROM employee_profile 
+            WHERE emp_code = :empcode";
+            $rparam = array(':empcode' => $empId);
+            $rstmt =$connL->prepare($rquery);
+            $rstmt->execute($rparam);
+            $rresult = $rstmt->fetch();
+            $e_req = $rresult['emailaddress'];
+            $n_req = $rresult['fullname'];
+
+            $query = "SELECT firstname+' '+lastname as [fullname],emailaddress FROM employee_profile WHERE emp_code = :approver";
+            $param = array(':approver' => $empReportingTo);
+            $stmt =$connL->prepare($query);
+            $stmt->execute($param);
+            $result = $stmt->fetch();
+            $e_appr = $result['emailaddress'];
+            $n_appr = $result['fullname'];
+            $apprv_name = $result['fullname'];
+
+                $querys = "INSERT INTO logs_ot (ot_id,emp_code,emp_name,remarks,audituser,auditdate) 
+                VALUES(:ot_id, :emp_code,:emp_name,:remarks,:audituser, :auditdate) ";
+    
+                $stmts =$connL->prepare($querys);
+    
+            $params = array(
+                ":ot_id" => $rowid,
+                ":emp_code"=> $empId,
+                ":emp_name"=> $apprv_name,
+                ":remarks" => 'Rejected by '.$apprv_name.'. Reason: '.$rjctRsn,
+                ":audituser" => $empReportingTo,
+                ":auditdate"=>date('m-d-Y H:i:s')
+            );
+
+            $results = $stmts->execute($params);
+
+            echo $results;
+
+            // exit();
 
             $query = " UPDATE tr_overtime 
             SET status = :apvd_stat, audituser = :audituser, auditdate = :auditdate, reject_reason = :reject_reason
@@ -144,8 +278,132 @@
             $result = $stmt->execute($param);
 
             echo $result;
+
+        $erequester = $e_req;
+        $nrequester = $n_req;
+        $eapprover = $e_appr;
+        $napprover = $n_appr;
+
+        $mail = new PHPMailer(true);
+        try {
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;      
+        $mail->isSMTP();                                           
+        $mail->Host       = 'mail.obanana.com'; 
+        $mail->SMTPAuth   = true;                                   
+        $mail->Username   = 'hris-support@obanana.com';        
+        $mail->Password   = '@dmin123@dmin123';                              
+        $mail->SMTPSecure = 'tls';            
+        $mail->Port       = 587;                                   
+
+        $mail->setFrom('hris-support@obanana.com','HRIS-NOREPLY');
+        $mail->addAddress($erequester,'Requester');    
+
+        $mail->isHTML(true);                          
+        $mail->Subject = 'Rejected Overtime Request  ';
+        $mail->Body    = '<h1>Hi '.$nrequester.' </b>,</h1>Your overtime request #'.$rowid.' has been rejected.<br><br>
+                        <h2>From: '.$napprover.' <br></h2>
+                        <h2>Reason: '.$rjctRsn.' <br><br></h2>
+                        <h2>Check the request in :
+                        <a href="http://124.6.185.87:6868/overtime/ot_app_view.php">Overtime Request List</a> 
+                        <br><br></h2>
+
+                        Thank you for using our application! <br>
+                        Regards, <br>
+                        Human Resource Information System <br> <br>
+
+                        <h6>If you are having trouble clicking the "Overtime Request List" button, copy and paste the URL below into your web browser: http://124.6.185.87:6868/overtime/ot_app_view.php <h6>
+                       ';
+            $mail->send();
+            // echo 'Message has been sent';
+            } catch (Exception $e) {
+            // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+
             
         }
+
+
+        function FwdOT($empReportingTo,$empId,$approver,$rowid){
+        
+
+        global $connL;
+
+        $cmd = $connL->prepare("UPDATE dbo.tr_overtime SET reporting_to = :approval where rowid = :rowid");
+        $cmd->bindValue('approval','OBN20000205');         
+        $cmd->bindValue('rowid',$rowid);                           
+        $cmd->execute();
+    
+
+        $query = "SELECT firstname+' '+lastname as [fullname],emailaddress FROM employee_profile 
+        WHERE emp_code = :empcode";
+        $param = array(':empcode' => $approver);
+        $stmt =$connL->prepare($query);
+        $stmt->execute($param);
+        $result = $stmt->fetch();
+        $e_appr = $result['emailaddress'];
+        $n_appr = $result['fullname'];        
+        $aprvname = $result['fullname'];
+
+        $query = "INSERT INTO logs_ot (ot_id,emp_code,emp_name,remarks,audituser,auditdate) 
+                VALUES(:ot_id, :emp_code,:emp_name,:remarks,:audituser, :auditdate) ";
+    
+                $stmt =$connL->prepare($query);
+    
+                $param = array(
+                    ":ot_id" => $rowid,
+                    ":emp_code"=> $approver,
+                    ":emp_name"=> $aprvname,
+                    ":remarks" => 'Forwarded to Sir.Francis Calumba',
+                    ":audituser" => $approver,
+                    ":auditdate"=>date('m-d-Y H:i:s')
+                );
+
+            $result = $stmt->execute($param);
+
+            echo $result;
+        // $erequester = 'fcalumba@premiummegastructures.com';
+        // $nrequester = 'Francis Calumba';
+        $erequester = 'fcalumba@premiummegastructures.com';
+        $nrequester = 'Francis Calumba';            
+        $eapprover = $e_appr;
+        $napprover = $n_appr;
+
+        $mail = new PHPMailer(true);
+        try {
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;      
+        $mail->isSMTP();                                           
+        $mail->Host       = 'mail.obanana.com'; 
+        $mail->SMTPAuth   = true;                                   
+        $mail->Username   = 'hris-support@obanana.com';        
+        $mail->Password   = '@dmin123@dmin123';                              
+        $mail->SMTPSecure = 'tls';            
+        $mail->Port       = 587;                                   
+
+        $mail->setFrom('hris-support@obanana.com','HRIS-NOREPLY');
+        $mail->addAddress($erequester,'President');    
+
+        $mail->isHTML(true);                          
+        $mail->Subject = 'Forward Request to the President: ';
+        $mail->Body    = '<h1>Hi '.$nrequester.' </b>,</h1>The overtime request #'.$rowid.' has been forwarded to you for your approval.<br><br>
+                        <h2>From: '.$napprover.' <br><br></h2>
+    
+                        <h2>Check the request in :
+                        <a href="http://124.6.185.87:6868/overtime/ot_app_view.php">Overtime Approval List</a> 
+                        <br><br></h2>
+
+                        Thank you for using our application! <br><br>
+                        Regards, <br>
+                        Human Resource Information System <br> <br>
+
+                        <h6>If you are having trouble clicking the "Overtime Approval List" button, copy and paste the URL below into your web browser: http://124.6.185.87:6868/overtime/ot_app_view.php <h6>
+                       ';
+            $mail->send();
+            // echo 'Message has been sent';
+            } catch (Exception $e) {
+            // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }        
+    
+    }
 
         function GetEmployeeList($employee){
 

@@ -19,7 +19,7 @@ public function InsertPlantillaEnt($entry_date,$department,$position,$reporting_
                     ":reporting_to"=> $reporting_to,
                     ":status"=> $status,
                     ":audituser" => $empCode,
-                    ":auditdate"=>date('m-d-Y')                                          
+                    ":auditdate"=>date('m-d-Y H:i:s')                                          
                 );
 
             $result = $stmt->execute($param);

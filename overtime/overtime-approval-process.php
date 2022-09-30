@@ -40,6 +40,14 @@ if($overtime->{"Action"} == "GetOTDetails"){
 
     $overtimeApproval->RejectOT($empReportingTo, $empId,$rjctRsn,$rowid);
     
+}elseif($overtime->{"Action"} == "FwdOT"){
+
+    $empId = $overtime->{"empId"};
+    $approver = $overtime->{"approver"};
+    $rowid = $overtime->{"rowid"};
+
+    $overtimeApproval->FwdOT($empReportingTo,$empId,$approver,$rowid);
+    
 }elseif($overtime->{"Action"} == "GetEmployeeList"){
         
     $employee = $overtime->{"employee"};

@@ -12,9 +12,17 @@ if($mfpos->{"Action"} == "InsertMfpositionEnt")
 {
 
     $position = $mfpos->{"position"};
+    $status = $mfpos->{"status"};
+    $empCode = $mfpos->{"empCode"};
+    $arr = $mfpos->{"department"} ;
 
+    $mfPos->InsertMfpositionEnt($position,$status,$empCode);    
 
-    $mfPos->InseryMfpositionEnt($position);
+        foreach($arr as $value){
+            $deptJob = $value;
+          
+                $mfPos->InsertJobDeptEnt($deptJob,$empCode);    
+        }    
 
 }else{
 

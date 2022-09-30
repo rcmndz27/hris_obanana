@@ -13,9 +13,10 @@ if($banent->{"Action"} == "InsertBankEnt")
 
     $descsb = $banent->{"descsb"};
     $descsb_name = $banent->{"descsb_name"};
+    $status = $banent->{"status"};
 
 
-    $banEnt->InseryBankEnt($descsb,$descsb_name);
+    $banEnt->InsertBankEnt($descsb,$descsb_name,$status);
 
 }else{
 

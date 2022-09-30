@@ -1,16 +1,16 @@
 <?php
+
+            date_default_timezone_set('Asia/Manila');
     session_start();
 
     if (empty($_SESSION['userid']))
     {
-        echo '<script type="text/javascript">alert("Please login first!!");</script>';
-        header('refresh:1;url=../index.php' );
+        include_once('../loginfirst.php');
+        exit();
     }
     else
     {
-        include('../_header.php');
-        if ($empUserType == "Admin" || $empUserType == "HR-CreateStaff")
-        {
+            include('../_header.php');
             include("../salary/salarylist.php");
             include('../elements/DropDown.php');
             include('../controller/MasterFile.php');
@@ -18,146 +18,22 @@
             $mf = new MasterFile();
             $dd = new DropDown();
 
-        }
-        else
+        if ($empUserType == 'Admin' || $empUserType == 'Group Head' || $empUserType == 'President' || $empUserType == 'Finance')
         {
-            header( "refresh:1;url=../index.php" );
-        }
+  
+        }else{
+            echo '<script type="text/javascript">swal({text:"You do not have access here!",icon:"error"});';
+            echo "window.location.href = '../index.php';";
+            echo "</script>";
+        }             
+
+   
 
     }    
 ?>
+<link rel="stylesheet" type="text/css" href="../salary/sal_view.css">
 <script type="text/javascript" src="../salary/salary_ent.js"></script>
 <script type='text/javascript' src='../js/validator.js'></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<style type="text/css">
-table,th{
-
-                border: 1px solid #dee2e6;
-                font-weight: 700;
-                font-size: 14px;
- }   
-
-
-table,td{
-
-        border: 1px solid #dee2e6;
- }  
-
- th,td{
-    border: 1px solid #dee2e6;
- }
-  
-table {
-        border: 1px solid #dee2e6;
-        color: #ffff;
-        margin-bottom: 100px;
-        border: 2px solid black;
-        background-color: white;
-        text-align: center;
-        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-}
-#myInput {
-  background-image: url('../img/searchicon.png');
-  background-size: 30px;
-  background-position: 5px 5px;
-  background-repeat: no-repeat;
-  width: 100%;
-  font-size: 16px;  
-  padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
-}
-    .bb{
-        font-weight: bolder;
-        text-align: center;
-        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-    }
-    .cstat {
-    color: #e65a5a;
-    font-size: 10px;
-    text-align: center;
-    margin: 0;
-    padding: 5px 5px 5px 5px;
-    }
-    .ppclip{
-        height: 50px;
-        width: 50px;
-        cursor: pointer;
-    }
-    .ppclip:hover{
-        opacity: 0.5;
-    }
-
-    .bb{
-        font-weight: bolder;
-        text-align: center;
-    }
-.mbt {
-    background-color: #faf9f9;
-    padding: 30px;
-    border-radius: 0.25rem;
-}
-
-.pad{
-    padding: 5px 5px 5px 5px;
-    font-weight: bolder;
-}
-
-.caps{
-    text-transform: uppercase;
-    font-weight: bolder;
-    cursor: pointer;
-    margin-bottom: 10px;
-}
-
-.addapp{
-    color: #ffff;
-    font-weight: bolder;
-}
-.req{
-    color: red;
-}
-
-
-.addNewAppBut {
-    background-color: #fbec1e;
-    color: #ed6200;
-    border-color: #fbec1e;
-    border-radius: 1em;
-}
-
-
-.addNewAppBut:hover {
-    opacity: 0.5;
-}
-
-.backbut{
-    background-color: #fbec1e;
-    border-color: #fbec1e;
-    border-radius: 1rem;
-    font-size: 20px;
-    font-weight: bolder;
-    color: #d64747;
-}
-
-.backbut:hover{
-    opacity: 0.5;
-}
-
-.subbut{
-    background-color: #ffaa00;
-    border-color: #ffaa00;
-    font-weight: bolder;
-    color: #ffff;
-    font-size: 20px;
-    border-radius: 1rem;
-}
-
-.subbut:hover{
-    opacity: 0.5;
-}
-
-</style>
 <div class="container">
     <div class="section-title">
           <h1>ALL SALARY LIST</h1>
@@ -173,14 +49,16 @@ table {
     <div class="pt-3">
         <div class="row align-items-end justify-content-end">
             <div class="col-md-12 mb-3">
-                <button type="button" class="bb addNewAppBut" id="salaryEntry"><i class="fas fa-money-bill"></i> ADD NEW EMPLOYEE SALARY </button>
+                <button type="button" class="btn btn-warning" id="salaryEntry"><i class="fas fa-plus-circle"></i> ADD NEW EMPLOYEE SALARY </button>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="panel-body">
                     <div id="tableList" class="table-responsive-sm table-body">
-                        <?php $allSalaryList->GetAllSalaryList(); ?>
+                        <?php
+
+            date_default_timezone_set('Asia/Manila'); $allSalaryList->GetAllSalaryList(); ?>
 
                     </div>
                 </div>
@@ -210,13 +88,17 @@ table {
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="control-label" for="bank_type">Employee Code/Name<span class="req">*</span></label>
-                                        <?php $dd->GenerateDropDown("emp_code", $mf->GetEmployeeSalary("empsal")); ?> 
+                                        <?php
+
+            date_default_timezone_set('Asia/Manila'); $dd->GenerateDropDown("emp_code", $mf->GetEmployeeSalary("empsal")); ?> 
                                     </div>
                                 </div> 
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label" for="bank_type">Bank Name<span class="req">*</span></label>
-                                        <?php $dd->GenerateDropDown("bank_type", $mf->GetAllBank("bankname")); ?> 
+                                        <?php
+
+            date_default_timezone_set('Asia/Manila'); $dd->GenerateDropDown("bank_type", $mf->GetAllBank("bankname")); ?> 
                                     </div>
                                 </div> 
                                 <div class="col-lg-6">
@@ -243,21 +125,23 @@ table {
                                             id="amount" onkeypress="return onlyNumberKey(event)" placeholder="000000.00" maxlength="15">
                                     </div>
                                 </div> 
-                                 <div class="col-lg-6">
-                                 </div> 
-                                <div class="col-lg-6">
+
+                                <div class="col-lg-6" hidden>
                                     <div class="form-group">
                                         <label class="control-label" for="status">Status<span class="req">*</span></label>
                                         <input type="text" class="form-control inputtext" name="status"
                                             id="status" value="Active" readonly>                                        
                                     </div>
-                                </div>                                                   
-                        </div> <!-- form row closing -->
+                                </div> 
+                                <input type="text" name="eMplogName" id="eMplogName" value="<?php
+
+            date_default_timezone_set('Asia/Manila'); echo $empName ?>" hidden>
+                            </div> <!-- form row closing -->
                     </fieldset> 
 
                                 <div class="modal-footer">
-                                    <button type="button" class="backbut" data-dismiss="modal"><i class="fas fa-times-circle"></i> CANCEL</button>
-                                    <button type="button" class="subbut" id="Submit" ><i class="fas fa-check-circle"></i> SUBMIT</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CANCEL</button>
+                                    <button type="button" class="btn btn-success" id="Submit" ><i class="fas fa-check-circle"></i> SUBMIT</button>
                                 </div> 
                         </div> <!-- main body closing -->
                     </div> <!-- modal body closing -->
@@ -286,18 +170,21 @@ table {
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="control-label" for="empcode">Employee Code<span class="req">*</span></label>
-                                        <input type="text" class="form-control" name="empcode" id="empcode" readonly>
+                                    <input type="text" class="form-control" name="empcode" id="empcode" hidden>
+                                    <input type="text" class="form-control" name="empname" id="empname" readonly>                                        
                                     </div>
                                 </div> 
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label" for="banktype">Bank Name<span class="req">*</span></label>
-                                        <?php $dd->GenerateDropDown("banktype", $mf->GetAllBank("bankname")); ?> 
+                                        <?php
+
+            date_default_timezone_set('Asia/Manila'); $dd->GenerateDropDown("banktype", $mf->GetAllBank("bankname")); ?> 
                                     </div>
                                 </div> 
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="control-label" for="bank_no">Bank Account No.<span class="req">*</span></label>
+                                        <label class="control-label" for="bankno">Bank Account No.<span class="req">*</span></label>
                                         <input type="text" class="form-control" name="bankno"
                                             id="bankno" onkeypress="return onlyNumberKey(event)" placeholder="Account No...." maxlength="15">
                                     </div>
@@ -315,8 +202,8 @@ table {
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label" for="amnt">Payment Rate<span class="req">*</span></label>
-                                        <input type="text" class="form-control inputtext" name="amnt"
-                                            id="amnt" onkeypress="return onlyNumberKey(event)" placeholder="000000.00" maxlength="15">
+                                        <input type="number" class="form-control inputtext" name="amnt"
+                                            id="amnt" >
                                     </div>
                                 </div> 
                                  <div class="col-lg-6">
@@ -334,8 +221,8 @@ table {
                     </fieldset> 
 
                                 <div class="modal-footer">
-                                    <button type="button" class="backbut" data-dismiss="modal"><i class="fas fa-times-circle"></i> CANCEL</button>
-                                    <button type="button" class="subbut" onclick="updateSal()" ><i class="fas fa-check-circle"></i> SUBMIT</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CANCEL</button>
+                                    <button type="button" class="btn btn-success" onclick="updateSal()" ><i class="fas fa-check-circle"></i> SUBMIT</button>
                                 </div> 
                         </div> <!-- main body closing -->
                     </div> <!-- modal body closing -->
@@ -343,30 +230,52 @@ table {
             </div> <!-- modal dialog closing -->
         </div><!-- modal fade closing -->
 
+<div class="modal fade" id="viewSalaryLogs" tabindex="-1" role="dialog" aria-labelledby="informationModalTitle"
+aria-hidden="true">
+<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title bb" id="popUpModalTitle">VIEW SALARY LOGS  <i class="fas fa-money-bill"></i></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times; </span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="main-body">
+                <fieldset class="fieldset-border">
+                    <div class="d-flex justify-content-center">
+                        <legend class="fieldset-border pad">
+                        </legend>
+                    </div>
+                    <div class="form-row">
+                        <div class="row pt-3">
+                            <div class="col-md-12">
+                                <div class="panel-body">
+                                    <div id="contents2" class="table-responsive-sm table-body">
+                                        <button type="button" id="search" hidden>GENERATE</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                                               
+                    </div> <!-- form row closing -->
+                </fieldset> 
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CLOSE</button>
+                </div> 
+            </div> <!-- main body closing -->
+        </div> <!-- modal body closing -->
+    </div> <!-- modal content closing -->
+</div> <!-- modal dialog closing -->
+</div><!-- modal fade closing -->   
+
+
     </div> <!-- main body mbt closing -->
 </div><!-- container closing -->
 
 
 <script>
 
-function myFunction() {
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("allSalaryList");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
 
     function onlyNumberKey(evt) {
           
@@ -379,81 +288,313 @@ function myFunction() {
 
 
 
-    function editSalaryModal(empcd,banktype,bankno,payrate,amnt,stts){
+    function editSalaryModal(empcd,fname){
           
         $('#updateSal').modal('toggle');
+        document.getElementById('empcode').value =  empcd;   
+        document.getElementById('empname').value =  fname;   
+        document.getElementById('banktype').value =  document.getElementById('bt'+empcd).innerHTML;  
+        document.getElementById('bankno').value =  document.getElementById('bn'+empcd).innerHTML;  
+        document.getElementById('payrate').value =  document.getElementById('pr'+empcd).innerHTML;  
+        document.getElementById('amnt').value =  document.getElementById('am'+empcd).innerHTML;  
+        document.getElementById('stts').value =  document.getElementById('st'+empcd).innerHTML;  
 
-        var hidful = document.getElementById('empcode');
-        hidful.value =  empcd;   
+}
 
-        var bnkt = document.getElementById('banktype');
-        bnkt.value =  banktype;  
+function insertMfSalLogs(url2,emp_code,column_name,new_data,old_data) {
 
-        var bno = document.getElementById('bankno');
-        bno.value =  bankno;  
-
-        var pyrte = document.getElementById('payrate');
-        pyrte.value =  payrate;  
-
-        var at = document.getElementById('amnt');
-        at.value =  amnt;  
-
-        var ss = document.getElementById('stts');
-        ss.value =  stts;                                  
-
-
-    }
-
+    $.post (url2,
+    {
+        emp_code:emp_code,
+        column_name: column_name,
+        new_data: new_data,
+        old_data: old_data
+    });
+}
 
      function updateSal()
     {
 
-        $("body").css("cursor", "progress");
+
         var url = "../salary/updatesalary_process.php";
+        var url2 = "../salary/logmfsalary_process.php";
         var emp_code = document.getElementById("empcode").value;
         var bank_type = document.getElementById("banktype").value;
         var bank_no = document.getElementById("bankno").value;
         var pay_rate = document.getElementById("payrate").value;
         var amount = document.getElementById("amnt").value;
         var status = document.getElementById("stts").value;      
+        var amtn = '₱ '+amount.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-        $('#contents').html('');
+        var old_bank_type =  document.getElementById('bt'+emp_code).innerHTML;  
+        var old_bank_no =  document.getElementById('bn'+emp_code).innerHTML;  
+        var old_pay_rate =  document.getElementById('pr'+emp_code).innerHTML;  
+        var old_amount  = document.getElementById('am'+emp_code).innerHTML;  
+        var old_status =  document.getElementById('st'+emp_code).innerHTML;            
 
-                        swal({
-                          title: "Are you sure?",
-                          text: "You want to update this employee salary details?",
-                          icon: "success",
-                          buttons: true,
-                          dangerMode: true,
-                        })
-                        .then((verifyApp) => {
-                          if (verifyApp) {
-                                $.post (
-                                    url,
-                                    {
-                                        action: 1,
-                                        emp_code: emp_code ,
-                                        bank_type: bank_type ,
-                                        bank_no: bank_no ,
-                                        pay_rate: pay_rate ,
-                                        amount: amount ,               
-                                        status: status 
-                                        
-                                    },
-                                    function(data) { $("#contents").html(data).show(); }
-                                );
+swal({                     
+  title: "Are you sure?",
+  text: "You want to update this employee salary details?",
+  icon: "success",
+  buttons: true,
+  dangerMode: true,
+})
+    .then((verifyApp) => {
+      if (verifyApp) {                      
+        $.post (
+            url,
+            {
+                action: 1,
+                emp_code: emp_code ,
+                bank_type: bank_type ,
+                bank_no: bank_no ,
+                pay_rate: pay_rate ,
+                amount: amount ,               
+                status: status 
+                
+            },
+            function(data) { 
+                console.log(data);
+                swal({
+                    title: "Success!", 
+                    text: "Successfully updated the employee salary details!", 
+                    icon: "success",
+                }).then(function() {
+                    $('#updateSal').modal('hide');
+                        document.getElementById('bt'+emp_code).innerHTML =  bank_type;
+                        document.getElementById('bn'+emp_code).innerHTML = bank_no;
+                        document.getElementById('pr'+emp_code).innerHTML =  pay_rate;
+                        document.getElementById('am'+emp_code).innerHTML =  amount;
+                        document.getElementById('amtn'+emp_code).innerHTML =  amtn;
+                        document.getElementById('st'+emp_code).innerHTML =   status;
 
-                                swal({text:"Successfully update the employee salary details!",icon:"success"});
-                                location.reload();
-                          } else {
-                            swal({text:"You cancel the updating of employee salary details!",icon:"error"});
-                          }
-                        });
-   
-                }
+                        if(bank_type !== old_bank_type){
+                        new_data = bank_type;
+                        old_data =  old_bank_type;
+                        column_name =  'Bank Type';
+                        insertMfSalLogs(url2,emp_code,column_name,new_data,old_data);
+                        }if(bank_no !== old_bank_no){
+                        new_data = bank_no;
+                        old_data =  old_bank_no;
+                        column_name =  'Bank No.';         
+                        insertMfSalLogs(url2,emp_code,column_name,new_data,old_data);
+                        }if(pay_rate !== old_pay_rate){
+                        new_data = pay_rate;
+                        old_data =  old_pay_rate;
+                        column_name =  'Pay Type';         
+                        insertMfSalLogs(url2,emp_code,column_name,new_data,old_data);
+                        }if(amount !== old_amount){
+                        new_data = amount;
+                        old_data =  old_amount;
+                        column_name =  'Salary Rate';         
+                        insertMfSalLogs(url2,emp_code,column_name,new_data,old_data);
+                        }if(status !== old_status){
+                        new_data = status;
+                        old_data =  old_status;
+                        column_name =  'Status';         
+                        insertMfSalLogs(url2,emp_code,column_name,new_data,old_data);
+                        }                                                
+                 }); 
+            }
+        );
+
+  } else {
+    swal({text:"You cancel the updating of employee salary details!",icon:"error"});
+  }
+});
+
+}
+
+
+function viewSalaryLogs(empcd)
+ {
+     $('#viewSalaryLogs').modal('toggle');
+     var url = "../salary/viewsalarylogs_process.php";
+     var emp_code = empcd;
+
+     $.post (
+        url,
+        {
+            emp_code: emp_code        
+        },
+        function(data) { 
+            $("#contents2").html(data).show(); 
+            $("#ViewSalaryLogs").tableExport({
+                headers: true,
+                footers: true,
+                formats: ['xlsx'],
+                filename: 'id',
+                bootstrap: false,
+                exportButtons: true,
+                position: 'top',
+                ignoreRows: null,
+                ignoreCols: null,
+                trimWhitespace: true,
+                RTL: false,
+                sheetname: 'Salary Logs'
+            });
+            $(".fa-file-export").remove();
+            $(".btn btn-primary").prepend('<i class="fas fa-file-export"></i>');                
+        }
+        );
+ }
+
+
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("allSalaryList");
+  tr = table.getElementsByTagName("tr");
+for (i = 0; i < tr.length; i++) {
+   td = tr[i].getElementsByTagName("td");
+    if(td.length > 0){ // to avoid th
+       if (td[0].innerHTML.toUpperCase().indexOf(filter) > -1 || td[1].innerHTML.toUpperCase().indexOf(filter) > -1 
+        || td[2].innerHTML.toUpperCase().indexOf(filter) > -1  || td[3].innerHTML.toUpperCase().indexOf(filter) > -1
+        || td[4].innerHTML.toUpperCase().indexOf(filter) > -1  || td[5].innerHTML.toUpperCase().indexOf(filter) > -1 ) {
+         tr[i].style.display = "";
+       } else {
+         tr[i].style.display = "none";
+       }
+
+    }
+ }
+}
+
+
+
+getPagination('#allSalaryList');
+
+function getPagination(table) {
+  var lastPage = 1;
+
+  $('#maxRows')
+    .on('change', function(evt) {
+      //$('.paginationprev').html('');  
+      // reset pagination
+
+     lastPage = 1;
+      $('.pagination')
+        .find('li')
+        .slice(1, -1)
+        .remove();
+      var trnum = 0; // reset tr counter
+      var maxRows = parseInt($(this).val()); // get Max Rows from select option
+
+      if (maxRows == 5000) {
+        $('.pagination').hide();
+      } else {
+        $('.pagination').show();
+      }
+
+      var totalRows = $(table + ' tbody tr').length; // numbers of rows
+      $(table + ' tr:gt(0)').each(function() {
+        // each TR in  table and not the header
+        trnum++; // Start Counter
+        if (trnum > maxRows) {
+          // if tr number gt maxRows
+
+          $(this).hide(); // fade it out
+        }
+        if (trnum <= maxRows) {
+          $(this).show();
+        } // else fade in Important in case if it ..
+      }); //  was fade out to fade it in
+      if (totalRows > maxRows) {
+        // if tr total rows gt max rows option
+        var pagenum = Math.ceil(totalRows / maxRows); // ceil total(rows/maxrows) to get ..
+        //  numbers of pages
+        for (var i = 1; i <= pagenum; ) {
+          // for each page append pagination li
+          $('.pagination #prev')
+            .before(
+              '<li data-page="' +
+                i +
+                '">\
+                                  <span>' +
+                i++ +
+                '<span class="sr-only">(current)</span></span>\
+                                </li>'
+            )
+            .show();
+        } // end for i
+      } // end if row count > max rows
+      $('.pagination [data-page="1"]').addClass('active'); // add active class to the first li
+      $('.pagination li').on('click', function(evt) {
+        // on click each page
+        evt.stopImmediatePropagation();
+        evt.preventDefault();
+        var pageNum = $(this).attr('data-page'); // get it's number
+
+        var maxRows = parseInt($('#maxRows').val()); // get Max Rows from select option
+
+        if (pageNum == 'prev') {
+          if (lastPage == 1) {
+            return;
+          }
+          pageNum = --lastPage;
+        }
+        if (pageNum == 'next') {
+          if (lastPage == $('.pagination li').length - 2) {
+            return;
+          }
+          pageNum = ++lastPage;
+        }
+
+        lastPage = pageNum;
+        var trIndex = 0; // reset tr counter
+        $('.pagination li').removeClass('active'); // remove active class from all li
+        $('.pagination [data-page="' + lastPage + '"]').addClass('active'); // add active class to the clicked
+        // $(this).addClass('active');                  // add active class to the clicked
+        limitPagging();
+        $(table + ' tr:gt(0)').each(function() {
+          // each tr in table not the header
+          trIndex++; // tr index counter
+          // if tr index gt maxRows*pageNum or lt maxRows*pageNum-maxRows fade if out
+          if (
+            trIndex > maxRows * pageNum ||
+            trIndex <= maxRows * pageNum - maxRows
+          ) {
+            $(this).hide();
+          } else {
+            $(this).show();
+          } //else fade in
+        }); // end of for each tr in table
+      }); // end of on click pagination list
+      limitPagging();
+    })
+    .val(5)
+    .change();
+
+  // end of on select change
+
+  // END OF PAGINATION
+}
+
+function limitPagging(){
+    // alert($('.pagination li').length)
+
+    if($('.pagination li').length > 7 ){
+            if( $('.pagination li.active').attr('data-page') <= 3 ){
+            $('.pagination li:gt(5)').hide();
+            $('.pagination li:lt(5)').show();
+            $('.pagination [data-page="next"]').show();
+        }if ($('.pagination li.active').attr('data-page') > 3){
+            $('.pagination li:gt(0)').hide();
+            $('.pagination [data-page="next"]').show();
+            for( let i = ( parseInt($('.pagination li.active').attr('data-page'))  -2 )  ; i <= ( parseInt($('.pagination li.active').attr('data-page'))  + 2 ) ; i++ ){
+                $('.pagination [data-page="'+i+'"]').show();
+
+            }
+
+        }
+    }
+}                
     
 
 </script>
 
 
-<?php include("../_footer.php");?>
+<?php
+
+            date_default_timezone_set('Asia/Manila'); include("../_footer.php");?>

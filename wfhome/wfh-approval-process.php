@@ -39,6 +39,15 @@ if($wfh->{"Action"} == "GetWfhDetails"){
 
     $wfhApproval->RejectWfh($empReportingTo, $empId,$rjctRsn,$rowId);
     
+}else if($wfh->{"Action"} == "FwdWfh"){
+
+    $empId = $wfh->{"empId"};
+    $approver = $wfh->{"approver"};
+    $rowId = $wfh->{"rowid"};
+
+
+    $wfhApproval->FwdWfh($empReportingTo,$empId,$approver,$rowId);
+    
 }else if($wfh->{"Action"} == "GetEmployeeList"){
         
     $employee = $wfh->{"employee"};

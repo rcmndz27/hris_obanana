@@ -34,7 +34,7 @@ public function InsertAppEnt($fname,$mi,$fmname,$howtoa,$refby,$refdate,$jpos1,$
                     ":ds2"=> $ds2,
                     ":scname2" => $scname2,  
                     ":audituser" => $fname,
-                    ":auditdate"=>date('m-d-Y')                                          
+                    ":auditdate"=>date('m-d-Y H:i:s')                                          
                 );
 
             $result = $stmt->execute($param);

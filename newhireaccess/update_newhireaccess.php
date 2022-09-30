@@ -6,8 +6,8 @@
     if (empty($_SESSION['userid']))
     {
 
-        echo '<script type="text/javascript">alert("Please login first!!");</script>';
-        header( "refresh:1;url=../index.php" );
+        include_once('../loginfirst.php');
+        exit();
     }
     else
     {
@@ -65,10 +65,10 @@
         $mf = new MasterFile();
         $dd = new DropDown();
 
-            if($empUserType == 'Admin'|| $empUserType == 'HR-CreateStaff') {
+            if($empUserType == 'Admin' || $empUserType == 'HR Generalist' ||$empUserType == 'HR Manager' || $empUserType == 'Group Head'|| $empUserType == 'HR-CreateStaff') {
 
             }else{
-                        echo '<script type="text/javascript">alert("You do not have access here!");';
+                        echo '<script type="text/javascript">swal({text:"You do not have access here!",icon:"error"});';
                         echo "window.location.href = '../index.php';";
                         echo "</script>";
             }
@@ -115,13 +115,13 @@ opacity: 0.5;
     width: 200px;
 }
 
-.backbut{
+.btn btn-danger{
     background-color: #fbec1e;
     border-color: #fbec1e;
     border-radius: 1rem;
 }
 
-.backbut:hover{
+.btn btn-danger:hover{
     opacity: 0.5;
 }
 
@@ -329,7 +329,7 @@ color: #d64747;
                             <div class="mt-3 d-flex justify-content-center">
                                 <button type="button" id="search" class="btn btn-primary sub" onmousedown="javascript:filterAtt()">UPDATE
                                 </button>
-                                <button type="button" id="search" class="btn btn-small btn-primary mr-1 bup backbut">
+                                <button type="button" id="search" class="btn btn-small btn-primary mr-1 bup btn btn-danger">
                                     <a href="../newhireaccess/newhireaccess_view.php" class="backtxt">BACK</a>
                                 </button>                                
                             </div>     

@@ -39,17 +39,18 @@ $(function(){
    
             param = {
                 'Action': 'InseryDeductionEnt',
-                'emp_code': emp_code[0],
-                'deduction_id': deduction_id[0],
+                'emp_code': $('#emp_code').val(),
+                'deduction_id': $('#deduction_id').val(),
                 'period_cutoff': $( "#period_cutoff option:selected" ).text(),
                 'effectivity_date': $('#effectivity_date').val(),
+                'eMplogName': $('#eMplogName').val(),
                 'amount': $('#amount').val()                   
             }
     
             param = JSON.stringify(param);
 
-            // swal(param);
-            // exit();
+            // console.log(param);
+            // return false;
 
                      swal({
                           title: "Are you sure you want to add this employee deduction details?",
@@ -67,9 +68,14 @@ $(function(){
                                             data: param
                                         },
                                         success: function (result) {
-                                            console.log('success: ' + result);
-                                            swal({text:"Successfully added employee deduction details!",icon:"success"});
-                                            location.reload();
+                                            // console.log(result);
+                                            swal({
+                                                title: "Success!", 
+                                                text: "Successfully added the employee deduction details!", 
+                                                icon: "success",
+                                            }).then(function() {
+                                                location.href = '../deduction/deductionlist_view.php';
+                                            });
                                         },
                                         error: function (result) {
                                             console.log('error: ' + result);

@@ -6,8 +6,8 @@
     if (empty($_SESSION['userid']))
     {
 
-        echo '<script type="text/javascript">alert("Please login first!!");</script>';
-        header( "refresh:1;url=../index.php" );
+        include_once('../loginfirst.php');
+        exit();
     }
     else
     {
@@ -21,113 +21,50 @@
         $dd = new DropDown();
         $empCode = $_SESSION['userid'];
 
+        if ($empUserType == 'Admin' || $empUserType == 'Finance' || $empUserType == 'Group Head' || $empUserType == 'President')
+        {
+  
+        }else{
+            echo '<script type="text/javascript">swal({text:"You do not have access here!",icon:"error"});';
+            echo "window.location.href = '../index.php';";
+            echo "</script>";
+        }
+
     }
         
 ?>
 
-
-<!-- <script type='text/javascript' src='../payslip/payslips.js'></script>	 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js" ></script>
-<style type="text/css">
-    
- table,
-
-            th,
-            td {
-                border: 1px solid black;
-                border-collapse: collapse;
-                padding: 3px 3px 3px 3px;
-                border-color: black;
-                background-color: #ffff;
-                /*font-style: italic;*/
-                font-size: 15px;
-
-            }
-  
-            table {
-                /*width: 600px;*/
-                display: block;
-                overflow-y:auto;
-                overflow-x:auto;
-                padding: 20px 20px 20px 20px;
-                color: black;
-                /*background-image: url('../img/payroll4.png');*/
-            }
-.btn-save{
-background-color: #b52020;
-border-color: #b52020;
-color: #ffff;
-
-}
-.paybg{
-background-color: #D9E1F2;
-}
-
-.grossbg{
-background-color: #B4C6E7;
-}
-
-.dedbg{
-background-color: #FFF2CC;
-}
-.subbg{
-background-color: #FFE699;
-}
-.netbg{
-background-color: #C6E0B4;
-}
-.btn-save:hover{
-/*opacity: 0.5;*/
-background-color: #b71e1e;
-}
-.mbot{
-    font-weight: bolder;    
-    font-size: 17px;
-}
-.pdfimg:hover{
-    opacity: 0.5;
-    cursor: pointer;
-}
-
-.mleft{
-    margin-left: 30px;
-}
-.bgen{
-    font-weight: bolder;
-}
-.mbt {
-    background-color: #faf9f9;
-    padding: 30px;
-    border-radius: 0.25rem;
-}
-
-.pad{
-    padding: 5px 5px 5px 5px;
-    font-weight: bolder;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="../payslip/payslip.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<div id = "myDiv" style="display:none;" class="loader"></div>
 <div class="container">
     <div class="section-title">
           <h1>PAYROLL REGISTER VIEW</h1>
         </div>
     <div class="main-body mbt">
-
-          <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item active" aria-current="page"><b><i class='fas fa-money-check fa-fw'>
-                        </i>&nbsp;PAYROLL REGISTER VIEW</b></li>
+                        </i>&nbsp;PAYSLIP ALL VIEWING </b></li>
             </ol>
           </nav>
 
       <div class="form-row pt-3">
                 <label for="employeepaylist" class="col-form-label pad">EMPLOYEE:</label>
-                <div class="col-md-6">      
-                        <?php $dd->GenerateDropDown("emppay", $mf->GetAllEmployeePay("emppay")); ?>
+                <div class="col-md-3">      
+                        <?php $dd->GenerateSingleGenDropDown("emppay", $mf->GetAttEmployeeNames("allempnames")); ?>
                 </div>
 
-                <div class="col-md-3 d-flex">
-                        <button type="button" id="search" class="genpyrll" onmousedown="javascript:filterAtt()">
+                <label for="payroll_period" class="col-form-label pad">PAY-PERIOD:</label>
+
+                <div class='col-md-3'>
+                    <?php $dd->GenerateDropDown("ddcutoff", $mf->GetAllPayCutoff("paycut")); ?>
+                </div>                
+
+
+                <div class="col-md-2 d-flex">
+                        <button type="button" id="search" class="btn btn-warning" onclick="filterAtt()">
                             <i class="fas fa-search-plus"></i>GENERATE                       
                         </button>
                         <a href='javascript:generatePDF()'><img src="../img/expdf.png" height="40" class="pdfimg" id='expdf'></a>                        
@@ -135,7 +72,7 @@ background-color: #b71e1e;
 
         </div>
 
-    <div class="row pt-5">
+    <div class="row pt-4">
         <div class="col-md-12 mbot">
             <div class="d-flex justify-content-center">
                 <div id='contents'></div>     
@@ -144,90 +81,60 @@ background-color: #b71e1e;
     </div>
 </div>
 </div>
-<br><br>
+
 <script type="text/javascript">
-        $('#expdf').hide();
-        $('#search').click(function(e){
-            var showpay = $('#showpay').val();  
-                if(showpay === 'ok'){
-                    $('#expdf').show();
-                }else{
-                    $('#expdf').hide();
-                }
-    });
-</script>
-<script>
-
-
-
+    $('#expdf').hide();
     function filterAtt()
     {
-        $("body").css("cursor", "progress");
+
+        $('#expdf').show();
+        document.getElementById("myDiv").style.display="block";
         var url = "../payslip/payslips_process.php";
-        var cutoffe = $('#emppay').children("option:selected").val();
-        var data = cutoffe.split(" - ");
+        var dt = 'OBN'+$('#emppay').val();
+        var cutoff = $('#ddcutoff').children("option:selected").val();
+        var data = cutoff.split(" - ");
         $('#expdf').show();
 
-        $('#contents').html('')
+        // console.log(dt);
+        // console.log(data[0]);
+        // console.log(data[1]);
+
+        // return false;
 
         $.post (
             url,
             {
                 _action: 1,
-                _empCode: data[0],
-                _from: data[2],
-                _to: data[3]
+                _empCode: dt,
+                _from: data[0],
+                _to: data[1]
                 
             },
-            function(data) { $("#contents").html(data).show(); }
+            function(data) { $("#contents").html(data).show(); 
+            document.getElementById("myDiv").style.display="none";
+        }
         );
     }
-</script>
-<script type="text/javascript">
-function generatePDF() {
-  console.log('converting...');
 
-  var printableArea = document.getElementById('payslipsList');
+    function generatePDF() {
+        var dt = $('#emppay').val();
+        var cfta = document.getElementById(dt).innerHTML;
+        var data = cfta.split(" - ");
+        var stringToReplace = data[0];
+        var desired = cfta.replace(/[^\w\s]/gi, '');
 
-  html2canvas(printableArea, {
-    useCORS: true,
-    onrendered: function(canvas) {
-
-      var pdf = new jsPDF('p', 'pt', 'letter');
-
-      var pageHeight = 980;
-      var pageWidth = 900;
-      for (var i = 0; i <= printableArea.clientHeight / pageHeight; i++) {
-        var srcImg = canvas;
-        var sX = 0;
-        var sY = pageHeight * i; // start 1 pageHeight down for every new page
-        var sWidth = pageWidth;
-        var sHeight = pageHeight;
-        var dX = 0;
-        var dY = 0;
-        var dWidth = pageWidth;
-        var dHeight = pageHeight;
-
-        window.onePageCanvas = document.createElement("canvas");
-        onePageCanvas.setAttribute('width', pageWidth);
-        onePageCanvas.setAttribute('height', pageHeight);
-        var ctx = onePageCanvas.getContext('2d');
-        ctx.drawImage(srcImg, sX, sY, sWidth, sHeight, dX, dY, dWidth, dHeight);
-
-        var canvasDataURL = onePageCanvas.toDataURL("image/png", 1.0);
-        var width = onePageCanvas.width;
-        var height = onePageCanvas.clientHeight;
-
-        if (i > 0) // if we're on anything other than the first page, add another page
-          pdf.addPage(612, 791); // 8.5" x 11" in pts (inches*72)
-
-        pdf.setPage(i + 1); 
-        pdf.addImage(canvasDataURL, 'PNG', 20, 40, (width * .62), (height * .62)); 
-
-      }
-      pdf.save('payslip.pdf');
+        html2canvas(document.getElementById('payslipsList'), {
+            onrendered: function (canvas) {
+                var data = canvas.toDataURL();
+                var docDefinition = {
+                    content: [{
+                        image: data,
+                        width: 500
+                    }]
+                };
+                pdfMake.createPdf(docDefinition).download("PaySlips"+desired+".pdf");
+            }
+        });
     }
-  });
-}
 </script>
 <?php include('../_footer.php');  ?>

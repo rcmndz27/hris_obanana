@@ -2,7 +2,7 @@
 
 Class AllowancesEnt{
 
-public function InseryAllowancesEnt($emp_code,$benefit_id,$period_cutoff,$effectivity_date,$amount)
+public function InsertAllowancesEnt($eMplogName,$emp_code,$benefit_id,$period_cutoff,$effectivity_date,$amount)
     {
         global $connL;
 
@@ -18,8 +18,8 @@ public function InseryAllowancesEnt($emp_code,$benefit_id,$period_cutoff,$effect
                     ":period_cutoff" => $period_cutoff,
                     ":effectivity_date"=> $effectivity_date,
                     ":amount"=> $amount,
-                    ":audituser" => 'user',
-                    ":auditdate"=>date('m-d-Y')                                          
+                    ":audituser" => $eMplogName,
+                    ":auditdate"=>date('m-d-Y H:i:s')                                          
                 );
 
             $result = $stmt->execute($param);

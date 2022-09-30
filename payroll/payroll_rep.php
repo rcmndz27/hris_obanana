@@ -37,7 +37,8 @@ function GetPayrollRepList($action, $dtFrom, $dtTo,$company){
                         <th>Absences</th>
                         <th> Lates </th>
                         <th> Undertime </th>
-                        <th> Salary Adjustment </th>
+                        <th> Salary Adjustment (HRS)</th>
+                        <th> Salary Adjustment (Days)</th>
                         <th> Overtime </th>
                         <th> Meal Allowance </th>
                         <th> Salary Allowance </th>
@@ -94,13 +95,14 @@ function GetPayrollRepList($action, $dtFrom, $dtTo,$company){
                                     "<td>" . $r['location'] . "</td>".
                                     "<td>" . date('m/d/y', strtotime($r['date_hired'])) . "</td>".
                                     "<td>" . date('m/d/y', strtotime($r['date_from'])) . "</td>".
-                                    "<td>" . date('m/d/y', strtotime($r['date_to'])) . "</td>".                                           
+                                    "<td>" . date('m/d/y', strtotime($r['date_to'])) . "</td>".
                                     "<td>" . round($r['month_pay'],2) . "</td>".
                                     "<td>" . round($r['daily_pay'],2) . "</td>".
                                     "<td>" . round($r['semi_month_pay'],2) . "</td>".
                                     "<td>" . round($r['absences'],2) . "</td>".
                                     "<td>" . round($r['late'],2) . "</td>".
                                     "<td>" . round($r['undertime'],2) . "</td>".
+                                    "<td>" . round($r['total_adjstmenthrs'],2) . "</td>".
                                     "<td>" . round($r['salary_adjustment'],2) . "</td>".
                                     "<td>" . round($r['overtime'],2) . "</td>".
                                     "<td>" . round($r['meal_allowance'],2) . "</td>".

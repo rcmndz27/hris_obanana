@@ -1,25 +1,17 @@
 $(function(){
 
 
-    function XLSXExport(){
-        $("#dtrList").tableExport({
-            headers: true,
-            footers: true,
-            formats: ['xlsx'],
-            filename: 'id',
-            bootstrap: false,
-            exportButtons: true,
-            position: 'top',
-            ignoreRows: null,
-            ignoreCols: null,
-            trimWhitespace: true,
-            RTL: false,
-            sheetname: 'id'
-        });
-    }
-
     $("#search").click(function(e){
-        e.preventDefault();
+
+         e.preventDefault();
+        document.getElementById("myDiv").style.display="block";
+
+        if($('#dateTo').val()== '' ){
+
+            swal({text:"Kindly fill up blank fields!",icon:"warning"});
+            document.getElementById("myDiv").style.display="none";
+
+       }else{   
 
         param = {
           Action: "GetAttendanceList",
@@ -37,17 +29,21 @@ $(function(){
             data: {data:param} ,
             success: function (data){
                 // console.log("success: "+ data);
-                $("#tableList").html(data);
-                XLSXExport();
+                    $('#dtrList').remove();      
+                    $('#btnExport').remove();
+                    $('#dtrViewList').append(data);     
+                // XLSXExport();
+                document.getElementById("myDiv").style.display="none";
             },
             error: function (data){
+                
+                document.getElementById("myDiv").style.display="none";
                 // console.log("error: "+ data);	
             }
         });
 
-    });
+        }
 
-
-    
+    });    
 
 });

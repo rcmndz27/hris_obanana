@@ -3,61 +3,24 @@
 
     if (empty($_SESSION['userid']))
     {
-        echo '<script type="text/javascript">alert("Please login first!!");</script>';
-        header( "refresh:1;url=../index.php" );
+        include_once('../loginfirst.php');
+        exit();
     }
     else
     {
         include('../_header.php');
         include('../leave/leaveApproval.php');
 
-        if ($empType == 'Staff')
-        {
-            echo '<span class="etcMessage">
-                    <script type="text/javascript">
-                        alert("This page is RESTRICTED!!");
-                        $("etcMessage").remove();
-                    </script>
-                </span';
-        }
-        else
-        {
-
+        if ($empUserType == 'Admin' || $empUserType == 'HR Generalist' ||$empUserType == 'HR Manager' || $empUserType == 'Group Head' || $empUserType == 'Team Manager' || $empUserType == 'President' || $empUserType == 'Finance'){
+        }else{
+            echo '<script type="text/javascript">swal({text:"You do not have access here!",icon:"error"});';
+            echo "window.location.href = '../index.php';";
+            echo "</script>";
         }
     }
 ?>
-<style type="text/css">
-table,th{
-
-                border: 1px solid #dee2e6;
-                font-weight: 700;
-                font-size: 14px;
- }   
-
-
-table,td{
-
-                border: 1px solid #dee2e6;
- }  
-
- th,td{
-    border: 1px solid #dee2e6;
- }
-  
-table {
-        border: 1px solid #dee2e6;
-        color: #ffff;
-        margin-bottom: 100px;
-        border: 2px solid black;
-        background-color: white;
-    }
-  
-.mbt {
-    background-color: #faf9f9;
-    padding: 30px;
-    border-radius: 0.25rem;
-}
-</style>
+<script type='text/javascript' src='../leave/leaveApplication.js'></script>
+<link rel="stylesheet" type="text/css" href="../leave/leaveapp.css">
 <div class="container">
     <div class="section-title">
           <h1>LEAVE APPROVAL</h1>
@@ -73,6 +36,7 @@ table {
           </nav>
 
          <div class="row">
+            <input type="text" name="empCode" id="empCode" value="<?php  echo $empCode; ?>" hidden>
             <div class="col-md-12 pt-3">
                 <div class="panel-body" id="pendingList">
                 </div>
@@ -102,20 +66,22 @@ table {
                             <input type="text" name="remarks" id="remarks" class="form-control">
                         </div>
                     </div>
-
                     <div class="modal-footer">
-                        <button type="button" class="backbut" data-dismiss="modal"><i class="fas fa-times-circle"></i> CANCEL</button>
-                        <button type="button" class="subbut btnRemarks" id="submit"><i class="fas fa-check-circle"></i> SUBMIT</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CANCEL</button>
+                        <button type="button" class="btn btn-success btnRemarks" id="submit"><i class="fas fa-check-circle"></i> SUBMIT</button>
                     </div>
-
                 </div>
             </div>
         </div>       
     </div>
 </div>
-<br><br>
 
-<script type='text/javascript' src='../leave/leaveApplication.js'></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
 <?php  include('../_footer.php');?>
+
+<!-- <script type="text/javascript">
+    $(document).ready(function(){
+
+});
+</script> -->

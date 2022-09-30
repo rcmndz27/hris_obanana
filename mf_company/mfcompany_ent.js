@@ -13,7 +13,8 @@ $(function(){
     
         inputValues = [
             $('#code'),
-            $('#descs')
+            $('#descs'),
+            $('#status')
         ];
 
 
@@ -23,17 +24,17 @@ $(function(){
 
 
 
+
     $('#Submit').click(function(){
 
 
         if (CheckInput() === true) {
-
-
    
             param = {
                 'Action': 'InsertMfcompanyEnt',
                 'code': $('#code').val(),
-                'descs': $('#descs').val()                 
+                'descs': $('#descs').val(),
+                'status': $('#status').children("option:selected").val()                                    
             }
     
             param = JSON.stringify(param);
@@ -57,12 +58,17 @@ $(function(){
                                             data: param
                                         },
                                         success: function (result) {
-                                            console.log('success: ' + result);
-                                            swal({text:"Successfully added company!",icon:"success"});
-                                            location.reload();
+                                            swal({
+                                            title: "Success!", 
+                                            text: "Successfully added the company details!", 
+                                            type: "success",
+                                            icon: "success",
+                                            }).then(function() {
+                                                location.href = '../mf_company/mfcompanylist_view.php';
+                                            });  
                                         },
                                         error: function (result) {
-                                            console.log('error: ' + result);
+                                            // console.log('error: ' + result);
                                         }
                                     }); //ajax
                           } else {

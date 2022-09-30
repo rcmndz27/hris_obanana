@@ -12,8 +12,5 @@
     {
         GetPayslipsList($action, $dateFrom, $dateTo,$empCode);
     }
-    else{
-
-    }
 
 ?>

@@ -1,74 +1,51 @@
  $(function(){
 
-   
+   $('#planot').hide();
+
     function CheckInput() {
 
         var inputValues = [];
 
         inputValues = [
-            
+
+            $('#otdate'),
             $('#remarks'),
-            
-        ];
+            $('#otstartdtime'),
+            $('#otenddtime')         
+        ]
 
         var result = (CheckInputValue(inputValues) === '0') ? true : false;
         return result;
     }
 
 
-            $('#otdateto').change(function(){
-
-                if($('#otdateto').val() < $('#otdate').val()){
-
-                    swal({text:"OT date TO must be greater than OT Date From!",icon:"error"});
-
-                    var input2 = document.getElementById('otdateto');
-                    input2.value = $('#otdate').val();
-                }else{
-                    // alert('Error');
-                }   
-
-
-            });
-
 $('#Submit').click(function(){
 
     
-
-            var dte = $('#otdate').val();
-            var dte_to = $('#otdateto').val();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-            dateArr = []; //Array where rest of the dates will be stored
-
-            //creating JS date objects
-            var start = new Date(dte);
-            var date = new Date(dte_to);
-            var end = date.setDate(date.getDate() + 1);
-
-            //Logic for getting rest of the dates between two dates("FromDate" to "EndDate")
-            while(start < end){
-               dateArr.push(moment(start).format('MM-DD-YYYY'));
-               var newDate = start.setDate(start.getDate() + 1);
-               start = new Date(newDate);  
-            }
-
-            const ite_date = dateArr.length === 0  ? dte : dateArr ;
+            var e_req = $('#e_req').val();
+            var n_req = $('#n_req').val();
+            var e_appr = $('#e_appr').val();
+            var n_appr = $('#n_appr').val();            
 
 
             if (CheckInput() === true) {
 
                 param = {
                     "Action":"ApplyOtApp",
-                    "otdate": ite_date,
+                    "otdate": $('#otdate').val(),
                     "otstartdtime": $('#otstartdtime').val(),
                     "otenddtime": $('#otenddtime').val(),
-                    "otreqhrs": $('#otreqhrs').val(),
-                    "remarks": $('#remarks').val()
+                    "remarks": $('#remarks').val(),
+                    "e_req": e_req,
+                    "n_req": n_req,
+                    "e_appr": e_appr,
+                    "n_appr": n_appr
                 };
                 
                 param = JSON.stringify(param);
 
-                    if($('#otdateto').val() >= $('#otdate').val()){
+                // console.log(param);
+                // return false;
 
                             swal({
                               title: "Are you sure?",
@@ -78,6 +55,7 @@ $('#Submit').click(function(){
                               dangerMode: true,
                             })
                             .then((applyOT) => {
+                            document.getElementById("myDiv").style.display="block";
                               if (applyOT) {
                                         $.ajax({
                                         type: "POST",
@@ -85,22 +63,29 @@ $('#Submit').click(function(){
                                         data: {data:param} ,
                                         success: function (data){
                                             console.log("success: "+ data);
-                                            $('#popUpModal').modal('toggle');
-                                            location.reload();
+                                                    swal({
+                                                    title: "Success!", 
+                                                    text: "Successfully added overtime details!", 
+                                                    type: "success",
+                                                    icon: "success",
+                                                    }).then(function() {
+                                                        location.href = '../overtime/ot_app_view.php';
+                                                    });
                                         },
                                         error: function (data){
-                                            alert('error');
+                                            // alert('error');
                                         }
                                     });//ajax
 
                               } else {
-                                swal("Your cancel your overtime!");
+                                document.getElementById("myDiv").style.display="none";
+                                swal({text:"You cancel your overtime!",icon:"error"});
                               }
                             });
-                        }else{
-                            swal({text:"OT date TO must be greater than OT Date From!",icon:"error"});
-                        }
+
                  
+            }else{
+                swal({text:"Kindly fill up blank fields!",icon:"error"});
             }
                         
       

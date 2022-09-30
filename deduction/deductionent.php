@@ -2,13 +2,13 @@
 
 Class DeductionEnt{
 
-public function InseryDeductionEnt($emp_code,$deduction_id,$period_cutoff,$effectivity_date,$amount)
+public function InsertDeductionEnt($eMplogName,$emp_code,$deduction_id,$period_cutoff,$effectivity_date,$amount)
     {
         global $connL;
 
-            $query = "INSERT INTO employee_deduction_management (emp_code,deduction_id,period_cutoff,effectivity_date,amount,audituser,auditdate) 
+            $query = "INSERT INTO employee_deduction_management (emp_code,deduction_id,period_cutoff,effectivity_date,amount,status,audituser,auditdate) 
 
-                VALUES(:emp_code,:deduction_id,:period_cutoff,:effectivity_date,:amount,:audituser,:auditdate)";
+                VALUES(:emp_code,:deduction_id,:period_cutoff,:effectivity_date,:amount,:status,:audituser,:auditdate)";
     
                 $stmt =$connL->prepare($query);
 
@@ -18,8 +18,9 @@ public function InseryDeductionEnt($emp_code,$deduction_id,$period_cutoff,$effec
                     ":period_cutoff" => $period_cutoff,
                     ":effectivity_date"=> $effectivity_date,
                     ":amount"=> $amount,
-                    ":audituser" => 'user',
-                    ":auditdate"=>date('m-d-Y')                                          
+                    ":status"=> 'Active',
+                    ":audituser" => $eMplogName,
+                    ":auditdate"=>date('m-d-Y H:i:s')                                          
                 );
 
             $result = $stmt->execute($param);

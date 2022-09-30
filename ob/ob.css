@@ -1,0 +1,20 @@
+#empList{
+    list-style: none;
+    padding: 0px;
+    width: 250px;
+    position: absolute;
+    margin: 0;
+    }
+
+#empList li{
+ background: #d5dee6;
+ color: #000;
+ padding: 4px;
+ border-radius: 0.25rem;
+}
+
+#empList li:hover{
+ cursor: pointer;
+ font-size: 20px;
+ opacity: 0.5;
+}

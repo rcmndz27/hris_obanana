@@ -3,25 +3,26 @@
 
     if (empty($_SESSION['userid']))
     {
-        echo '<script type="text/javascript">alert("Please login first!!");</script>';
-        header('refresh:1;url=../index.php' );
+        include_once('../loginfirst.php');
+        exit();
     }
     else
     {
         include('../_header.php');
-        if ($empUserType == "Admin" || $empUserType == "HR-CreateStaff")
-        {
-            include("../users/userslist.php");
-            include('../elements/DropDown.php');
-            include('../controller/MasterFile.php');
-            $allUsersList = new UsersList(); 
-            $mf = new MasterFile();
-            $dd = new DropDown();
+        include("../users/userslist.php");
+        include('../elements/DropDown.php');
+        include('../controller/MasterFile.php');
+        $allUsersList = new UsersList(); 
+        $mf = new MasterFile(); 
+        $dd = new DropDown();
 
-        }
-        else
+        if ($empUserType == 'Admin' || $empUserType == 'HR Generalist' ||$empUserType == 'HR Manager' || $empUserType == 'Group Head' || $empUserType == 'President')
         {
-            header( "refresh:1;url=../index.php" );
+  
+        }else{
+            echo '<script type="text/javascript">swal({text:"You do not have access here!",icon:"error"});';
+            echo "window.location.href = '../index.php';";
+            echo "</script>";
         }
 
     }    
@@ -47,7 +48,7 @@
     <div class="pt-3">
         <div class="row align-items-end justify-content-end">
             <div class="col-md-12 mb-3">
-                <button type="button" class="bb addNewAppBut" id="usersEntry"><i class="fas fa-plus-circle"></i> ADD NEW USER ACCOUNT </button>
+                <button type="button" class="btn btn-warning" id="usersEntry"><i class="fas fa-plus-circle"></i> ADD NEW USER ACCOUNT </button>
             </div>
         </div>
         <div class="row">
@@ -82,10 +83,10 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="control-label" for="empcode name">Employee Code/Name<span class="req">*</span></label>
-                                        <?php $dd->GenerateDropDown("emp_code", $mf->GetUserAccntNames("allusracnt")); ?> 
+                                        <?php $dd->GenerateSingleGenDropDown("emp_code", $mf->GetUserAccntNames("allusracnt")); ?> 
                                     </div>
                                 </div> 
-                              <div class="col-12">
+<!--                               <div class="col-12">
                                 <div class="form-group">
                                  <label class="control-label" for="users_id">User Password<span class="req">*</span>
                                  </label>
@@ -99,14 +100,7 @@
                                   </div>
                                 </div>
                                 </div>
-                              </div> 
-<!--                                 <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="control-label" for="useremail">User Email<span class="req">*</span></label>
-                                        <input type="text" class="form-control inputtext" name="useremail"
-                                            id="useremail" readonly>    
-                                    </div>
-                                </div> -->
+                              </div>  -->
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label" for="emp_level">User Level<span class="req">*</span></label>
@@ -123,12 +117,13 @@
                                         </select>                                               
                                     </div>
                                 </div>
+                                <input type="text" name="eMplogName" id="eMplogName" value="<?php echo $empName ?>" hidden>
                             </div> <!-- form row closing -->
                     </fieldset> 
 
                                 <div class="modal-footer">
-                                    <button type="button" class="backbut" data-dismiss="modal"><i class="fas fa-times-circle"></i> CANCEL</button>
-                                    <button type="button" class="subbut" id="Submit" ><i class="fas fa-check-circle"></i> SUBMIT</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CANCEL</button>
+                                    <button type="button" class="btn btn-success" id="Submit" ><i class="fas fa-check-circle"></i> SUBMIT</button>
                                 </div> 
                         </div> <!-- main body closing -->
                     </div> <!-- modal body closing -->
@@ -161,9 +156,9 @@
                                   <input name="usrid" id="usrid" class="form-control" hidden />
                                     </div>
                                 </div> 
-                              <div class="col-12">
+<!--                               <div class="col-12">
                                 <div class="form-group">
-                                 <label class="control-label" for="users_id">User Password<span class="req">*</span>
+                                 <label class="control-label" for="password">User Password<span class="req">*</span>
                                  </label>
                                 <div class="input-group mb-3">
                                   <input name="pssword" type="password"  class="form-control inputtext" id="pssword" nameplaceholder="Password" required="true" aria-label="password" aria-describedby="basic-addon1" />
@@ -175,7 +170,7 @@
                                   </div>
                                 </div>
                                 </div>
-                              </div> 
+                              </div>  -->
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label" for="usrtyp">User Level<span class="req">*</span></label>
@@ -196,8 +191,8 @@
                     </fieldset> 
 
                                 <div class="modal-footer">
-                                    <button type="button" class="backbut" data-dismiss="modal"><i class="fas fa-times-circle"></i> CANCEL</button>
-                                    <button type="button" class="subbut" onclick="updateUsrs()" ><i class="fas fa-check-circle"></i> SUBMIT</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CANCEL</button>
+                                    <button type="button" class="btn btn-success" onclick="updateUsrs()" ><i class="fas fa-check-circle"></i> SUBMIT</button>
                                 </div> 
                         </div> <!-- main body closing -->
                     </div> <!-- modal body closing -->
@@ -242,24 +237,6 @@ function password_show_hide() {
   }
 }
 
-function myFunction() {
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("allUsersList");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
 
     function onlyNumberKey(evt) {
           
@@ -270,40 +247,26 @@ function myFunction() {
         return true;
     }
 
-      function editUsrModal(empcd,name,usrrtyp,usrmail,stts){
+      function editUsrModal(empcd,name){
 
    
         $('#updateUsrs').modal('toggle');
-
-        var hidful = document.getElementById('empcode');
-        hidful.value =  name;   
-
-        var bnkt = document.getElementById('usrtyp');
-        bnkt.value =  usrrtyp;  
-
-        var at = document.getElementById('stats');
-        at.value =  stts;  
-
-        var ast = document.getElementById('usrid');
-        ast.value =  empcd;  
-
-                                
-
-    }
+        document.getElementById('empcode').value =  name;   
+        document.getElementById('usrid').value =  empcd;                            
+        document.getElementById('usrtyp').value = document.getElementById('usr'+empcd).innerHTML;
+        document.getElementById('stats').value = document.getElementById('st'+empcd).innerHTML;
+    }   
 
 
      function updateUsrs()
     {
 
-        $("body").css("cursor", "progress");
+
         var url = "../users/updateusers_process.php";
         var emp_code = document.getElementById("usrid").value;
-        var userpassword = document.getElementById("pssword").value;
         var status = $('#stats').children("option:selected").val();
         var usertype = $('#usrtyp').children("option:selected").val();
-
-
-        $('#contents').html('');
+        // var userpassword = document.getElementById("pssword").value;
 
                         swal({
                           title: "Are you sure?",
@@ -319,16 +282,26 @@ function myFunction() {
                                     {
                                         action: 1,
                                         emp_code: emp_code ,
-                                        userpassword: userpassword,
+                                        // userpassword: userpassword,
                                         status: status,
                                         usertype: usertype
                                         
                                     },
-                                    function(data) { $("#contents").html(data).show(); }
+                                    function(data) { 
+                                        swal({
+                                            title: "Success!", 
+                                            text: "Successfully updated the user account details!", 
+                                            type: "success",
+                                            icon: "success",
+                                        }).then(function() {
+                                            $('#updateUsrs').modal('hide');
+                                            document.getElementById('st'+emp_code).innerHTML = status;
+                                            document.getElementById('usr'+emp_code).innerHTML = usertype;
+                                         }); 
+                                    }
                                 );
 
-                                swal({text:"Successfully update the employee users details!",icon:"success"});
-                                location.reload();
+
                           } else {
                             swal({text:"You cancel the updating of employee users details!",icon:"error"});
                           }
@@ -340,12 +313,8 @@ function myFunction() {
     function deleteLogsModal(empcd)
     {
 
-        $("body").css("cursor", "progress");
         var url = "../users/unblockusers_process.php";
         var emp_code = empcd;
-
-
-        $('#contents').html('');
 
                         swal({
                           title: "Are you sure?",
@@ -363,17 +332,214 @@ function myFunction() {
                                         emp_code: emp_code 
                                         
                                     },
-                                    function(data) { $("#contents").html(data).show(); }
+                                    function(data) { 
+                                            swal({
+                                            title: "Success!", 
+                                            text: "Successfully unlocked the user account!.", 
+                                            icon: "success",
+                                        }).then(function() {
+                                            document.querySelector('#ub'+emp_code).remove();
+                                        });
+                                    }
                                 );
 
-                                swal({text:"Successfully unblocked the user account!",icon:"success"});
-                                location.reload();
                           } else {
                             swal({text:"You cancel the unblocking of the user account!",icon:"error"});
                           }
                         });
    
                 }
+
+function resetPassword(empcd)
+        {
+
+                 var url = "../users/resetPasswordProcess.php";    
+                 var emp_code = empcd;   
+
+                    swal({
+                          title: "Are you sure?",
+                          text: "You want to reset this user account password?",
+                          icon: "warning",
+                          buttons: true,
+                          dangerMode: true,
+                        })
+                        .then((restPSS) => {
+                          if (restPSS) {
+                            $.post (
+                                    url,
+                                    {
+                                        choice: 1,
+                                        emp_code:emp_code
+                                    },
+                                    function(data) { 
+                                        // console.log(data);
+                                            swal({
+                                            title: "Success!", 
+                                            text: "Successfully reset the password!", 
+                                            type: "info",
+                                            icon: "info",
+                                            });  
+                                    }
+                                );
+                          } else {
+                            swal({text:"You stop the cancellation of password reset.",icon:"error"});
+                          }
+                        });
+      
+    }                
+
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("allUsersList");
+  tr = table.getElementsByTagName("tr");
+for (i = 0; i < tr.length; i++) {
+   td = tr[i].getElementsByTagName("td");
+    if(td.length > 0){ // to avoid th
+       if (td[0].innerHTML.toUpperCase().indexOf(filter) > -1 || td[1].innerHTML.toUpperCase().indexOf(filter) > -1 
+        || td[2].innerHTML.toUpperCase().indexOf(filter) > -1  || td[3].innerHTML.toUpperCase().indexOf(filter) > -1
+        || td[4].innerHTML.toUpperCase().indexOf(filter) > -1  || td[5].innerHTML.toUpperCase().indexOf(filter) > -1 ) {
+         tr[i].style.display = "";
+       } else {
+         tr[i].style.display = "none";
+       }
+
+    }
+ }
+}
+
+
+
+getPagination('#allUsersList');
+
+function getPagination(table) {
+  var lastPage = 1;
+
+  $('#maxRows')
+    .on('change', function(evt) {
+      //$('.paginationprev').html('');  
+      // reset pagination
+
+     lastPage = 1;
+      $('.pagination')
+        .find('li')
+        .slice(1, -1)
+        .remove();
+      var trnum = 0; // reset tr counter
+      var maxRows = parseInt($(this).val()); // get Max Rows from select option
+
+      if (maxRows == 5000) {
+        $('.pagination').hide();
+      } else {
+        $('.pagination').show();
+      }
+
+      var totalRows = $(table + ' tbody tr').length; // numbers of rows
+      $(table + ' tr:gt(0)').each(function() {
+        // each TR in  table and not the header
+        trnum++; // Start Counter
+        if (trnum > maxRows) {
+          // if tr number gt maxRows
+
+          $(this).hide(); // fade it out
+        }
+        if (trnum <= maxRows) {
+          $(this).show();
+        } // else fade in Important in case if it ..
+      }); //  was fade out to fade it in
+      if (totalRows > maxRows) {
+        // if tr total rows gt max rows option
+        var pagenum = Math.ceil(totalRows / maxRows); // ceil total(rows/maxrows) to get ..
+        //  numbers of pages
+        for (var i = 1; i <= pagenum; ) {
+          // for each page append pagination li
+          $('.pagination #prev')
+            .before(
+              '<li data-page="' +
+                i +
+                '">\
+                                  <span>' +
+                i++ +
+                '<span class="sr-only">(current)</span></span>\
+                                </li>'
+            )
+            .show();
+        } // end for i
+      } // end if row count > max rows
+      $('.pagination [data-page="1"]').addClass('active'); // add active class to the first li
+      $('.pagination li').on('click', function(evt) {
+        // on click each page
+        evt.stopImmediatePropagation();
+        evt.preventDefault();
+        var pageNum = $(this).attr('data-page'); // get it's number
+
+        var maxRows = parseInt($('#maxRows').val()); // get Max Rows from select option
+
+        if (pageNum == 'prev') {
+          if (lastPage == 1) {
+            return;
+          }
+          pageNum = --lastPage;
+        }
+        if (pageNum == 'next') {
+          if (lastPage == $('.pagination li').length - 2) {
+            return;
+          }
+          pageNum = ++lastPage;
+        }
+
+        lastPage = pageNum;
+        var trIndex = 0; // reset tr counter
+        $('.pagination li').removeClass('active'); // remove active class from all li
+        $('.pagination [data-page="' + lastPage + '"]').addClass('active'); // add active class to the clicked
+        // $(this).addClass('active');                  // add active class to the clicked
+        limitPagging();
+        $(table + ' tr:gt(0)').each(function() {
+          // each tr in table not the header
+          trIndex++; // tr index counter
+          // if tr index gt maxRows*pageNum or lt maxRows*pageNum-maxRows fade if out
+          if (
+            trIndex > maxRows * pageNum ||
+            trIndex <= maxRows * pageNum - maxRows
+          ) {
+            $(this).hide();
+          } else {
+            $(this).show();
+          } //else fade in
+        }); // end of for each tr in table
+      }); // end of on click pagination list
+      limitPagging();
+    })
+    .val(5)
+    .change();
+
+  // end of on select change
+
+  // END OF PAGINATION
+}
+
+function limitPagging(){
+    // alert($('.pagination li').length)
+
+    if($('.pagination li').length > 7 ){
+            if( $('.pagination li.active').attr('data-page') <= 3 ){
+            $('.pagination li:gt(5)').hide();
+            $('.pagination li:lt(5)').show();
+            $('.pagination [data-page="next"]').show();
+        }if ($('.pagination li.active').attr('data-page') > 3){
+            $('.pagination li:gt(0)').hide();
+            $('.pagination [data-page="next"]').show();
+            for( let i = ( parseInt($('.pagination li.active').attr('data-page'))  -2 )  ; i <= ( parseInt($('.pagination li.active').attr('data-page'))  + 2 ) ; i++ ){
+                $('.pagination [data-page="'+i+'"]').show();
+
+            }
+
+        }
+    }
+}                
+    
+                    
     
 
 </script>

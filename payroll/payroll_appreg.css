@@ -1,0 +1,57 @@
+
+th{
+    padding: 20px;
+    font-size: 14px;
+    text-align: left ;
+
+}
+.table2 {
+        text-align: right;
+        width: 1070px;
+        height: 600px;
+        display: block;
+        font-size: 12px;
+        overflow-y:auto;
+        overflow-x:auto;
+}
+
+.ryt{
+    text-align: center;
+}
+
+
+.mbot{
+    font-weight: bolder;
+    font-size: 13px;
+    margin-top: -50px;
+}
+
+.mleft{
+    margin-left: 50px;
+}
+
+#myInput {
+  background-image: url('../img/searchicon.png');
+  background-size: 30px;
+  background-position: 5px 5px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;  
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+.mbt {
+    background-color: #faf9f9;
+    padding: 30px;
+    border-radius: 0.25rem;
+}
+
+.pad{
+    padding: 5px 5px 5px 5px;
+    font-weight: bolder;
+}
+
+.paytop{
+    text-align: left;
+}

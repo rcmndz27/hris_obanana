@@ -13,8 +13,9 @@ if($mfded->{"Action"} == "InsertMfdeductionEnt")
 
     $deduction_code = $mfded->{"deduction_code"};
     $deduction_name = $mfded->{"deduction_name"};
+    $status = $mfded->{"status"};
 
-    $mfDed->InsertMfdeductionEnt($deduction_code,$deduction_name);
+    $mfDed->InsertMfdeductionEnt($deduction_code,$deduction_name,$status);
 
 }else{
 

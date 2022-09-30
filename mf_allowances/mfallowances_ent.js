@@ -13,7 +13,8 @@ $(function(){
     
         inputValues = [
             $('#benefit_code'),
-            $('#benefit_name')
+            $('#benefit_name'),
+            $('#status')
         ];
 
 
@@ -28,12 +29,11 @@ $(function(){
 
         if (CheckInput() === true) {
 
-
-   
             param = {
                 'Action': 'InsertMfallowancesEnt',
                 'benefit_code': $('#benefit_code').val(),
-                'benefit_name': $('#benefit_name').val()                 
+                'benefit_name': $('#benefit_name').val(),
+                'status': $('#status').children("option:selected").val()                
             }
     
             param = JSON.stringify(param);
@@ -57,12 +57,17 @@ $(function(){
                                             data: param
                                         },
                                         success: function (result) {
-                                            console.log('success: ' + result);
-                                            swal({text:"Successfully added allowances type!",icon:"success"});
-                                            location.reload();
+                                            swal({
+                                            title: "Success!", 
+                                            text: "Successfully added allowances type!", 
+                                            type: "success",
+                                            icon: "success",
+                                        }).then(function() {
+                                            location.href = '../mf_allowances/mfallowanceslist_view.php';
+                                        });
                                         },
                                         error: function (result) {
-                                            console.log('error: ' + result);
+                                            // console.log('error: ' + result);
                                         }
                                     }); //ajax
                           } else {

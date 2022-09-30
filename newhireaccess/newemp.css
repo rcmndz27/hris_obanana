@@ -1,0 +1,123 @@
+.bup{
+
+font-weight: bold;
+}
+
+.req{
+    color: red;
+}
+
+.mbt {
+    background-color: #faf9f9;
+    padding: 30px;
+    border-radius: 0.25rem;
+}
+
+.pad{
+    padding: 10px 10px 10px 10px;
+    font-weight: bolder;
+}
+.note{
+    font-size: 11px;
+    font-style: italic;
+}
+.note2{
+    font-size: 14px;
+    font-style: italic;
+}
+.refby{
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid black;
+width: 30px;
+    height: 20px;
+}
+.tabrec{
+    text-transform: uppercase;
+    color: black;
+    font-weight: bolder;
+}
+.mar_dep{
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid black;
+  width: 30px;
+  height: 20px;
+}
+.sub{
+    width: 200px;
+    font-size: 20px;
+    color: #ffff;
+    font-weight: bolder;
+    background-color: #ffaa00;
+    border-color: #ffaa00;
+    border-radius: 1rem;
+}
+
+.samea{
+    width: 100px;
+    height: 20px;
+    padding: 1px;
+    font-size: 12px;
+    font-weight: bolder;
+    background-color: #8b8888;
+    border-color: gray;
+    color: #ffff;
+    border-radius: 1rem;
+}
+
+.samea:hover{
+opacity: 0.5;
+}
+
+.adddep{
+    background-color: #ffaa00;
+    font-weight: bolder;
+    border-color: #ffaa00;
+    color: #ffff;
+    width: 75px;
+    height: 35px;
+    font-size: 12px;
+    padding: 2px;
+}
+
+.adddep:hover{
+background-color: #fbec1e;
+border-color: #fbec1e;
+color: #000;
+
+}
+
+.addjob {
+    background-color: #ffaa00;
+    font-weight: bolder;
+    border-color: #ffaa00;
+    border-radius: 1rem;
+    color: #ffff;
+    width: 160px;
+    height: 35px;
+    font-size: 12px;
+    padding: 2px;
+}
+
+.addjob:hover{
+    background-color: #fbec1e;
+    border-color: #fbec1e;
+    color: #000;
+}
+
+
+.rememp {
+    width: 150px;
+    font-weight: bolder;
+    height: 40px;
+    padding: 3px;
+    font-size: 12px;
+    border-radius: 1rem;
+}
+
+.rememp:hover{
+opacity: 0.5;
+}

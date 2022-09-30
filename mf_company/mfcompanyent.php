@@ -2,17 +2,18 @@
 
 Class MfcompanyEnt{
 
-public function InseryMfcompanyEnt($code,$descs)
+public function InsertMfcompanyEnt($code,$descs,$status)
     {
         global $connL;
 
-            $query = "INSERT INTO mf_company (code,descs) VALUES(:code,:descs)";
+            $query = "INSERT INTO mf_company (code,descs,status) VALUES(:code,:descs,:status)";
     
                 $stmt =$connL->prepare($query);
 
                 $param = array(
                     ":code"=> $code,
-                    ":descs" => $descs                                        
+                    ":descs" => $descs,                                        
+                    ":status" => 'Active'  
                 );
 
             $result = $stmt->execute($param);

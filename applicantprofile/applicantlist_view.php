@@ -3,14 +3,12 @@
 
     if (empty($_SESSION['userid']))
     {
-        echo '<script type="text/javascript">alert("Please login first!!");</script>';
-        header('refresh:1;url=../index.php' );
+        include_once('../loginfirst.php');
+        exit();
     }
     else
     {
-        include('../_header.php');
-        if ($empUserType == "Admin" || $empUserType == "HR-CreateStaff")
-        {
+            include('../_header.php');
             include("../applicantprofile/applicantlist.php");
             include('../elements/DropDown.php');
             include('../controller/MasterFile.php');
@@ -24,147 +22,21 @@
 
             $today = $year . '-' . $month . '-' . $day;
 
-        }
-        else
+       if ($empUserType == 'Admin' || $empUserType == 'HR Generalist' ||$empUserType == 'HR Manager' || $empUserType == 'Group Head')
         {
-            header( "refresh:1;url=../index.php" );
+  
+        }else{
+            echo '<script type="text/javascript">swal({text:"You do not have access here!",icon:"error"});';
+            echo "window.location.href = '../index.php';";
+            echo "</script>";
         }
 
     }    
 ?>
+<link rel="stylesheet" type="text/css" href="../applicantprofile/app_view.css">
 <script type="text/javascript" src="../applicantprofile/appent_emp.js"></script>
 <script type="text/javascript" src="../applicantprofile/verify_appent.js"></script>
 <script type='text/javascript' src='../js/validator.js'></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<style type="text/css">
-table,th{
-
-                border: 1px solid #dee2e6;
-                font-weight: 700;
-                font-size: 14px;
- }   
-
-
-table,td{
-
-        border: 1px solid #dee2e6;
- }  
-
- th,td{
-    border: 1px solid #dee2e6;
- }
-  
-table {
-        border: 1px solid #dee2e6;
-        color: #ffff;
-        margin-bottom: 100px;
-        border: 2px solid black;
-        background-color: white;
-        text-align: center;
-        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-}
-#myInput {
-  background-image: url('../img/searchicon.png');
-  background-size: 30px;
-  background-position: 5px 5px;
-  background-repeat: no-repeat;
-  width: 100%;
-  font-size: 16px;  
-  padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
-}
-    .bb{
-        font-weight: bolder;
-        text-align: center;
-        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-    }
-    .cstat {
-    color: #e65a5a;
-    font-size: 10px;
-    text-align: center;
-    margin: 0;
-    padding: 5px 5px 5px 5px;
-    }
-    .ppclip{
-        height: 50px;
-        width: 50px;
-        cursor: pointer;
-    }
-    .ppclip:hover{
-        opacity: 0.5;
-    }
-
-    .bb{
-        font-weight: bolder;
-        text-align: center;
-    }
-.mbt {
-    background-color: #faf9f9;
-    padding: 30px;
-    border-radius: 0.25rem;
-}
-
-.pad{
-    padding: 5px 5px 5px 5px;
-    font-weight: bolder;
-}
-
-.caps{
-    text-transform: uppercase;
-    font-weight: bolder;
-    cursor: pointer;
-    margin-bottom: 10px;
-}
-
-.addapp{
-    color: #ffff;
-    font-weight: bolder;
-}
-.req{
-    color: red;
-}
-
-
-.addNewAppBut {
-    background-color: #fbec1e;
-    color: #ed6200;
-    border-color: #fbec1e;
-    border-radius: 1em;
-}
-
-
-.addNewAppBut:hover {
-    opacity: 0.5;
-}
-
-.backbut{
-    background-color: #fbec1e;
-    border-color: #fbec1e;
-    border-radius: 1rem;
-    font-size: 20px;
-    font-weight: bolder;
-    color: #d64747;
-}
-
-.backbut:hover{
-    opacity: 0.5;
-}
-
-.subbut{
-    background-color: #ffaa00;
-    border-color: #ffaa00;
-    font-weight: bolder;
-    color: #ffff;
-    font-size: 20px;
-    border-radius: 1rem;
-}
-
-.subbut:hover{
-    opacity: 0.5;
-}
-
-</style>
 <div class="container">
         <div class="section-title">
           <h1>ALL APPLICANT LIST</h1>
@@ -180,7 +52,7 @@ table {
     <div class="pt-3">
         <div class="row align-items-end justify-content-end">
             <div class="col-md-12 mb-3">
-                <button type="button" class="bb addNewAppBut" id="applicantEntry"><i class="fas fa-user-plus"></i> ADD NEW APPLICANT </button>
+                <button type="button" class="btn btn-warning" id="applicantEntry"><i class="fas fa-user-plus"></i> ADD NEW APPLICANT </button>
             </div>
         </div>
         <div class="row">
@@ -402,8 +274,8 @@ table {
                             </div>
                         </fieldset>   
                             <div class="modal-footer">
-                                <button type="button" class="backbut" data-dismiss="modal"><i class="fas fa-times-circle"></i> CANCEL</button>
-                                <button type="button" class="subbut" id="Submit" ><i class="fas fa-check-circle"></i> SUBMIT</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CANCEL</button>
+                                <button type="button" class="btn btn-success" id="Submit" ><i class="fas fa-check-circle"></i> SUBMIT</button>
                             </div>
                         </div>
                     </div>
@@ -447,13 +319,13 @@ table {
                                     <div class="form-group">
                                         <label class="control-label" for="Relevant">Relevant</label>
                                         <input type="text" class="form-control inputtext"
-                                        onkeypress="return onlyNumberKey(event)" placeholder="0000" maxlength="4" id="relevant" name="relevant">
+                                        onkeypress="return onlyNumberKey(event)" placeholder="0000" maxlength="4" id="relevant" name="relevant" required>
                                     </div>
                                 </div> 
                                 <div class="col-lg-5">
                                     <div class="form-group">
                                         <label class="control-label" for="notRelevant">Not Relevant</label>
-                                        <input type="text" class="form-control inputtext" onkeypress="return onlyNumberKey(event)" placeholder="0000" maxlength="4" id="not_relevant" name="not_relevant">
+                                        <input type="text" class="form-control inputtext" onkeypress="return onlyNumberKey(event)" placeholder="0000" maxlength="4" id="not_relevant" name="not_relevant" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-1">
@@ -470,12 +342,12 @@ table {
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label class="control-label" for="Verifieddate">Verified Date</label>
-                                        <input type="date" class="form-control inputtext" id="verified_date" name="verified_date" value="<?php echo $today; ?>">
+                                        <input type="date" class="form-control inputtext" id="verified_date" name="verified_date" value="<?php echo $today; ?>" min="<?php echo $today; ?>">
                                     </div>
                                 </div>
                                 <div class="col-lg-2">
                                     <div class="form-group">
-                                        <label class="control-label" for="Verifiedby">Action Taken</label>
+                                        <label class="control-label" for="action_taken">Action Taken</label>
                                         <select type="select" class="form-select" id="action_taken" name="action_taken" >
                                             <option value="Dead File">Dead File</option>
                                             <option value="Keep">Keep</option>
@@ -503,7 +375,7 @@ table {
                                         <div class="form-group">
                                             <label class="control-label" for="referral_date">Referral Date</label>
                                             <div id="ref_date">
-                                                <input type="date" class="form-control inputtext" id="referral_date" name="referral_date" >
+                                                <input type="date" class="form-control inputtext" id="referral_date" name="referral_date"  value="<?php echo $today; ?>">
                                             </div>
                                             <div id="ref_date_dis">
                                                 <input type="date" class="form-control inputtext" id="referral_date" name="referral_date" readonly>
@@ -513,8 +385,8 @@ table {
                                 </div> <!-- form row closing -->
                             </fieldset> 
                                 <div class="modal-footer">
-                                    <button type="button" class="backbut" data-dismiss="modal"><i class="fas fa-times-circle"></i> CANCEL</button>
-                                    <button type="button" class="subbut" onclick="verifyAppli()" ><i class="fas fa-check-circle"></i> SUBMIT</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CANCEL</button>
+                                    <button type="button" class="btn btn-success" onclick="verifyAppli()" ><i class="fas fa-check-circle"></i> SUBMIT</button>
                                 </div>                            
                         </div> <!-- main body closing -->
                     </div> <!-- modal body closing -->
@@ -547,20 +419,21 @@ table {
                                         <input type="text" class="form-control" id="applicant_names" name="applicant_names" 
                                          readonly>
                                     </div>
-                                </div>                                 
-                                <div class="col-lg-12">
+                                </div>  
+                        <input type="text" class="form-control inputtext" id="rowid" name="rowid" hidden>
+                        <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="control-label" for="manpow">Manpower Request</label>
                                            <div id="ref_to">
-                                                <?php $dd->GenerateDropDown("manpow", $mf->GetAllManpowerList("manpow")); ?>
+                                                <?php $dd->GenerateSingleDropDown("manpow", $mf->GetAllManpowerList("manpow")); ?>
                                             </div>
                                     </div>
                                 </div>                                                         
                         </div> <!-- form row closing -->
                     </fieldset> 
                                 <div class="modal-footer">
-                                    <button type="button" class="backbut" data-dismiss="modal"><i class="fas fa-times-circle"></i> CANCEL</button>
-                                    <button type="button" class="subbut" onclick="updateAppli()" ><i class="fas fa-check-circle"></i> SUBMIT</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CANCEL</button>
+                                    <button type="button" class="btn btn-success" onclick="updateAppli()" ><i class="fas fa-check-circle"></i> SUBMIT</button>
                                 </div>                            
                         </div> <!-- main body closing -->
                     </div> <!-- modal body closing -->
@@ -576,25 +449,6 @@ table {
 
 <script>
 
-function myFunction() {
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("allAppEnt");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[1];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
-
     function onlyNumberKey(evt) {
           
         // Only ASCII character in that range allowed
@@ -607,86 +461,98 @@ function myFunction() {
     function verifyEntryModal(verid,name){
 
         $('#verifyModal').modal('toggle');
-        var hidful = document.getElementById('applicant_name');
-        hidful.value = name;
-
-        var idrow = document.getElementById('rowid');
-        idrow.value = verid;
+        document.getElementById('applicant_name').value = name;
+        document.getElementById('rowid').value = verid;
 
     }
 
     function updateEntryModal(verid,name){
 
         $('#updateModal').modal('toggle');
-        var hidful = document.getElementById('applicant_names');
-        hidful.value = name;
-
-        var updrow = document.getElementById('uprowid');
-        updrow.value = verid;        
+        document.getElementById('applicant_names').value = name;
+        document.getElementById('uprowid').value = verid;        
 
     }
 
 
-     function verifyAppli()
-    {
+ function verifyAppli()
+{
 
-        $("body").css("cursor", "progress");
-        if($('#action_taken').val() === 'Referred'){
-            var appent_status = 1;
-        }else{
-            var appent_status = 0;
-        }
-        var url = "../applicantprofile/verify_appent_process.php";
-        var relevant = document.getElementById("relevant").value;
-        var not_relevant = document.getElementById("not_relevant").value;
-        var verified_by = document.getElementById("verified_by").value;
-        var verified_date = document.getElementById("verified_date").value;
-        var action_taken = document.getElementById("action_taken").value;
-        var referred_to = document.getElementById("referred_to").value;
-        var referral_date = document.getElementById("referral_date").value;        
-        var rowid = document.getElementById("rowid").value;
-
-        // swal(appent_status);
-        // exit();
-
-
-        $('#contents').html('');
-
-                        swal({
-                          title: "Are you sure?",
-                          text: "You want to verify this applicant?",
-                          icon: "success",
-                          buttons: true,
-                          dangerMode: true,
-                        })
-                        .then((verifyApp) => {
-                          if (verifyApp) {
-                                $.post (
-                                    url,
-                                    {
-                                        action: 1,
-                                        relevant: relevant ,
-                                        not_relevant: not_relevant ,
-                                        verified_by: verified_by ,
-                                        verified_date: verified_date ,
-                                        action_taken: action_taken ,               
-                                        referred_to: referred_to ,
-                                        referral_date: referral_date ,
-                                        appent_status: appent_status,
-                                        rowid: rowid 
-                                    },
-                                    function(data) { $("#contents").html(data).show(); }
-                                );
-
-                                swal({text:"Successfully verified the applicant!",icon:"success"});
-                                location.reload();
-                          } else {
-                            swal({text:"You cancel the verification of applicant!",icon:"error"});
-                          }
-                        });
-
-   
+    if($('#action_taken').val() === 'Referred'){
+        var appent_status = 1;
+        var status = 'Active';
+    }else{
+        var appent_status = 0;
+        var status = 'Inactive';
     }
+    var url = "../applicantprofile/verify_appent_process.php";
+    var relevant = document.getElementById("relevant").value;
+    var not_relevant = document.getElementById("not_relevant").value;
+    var verified_by = document.getElementById("verified_by").value;
+    var verified_date = document.getElementById("verified_date").value;
+    var action_taken = document.getElementById("action_taken").value;
+    var referred_to = document.getElementById("referred_to").value;
+    var referral_date = document.getElementById("referral_date").value;  
+    var rowid = document.getElementById("rowid").value;
+    var applicant_names = document.getElementById("applicant_name").value;    
+    var appname = "'"+applicant_names+"'";    
+
+    // console.log("'"+applicant_names+"'");     
+    // return false;
+
+    
+    if(relevant == '' || not_relevant == ''){
+              swal({text:"Kindly fill up the blank fields.",icon:"error"});
+    }else{
+                    swal({
+                      title: "Are you sure?",
+                      text: "You want to verify this applicant?",
+                      icon: "success",
+                      buttons: true,
+                      dangerMode: true,
+                    })
+                    .then((verifyApp) => {
+                      if (verifyApp) {
+                            $.post (
+                                url,
+                                {
+                                    action: 1,
+                                    relevant: relevant ,
+                                    not_relevant: not_relevant ,
+                                    verified_by: verified_by ,
+                                    verified_date: verified_date ,
+                                    action_taken: action_taken ,               
+                                    referred_to: referred_to ,
+                                    referral_date: referral_date ,
+                                    appent_status: appent_status,
+                                    rowid: rowid 
+                                },
+                    function(data) {
+                            swal({
+                            title: "Success!", 
+                            text: "Successfully verified applicant details!", 
+                            type: "success",
+                            icon: "success",
+                            }).then(function(e) {
+                                $('#verifyModal').modal('hide');
+                                document.getElementById('st'+rowid).innerHTML = status;
+
+                            if(status == 'Active'){
+                                document.getElementById('upd'+rowid).innerHTML = '<button type="button" class="uptv" onclick="updateEntryModal('+rowid+','+appname+')"><i class="fas fa-edit"></i> UPDATE</button>';
+                            }else{
+                                document.getElementById('upd'+rowid).innerHTML = '<button type="button" class="btn btn-info" onclick="verifyEntryModal('+rowid+','+appname+')"><i class="fas fa-user-check"></i> VERIFY</button>'; 
+                            }
+                            });                                     
+
+                    }
+                            );
+                      } else {
+                        swal({text:"You cancel the verification of applicant!",icon:"error"});
+                      }
+            });
+     }                        
+
+}
     
 
 
@@ -694,15 +560,9 @@ function myFunction() {
     {
         
 
-        $("body").css("cursor", "progress");
         var url = "../applicantprofile/update_appent_process.php";
-        var manpow = $('#manpow').children("option:selected").val();
-        var man_pow = manpow.split(" - ");
-        var uprowid = document.getElementById("uprowid").value;   
-
-
-        $('#contents').html('');
-
+        var man_pow = document.getElementById("manpow").value;   
+        var uprowid = document.getElementById("uprowid").value; 
 
                         swal({
                           title: "Are you sure?",
@@ -717,19 +577,182 @@ function myFunction() {
                                     url,
                                     {
                                         action: 1,
-                                        man_pow: man_pow[0],
+                                        man_pow: man_pow,
                                         rowid: uprowid
                                     },
-                                    function(data) { $("#contents").html(data).show(); }
+                                    function(data) { 
+                                        swal({
+                                        title: "Success!", 
+                                        text: "Successfully verified applicant details!", 
+                                        type: "success",
+                                        icon: "success",
+                                        }).then(function(e) {
+                                            $('#updateModal').modal('hide');
+                                            document.getElementById('st'+uprowid).innerHTML = 'Active';
+                                            document.getElementById('upd'+uprowid).innerHTML = 'HIRED';
+                                        }); 
+                                }
                                 );
-                            swal({text:"Successfully updated the applicant!",icon:"success"});
-                            location.reload();
                           } else {
                             swal({text:"You cancel the updating of applicant!",icon:"error"});
                           }
                         });
 
     }
+
+
+    function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("allAppEnt");
+  tr = table.getElementsByTagName("tr");
+for (i = 0; i < tr.length; i++) {
+   td = tr[i].getElementsByTagName("td");
+    if(td.length > 0){ // to avoid th
+       if (td[0].innerHTML.toUpperCase().indexOf(filter) > -1 || td[1].innerHTML.toUpperCase().indexOf(filter) > -1 
+        || td[2].innerHTML.toUpperCase().indexOf(filter) > -1  || td[3].innerHTML.toUpperCase().indexOf(filter) > -1
+        || td[4].innerHTML.toUpperCase().indexOf(filter) > -1 ) {
+         tr[i].style.display = "";
+       } else {
+         tr[i].style.display = "none";
+       }
+
+    }
+ }
+}
+
+
+
+getPagination('#allAppEnt');
+
+function getPagination(table) {
+  var lastPage = 1;
+
+  $('#maxRows')
+    .on('change', function(evt) {
+      //$('.paginationprev').html('');  
+      // reset pagination
+
+     lastPage = 1;
+      $('.pagination')
+        .find('li')
+        .slice(1, -1)
+        .remove();
+      var trnum = 0; // reset tr counter
+      var maxRows = parseInt($(this).val()); // get Max Rows from select option
+
+      if (maxRows == 5000) {
+        $('.pagination').hide();
+      } else {
+        $('.pagination').show();
+      }
+
+      var totalRows = $(table + ' tbody tr').length; // numbers of rows
+      $(table + ' tr:gt(0)').each(function() {
+        // each TR in  table and not the header
+        trnum++; // Start Counter
+        if (trnum > maxRows) {
+          // if tr number gt maxRows
+
+          $(this).hide(); // fade it out
+        }
+        if (trnum <= maxRows) {
+          $(this).show();
+        } // else fade in Important in case if it ..
+      }); //  was fade out to fade it in
+      if (totalRows > maxRows) {
+        // if tr total rows gt max rows option
+        var pagenum = Math.ceil(totalRows / maxRows); // ceil total(rows/maxrows) to get ..
+        //  numbers of pages
+        for (var i = 1; i <= pagenum; ) {
+          // for each page append pagination li
+          $('.pagination #prev')
+            .before(
+              '<li data-page="' +
+                i +
+                '">\
+                                  <span>' +
+                i++ +
+                '<span class="sr-only">(current)</span></span>\
+                                </li>'
+            )
+            .show();
+        } // end for i
+      } // end if row count > max rows
+      $('.pagination [data-page="1"]').addClass('active'); // add active class to the first li
+      $('.pagination li').on('click', function(evt) {
+        // on click each page
+        evt.stopImmediatePropagation();
+        evt.preventDefault();
+        var pageNum = $(this).attr('data-page'); // get it's number
+
+        var maxRows = parseInt($('#maxRows').val()); // get Max Rows from select option
+
+        if (pageNum == 'prev') {
+          if (lastPage == 1) {
+            return;
+          }
+          pageNum = --lastPage;
+        }
+        if (pageNum == 'next') {
+          if (lastPage == $('.pagination li').length - 2) {
+            return;
+          }
+          pageNum = ++lastPage;
+        }
+
+        lastPage = pageNum;
+        var trIndex = 0; // reset tr counter
+        $('.pagination li').removeClass('active'); // remove active class from all li
+        $('.pagination [data-page="' + lastPage + '"]').addClass('active'); // add active class to the clicked
+        // $(this).addClass('active');                  // add active class to the clicked
+        limitPagging();
+        $(table + ' tr:gt(0)').each(function() {
+          // each tr in table not the header
+          trIndex++; // tr index counter
+          // if tr index gt maxRows*pageNum or lt maxRows*pageNum-maxRows fade if out
+          if (
+            trIndex > maxRows * pageNum ||
+            trIndex <= maxRows * pageNum - maxRows
+          ) {
+            $(this).hide();
+          } else {
+            $(this).show();
+          } //else fade in
+        }); // end of for each tr in table
+      }); // end of on click pagination list
+      limitPagging();
+    })
+    .val(10)
+    .change();
+
+  // end of on select change
+
+  // END OF PAGINATION
+}
+
+function limitPagging(){
+    // alert($('.pagination li').length)
+
+    if($('.pagination li').length > 7 ){
+            if( $('.pagination li.active').attr('data-page') <= 3 ){
+            $('.pagination li:gt(5)').hide();
+            $('.pagination li:lt(5)').show();
+            $('.pagination [data-page="next"]').show();
+        }if ($('.pagination li.active').attr('data-page') > 3){
+            $('.pagination li:gt(0)').hide();
+            $('.pagination [data-page="next"]').show();
+            for( let i = ( parseInt($('.pagination li.active').attr('data-page'))  -2 )  ; i <= ( parseInt($('.pagination li.active').attr('data-page'))  + 2 ) ; i++ ){
+                $('.pagination [data-page="'+i+'"]').show();
+
+            }
+
+        }
+    }
+}                
+    
+           
 
 </script>
 

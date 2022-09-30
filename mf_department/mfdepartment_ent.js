@@ -13,7 +13,8 @@ $(function(){
     
         inputValues = [
             $('#code'),
-            $('#descs')
+            $('#descs'),
+            $('#status')
         ];
 
 
@@ -33,7 +34,8 @@ $(function(){
             param = {
                 'Action': 'InsertMfdepartmentEnt',
                 'code': $('#code').val(),
-                'descs': $('#descs').val()                 
+                'descs': $('#descs').val(),
+                'status': $('#status').children("option:selected").val()                   
             }
     
             param = JSON.stringify(param);
@@ -57,12 +59,17 @@ $(function(){
                                             data: param
                                         },
                                         success: function (result) {
-                                            console.log('success: ' + result);
-                                            swal({text:"Successfully added department!",icon:"success"});
-                                            location.reload();
+                                            swal({
+                                            title: "Success!", 
+                                            text: "Successfully added the department details!", 
+                                            type: "success",
+                                            icon: "success",
+                                            }).then(function() {
+                                                location.href = '../mf_department/mfdepartmentlist_view.php';
+                                            }); 
                                         },
                                         error: function (result) {
-                                            console.log('error: ' + result);
+                                            // console.log('error: ' + result);
                                         }
                                     }); //ajax
                           } else {

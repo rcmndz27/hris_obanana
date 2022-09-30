@@ -2,7 +2,7 @@
 
 Class ManEnt{
 
-public function InsertManpowerEnt($position,$req_ment,$date_needed,$status)
+public function InsertManpowerEnt($eMplogName,$position,$req_ment,$date_needed,$status)
     {
         global $connL;
 
@@ -18,8 +18,8 @@ public function InsertManpowerEnt($position,$req_ment,$date_needed,$status)
                     ":req_ment" => $req_ment,
                     ":date_needed"=> $date_needed,
                     ":status"=> $status,
-                    ":audituser" => 'user',
-                    ":auditdate"=>date('m-d-Y')                                          
+                    ":audituser" => $eMplogName,
+                    ":auditdate"=>date('m-d-Y H:i:s')                                          
                 );
 
             $result = $stmt->execute($param);

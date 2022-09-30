@@ -36,7 +36,7 @@ table {
         overflow: scroll;
     }
     thead {
-        font-weight: 700;
+        font-weight: 600;
         background-color: $black;
         color: $white;
     }
@@ -90,7 +90,7 @@ input[type=file]
 }
 .button {
     border: none;
-    font-weight: 700;
+    font-weight: 600;
     @include xbTransition(1s all ease);
 }
 .button:hover {
@@ -128,7 +128,7 @@ input[type=file]
     color: $blue-dark;
     border: none;
     background-color: transparent;
-    font-weight: 700;
+    font-weight: 600;
     text-decoration: underline;
 }
 .tableBtn:hover {
@@ -177,7 +177,7 @@ input[type=file]
         
         .navbar-brand {
             color: inherit;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 2.1rem;
             @include xbTransition(0.5s all ease);
         }
@@ -228,7 +228,7 @@ input[type=file]
             color: $disabled-color;
             background-color: $white;
             z-index: 10;
-            font-weight: 700;
+            font-weight: 600;
             margin-left: 5px;
             @include xbTransition((transform 150ms ease-out, font-size 150ms ease-out));
         }
@@ -982,7 +982,7 @@ input[type=file]
                 overflow: scroll;
             }
             thead {
-                font-weight: 700;
+                font-weight: 600;
                 background-color: $black;
                 color: $white;
             }
@@ -1116,7 +1116,7 @@ input[type=file]
                 .errMessage {
                     margin-right: auto;
                     color: $red;
-                    font-weight: 700;
+                    font-weight: 600;
                     font-size: 0.9rem;
                 }
             }

@@ -52,16 +52,15 @@ else
   <link type='text/css' rel='stylesheet' href="<?= constant('FONTAWESOME_CSS'); ?>">
   <link rel="stylesheet" href="../css/header.css">
   <link rel="stylesheet" href="../css/custom.css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="../css/styles.css" rel="stylesheet" />
     <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <script type='text/javascript' src="<?= constant('BOOTSTRAP_JS'); ?>"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <!-- <script type="text/javascript" src='../js/script.js'></script> -->
+    <script type="text/javascript" src='../js/script.js'></script>
     </head>
 <body>
-
+<div id = "myDiv" style="display:none;" class="loader"></div>
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
@@ -70,7 +69,7 @@ else
       <nav id="navbar" class="navbar">
           <ul>
                 <li><a class="nav-link active" href="#"><i class="fas fa-users fa-fw"></i>  &nbsp;APPLICANT</a></li>
-                <li><a class="nav-link" href="../index.php"><i class="fas fa-home fa-fw"></i>  &nbsp;LOGIN</a></li>
+       <!--          <li><a class="nav-link" href="../index.php"><i class="fas fa-home fa-fw" onclick="show()"></i>  &nbsp;LOGIN</a></li> -->
 
             </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -78,6 +77,12 @@ else
     </div>
   </header><!-- End Header -->
   <br>
- <script src="../assets/js/main.js"></script>
+<script type="text/javascript">
+         function show() {
+            document.getElementById("myDiv").style.display="block";
+        }
+</script>
+
+
 </body>
 

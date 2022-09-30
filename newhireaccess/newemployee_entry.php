@@ -14,137 +14,14 @@
 
     $today = $year . '-' . $month . '-' . $day;
 
-    
+    $date = strtotime($today.'-18 year');
 ?>   
-?> 
-    <script type="text/javascript" src="../newhireaccess/newemp.js"></script>
-    <script type='text/javascript' src='../js/validator.js'></script>
-
-<style type="text/css">
-    
-.bup{
-
-font-weight: bold;
-}
-
-.req{
-    color: red;
-}
-
-.mbt {
-    background-color: #faf9f9;
-    padding: 30px;
-    border-radius: 0.25rem;
-}
-
-.pad{
-    padding: 10px 10px 10px 10px;
-    font-weight: bolder;
-}
-.note{
-    font-size: 11px;
-    font-style: italic;
-}
-.note2{
-    font-size: 14px;
-    font-style: italic;
-}
-.refby{
-  border: 0;
-  outline: 0;
-  background: transparent;
-  border-bottom: 1px solid black;
-width: 30px;
-    height: 20px;
-}
-.tabrec{
-    text-transform: uppercase;
-    color: black;
-    font-weight: bolder;
-}
-.mar_dep{
-  border: 0;
-  outline: 0;
-  background: transparent;
-  border-bottom: 1px solid black;
-  width: 30px;
-  height: 20px;
-}
-.sub{
-    width: 200px;
-    font-size: 20px;
-    color: #ffff;
-    font-weight: bolder;
-    background-color: #ffaa00;
-    border-color: #ffaa00;
-    border-radius: 1rem;
-}
-
-.samea{
-    width: 100px;
-    height: 20px;
-    padding: 1px;
-    font-size: 12px;
-    font-weight: bolder;
-    background-color: #8b8888;
-    border-color: gray;
-    color: #ffff;
-    border-radius: 1rem;
-}
-
-.samea:hover{
-opacity: 0.5;
-}
-
-.adddep{
-    background-color: #ffaa00;
-    font-weight: bolder;
-    border-color: #ffaa00;
-    border-radius: 1rem;
-    color: #ffff;
-    width: 75px;
-    height: 35px;
-    font-size: 12px;
-    padding: 2px;
-}
-
-.adddep:hover{
-opacity: 0.5;
-}
-
-.addjob {
-    background-color: #ffaa00;
-    font-weight: bolder;
-    border-color: #ffaa00;
-    border-radius: 1rem;
-    color: #ffff;
-    width: 160px;
-    height: 35px;
-    font-size: 12px;
-    padding: 2px;
-}
-
-.addjob:hover{
-opacity: 0.5;
-}
-
-
-.rememp {
-    width: 150px;
-    font-weight: bolder;
-    height: 40px;
-    padding: 3px;
-    font-size: 12px;
-    border-radius: 1rem;
-}
-
-.rememp:hover{
-opacity: 0.5;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="../newhireaccess/newemp.css">
+<script type="text/javascript" src="../newhireaccess/newemp.js"></script>
+<script type='text/javascript' src='../js/validator.js'></script>
 <div class="container">
     <div class="section-title">
-          <h1></h1>
+          <h1>EMPLOYEE PROFILE - PERSONAL DATA SHEET</h1>
         </div>
     <div class="main-body mbt">
 
@@ -155,7 +32,7 @@ opacity: 0.5;
                         </i>&nbsp; EMPLOYEE PROFILE - PERSONAL DATA SHEET</b></li>
             </ol>
           </nav>
-          <form id="applicantform">
+          <form id="applicantform" method="post">
                 <ul class="nav nav-tabs tabrec" id="myTab" name="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <a class="nav-link active" id="personal-tab" name="personal-tab" data-toggle="tab"
@@ -167,13 +44,13 @@ opacity: 0.5;
                     </li>
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="job-tab" name="job-tab" data-toggle="tab" href="#job" role="tab"
-                            aria-controls="job" aria-selected="false">Employment Record</a>
+                            aria-controls="job" aria-selected="false">Employment Record </a>
                     </li>
 
                 </ul>
 
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="personal" role="tabpanel" aria-labelledby="personal-tab"><br>
+                    <div class="tab-pane fade active show" id="personal" role="tabpanel" aria-labelledby="personal-tab">
                       <fieldset class="fieldset-border">
                             <div class="d-flex justify-content-center">
                                 <legend class="fieldset-border pad">
@@ -183,7 +60,7 @@ opacity: 0.5;
                         <div class="form-row">
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                <label class="control-label" for="collegeCourse">Attach recent photograph <span class="req">*</span></label>
+                                <label class="control-label" for="collegeCourse">Upload Photo <span class="req">*</span></label>
                                 <input class="d-block" type="file" name="empimgpic" id="empimgpic" accept="image/png, image/jpeg" onChange="GetEmpImgFile()">
                                 </div>
                             </div>
@@ -196,61 +73,59 @@ opacity: 0.5;
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="control-label" for="dateField">Date Filed:</label>
-                                        <input type="text" class="form-control" name="dateFiled" id="dateFiled" value="<?php echo date("Y/m/d"); ?>" readonly>  
+                                        <input type="text" class="form-control" name="dateFiled" id="dateFiled" value="<?php echo date("F d , Y"); ?>" readonly>  
                                     </div>
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-2">
                                     <div class="form-group">
-                                        <label class="control-label" for="prefwork">Preferred field of work:<span class="req">*</span></label>
-                                        <input type="text" class="form-control inputtext" name="preffieldwork"
-                                            id="preffieldwork" placeholder="1.">
+                                        <label class="control-label" for="newEmpCode">Employee Code:<span class="req">*</span></label>
+                                          <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text">OBN</span>
+                                            </div>
+                                            <input type="text" class="form-control inputtext" id="emp_code" name="emp_code" placeholder="000999">
+                                          </div> 
                                     </div>
-                                </div>
-                                <div class="col-lg-8">
+                                </div>   
+
+                                                             
+                                <div class="col-lg-10">
                                     <div class="form-group">
                                         <label class="control-label" for="positionList">Position Title:<span class="req">*</span></label>
-                                        <label class="note">(Please confirm vacancy you wish to be evaluated for by printing its position title below:)</label>
                                         <input type="text" class="form-control inputtext" name="positiontitle"
-                                            id="positiontitle" placeholder="1.">
+                                            id="positiontitle" placeholder="Job Title" required>
 
                                     </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control inputtext" name="preffieldwork1"
-                                            id="preffieldwork1" placeholder="2.">
-                                    </div>
-                                </div>
-                                <div class="col-lg-8">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control inputtext" name="positiontitle1"
-                                            id="positiontitle1" placeholder="2.">
-                                    </div>
-                                </div>                                                                
+                                </div>                                                               
                             </div> 
-                        <div class="form-row mb-2">
-                            <div class="col-lg-6">
-                                <label class="control-label" for="reasonsfor">Reason for wishing to be considered for the position at hand:<span class="req">*</span></label>
-                                  <textarea class="form-control" id="reason_position" name="reason_position" rows="1"
-                                    cols="90" placeholder="Reason....."></textarea>
-                            </div>
-                            <div class="col-lg-6">
-                                        <label class="control-label" for="expect_salary">Expected Minimum Salary:<span class="req">*</span></label>
-                                        <input type="text" class="form-control inputtext" onkeypress="return onlyNumberKey(event)"name="expected_salary"
-                                            id="expected_salary" placeholder="P 00,000.00">
-                            </div>                            
-                        </div>  
-
+<!--                         
+<div class="form-row mb-2">
+<div class="col-lg-6">
+<label class="control-label" for="reasonsfor">Reason for wishing to be considered for the position at hand:<span class="req">*</span></label>
+<textarea class="form-control" id="reason_position" name="reason_position" rows="1"
+cols="90" placeholder="Reason....."></textarea>
+</div>
+<div class="col-lg-6">
+<label class="control-label" for="expect_salary">Expected Minimum Salary:<span class="req">*</span></label>
+<input type="text" class="form-control inputtext" onkeypress="return onlyNumberKey(event)"name="expected_salary"
+id="expected_salary" placeholder="P 00,000.00">
+</div>                            
+</div>   
+-->
                           <div class="form-row">
                                 <div class="col-lg-8">
                                     <div class="form-group">
-                                        <label class="control-label" for="How you come to apply">How you come to apply?<span class="req">*</span></label>
+                                        <label class="control-label" for="How you come to apply">Source of Application:</label>
                                         <select type="select" class="form-select" id="howtoapply" name="howtoapply" >
                                             <option value="Walk-in">Walk-in</option>
                                             <option value="Ads">Ads</option>
                                             <option value="College Placement Office">College Placement Office</option>
+                                            <option value="LinkedIn">LinkedIn</option>
+                                            <option value="Indeed">Indeed</option>
+                                            <option value="JobStreet">JobStreet</option>
+                                            <option value="Website">Website</option>
                                             <option value="Referred By">Referred By</option>
                                         </select>
                                     </div>
@@ -301,7 +176,7 @@ opacity: 0.5;
                             <div class="form-row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="control-label" for="Address">(A) Address at which you reside at present<span class="req">*</span></label>
+                                        <label class="control-label" for="Address">(A) Present Address<span class="req">*</span></label>
                                         <label class="note">(indicate since when)</label>
                                   <textarea class="form-control" id="emp_address" name="emp_address" rows="2"
                                     cols="90" placeholder="Address....."></textarea>
@@ -310,7 +185,7 @@ opacity: 0.5;
 
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="control-label" for="Permanent">(B) Permanent Residence<span class="req">*</span></label>
+                                        <label class="control-label" for="Permanent">(B) Permanent Address<span class="req">*</span></label>
                                         <label class="note"><input class="btn samea" id="perma" value="SAME IN (A)"></label>
                                   <textarea class="form-control" id="emp_address2" name="emp_address2" rows="2"
                                     cols="90" placeholder="Address....."></textarea>
@@ -321,12 +196,12 @@ opacity: 0.5;
                             <div class="form-row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                         <label class="control-label" for="telno">Telephone Number:<span class="req">*</span></label>
-                                        <input type="text" class="form-control" name="telno" id="telno" onkeypress="return onlyNumberKey(event)" maxlength="11" placeholder="02......">
+                                         <label class="control-label" for="telno">Telephone Number:</label>
+                                        <input type="text" class="form-control" name="telno" id="telno" onkeypress="return onlyNumberKey(event)" maxlength="20" placeholder="02......">
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label" for="cellphone">Mobile Number:<span class="req">*</span></label>
-                                        <input type="text" class="form-control" id="celno" onkeypress="return onlyNumberKey(event)" name="celno" maxlength="11"  placeholder="09..........">
+                                        <input type="text" class="form-control" id="celno" onkeypress="return onlyNumberKey(event)" name="celno" maxlength="20"  placeholder="09..........">
                                     </div> 
                                     <div class="form-group">
                                         <label class="control-label" for="emailaddress">Email Address:<span class="req">*</span></label>
@@ -336,12 +211,12 @@ opacity: 0.5;
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label" for="telno1">Other Telephone Number:</label>
-                                        <input type="text" class="form-control" id="telno1"  onkeypress="return onlyNumberKey(event)" name="telno1" maxlength="11" placeholder="02......">
+                                        <input type="text" class="form-control" id="telno1"  onkeypress="return onlyNumberKey(event)" name="telno1" maxlength="20" placeholder="02......">
 
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label" for="celno1">Other Mobile Number:</label>
-                                        <input type="text" class="form-control" id="celno1" onkeypress="return onlyNumberKey(event)" name="celno1" maxlength="11" placeholder="09..........">
+                                        <input type="text" class="form-control" id="celno1" onkeypress="return onlyNumberKey(event)" name="celno1" maxlength="20" placeholder="09..........">
 
                                     </div>
                                     <div class="form-group">
@@ -363,7 +238,7 @@ opacity: 0.5;
                                     <div class="form-group">
                                         <label class="control-label" for="birthdate">Date of Birth:<span class="req">*</span></label>
                                         <input type="date" class="form-control inputtext" id="birthdate"
-                                            name="birthdate" value="<?php echo $today; ?>">
+                                            name="birthdate" max="<?php echo date('Y-m-d',$date); ?>">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
@@ -376,7 +251,7 @@ opacity: 0.5;
                                 <div class="col-lg-2">
                                     <label class="control-label" for="maidenname">Age:<span class="req">*</span></label>
                                      <label class="note">(as of last birthday)</label>
-                                    <input type="text" class="form-control" name="age" id="age" readonly>
+                                    <input type="text" class="form-control" name="age" id="age" placeholder="0" readonly>
                                 </div>                                 
                                 <div class="col-lg-4">
                                     <div class="form-group">
@@ -386,7 +261,7 @@ opacity: 0.5;
                                 </div>
                             
                             </div>
-
+<!-- 
                             <div class="form-row">
                                 <div class="col-lg-6">
                                     <label class="control-label" for="residence_certno">Residence Certificate No. :</label>
@@ -400,13 +275,13 @@ opacity: 0.5;
                                     <label class="control-label" for="residence_certplace">Place Issued:</label>
                                     <input type="text" class="form-control" name="residence_certplace" id="residence_certplace" placeholder="Place Issued....">
                                 </div>                                                               
-                            </div><br>
+                            </div><br> -->
                             <div class="form-row">
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label class="control-label" for="tin_no">TIN:</label>
                                         <input type="text" class="form-control inputtext" name="tin_no" id="tin_no"
-                                            placeholder="Required" onkeypress="return onlyNumberKey(event)">
+                                            placeholder="TIN" onkeypress="return onlyNumberKey(event)">
                                     </div>
                                 </div>
 
@@ -414,7 +289,7 @@ opacity: 0.5;
                                     <div class="form-group">
                                         <label class="control-label" for="sss_no">SSS No. :</label>
                                         <input type="text" class="form-control inputtext" name="sss_no" id="sss_no"
-                                            placeholder="Required" onkeypress="return onlyNumberKey(event)">
+                                            placeholder="SSS No." onkeypress="return onlyNumberKey(event)">
                                     </div>
                                 </div>
 
@@ -422,7 +297,7 @@ opacity: 0.5;
                                     <div class="form-group">
                                         <label class="control-label" for="phil_no">Philhealth No. :</label>
                                         <input type="text" class="form-control inputtext" name="phil_no"
-                                            id="phil_no" placeholder="Required" onkeypress="return onlyNumberKey(event)">
+                                            id="phil_no" placeholder="Philhealth No." onkeypress="return onlyNumberKey(event)">
                                     </div>
                                 </div>
 
@@ -430,7 +305,7 @@ opacity: 0.5;
                                     <div class="form-group">
                                         <label class="control-label" for="pagibig_no">Pag-ibig No. :</label>
                                         <input type="text" class="form-control inputtext" name="pagibig_no" id="pagibig_no"
-                                            placeholder="Required" onkeypress="return onlyNumberKey(event)">
+                                            placeholder="Pag-ibig No." onkeypress="return onlyNumberKey(event)">
                                     </div>
                                 </div> 
                             </div>
@@ -481,8 +356,7 @@ opacity: 0.5;
                                 </div>                                                                    
                             </div>
 
-                <div class="form-row">
- 
+                                <div class="form-row">
                                         <div class="col-lg-5">
                                             <div class="form-group">
                                                 <label class="control-label" for="depname">Dependent's Name:</label>
@@ -504,41 +378,19 @@ opacity: 0.5;
                                         <div class="col-lg-1">
                                             <div class="form-group"> 
                                                 <label class="control-label" for="adddep">&nbsp;</label>
-                                                <button type="button" name="add_dep" id="add_dep" class="btn btn-success adddep">+Add More 
+                                                <button type="button" name="add_dep" id="add_dep" class="btn btn-success adddep">+ &nbsp;Add More 
                                                 </button> 
                                             </div>
-                                       </div> 
-                        
-                </div>
-            <div id="dep_dynamic_field"></div>
-
-                            <div class="form-row">
-                                <div class="col-lg-6">
-                                    <label class="control-label" for="spousename">Spouse Name:</label>
-                                    <input type="text" class="form-control" name="spousename" id="spousename" placeholder="Spouse Name">
+                                        </div>                         
                                 </div>
+            <div id="dep_dynamic_field"></div>
+                        <div class="form-row">
                                 <div class="col-lg-6">
+                                    <div class="form-group">
                                     <label class="control-label" for="fathername">Father's Name:</label>
                                     <input type="text" class="form-control" name="fathername" id="fathername" placeholder="Father's Name">
-                                </div>                               
-                            </div><br>                         
-                            <div class="form-row">
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label class="control-label" s for="spousebirthdate">Spouse Birthdate:</label>
-                                        <input type="date" class="form-control inputtext" id="spousebirthdate"
-                                            name="spousebirthdate" value="<?php echo $today; ?>">
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label class="control-label" for="spouseage">Spouse Age:</label>
-                                        <input type="text" class="form-control inputtext" name="spouseage" id="spouseage"
-                                            placeholder="00" readonly>
-                                    </div>
-                                </div>
-
+                                    </div> 
+                                </div> 
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="control-label" for="fatheroccupation">Father's Occupation:</label>
@@ -547,29 +399,15 @@ opacity: 0.5;
                                 </div>
                                 <div class="col-lg-2">
                                     <div class="form-group">
-                                        <label class="control-label" for="fatherbirthdate">Father's Birthdate:</label>
-                                        <input type="date" class="form-control inputtext" name="fatherbirthdate"
-                                            id="fatherbirthdate">
+                                        <label class="control-label" for="fatherbirthdate">Father's Age:</label>
+                                        <input type="text" class="form-control inputtext" name="fatherbirthdate"
+                                            id="fatherbirthdate" onkeypress="return onlyNumberKey(event)" maxlength="">
                                     </div>
-                                </div> 
-                            </div>
-                            <div class="form-row">
-                                <div class="col-lg-6">
-                                    <label class="control-label" for="spouseoccupation">Spouse Occupation:</label>
-                                    <input type="text" class="form-control" name="spouseoccupation" id="spouseoccupation" placeholder="Occupation">
-                                </div>
-                                <div class="col-lg-6">
-                                    <label class="control-label" for="mothername">Mother's Name:</label>
-                                    <input type="text" class="form-control" name="mothername" id="mothername" placeholder="Mother's Name">
-                                </div>                               
-                            </div><br> 
-
-                        <div class="form-row">
+                                </div>  
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="control-label" for="spousecompany">Spouse Company Name and Address:</label>
-                                  <textarea  type="text" class="form-control" id="spousecompany" name="spousecompany" rows="1"
-                                    cols="90" placeholder="Company Name and Address....."></textarea>
+                                    <label class="control-label" for="mothername">Mother's Name:</label>
+                                    <input type="text" class="form-control" name="mothername" id="mothername" placeholder="Mother's Name">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -581,10 +419,44 @@ opacity: 0.5;
                                 </div>
                                 <div class="col-lg-2">
                                     <div class="form-group">
-                                        <label class="control-label" for="motherbirthdate">Mother's Birhdate:</label>
-                                        <input type="date" class="form-control inputtext" name="motherbirthdate" id="motherbirthdate">
+                                        <label class="control-label" for="motherbirthdate">Mother's Age:</label>
+                                        <input type="text" class="form-control inputtext" name="motherbirthdate" id="motherbirthdate" onkeypress="return onlyNumberKey(event)" maxlength="3"> 
                                     </div>
-                                </div> 
+                                </div>                                                           
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                    <label class="control-label" for="spousename">Spouse Name:</label>
+                                    <input type="text" class="form-control" name="spousename" id="spousename" placeholder="Spouse Name">
+                                    </div>
+                                </div>                                                              
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label" for="spousebirthdate">Spouse Birthdate:</label>
+                                        <input type="date" class="form-control inputtext" id="spousebirthdate"
+                                            name="spousebirthdate" max="<?php echo date('Y-m-d',$date); ?>" >
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label" for="spouseage">Spouse Age:
+                                        </label>
+                                        <input type="text" class="form-control inputtext" name="spouseage" id="spouseage"
+                                            placeholder="00" readonly>
+                                    </div>
+                                </div>                              
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="spouseoccupation">Spouse Occupation:</label>
+                                        <input type="text" class="form-control" name="spouseoccupation" id="spouseoccupation" placeholder="Occupation">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="spousecompany">Spouse Company Name and Address:</label>
+                                  <textarea  type="text" class="form-control" id="spousecompany" name="spousecompany" rows="1"
+                                    cols="90" placeholder="Company Name and Address....."></textarea>
+                                    </div>
+                                </div>
                                     <div class="col-lg-7">
                                         <div class="form-group">
                                             <label class="control-label" for="sibname">Name of Siblings:</label>
@@ -600,49 +472,46 @@ opacity: 0.5;
                                     <div class="col-lg-1">
                                                 <div class="form-group"> 
                                                     <label class="control-label" for="adddep">&nbsp;</label>
-                                                    <button type="button" name="add_sib" id="add_sib" class="btn btn-success adddep">+Add More 
-                                                    </button> 
-                                                </div>
+                                                    <button type="button" name="add_sib" id="add_sib" class="btn btn-success adddep">+ &nbsp;Add More 
+                                                </button> 
+                                         </div>
                                     </div> 
-            </div> 
-            <div id="sib_dynamic_field">
-
-             </div>   
-
-                <div class="form-row">
+                            </div> 
+                            <div id="sib_dynamic_field"></div>   
+                            <div class="form-row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="control-label" for="companyrelatives">Have you any near relatives working in another company like Obanana ?</label>
                                         <label class="note">If so, give name, relationship, and organization.</label>
-                                  <textarea class="form-control" id="companyrelatives" name="companyrelatives" rows="4"
-                                    cols="90" placeholder="Have you any near relatives working in another company like Obanana ?relativeswork"></textarea>
+                                        <textarea class="form-control" id="companyrelatives" name="companyrelatives" rows="4"
+                                        cols="90" placeholder="Have you any near relatives working in another company like Obanana ?"></textarea>
                                     </div>
                                 </div> 
                                 <div class="col-lg-12">
                                     <label class="control-label" for="contactperson">Contact person in case of emergency:</label>
-                                  </div> 
+                                </div> 
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="control-label" for="contactpersonname">Name:<span class="req">*</span></label>
+                                        <label class="control-label" for="contactpersonname">Name:</label>
                                         <input type="text" class="form-control inputtext" name="contactpersonname"
-                                            id="contactpersonname" placeholder="Name....">
+                                        id="contactpersonname" placeholder="Name....">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="control-label" for="c">Contact Number:<span class="req">*</span></label>
-                                        <input type="number" class="form-control inputtext" name="contactpersonno"
-                                            id="contactpersonno" placeholder="09........" onkeypress="return onlyNumberKey(event)" maxlength="11">
+                                        <label class="control-label" for="c">Contact Number:</label>
+                                        <input type="text" class="form-control inputtext" name="contactpersonno"
+                                        id="contactpersonno" placeholder="09........" onkeypress="return onlyNumberKey(event)" maxlength="20">
                                     </div>
                                 </div>
-                                 <div class="col-lg-12">
+                                <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="control-label" for="contactpersonaddress">Address:</label>
-                                  <textarea class="form-control" id="contactpersonaddress" name="contactpersonaddress" rows="4"
-                                    cols="90" placeholder="Address...."></textarea>
+                                        <textarea class="form-control" id="contactpersonaddress" name="contactpersonaddress" rows="4"
+                                        cols="90" placeholder="Address...."></textarea>
                                     </div>
                                 </div>   
-                                <div class="col-lg-12">
+<!--                                 <div class="col-lg-12">
                                     <label class="control-label" for="presentAddress">Legal Convictions:</label>
                                     <label class="note">Have you ever been charged or found guilty of the violation of any law (other than minor traffic violations), give details/particulars.</label>
                                   </div>  
@@ -682,17 +551,17 @@ opacity: 0.5;
                                         <input type="text" class="form-control inputtext" name="civilcase"
                                             id="civilcase" placeholder="Have you been involved in any administrative or civil cases?">
                                     </div>
-                                </div>  
-              </div> 
+                                </div>   -->
+                            </div> 
                              
                
-                                <div class="col-lg-12">
+<!--                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="note" for="philhealth">May we seek references from your present/most recent employer and your former employers and supervisors? If not, specify exclusions. You  may also add more references here including name, occupation, relationship to you, address, telephone and fax numbers. We would also ask you to be responsible in notifying the people you have submitted as your references.</label>
                                     </div>
-                                </div>
+                                </div> -->
                                    <!-- legal conviction contact -->
-             <div class="form-row">
+<!--              <div class="form-row">
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label class="control-label" for="conname">Name:</label>
@@ -720,31 +589,29 @@ opacity: 0.5;
                                     <div class="col-lg-1">
                                         <div class="form-group"> 
                                                 <label class="control-label" for="adddep">&nbsp;</label>
-                                                <button type="button" name="add_con" id="add_con" class="btn btn-success adddep">+Add More 
+                                                <button type="button" name="add_con" id="add_con" class="btn btn-success adddep">+ &nbsp;Add More 
                                                 </button> 
                                         </div>
                                     </div>
-            </div>
+            </div> -->
        
-            <div id="con_dynamic_field">
-
-             </div>            
-
+<!--             <div id="con_dynamic_field"></div>            
              <div class="form-row">
-
-                                <div class="col-lg-12">
-                                    <div class="form-group">
+                <div class="col-lg-12">
+                            <div class="form-group">
                                         <label class="control-label" for="rightsemployee">Will you have or can you arrange return rights to your present employer?</label>
                                         <input type="text" class="form-control inputtext" name="rightsemployee"
                                             id="rightsemployee" placeholder="Will you have or can you arrange return rights to your present employer?">                                        
-                                    </div>
-                                </div>      
-                                                                            
+                            </div>
+                    </div>
                 </div> 
-
+ -->
                             <div class="d-flex justify-content-center">
-                                    -- Next, Go to Education Tab --
-                             </div>
+                                    <!-- -- Next, Go to Education Tab -- -->
+                                    <button type="button" class="btn btn-success adddep" onclick='nextPTabAct();'>  NEXT >>
+                                    </button>    
+                             </div>                
+
                         </fieldset>
                 </div>
 
@@ -776,7 +643,7 @@ opacity: 0.5;
                                 </div>                                
                                 <div class="col-lg-3">
                                     <div class="form-group">
-                                        <label class="control-label" for="schoolname">Name of  School/College/University:</label>
+                                        <label class="control-label" for="schoolname">Name of  School/College/University:</label><br><br>
                                         <input type="text" class="form-control" name="schoolname[]" placeholder="School Name...">                                            
                                     </div>
                                 </div>
@@ -795,7 +662,7 @@ opacity: 0.5;
                                     <div class="col-lg-1">
                                         <div class="form-group"> 
                                                 <label class="control-label" for="adddep">&nbsp;</label><br><br>
-                                                <button type="button" name="add_edu" id="add_edu" class="btn btn-success adddep">+Add More 
+                                                <button type="button" name="add_edu" id="add_edu" class="btn btn-success adddep">+ &nbsp;Add More 
                                                 </button> 
                                         </div>
                                     </div>
@@ -804,7 +671,11 @@ opacity: 0.5;
                         <div id="edu_dynamic_field"></div>  
 
                             <div class="d-flex justify-content-center">
-                                    -- Next, Go to Employment Tab --
+                                    <!-- -- Next, Go to Employment Tab -- -->
+                                    <button type="button" class="btn btn-success adddep" onclick='prevETabAct();'> << PREV 
+                                    </button>&nbsp;
+                                    <button type="button" class="btn btn-success adddep" onclick='nextETabAct();'>  NEXT >>
+                                    </button>
                              </div>
                 </fieldset>
             </div>
@@ -813,9 +684,10 @@ opacity: 0.5;
                         <fieldset class="fieldset-border">
                             <div class="d-flex justify-content-center">
                                 <legend class="fieldset-border pad">
-                                    EMPLOYMENT RECORD
-                                </legend>
+                                    EMPLOYMENT RECORD ( <span id="empcnt">1</span> )
+                                </legend>                              
                              </div>
+                             
                             <div class="form-row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
@@ -824,7 +696,7 @@ opacity: 0.5;
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label class="control-label" for="philhealth">1. Present or Most Recent Employment</label>
+                                        <label class="control-label" for="philhealth">Present or Most Recent Employment</label>
                                     </div>
                                 </div>                                
                                 <div class="col-lg-4">
@@ -840,93 +712,105 @@ opacity: 0.5;
                                 <div class="col-lg-2">
                                     <div class="form-group">
                                         <label class="control-label" for="jobfrom">From:</label>
-                                        <input type="date" class="form-control inputtext" id="jobfrom" name="jobfrom">
+                                        <input type="date" class="form-control inputtext" name="jobfrom[]">
                                     </div>
                                 </div>
                                 <div class="col-lg-2">
                                     <div class="form-group">
                                         <label class="control-label" for="jobto">To:</label>
-                                        <input type="date" class="form-control inputtext" id="jobto" name="jobto">
+                                        <input type="date" class="form-control inputtext" name="jobto[]">
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+<!--                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="control-label" for="startingposition">Starting:</label>
-                                        <input type="text" class="form-control inputtext" id="startingposition"
-                                            name="startingposition" placeholder="Starting...">
+                                        <input type="text" class="form-control inputtext" 
+                                            name="startingposition[]" placeholder="Starting...">
                                     </div>
-                                </div>
-                                <div class="col-lg-4">
+                                </div> -->
+                                <div class="col-lg-8">
                                     <div class="form-group">
-                                        <label class="control-label" for="mostrecentposition">Most Recent:</label>
-                                        <input type="text" class="form-control inputtext" id="mostrecentposition"
-                                            name="mostrecentposition" placeholder="Most Recent...">
+                                        <label class="control-label" for="mostrecentposition">Most Recent Position:</label>
+                                        <input type="text" class="form-control inputtext" 
+                                            name="mostrecentposition[]" placeholder="Most Recent...">
                                     </div>
                                 </div>                                                                                   
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="control-label" for="notypeemployees">Number and type of employees supervised by you, (if any):</label>
-                                        <input type="text" class="form-control inputtext" id="notypeemployees"
-                                            name="notypeemployees" placeholder="Required">
+                                        <input type="text" class="form-control inputtext" 
+                                            name="notypeemployees[]" placeholder="Required">
                                     </div>
                                 </div>
                                  <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label" for="employername">Name of Employer:</label>
-                                        <input type="text" class="form-control inputtext" id="employername"
-                                            name="employername" placeholder="Employer's Name...">
+                                        <input type="text" class="form-control inputtext"
+                                            name="employername[]" placeholder="Employer's Name...">
                                     </div>
                                 </div>                               
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label" for="employeraddress">Address of Employer:</label>
-                                        <input type="text" class="form-control inputtext" id="employeraddress"
-                                            name="employeraddress" placeholder="Employer's Address...">
+                                        <input type="text" class="form-control inputtext" 
+                                            name="employeraddress[]" placeholder="Employer's Address...">
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+<!--                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label" for="supervisorname">Name  of Supervisor:</label>
-                                        <input type="text" class="form-control inputtext" id="supervisorname"
-                                            name="supervisorname" placeholder="Supervisor's Name">
+                                        <input type="text" class="form-control inputtext" 
+                                            name="supervisorname[]" placeholder="Supervisor's Name">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label" for="supervisortitle">Title of Supervisor:</label>
-                                        <input type="text" class="form-control inputtext" id="supervisortitle"
-                                            name="supervisortitle" placeholder="Supervisor's Title">
+                                        <input type="text" class="form-control inputtext" 
+                                            name="supervisortitle[]" placeholder="Supervisor's Title">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="control-label" for="duties">Brief description of your duties and responsibilities:</label>
-                                        <input type="text" class="form-control inputnumber" id="duties" name="duties"
+                                        <input type="text" class="form-control inputnumber" name="duties[]"
                                             placeholder="Duties....">
                                     </div>
-                                </div>
+                                </div>-->
 
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="control-label" for="reasonforleaving">Reason for leaving:</label>
-                                        <input type="text" class="form-control inputnumber" id="reasonforleaving"
-                                            name="reasonforleaving" placeholder="Reason for leaving...">
+                                        <input type="text" class="form-control inputnumber" 
+                                            name="reasonforleaving[]" placeholder="Reason for leaving...">
                                     </div>
-                                </div>
+                                </div> 
 
-                <div id="job_dynamic_field"></div>  
-                                <div class="col-lg-12">
+                <div id="job_dynamic_field"></div> 
+                                 <div class="col-lg-4">
+                                </div>
+                                 <div class="col-lg-3">
+                                </div>
+                                 <div class="col-lg-3">
+                                </div>
+                                <div class="col-lg-2">
                                         <div class="form-group"> 
-                                                <button type="button" name="add_job" id="add_job" class="btn btn-success addjob">+Add More Employment
+                                                <button type="button" name="add_job" id="add_job" class="btn btn-success addjob">+ &nbsp;Add More Employment
                                                 </button> 
                                         </div>
                                 </div>                                
                             </div> 
+
+                            <div class="d-flex justify-content-center">
+                                    <!-- -- Next, Go to Employment Tab -- -->
+                                    <button type="button" class="btn btn-success adddep" onclick='prevJTabAct();'> << PREV 
+                                    </button>&nbsp;
+                                </div> 
                           
                                                                       
                             <div class="mt-3 d-flex justify-content-center">
-                                <button type="button" class="empappbut" id="Submit"><i class="fas fa-check-circle"></i> SUBMIT</button>
+                                <button type="button" class="btn btn-success" id="Submit"><i class="fas fa-check-circle"></i> SUBMIT</button>
                             </div>       
                                
                         </fieldset><!-- JobHistory  -->
@@ -948,6 +832,22 @@ opacity: 0.5;
         return true;
     }
 
+   
+    function nextPTabAct() {   
+        document.getElementById("education-tab").click();
+}
+
+    function prevJTabAct() {   
+        document.getElementById("education-tab").click();
+}
+
+    function nextETabAct() {   
+        document.getElementById("job-tab").click();
+}
+
+    function prevETabAct() {   
+        document.getElementById("personal-tab").click();
+}
 </script>
 
  <script>  
@@ -955,7 +855,7 @@ opacity: 0.5;
       var i=1;  
       $('#add_dep').click(function(){  
            i++;  
-            $('#dep_dynamic_field').append('<div class="form-row" id="row'+i+'"><div class="col-lg-5" ><div class="form-group"><input type="text" class="form-control inputtext"name="depname[]" placeholder="Dependent&#39 Name" ></div></div><div class="col-lg-3"><div class="form-group"><input type="date" class="form-control inputtext"name="depbirthdate[]"></div></div><div class="col-lg-3"><div class="form-group"><input type="text" class="form-control inputtext"name="deprelationship[]" placeholder="Relationship" ></div></div><div class="col-lg-1"><div class="form-group"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">x</button></div></div></div>');
+            $('#dep_dynamic_field').append('<div class="form-row" id="row'+i+'"><div class="col-lg-5" ><div class="form-group"><input type="text" class="form-control inputtext" name="depname[]" placeholder="Dependent&#39 Name" ></div></div><div class="col-lg-3"><div class="form-group"><input type="date" class="form-control inputtext" name="depbirthdate[]"></div></div><div class="col-lg-3"><div class="form-group"><input type="text" class="form-control inputtext" name="deprelationship[]" placeholder="Relationship" ></div></div><div class="col-lg-1"><div class="form-group"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">x</button></div></div></div>');
 
       });  
       $(document).on('click', '.btn_remove', function(){  
@@ -970,7 +870,7 @@ opacity: 0.5;
       var i=1;  
       $('#add_sib').click(function(){  
            i++;  
-            $('#sib_dynamic_field').append('<div class="form-row" id="row'+i+'"><div class="col-lg-7"><div class="form-group"><input type="text" class="form-control inputtext" name="sibname"id="sibname" placeholder="Name..."></div></div><div class="col-lg-4"><div class="form-group"><input type="text" class="form-control inputtext" name="sibrelationship" id="sibrelationship" placeholder="Relationship..."></div></div><div class="col-lg-1"><div class="form-group"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">x</button></div></div></div>');
+            $('#sib_dynamic_field').append('<div class="form-row" id="row'+i+'"><div class="col-lg-7"><div class="form-group"><input type="text" class="form-control inputtext" name="sibname[]" placeholder="Name..."></div></div><div class="col-lg-4"><div class="form-group"><input type="text" class="form-control inputtext" name="sibrelationship[]" placeholder="Relationship..."></div></div><div class="col-lg-1"><div class="form-group"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">x</button></div></div></div>');
 
       });  
       $(document).on('click', '.btn_remove', function(){  
@@ -981,12 +881,12 @@ opacity: 0.5;
  </script>
 
 
-  <script>  
+<!--   <script>  
  $(document).ready(function(){  
       var i=1;  
       $('#add_con').click(function(){  
            i++;  
-            $('#con_dynamic_field').append('<div class="form-row" id="row'+i+'"><div class="col-lg-3"><div class="form-group"><input type="text" class="form-control inputtext" name="conname" id="conname" placeholder="Name..."></div></div><div class="col-lg-2"><div class="form-group"><input type="text" class="form-control inputtext" name="conoccupation" id="conoccupation" placeholder="Occupation..."></div></div><div class="col-lg-3"><div class="form-group"><input type="text" class="form-control inputtext" name="concompany"id="concompany" placeholder="Company..."></div></div><div class="col-lg-3"><div class="form-group"><input type="text" class="form-control inputtext" name="conconviction" id="conconviction" placeholder="Conviction..."></div></div><div class="col-lg-1"><div class="form-group"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">x</button></div></div></div>');
+            $('#con_dynamic_field').append('<div class="form-row" id="row'+i+'"><div class="col-lg-3"><div class="form-group"><input type="text" class="form-control inputtext" name="conname[]" placeholder="Name..."></div></div><div class="col-lg-2"><div class="form-group"><input type="text" class="form-control inputtext" name="conoccupation[]" placeholder="Occupation..."></div></div><div class="col-lg-3"><div class="form-group"><input type="text" class="form-control inputtext" name="concompany[]" placeholder="Company..."></div></div><div class="col-lg-3"><div class="form-group"><input type="text" class="form-control inputtext" name="conconviction[]" placeholder="Conviction..."></div></div><div class="col-lg-1"><div class="form-group"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">x</button></div></div></div>');
 
       });  
       $(document).on('click', '.btn_remove', function(){  
@@ -994,16 +894,16 @@ opacity: 0.5;
            $('#row'+button_id+'').remove();  
       });   
  });  
- </script>
+ </script> -->
 
    <script>  
  $(document).ready(function(){  
       var i=1;  
       $('#add_edu').click(function(){  
            i++;  
-            $('#edu_dynamic_field').append('<div class="form-row" id="row'+i+'"><div class="col-lg-2"><div class="form-group"><input type="date" class="form-control" id="schoolfrom" name="schoolfrom"></div></div><div class="col-lg-2"><div class="form-group"><input type="date" class="form-control" id="schoolto" name="schoolto"></div></div> <div class="col-lg-3"><div class="form-group"><input type="text" class="form-control" id="schoolname" name="schoolname" placeholder="School Name...."></div></div><div class="col-lg-2"><div class="form-group"><input type="text" class="form-control" id="coursename" name="coursename" placeholder="Course Name..."> </div></div><div class="col-lg-2"><div class="form-group"><input type="text" class="form-control" id="certificatedegree" name="certificatedegree" placeholder="Certificate/Diploma..."></div></div><div class="col-lg-1"><div class="form-group"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">x</button></div></div></div>');
-
+            $('#edu_dynamic_field').append('<div class="form-row" id="row'+i+'"><div class="col-lg-2"><div class="form-group"><input type="date" class="form-control"  name="schoolfrom[]"></div></div><div class="col-lg-2"><div class="form-group"><input type="date" class="form-control" name="schoolto[]"></div></div> <div class="col-lg-3"><div class="form-group"><input type="text" class="form-control"  name="schoolname[]" placeholder="School Name...."></div></div><div class="col-lg-2"><div class="form-group"><input type="text" class="form-control"  name="coursename[]" placeholder="Course Name..."> </div></div><div class="col-lg-2"><div class="form-group"><input type="text" class="form-control"  name="certificatedegree[]" placeholder="Certificate/Diploma..."></div></div><div class="col-lg-1"><div class="form-group"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">x</button></div></div></div>');
       });  
+
       $(document).on('click', '.btn_remove', function(){  
            var button_id = $(this).attr("id");   
            $('#row'+button_id+'').remove();  
@@ -1014,14 +914,21 @@ opacity: 0.5;
 <script>  
  $(document).ready(function(){  
       var i=1;  
+
       $('#add_job').click(function(){  
+            var empCount = document.getElementById("empcnt").innerText;
+            var parseEmpC = parseInt(empCount);
+            document.getElementById("empcnt").innerText = parseEmpC + 1;
            i++;  
-            $('#job_dynamic_field').append('<div class="form-row" id="row'+i+'"><div class="col-lg-12"><div class="form-group"><label class="control-label" for="jobcnt">'+i+'. </label></div></div><div class="col-lg-4"><div class="form-group"><label class="control-label" for="Period">Period</label></div></div> <div class="col-lg-8"><div class="form-group"><label class="control-label" for="Positions">Positions you have handled in the same organization before:</label></div></div><div class="col-lg-2"><div class="form-group"><label class="control-label" for="jobfrom">From:</label><input type="date" class="form-control inputtext" id="jobfrom" name="jobfrom"></div></div><div class="col-lg-2"><div class="form-group"><label class="control-label" for="jobto">To:</label><input type="date" class="form-control inputtext" id="jobto" name="jobto"></div></div><div class="col-lg-4"><div class="form-group"><label class="control-label" for="stratingposition">Starting:</label><input type="text" class="form-control inputtext" id="stratingposition"name="stratingposition" placeholder="Starting..."></div></div><div class="col-lg-4"><div class="form-group"><label class="control-label" for="mostrecentposition">Most Recent:</label><input type="text" class="form-control inputtext" id="mostrecentposition"name="mostrecentposition" placeholder="Most Recent..."></div></div><div class="col-lg-12"><div class="form-group"><label class="control-label" for="notypeemployees">Number and type of employees supervised by you, (if any):</label><input type="text" class="form-control inputtext" id="notypeemployees"name="notypeemployees" placeholder="Required"></div></div><div class="col-lg-6"><div class="form-group"><label class="control-label" for="employername">Name of Employer:</label><input type="text" class="form-control inputtext" id="employername"name="employername" placeholder="Employer&#39s Name..."></div></div><div class="col-lg-6"><div class="form-group"><label class="control-label" for="employeraddress">Address of Employer:</label><input type="text" class="form-control inputtext" id="employeraddress"name="employeraddress" placeholder="Employer&#39s Address..."></div></div><div class="col-lg-6"><div class="form-group"><label class="control-label" for="supervisorname">Name  of Supervisor:</label><input type="text" class="form-control inputtext" id="supervisorname"name="supervisorname" placeholder="Supervisor&#39s Name"></div></div><div class="col-lg-6"><div class="form-group"><label class="control-label" for="supervisortitle">Title of Supervisor:</label><input type="text" class="form-control inputtext" id="supervisortitle"name="supervisortitle" placeholder="Supervisor&#39s Title"></div></div><div class="col-lg-12"><div class="form-group"><label class="control-label" for="duties">Brief description of your duties and responsibilities:</label><input type="text" class="form-control inputnumber" id="duties" name="duties"placeholder="Duties...."></div></div><div class="col-lg-12"><div class="form-group"><label class="control-label" for="reasonforleaving">Reason for leaving:</label><input type="text" class="form-control inputnumber" id="reasonforleaving"name="reasonforleaving" placeholder="Required"></div></div><div class="col-lg-10"></div><div class="col-lg-2"><div class="form-group"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove rememp">(x) Remove Employment</button></div></div></div>');
+            $('#job_dynamic_field').append('<div class="form-row" id="row'+i+'"><div class="col-lg-12"><hr></div><div class="col-lg-12"><div class="form-group"></div></div><div class="col-lg-4"><div class="form-group"><label class="control-label" for="Period">Period</label></div></div> <div class="col-lg-8"><div class="form-group"><label class="control-label" for="Positions">Positions you have handled in the same organization before:</label></div></div><div class="col-lg-2"><div class="form-group"><label class="control-label" for="jobfrom">From:</label><input type="date" class="form-control inputtext" name="jobfrom[]"></div></div><div class="col-lg-2"><div class="form-group"><label class="control-label" for="jobto">To:</label><input type="date" class="form-control inputtext"  name="jobto[]"></div></div><div class="col-lg-4"><div class="form-group"><label class="control-label" for="stratingposition">Starting:</label><input type="text" class="form-control inputtext" name="startingposition[]" placeholder="Starting..."></div></div><div class="col-lg-4"><div class="form-group"><label class="control-label" for="mostrecentposition">Most Recent:</label><input type="text" class="form-control inputtext" name="mostrecentposition[]" placeholder="Most Recent..."></div></div><div class="col-lg-12"><div class="form-group"><label class="control-label" for="notypeemployees">Number and type of employees supervised by you, (if any):</label><input type="text" class="form-control inputtext" name="notypeemployees[]" placeholder="Required"></div></div><div class="col-lg-6"><div class="form-group"><label class="control-label" for="employername">Name of Employer:</label><input type="text" class="form-control inputtext" name="employername[]" placeholder="Employer&#39s Name..."></div></div><div class="col-lg-6"><div class="form-group"><label class="control-label" for="employeraddress">Address of Employer:</label><input type="text" class="form-control inputtext" name="employeraddress[]" placeholder="Employer&#39s Address..."></div></div><div class="col-lg-6"><div class="form-group"><label class="control-label" for="supervisorname">Name  of Supervisor:</label><input type="text" class="form-control inputtext" name="supervisorname[]" placeholder="Supervisor&#39s Name"></div></div><div class="col-lg-6"><div class="form-group"><label class="control-label" for="supervisortitle">Title of Supervisor:</label><input type="text" class="form-control inputtext" name="supervisortitle[]" placeholder="Supervisor&#39s Title"></div></div><div class="col-lg-12"><div class="form-group"><label class="control-label" for="duties">Brief description of your duties and responsibilities:</label><input type="text" class="form-control inputnumber"  name="duties[]" placeholder="Duties...."></div></div><div class="col-lg-12"><div class="form-group"><label class="control-label" for="reasonforleaving">Reason for leaving:</label><input type="text" class="form-control inputnumber" name="reasonforleaving[]" placeholder="Required"></div></div><div class="col-lg-10"></div><div class="col-lg-2"><div class="form-group"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove rememp">(x) Remove Employment</button></div></div></div>');
 
       });  
       $(document).on('click', '.btn_remove', function(){  
            var button_id = $(this).attr("id");   
-           $('#row'+button_id+'').remove();  
+           $('#row'+button_id+'').remove();
+            var empCount = document.getElementById("empcnt").innerText;
+            var parseEmpC = parseInt(empCount);
+            document.getElementById("empcnt").innerText = parseEmpC - 1;           
       });   
  });  
  </script>

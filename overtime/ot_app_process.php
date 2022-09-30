@@ -22,23 +22,13 @@
 
         $otStartDtime = $otApplication->{"otstartdtime"};
         $otEndDtime = $otApplication->{"otenddtime"};
-        $otReqHrs = $otApplication->{"otreqhrs"};
         $remarks = $otApplication->{"remarks"};
-        $arr = $otApplication->{"otdate"} ;
-
-        foreach($arr as $value){
-            $otDate = $value;
-
-        $otApp->InsertAppliedOtApp($empCode,$empReportingTo,$otDate,$otStartDtime,$otEndDtime,$otReqHrs, 
-            $remarks);
-
-        }
-
-    }else{
-
+        $e_req = $otApplication->{"e_req"};
+        $n_req = $otApplication->{"n_req"};
+        $e_appr = $otApplication->{"e_appr"};
+        $n_appr = $otApplication->{"n_appr"};
+        $otDate = $otApplication->{"otdate"} ;
+        $otApp->InsertAppliedOtApp($empCode,$empReportingTo,$otDate,$otStartDtime,$otEndDtime,$remarks,$e_req,$n_req,$e_appr,$n_appr);
     }
-    
-
-    
 
 ?>

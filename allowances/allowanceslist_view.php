@@ -3,14 +3,12 @@
 
     if (empty($_SESSION['userid']))
     {
-        echo '<script type="text/javascript">alert("Please login first!!");</script>';
-        header('refresh:1;url=../index.php' );
+        include_once('../loginfirst.php');
+        exit();
     }
     else
     {
-        include('../_header.php');
-        if ($empUserType == "Admin" || $empUserType == "HR-CreateStaff")
-        {
+            include('../_header.php');
             include("../allowances/allowanceslist.php");
             include('../elements/DropDown.php');
             include('../controller/MasterFile.php');
@@ -18,146 +16,22 @@
             $mf = new MasterFile();
             $dd = new DropDown();
 
-        }
-        else
+
+        if ($empUserType == 'Admin' || $empUserType == 'Finance' || $empUserType == 'Group Head')
         {
-            header( "refresh:1;url=../index.php" );
-        }
+  
+        }else{
+            echo '<script type="text/javascript">swal({text:"You do not have access here!",icon:"error"});';
+            echo "window.location.href = '../index.php';";
+            echo "</script>";
+        } 
 
     }    
 ?>
+<link rel="stylesheet" type="text/css" href="../allowances/all_view.css">
 <script type="text/javascript" src="../allowances/allowances_ent.js"></script>
 <script type='text/javascript' src='../js/validator.js'></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<style type="text/css">
-table,th{
-
-                border: 1px solid #dee2e6;
-                font-weight: 700;
-                font-size: 14px;
- }   
-
-
-table,td{
-
-        border: 1px solid #dee2e6;
- }  
-
- th,td{
-    border: 1px solid #dee2e6;
- }
-  
-table {
-        border: 1px solid #dee2e6;
-        color: #ffff;
-        margin-bottom: 100px;
-        border: 2px solid black;
-        background-color: white;
-        text-align: center;
-        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-}
-#myInput {
-  background-image: url('../img/searchicon.png');
-  background-size: 30px;
-  background-position: 5px 5px;
-  background-repeat: no-repeat;
-  width: 100%;
-  font-size: 16px;  
-  padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
-}
-    .bb{
-        font-weight: bolder;
-        text-align: center;
-        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-    }
-    .cstat {
-    color: #e65a5a;
-    font-size: 10px;
-    text-align: center;
-    margin: 0;
-    padding: 5px 5px 5px 5px;
-    }
-    .ppclip{
-        height: 50px;
-        width: 50px;
-        cursor: pointer;
-    }
-    .ppclip:hover{
-        opacity: 0.5;
-    }
-
-    .bb{
-        font-weight: bolder;
-        text-align: center;
-    }
-.mbt {
-    background-color: #faf9f9;
-    padding: 30px;
-    border-radius: 0.25rem;
-}
-
-.pad{
-    padding: 5px 5px 5px 5px;
-    font-weight: bolder;
-}
-
-.caps{
-    text-transform: uppercase;
-    font-weight: bolder;
-    cursor: pointer;
-    margin-bottom: 10px;
-}
-
-.addapp{
-    color: #ffff;
-    font-weight: bolder;
-}
-.req{
-    color: red;
-}
-
-
-.addNewAppBut {
-    background-color: #fbec1e;
-    color: #ed6200;
-    border-color: #fbec1e;
-    border-radius: 1em;
-}
-
-
-.addNewAppBut:hover {
-    opacity: 0.5;
-}
-
-.backbut{
-    background-color: #fbec1e;
-    border-color: #fbec1e;
-    border-radius: 1rem;
-    font-size: 20px;
-    font-weight: bolder;
-    color: #d64747;
-}
-
-.backbut:hover{
-    opacity: 0.5;
-}
-
-.subbut{
-    background-color: #ffaa00;
-    border-color: #ffaa00;
-    font-weight: bolder;
-    color: #ffff;
-    font-size: 20px;
-    border-radius: 1rem;
-}
-
-.subbut:hover{
-    opacity: 0.5;
-}
-
-</style>
 <div class="container">
     <div class="section-title">
           <h1>ALL ALLOWANCE LIST</h1>
@@ -174,7 +48,7 @@ table {
     <div class="pt-3">
         <div class="row align-items-end justify-content-end">
             <div class="col-md-12 mb-3">
-                <button type="button" class="bb addNewAppBut" id="allowancesEntry"><i class="fas fa-money-check"></i> ADD NEW EMPLOYEE ALLOWANCE</button>
+                <button type="button" class="btn btn-warning" id="allowancesEntry"><i class="fas fa-plus-circle"></i> ADD NEW EMPLOYEE ALLOWANCE</button>
             </div>
         </div>
         <div class="row">
@@ -210,13 +84,13 @@ table {
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="control-label" for="bank_type">Employee Code/Name<span class="req">*</span></label>
-                                        <?php $dd->GenerateDropDown("emp_code", $mf->GetEmployeeNames("allempnames")); ?> 
+                                        <?php $dd->GenerateSingleDropDown("emp_code", $mf->GetEmployeeNames("allempnames")); ?> 
                                     </div>
                                 </div> 
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label" for="benefit_id">Allowance Name<span class="req">*</span></label>
-                                        <?php $dd->GenerateDropDown("benefit_id", $mf->GetAllEmployeeAllowances("benlist")); ?> 
+                                        <?php $dd->GenerateSingleDropDown("benefit_id", $mf->GetAllEmployeeAllowances("benlist")); ?> 
                                     </div>
                                 </div> 
                                 <div class="col-lg-6">
@@ -235,7 +109,7 @@ table {
                                     <label class="control-label" for="effectivity_date">Effectivity Date<span class="req">*</span>
                                     </label>                                        
                                         <input type="date" class="form-control inputtext" name="effectivity_date"
-                                            id="effectivity_date">
+                                            id="effectivity_date" value="<?php  echo date('Y-m-d'); ?>" onkeydown="return false">
                                     </div>
                                 </div> 
                                 <div class="col-lg-6">
@@ -243,13 +117,14 @@ table {
                                         <label class="control-label" for="amount">Allowance Amount<span class="req">*</span></label>
                                         <input class="form-control" type="number"  id="amount" name="amount" step=".01">
                                     </div>
-                                </div>                                                   
-                        </div> <!-- form row closing -->
+                                </div>
+                                <input type="text" name="eMplogName" id="eMplogName" value="<?php echo $empName ?>" hidden>
+                            </div> <!-- form row closing -->
                     </fieldset> 
 
                                 <div class="modal-footer">
-                                    <button type="button" class="backbut" data-dismiss="modal"><i class="fas fa-times-circle"></i> CANCEL</button>
-                                    <button type="button" class="subbut" id="Submit"  ><i class="fas fa-check-circle"></i> SUBMIT</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CANCEL</button>
+                                    <button type="button" class="btn btn-success" id="Submit"  ><i class="fas fa-check-circle"></i> SUBMIT</button>
                                 </div> 
                         </div> <!-- main body closing -->
                     </div> <!-- modal body closing -->
@@ -278,13 +153,15 @@ table {
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="control-label" for="bank_type">Employee Code<span class="req">*</span></label>
-                                        <input type="text" class="form-control" name="empcode" id="empcode" readonly>
+                                        <input type="text" class="form-control" name="benfid" id="benfid" hidden>                                        
+                                        <input type="text" class="form-control" name="empcode" id="empcode" hidden>
+                                        <input type="text" class="form-control" name="empname" id="empname" readonly>  
                                     </div>
                                 </div> 
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label" for="benefitid">Allowance Name<span class="req">*</span></label>
-                                        <?php $dd->GenerateDropDown("benefitid", $mf->GetAllEmployeeAllowances("benlist")); ?> 
+                                        <?php $dd->GenerateSingleDropDown("benefitid", $mf->GetAllEmployeeAllowances("benlist")); ?> 
                                     </div>
                                 </div> 
                                 <div class="col-lg-6">
@@ -311,44 +188,75 @@ table {
                                         <label class="control-label" for="amnt">Allowance Amount<span class="req">*</span></label>
                                         <input class="form-control" type="number"  id="amnt" name="amnt" step=".01">
                                     </div>
-                                </div>                                                   
-                        </div> <!-- form row closing -->
+                                </div>  
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="stts">Status<span class="req">*</span></label>
+                                        <select type="select" class="form-select" id="stts" name="stts" >
+                                            <option value="Active">Active</option>
+                                            <option value="Inactive">Inactive</option>
+                                        </select>                                    
+                                    </div>
+                                </div>
+                            </div> <!-- form row closing -->
                     </fieldset> 
 
                                 <div class="modal-footer">
-                                    <button type="button" class="backbut" data-dismiss="modal"><i class="fas fa-times-circle"></i> CANCEL</button>
-                                    <button type="button" class="subbut" onclick="updateAlw()"  ><i class="fas fa-check-circle"></i> SUBMIT</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CANCEL</button>
+                                    <button type="button" class="btn btn-success" onclick="updateAlw()"  ><i class="fas fa-check-circle"></i> SUBMIT</button>
                                 </div> 
 
                         </div> <!-- main body closing -->
                     </div> <!-- modal body closing -->
                 </div> <!-- modal content closing -->
             </div> <!-- modal dialog closing -->
-        </div><!-- modal fade closing -->        
+        </div><!-- modal fade closing -->     
+
+<div class="modal fade" id="viewAlwLogs" tabindex="-1" role="dialog" aria-labelledby="informationModalTitle"
+aria-hidden="true">
+<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title bb" id="popUpModalTitle">VIEW ALLOWANCES LOGS  <i class="fas fa-money-bill"></i></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times; </span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="main-body">
+                <fieldset class="fieldset-border">
+                    <div class="d-flex justify-content-center">
+                        <legend class="fieldset-border pad">
+                        </legend>
+                    </div>
+                    <div class="form-row">
+                        <div class="row pt-3">
+                            <div class="col-md-12">
+                                <div class="panel-body">
+                                    <div id="contents2" class="table-responsive-sm table-body">
+                                        <button type="button" id="search" hidden>GENERATE</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                                               
+                    </div> <!-- form row closing -->
+                </fieldset> 
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CLOSE</button>
+                </div> 
+            </div> <!-- main body closing -->
+        </div> <!-- modal body closing -->
+    </div> <!-- modal content closing -->
+</div> <!-- modal dialog closing -->
+</div><!-- modal fade closing -->            
 
     </div> <!-- main body mbt closing -->
 </div><!-- container closing -->
 
 
 <script>
-function myFunction() {
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("allAllowancesList");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
+
 
     function onlyNumberKey(evt) {
           
@@ -359,78 +267,316 @@ function myFunction() {
         return true;
     }
 
- function editAlwModal(empcd,benname,periodcutoff,amnt,effectivitydate){
+
+function insertMfAlwLogs(url2,emp_code,column_name,new_data,old_data) {
+
+    $.post (url2,
+    {
+        emp_code:emp_code,
+        column_name: column_name,
+        new_data: new_data,
+        old_data: old_data
+    });
+}
+
+
+
+ function editAlwModal(empcd,benfid,fname){
 
    
         $('#updateAlw').modal('toggle');
-
-        var hidful = document.getElementById('empcode');
-        hidful.value =  empcd;   
-
-        var bnkt = document.getElementById('benefitid');
-        bnkt.value =  benname;  
-
-        var bno = document.getElementById('periodcutoff');
-        bno.value =  periodcutoff;  
-
-        var at = document.getElementById('amnt');
-        at.value =  amnt;  
-
-        var ss = document.getElementById('effectivitydate');
-        ss.value =  effectivitydate;                                  
-
+        document.getElementById('empcode').value =  empcd;  
+        document.getElementById('empname').value =  fname;  
+        document.getElementById('benfid').value =  benfid;           
+        document.getElementById('benefitid').value =  document.getElementById('bnr'+benfid).innerHTML;  
+        document.getElementById('periodcutoff').value =  document.getElementById('pc'+benfid).innerHTML;   
+        document.getElementById('amnt').value =  document.getElementById('am'+benfid).innerHTML;  
+        document.getElementById('effectivitydate').value =  document.getElementById('ed'+benfid).innerHTML;  
+        document.getElementById('stts').value =  document.getElementById('st'+benfid).innerHTML;      
 
     }
 
 
-     function updateAlw()
-    {
+function updateAlw()
+{
 
-        $("body").css("cursor", "progress");
-        var url = "../allowances/updateallowances_process.php";
-        var emp_code = document.getElementById("empcode").value;
-        var benefitid = $('#benefitid').children("option:selected").val();
-        var benefit_id = benefitid.split(" - ");
-        var period_cutoff = document.getElementById("periodcutoff").value;
-        var amount = document.getElementById("amnt").value;
-        var effectivity_date = document.getElementById("effectivitydate").value; 
+var url = "../allowances/updateallowances_process.php";
+var url2 = "../allowances/logsmfallowances_process.php";
+var emp_code = document.getElementById("empcode").value;
+var benefit_id = document.getElementById("benefitid").value;
+var benfid = document.getElementById("benfid").value;
+var e = document.getElementById("benefitid");
+var benefitid = e.options[e.selectedIndex].text;        
+var period_cutoff = document.getElementById("periodcutoff").value;
+var amount = document.getElementById("amnt").value;
+var amtn = '₱ '+amount.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");        
+var effectivity_date = document.getElementById("effectivitydate").value; 
+var status = document.getElementById("stts").value; 
 
-        $('#contents').html('');
+var old_benefitid =  document.getElementById('bn'+benfid).innerHTML;  
+var old_period_cutoff =  document.getElementById('pc'+benfid).innerHTML;   
+var old_amount =  document.getElementById('am'+benfid).innerHTML;  
+var old_effectivity_date =  document.getElementById('ed'+benfid).innerHTML;  
+var old_status =  document.getElementById('st'+benfid).innerHTML;    
 
-                        swal({
-                          title: "Are you sure?",
-                          text: "You want to update this allowances deduction details?",
-                          icon: "success",
-                          buttons: true,
-                          dangerMode: true,
-                        })
-                        .then((updateAlw) => {
-                          if (updateAlw) {
-                                $.post (
-                                    url,
-                                    {
-                                        action: 1,
-                                        emp_code: emp_code ,
-                                        benefit_id: benefit_id[0],
-                                        period_cutoff: period_cutoff,
-                                        amount: amount ,               
-                                        effectivity_date: effectivity_date 
-                                        
-                                    },
-                                    function(data) { $("#contents").html(data).show(); }
-                                );
-
-                                swal({text:"Successfully update the employee allowances details!",icon:"success"});
-                                location.reload();
-                          } else {
-                            swal({text:"You cancel the updating of employee allowances details!",icon:"error"});
-                          }
-                        });
-   
+        swal({
+          title: "Are you sure?",
+          text: "You want to update this employee allowances details?",
+          icon: "success",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((updateAlw) => {
+          if (updateAlw) {
+                $.post (
+                    url,
+                    {
+                        action: 1,
+                        emp_code: emp_code ,
+                        rowid : benfid,
+                        benefit_id: benefit_id,
+                        period_cutoff: period_cutoff,
+                        amount: amount ,               
+                        effectivity_date: effectivity_date,
+                        status: status 
+                        
+                    },
+                function(data) { 
+                    swal({
+                        title: "Success!", 
+                        text: "Successfully updated the employee allowances details!", 
+                        icon: "success",
+                    }).then(function() {
+                        $('#updateAlw').modal('hide');
+                        document.getElementById('bn'+benfid).innerHTML = benefitid;
+                        document.getElementById('bnr'+benfid).innerHTML = benefit_id;
+                        document.getElementById('pc'+benfid).innerHTML = period_cutoff;
+                        document.getElementById('am'+benfid).innerHTML = amount;
+                        document.getElementById('amtn'+benfid).innerHTML = amtn;
+                        document.getElementById('ed'+benfid).innerHTML = effectivity_date;
+                        document.getElementById('st'+benfid).innerHTML = status;
+                        if(benefitid !== old_benefitid){
+                        new_data = benefitid;
+                        old_data =  old_benefitid;
+                        column_name =  'Allowances Name';
+                        insertMfAlwLogs(url2,emp_code,column_name,new_data,old_data);
+                        }if(period_cutoff !== old_period_cutoff){
+                        new_data = period_cutoff;
+                        old_data =  old_period_cutoff;
+                        column_name =  'Period Cutoff';         
+                        insertMfAlwLogs(url2,emp_code,column_name,new_data,old_data);
+                        }if(effectivity_date !== old_effectivity_date){
+                        new_data = effectivity_date;
+                        old_data =  old_effectivity_date;
+                        column_name =  'Effectivity Date';         
+                        insertMfAlwLogs(url2,emp_code,column_name,new_data,old_data);
+                        }if(amount !== old_amount){
+                        new_data = amount;
+                        old_data =  old_amount;
+                        column_name =  'Allowances Amount';         
+                        insertMfAlwLogs(url2,emp_code,column_name,new_data,old_data);
+                        }if(status !== old_status){
+                        new_data = status;
+                        old_data =  old_status;
+                        column_name =  'Status';         
+                        insertMfAlwLogs(url2,emp_code,column_name,new_data,old_data);
+                        }                                                                          
+                    }); 
                 }
+            );
+
+      } else {
+        swal({text:"You cancel the updating of employee allowances details!",icon:"error"});
+      }
+    });
+
+}
     
 
+function viewAlwLogs(empcd)
+ {
+     $('#viewAlwLogs').modal('toggle');
+     var url = "../allowances/viewallowanceslogs_process.php";
+     var emp_code = empcd;
 
+     $.post (
+        url,
+        {
+            emp_code: emp_code        
+        },
+        function(data) { 
+            $("#contents2").html(data).show(); 
+            $("#ViewAlwLogs").tableExport({
+                headers: true,
+                footers: true,
+                formats: ['xlsx'],
+                filename: 'id',
+                bootstrap: false,
+                exportButtons: true,
+                position: 'top',
+                ignoreRows: null,
+                ignoreCols: null,
+                trimWhitespace: true,
+                RTL: false,
+                sheetname: 'Allowances Logs'
+            });
+            $(".fa-file-export").remove();
+            $(".btn btn-primary").prepend('<i class="fas fa-file-export"></i>');                
+        }
+        );
+ }    
+
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("allAllowancesList");
+  tr = table.getElementsByTagName("tr");
+for (i = 0; i < tr.length; i++) {
+   td = tr[i].getElementsByTagName("td");
+    if(td.length > 0){ // to avoid th
+       if (td[0].innerHTML.toUpperCase().indexOf(filter) > -1 || td[1].innerHTML.toUpperCase().indexOf(filter) > -1 
+        || td[2].innerHTML.toUpperCase().indexOf(filter) > -1  || td[3].innerHTML.toUpperCase().indexOf(filter) > -1
+        || td[4].innerHTML.toUpperCase().indexOf(filter) > -1  || td[5].innerHTML.toUpperCase().indexOf(filter) > -1 ) {
+         tr[i].style.display = "";
+       } else {
+         tr[i].style.display = "none";
+       }
+
+    }
+ }
+}
+
+
+getPagination('#allAllowancesList');
+
+function getPagination(table) {
+  var lastPage = 1;
+
+  $('#maxRows')
+    .on('change', function(evt) {
+      //$('.paginationprev').html('');  
+      // reset pagination
+
+     lastPage = 1;
+      $('.pagination')
+        .find('li')
+        .slice(1, -1)
+        .remove();
+      var trnum = 0; // reset tr counter
+      var maxRows = parseInt($(this).val()); // get Max Rows from select option
+
+      if (maxRows == 5000) {
+        $('.pagination').hide();
+      } else {
+        $('.pagination').show();
+      }
+
+      var totalRows = $(table + ' tbody tr').length; // numbers of rows
+      $(table + ' tr:gt(0)').each(function() {
+        // each TR in  table and not the header
+        trnum++; // Start Counter
+        if (trnum > maxRows) {
+          // if tr number gt maxRows
+
+          $(this).hide(); // fade it out
+        }
+        if (trnum <= maxRows) {
+          $(this).show();
+        } // else fade in Important in case if it ..
+      }); //  was fade out to fade it in
+      if (totalRows > maxRows) {
+        // if tr total rows gt max rows option
+        var pagenum = Math.ceil(totalRows / maxRows); // ceil total(rows/maxrows) to get ..
+        //  numbers of pages
+        for (var i = 1; i <= pagenum; ) {
+          // for each page append pagination li
+          $('.pagination #prev')
+            .before(
+              '<li data-page="' +
+                i +
+                '">\
+                                  <span>' +
+                i++ +
+                '<span class="sr-only">(current)</span></span>\
+                                </li>'
+            )
+            .show();
+        } // end for i
+      } // end if row count > max rows
+      $('.pagination [data-page="1"]').addClass('active'); // add active class to the first li
+      $('.pagination li').on('click', function(evt) {
+        // on click each page
+        evt.stopImmediatePropagation();
+        evt.preventDefault();
+        var pageNum = $(this).attr('data-page'); // get it's number
+
+        var maxRows = parseInt($('#maxRows').val()); // get Max Rows from select option
+
+        if (pageNum == 'prev') {
+          if (lastPage == 1) {
+            return;
+          }
+          pageNum = --lastPage;
+        }
+        if (pageNum == 'next') {
+          if (lastPage == $('.pagination li').length - 2) {
+            return;
+          }
+          pageNum = ++lastPage;
+        }
+
+        lastPage = pageNum;
+        var trIndex = 0; // reset tr counter
+        $('.pagination li').removeClass('active'); // remove active class from all li
+        $('.pagination [data-page="' + lastPage + '"]').addClass('active'); // add active class to the clicked
+        // $(this).addClass('active');                  // add active class to the clicked
+        limitPagging();
+        $(table + ' tr:gt(0)').each(function() {
+          // each tr in table not the header
+          trIndex++; // tr index counter
+          // if tr index gt maxRows*pageNum or lt maxRows*pageNum-maxRows fade if out
+          if (
+            trIndex > maxRows * pageNum ||
+            trIndex <= maxRows * pageNum - maxRows
+          ) {
+            $(this).hide();
+          } else {
+            $(this).show();
+          } //else fade in
+        }); // end of for each tr in table
+      }); // end of on click pagination list
+      limitPagging();
+    })
+    .val(10)
+    .change();
+
+  // end of on select change
+
+  // END OF PAGINATION
+}
+
+function limitPagging(){
+    // alert($('.pagination li').length)
+
+    if($('.pagination li').length > 7 ){
+            if( $('.pagination li.active').attr('data-page') <= 3 ){
+            $('.pagination li:gt(5)').hide();
+            $('.pagination li:lt(5)').show();
+            $('.pagination [data-page="next"]').show();
+        }if ($('.pagination li.active').attr('data-page') > 3){
+            $('.pagination li:gt(0)').hide();
+            $('.pagination [data-page="next"]').show();
+            for( let i = ( parseInt($('.pagination li.active').attr('data-page'))  -2 )  ; i <= ( parseInt($('.pagination li.active').attr('data-page'))  + 2 ) ; i++ ){
+                $('.pagination [data-page="'+i+'"]').show();
+
+            }
+
+        }
+    }
+}                
+    
+    
 
 </script>
 

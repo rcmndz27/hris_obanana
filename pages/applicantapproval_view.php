@@ -24,7 +24,7 @@
   table,th{
 
                 border: 1px solid #dee2e6;
-                font-weight: 700;
+                font-weight: 600;
                 font-size: 14px;
  }   
 

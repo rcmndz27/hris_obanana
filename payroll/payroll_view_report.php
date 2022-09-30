@@ -3,8 +3,8 @@
 
     if (empty($_SESSION['userid']))
     {
-        echo '<script type="text/javascript">alert("Please login first!!");</script>';
-        header( "refresh:1;url=../index.php" );
+        include_once('../loginfirst.php');
+        exit();
     }
     else
     {
@@ -24,10 +24,10 @@
 
         $empUserType = $empInfo->GetEmployeeUserType();
 
-            if($empUserType == 'Payroll' or $empUserType == 'Admin') {
+            if($empUserType == 'Admin' || $empUserType == 'HR Generalist' ||$empUserType == 'HR Manager' || $empUserType == 'Group Head' || $empUserType == 'President') {
 
             }else{
-                        echo '<script type="text/javascript">alert("You do not have access here!");';
+                        echo '<script type="text/javascript">swal({text:"You do not have access here!",icon:"error"});';
                         echo "window.location.href = '../index.php';";
                         echo "</script>";
             }
@@ -37,10 +37,7 @@
 
  
 <link rel="stylesheet" href="../css/payviewrpt.css">
-<script type='text/javascript' src='../payroll/payroll_rep.js'></script>
-<script src="<?= constant('NODE'); ?>xlsx/dist/xlsx.core.min.js"></script>
-<script src="<?= constant('NODE'); ?>file-saverjs/FileSaver.min.js"></script>
-<script src="<?= constant('NODE'); ?>tableexport/dist/js/tableexport.min.js"></script>
+<div id = "myDiv" style="display:none;" class="loader"></div>
 <div class="container">
         <div class="section-title">
           <h1>
@@ -68,12 +65,10 @@
                 </div>
 
                 <div class="col-md-2 d-flex">
-                        <button type="button" id="search" class="genpyrll" onmousedown="javascript:filterAtt()">
+                        <button type="button" id="search" class="genpyrll" onmousedown="javascript:pviewRpt()">
                             <i class="fas fa-search-plus"></i>
                             GENERATE                      
                         </button>
-
-
                 </div>
         </div>
       <div class="row pt-5">
@@ -87,6 +82,31 @@
 </div>
 <script>
 
+$(function(){
+
+
+    function XLSXExport(){
+        $("#payrollRepList").tableExport({
+            headers: true,
+            footers: true,
+            formats: ['xlsx'],
+            filename: 'id',
+            bootstrap: false,
+            exportButtons: true,
+            position: 'top',
+            ignoreRows: null,
+            ignoreCols: null,
+            trimWhitespace: true,
+            RTL: false,
+            sheetname: 'Payroll Report' 
+        });
+    }
+
+        $("#search").click(function(e){
+             XLSXExport();
+             $(".btn btn-primary").prepend('<i class="fas fa-file-export"></i> ');
+        });
+});
 
 function myFunction() {
   var input, filter, table, tr, td, i, txtValue;
@@ -107,8 +127,9 @@ function myFunction() {
   }
 }
 
-    function filterAtt()
+    function pviewRpt()
     {
+        document.getElementById("myDiv").style.display="block";
         var url = "../payroll/payrollrep_rep_process.php";
         var cutoff = $('#ddcutoff').children("option:selected").val();
         var dates = cutoff.split(" - ");
@@ -127,7 +148,9 @@ function myFunction() {
                 _company: companies[0]
                 
             },
-            function(data) { $("#contents").html(data).show(); }
+            function(data) { $("#contents").html(data).show();
+            document.getElementById("myDiv").style.display="none"; 
+        }
         );
     }
 </script>

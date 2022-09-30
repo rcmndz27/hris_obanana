@@ -1,0 +1,17 @@
+
+body   {
+    overflow: auto;
+    background-color: #f8f9fc;
+    height:100%;
+}
+
+.female{
+background-color: #f6c23e!important;
+}
+.allact{
+background-color: #4e73df!important;
+}
+
+.allinact{
+  background-color: #1cc88a!important;
+}

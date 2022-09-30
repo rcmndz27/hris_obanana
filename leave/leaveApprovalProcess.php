@@ -57,19 +57,28 @@
         $curLeaveType = $leaveApproval->{"curLeaveType"};
         $curDateFrom = $leaveApproval->{"curDateFrom"};
         $curDateTo = $leaveApproval->{"curDateTo"};
-        $curApproved = $leaveApproval->{"curApproved"};
+        $curRejected = $leaveApproval->{"curRejected"};
         $employee = $leaveApproval->{"employee"};
         $remarks = $leaveApproval->{"remarks"};
-        $rwid = $leaveApproval->{"rwid"};
+        $rowid = $leaveApproval->{"rowid"};
         $rejecter = $leaveApproval->{"rejecter"};
-        $empcd = $leaveApproval->{"empcd"};
+        $empcode = $leaveApproval->{"empcode"};
 
-        RejectLeave($employee,$curDateFrom,$curDateTo,$curLeaveType,$curApproved,$remarks,$rwid,$rejecter,$empcd);
+        RejectLeave($employee,$curDateFrom,$curDateTo,$curLeaveType,$curRejected,$remarks,$rowid,$rejecter,$empcode);
+
+    }else if ($leaveApproval->{"Action"} == "FwdLeave") {
+
+        $rowid = $leaveApproval->{"rowid"};
+        $approver = $leaveApproval->{"approver"};
+        $empcode = $leaveApproval->{"empcode"};
+
+        FwdLeave($rowid,$approver,$empcode);
 
     }else if($leaveApproval->{"Action"} == "GetPendingList"){
 
         $employee = $leaveApproval->{"employee"};
-        ShowAllLeave($employee);
+        $logEmpCode = $leaveApproval->{"logEmpCode"};
+        ShowAllLeave($employee,$logEmpCode);
 
     }else if($leaveApproval->{"Action"} == "GetLeaveListBlank"){
     
@@ -104,17 +113,5 @@
 
     }
     
-
-
-    
-
-    
-
-    
-
-
-
-
-
 
 ?>

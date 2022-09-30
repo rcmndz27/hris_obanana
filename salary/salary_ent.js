@@ -29,25 +29,26 @@ $(function(){
 
     $('#Submit').click(function(){
 
-         var empcode = $('#emp_code').children("option:selected").val();
+        var empcode = $('#emp_code').children("option:selected").val();
         var emp_code = empcode.split(" - ");
 
         if (CheckInput() === true) {
    
             param = {
-                'Action': 'InserySalaryEnt',
+                'Action': 'InsertSalaryEnt',
                 'emp_code': emp_code[0],
                 'bank_type': $( "#bank_type option:selected" ).text(),
                 'bank_no': $('#bank_no').val(),
                 'pay_rate': $("#pay_rate option:selected" ).text(),
                 'amount': $('#amount').val(),
+                'eMplogName': $('#eMplogName').val(),
                 'status': $('#status').val()                    
             }
     
             param = JSON.stringify(param);
 
-            // swal(param);
-            // exit();
+            // console.log(param);
+            // return false;
 
                      swal({
                           title: "Are you sure you want to add this employee salary details?",

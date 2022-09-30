@@ -1195,7 +1195,7 @@ body.swal2-toast-column .swal2-toast {
 .swal2-close {
   height: auto;
   padding: 1rem 1.2rem 1rem 1rem;
-  font-weight: 700; }
+  font-weight: 600; }
 
 .swal2-input,
 .swal2-textarea {

@@ -12,7 +12,7 @@ if($dtrviewing->{"Action"} == "GetEmployeeAttendannce"){
     $dateFrom = $dtrviewing->{"dateFrom"};
     $dateTo = $dtrviewing->{"dateTo"};
 
-    $empCodeParam = preg_replace('/[^0-9]/', '', $empCodeParam);
+    // $empCodeParam = preg_replace('/[^0-9]/', '', $empCodeParam);
 
     // echo $empCodeParam.', '.$dateFrom.', '.$dateTo;
 

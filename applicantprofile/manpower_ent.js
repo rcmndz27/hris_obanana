@@ -28,13 +28,14 @@ $(function(){
                 'position': $( "#position option:selected" ).text(),
                 'req_ment': $('#req_ment').val(),
                 'date_needed': $('#date_needed').val(),
+                'eMplogName': $('#eMplogName').val(),
                 'status': $('#status').val()                     
             }
     
             param = JSON.stringify(param);
 
-            // swal(param);
-            // exit();
+            // console.log(param);
+            // return false;
 
                      swal({
                           title: "Are you sure you want to submit this?",
@@ -52,8 +53,14 @@ $(function(){
                                             data: param
                                         },
                                         success: function (result) {
-                                            console.log('success: ' + result);
-                                            location.reload();
+                                                    swal({
+                                                    title: "Success!", 
+                                                    text: "Successfully added manpower details!", 
+                                                    type: "success",
+                                                    icon: "success",
+                                                    }).then(function(e) {
+                                                        location.href = '../applicantprofile/manpowerlist_view.php';
+                                                    });                                     
                                         },
                                         error: function (result) {
                                             // console.log('error: ' + result);

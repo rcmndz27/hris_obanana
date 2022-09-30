@@ -3,13 +3,13 @@
 
     if (empty($_SESSION['userid']))
     {
-        echo '<script type="text/javascript">alert("Please login first!!");</script>';
-        header('refresh:1;url=../index.php' );
+        include_once('../loginfirst.php');
+        exit();
     }
     else
     {
         include('../_header.php');
-        if ($empUserType == "Admin" || $empUserType == "HR-CreateStaff")
+        if ($empUserType == 'Admin' || $empUserType == 'HR Generalist' ||$empUserType == 'HR Manager' || $empUserType == 'Group Head' || $empUserType == "HR-CreateStaff")
         {
             include("../applicantprofile/applicantlist.php");
             $allAppEnt = new ApplicantList(); 

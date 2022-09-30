@@ -1,0 +1,79 @@
+    
+ table,
+
+            th,
+            td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 3px 3px 3px 3px;
+                border-color: black;
+                background-color: #ffff;
+                /*font-style: italic;*/
+                font-size: 15px;
+
+            }
+  
+            table {
+                /*width: 600px;*/
+                display: block;
+                overflow-y:auto;
+                overflow-x:auto;
+                padding: 20px 20px 20px 20px;
+                color: black;
+                /*background-image: url('../img/payroll4.png');*/
+            }
+.btn-save{
+background-color: #b52020;
+border-color: #b52020;
+color: #ffff;
+
+}
+.paybg{
+background-color: #D9E1F2;
+}
+
+.grossbg{
+background-color: #B4C6E7;
+}
+.imgh{
+    height: 50px;
+}
+.dedbg{
+background-color: #FFF2CC;
+}
+.subbg{
+    background-color: #FFE699;
+}
+.netbg{
+    background-color: #C6E0B4;
+}
+.btn-save:hover{
+    background-color: #b71e1e;
+}
+.mbot{
+    font-weight: bolder;
+    font-size: 17px;
+}
+.pdfimg:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.mleft{
+    margin-left: 50px;
+}
+.mbt {
+    background-color: #faf9f9;
+    padding: 30px;
+    border-radius: 0.25rem;
+}
+
+.pad{
+    padding: 5px 5px 5px 5px;
+}
+.cnt {
+    text-align: center;
+    font-size: 20px;
+    padding: 20px;
+    border-radius: 0.25rem;
+}

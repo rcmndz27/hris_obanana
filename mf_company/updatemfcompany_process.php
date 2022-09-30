@@ -7,10 +7,11 @@
     $rowid = $_POST["rowid"];
     $code = $_POST["code"];
     $descs = $_POST["descs"];
+    $status = $_POST["status"];
 
     if ($action == 1)
     {
-        UpdateMfcompany($rowid,$code,$descs);
+        UpdateMfcompany($rowid,$code,$descs,$status);
     }
     else {
 

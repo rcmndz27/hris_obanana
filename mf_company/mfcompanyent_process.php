@@ -13,9 +13,10 @@ if($mfcmp->{"Action"} == "InsertMfcompanyEnt")
 
     $code = $mfcmp->{"code"};
     $descs = $mfcmp->{"descs"};
+    $status = $mfcmp->{"status"};
 
 
-    $mfCmp->InseryMfcompanyEnt($code,$descs);
+    $mfCmp->InsertMfcompanyEnt($code,$descs,$status);
 
 }else{
 

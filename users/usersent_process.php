@@ -15,12 +15,11 @@ if($usrent->{"Action"} == "InsertUsersEnt")
     $userid = $usrent->{"userid"};
     $userpassword = $usrent->{"userpassword"};
     $usertype = $usrent->{"usertype"};
+    $eMplogName = $usrent->{"eMplogName"};
     $status = $usrent->{"status"};
 
 
-    $usrEnt->InsertUsersEnt($username,$userid,$userpassword,$usertype,$status);
-
-}else{
+    $usrEnt->InsertUsersEnt($eMplogName,$username,$userid,$userpassword,$usertype,$status);
 
 }
     

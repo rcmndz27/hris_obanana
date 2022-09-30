@@ -13,9 +13,9 @@ if($mfdep->{"Action"} == "InsertMfdepartmentEnt")
 
     $code = $mfdep->{"code"};
     $descs = $mfdep->{"descs"};
+    $status = $mfdep->{"status"};
 
-
-    $mfDep->InseryMfdepartmentEnt($code,$descs);
+    $mfDep->InsertMfdepartmentEnt($code,$descs,$status);
 
 }else{
 

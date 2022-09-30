@@ -5,12 +5,29 @@ Class ApplicantList{
     public function GetAllApplicantList(){
         global $connL;
 
-        echo '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+        echo '
+        <div class="form-row">  
+                    <div class="col-lg-1">
+                        <select class="form-select" name="state" id="maxRows">
+                             <option value="5000">ALL</option>
+                             <option value="5">5</option>
+                             <option value="10">10</option>
+                             <option value="15">15</option>
+                             <option value="20">20</option>
+                             <option value="50">50</option>
+                             <option value="70">70</option>
+                             <option value="100">100</option>
+                        </select> 
+                </div>         
+                <div class="col-lg-8">
+                </div>                               
+                <div class="col-lg-3">        
+                    <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for applicant.." title="Type in applicant details"> 
+                        </div>                     
+                </div>
+
         <table id="allAppEnt" class="table table-striped table-sm">
         <thead>
-            <tr>
-                <th colspan="6" class ="text-center">List of All Applicant</th>
-            </tr>
             <tr>
                 <th>Applicant Name</th>
                 <th>How did you apply?</th>
@@ -37,26 +54,25 @@ Class ApplicantList{
                 $fulln = ucwords($result['familyname']).",".ucwords($result['firstname'])." ".ucwords($result['middlename']);
                 echo '
                 <tr>
-                <td>' .  $fulln .'</td>
+                <td id="apl'.$result['rowid'].'">' .  $fulln .'</td>
                 <td>' . ucwords($result['howtoapply']) . '</td>
                 <td>' . ucwords($result['jobpos1']) . '</td>
                 <td>' . ucwords($result['jobpos2']) . '</td>
-                <td>' . ucwords($result['status']) . '</td>';
+                <td id="st'.$result['rowid'].'">' . ucwords($result['status']) . '</td>';
                 if($result['status'] == 'Inactive'){
-                echo '<td><button type="button" class="actv" onclick="verifyEntryModal('.$result['rowid'].','.$fullname.')">
+                echo '<td id="upd'.$result['rowid'].'"><button type="button" class="btn btn-info" onclick="verifyEntryModal('.$result['rowid'].','.$fullname.')">
                                 <i class="fas fa-user-check"></i> VERIFY
                             </button></td>';
                 }else if($result['status'] == 'Active'){
-                    echo '<td><button type="button" class="uptv" onclick="updateEntryModal('.$result['rowid'].','.$fullname.')">
+                    echo '<td id="upd'.$result['rowid'].'"><button type="button" class="uptv" onclick="updateEntryModal('.$result['rowid'].','.$fullname.')">
                                <i class="fas fa-edit"></i> UPDATE 
                             </button></td>';                  
                 }else{
-                    echo"<td><span>HIRED</span></td>";
+                    echo'<td id="upd'.$result['rowid'].'"><span>HIRED</span></td>';
                     
                 }
     
                 
-
             } while ($result = $stmt->fetch());
 
             echo '</tr></tbody>';
@@ -64,7 +80,20 @@ Class ApplicantList{
         }else { 
             echo '<tfoot><tr><td colspan="6" class="text-center">No Results Found</td></tr></tfoot>'; 
         }
-        echo '</table>';
+        echo '</table>
+<div class="pagination-container">
+        <nav>
+          <ul class="pagination">
+            
+            <li data-page="prev" >
+                <span> << <span class="sr-only">(current)</span></span></li>
+    
+          <li data-page="next" id="prev">
+                  <span> >> <span class="sr-only">(current)</span></span>
+            </li>
+          </ul>
+        </nav>
+      </div>        ';
     }
 
 

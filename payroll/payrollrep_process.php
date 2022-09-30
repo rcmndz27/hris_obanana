@@ -13,8 +13,5 @@
     {
         GetPayrollList($action, $dateFrom, $dateTo,$location,$empCode);
     }
-    else {
-
-    }
 
 ?>

@@ -13,7 +13,8 @@ $(function(){
     
         inputValues = [
             $('#descsb'),
-            $('#descsb_name')
+            $('#descsb_name'),
+            $('#status')
         ];
 
 
@@ -27,13 +28,12 @@ $(function(){
 
 
         if (CheckInput() === true) {
-
-
    
             param = {
                 'Action': 'InsertBankEnt',
                 'descsb': $('#descsb').val(),
-                'descsb_name': $('#descsb_name').val()                 
+                'descsb_name': $('#descsb_name').val(),
+                'status': $('#status').children("option:selected").val()                   
             }
     
             param = JSON.stringify(param);
@@ -57,9 +57,14 @@ $(function(){
                                             data: param
                                         },
                                         success: function (result) {
-                                            console.log('success: ' + result);
-                                            swal({text:"Successfully added bank type!",icon:"success"});
-                                            location.reload();
+                                            swal({
+                                            title: "Success!", 
+                                            text: "Successfully added bank details!", 
+                                            type: "success",
+                                            icon: "success",
+                                        }).then(function() {
+                                            location.href = '../mf_bank/banklist_view.php';
+                                        });
                                         },
                                         error: function (result) {
                                             console.log('error: ' + result);

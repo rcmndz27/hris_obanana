@@ -6,8 +6,8 @@
     if (empty($_SESSION['userid']))
     {
 
-        echo '<script type="text/javascript">alert("Please login first!!");</script>';
-        header( "refresh:1;url=../index.php" );
+        include_once('../loginfirst.php');
+        exit();
     }
     else
     {
@@ -39,10 +39,10 @@
         $today = $year . '-' . $month . '-' . $day;
 
 
-            if($empUserType == 'Admin'|| $empUserType == 'HR-Payroll') {
+            if($empUserType == 'Admin' || $empUserType == 'HR Generalist' ||$empUserType == 'HR Manager' || $empUserType == 'Group Head'|| $empUserType == 'HR-Payroll') {
 
             }else{
-                        echo '<script type="text/javascript">alert("You do not have access here!");';
+                        echo '<script type="text/javascript">swal({text:"You do not have access here!",icon:"error"});';
                         echo "window.location.href = '../index.php';";
                         echo "</script>";
             }
@@ -99,13 +99,13 @@ width: 30px;
   height: 20px;
 }
 
-.backbut{
+.btn btn-danger{
     background-color: #fbec1e;
     border-color: #fbec1e;
     border-radius: 1rem;
 }
 
-.backbut:hover{
+.btn btn-danger:hover{
     opacity: 0.5;
 }
 
@@ -246,7 +246,7 @@ color: #d64747;
                             <button type="button" id="search" class="btn btn-small btn-primary mr-1 bup subbut" onmousedown="javascript:filterAtt()">
                             VERIFY
                             </button>
-                            <button type="button" id="search" class="btn btn-small btn-primary mr-1 bup backbut">
+                            <button type="button" id="search" class="btn btn-small btn-primary mr-1 bup btn btn-danger">
                                 <a href="../applicantprofile/applicantlist_view.php" class="backtxt">BACK</a>
                             </button>
                             
@@ -278,7 +278,6 @@ color: #d64747;
         
         $("#search").one('click', function (event) 
         {
-        $("body").css("cursor", "progress");
         if($('#action_taken').val() === 'Referred'){
             var appent_status = 1;
         }else{
@@ -294,9 +293,6 @@ color: #d64747;
         var referral_date = document.getElementById("referral_date").value;        
         var rowid = document.getElementById("rowid").value;
         $(this).prop('disabled', true);
-
-        $('#contents').html('');
-
 
                         swal({
                           title: "Are you sure?",

@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+            date_default_timezone_set('Asia/Manila'); 
 
 
 function UpdateSalary($emp_code,$bank_type,$bank_no,$pay_rate,$amount,$status)

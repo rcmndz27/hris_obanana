@@ -13,9 +13,10 @@ if($mfalw->{"Action"} == "InsertMfallowancesEnt")
 
     $benefit_code = $mfalw->{"benefit_code"};
     $benefit_name = $mfalw->{"benefit_name"};
+    $status = $mfalw->{"status"};
 
 
-    $mfAlw->InseryMfallowancesEnt($benefit_code,$benefit_name);
+    $mfAlw->InseryMfallowancesEnt($benefit_code,$benefit_name,$status);
 
 }else{
 

@@ -1,17 +1,18 @@
 <?php
 
-    include('../payroll/payroll_reg.php');
+    include('../payroll/payroll_confirm.php');
     include('../config/db.php');
 
     $choice = $_POST['choice'];
-    $empCode = $_POST['emp_code'];
 
     if ($choice == 1)
-    {
-        ApprovePayRegView($empCode);
+    {   
+        $empCode = $_POST['emp_code'];
+        ConfirmPayRegView($empCode);
+    }else{
+        $empCode = $_POST['empCode'];
+        $date_from = $_POST['date_from'];
+        $date_to = $_POST['date_to'];
+        DeletePayReg($date_from,$date_to,$empCode);
     }
-    else {
-
-    }
-
 ?>

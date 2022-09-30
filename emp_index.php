@@ -2,16 +2,27 @@
 session_start(); 
 include('config/db.php');
 include('class/userClass.php');
-include('controller/indexProcess.php');
+// include('controller/indexProcess.php');
 
 $userClass = new userClass();
 
 $errorMsgReg='';
 $errorMsgLogin='';
 
-if (!empty($_POST['loginSubmit'])) 
+
+
+if (!empty($_POST['loginSubmit']))
+
+
 {
-    $userid = $_POST['userid'];
+
+    $query = 'SELECT userid FROM dbo.mf_user WHERE useremail =:email';
+    $param = array(":email" => $_POST['userid']);
+    $stmt =$connL->prepare($query);
+    $stmt->execute($param);
+    $r = $stmt->fetch();
+
+    $userid = isset($r['userid']) ? $r['userid'] : 'OBN00000';
     $password = $_POST['password'];
 
     $date1 = date("Y-m-d");
@@ -34,6 +45,10 @@ if (!empty($_POST['loginSubmit']))
     {
 
         $_SESSION['msg_blocked'] = 'YOUR ACCOUNT IS BLOCKED! PLEASE CONTACT YOUR ADMINISTRATOR!';
+
+                $ins = $connL->prepare(@"UPDATE dbo.mf_user SET locked_acnt = 1 where userid = :id");
+                $ins->bindParam(":id", $userid, PDO::PARAM_STR);
+                $ins->execute();
     }
     else
     {
@@ -50,26 +65,6 @@ if (!empty($_POST['loginSubmit']))
                 $url = 'pages/index.php';
                 $url_2 = 'pages/index.php';
 
-                if ($userid == 'PMI12000001' || $userid == 'PMI18000072')
-                {
-                    $ins = $connL->prepare(@"INSERT INTO dbo.logs VALUES(:id, :act, :date)");
-                    $ins->bindParam(":id", $userid, PDO::PARAM_STR);
-                    $ins->bindParam(":act", $action_s, PDO::PARAM_STR);
-                    $ins->bindParam(":date", $dateatt, PDO::PARAM_STR);
-                    $ins->execute();
-
-                    header("Location: $url");
-                }
-                else
-                {
-                    $ins = $connL->prepare(@"INSERT INTO dbo.logs VALUES(:id, :act, :date)");
-                    $ins->bindParam(":id", $userid, PDO::PARAM_STR);
-                    $ins->bindParam(":act", $action_s, PDO::PARAM_STR);
-                    $ins->bindParam(":date", $dateatt, PDO::PARAM_STR);
-                    $ins->execute();
-                    
-                    header("Location: $url");
-                }
             }
             else
             {
@@ -78,6 +73,7 @@ if (!empty($_POST['loginSubmit']))
                 $ins->bindParam(":act", $action_f, PDO::PARAM_STR);
                 $ins->bindParam(":date", $dateatt, PDO::PARAM_STR);
                 $ins->execute();
+
                 
                $_SESSION['msg_error'] = 'Wrong Username/Password';
                 session_destroy();
@@ -100,220 +96,19 @@ if (empty($_SESSION['userid'])) {
     <meta name="robots" content="noindex">
     <meta http-equiv='cache-control' content='no-cache'>
     <meta http-equiv='expires' content='0'>
-    <meta http-equiv='pragma' content='no-cache'>
-
-    <link type='image/x-png' rel='icon' href='img/ob_icon.png'>
-    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel='stylesheet' href='css/login.css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
+<meta http-equiv='pragma' content='no-cache'>
+<link type='image/x-png' rel='icon' href='img/ob_icon.png'>
+<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel='stylesheet' href='css/login_caru.css'>
+<link rel='stylesheet' href='css/login.css'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
       <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Dosis:300,400,500,,600,700,700i|Lato:300,300i,400,400i,700,700i" rel="stylesheet">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-    <script type='text/javascript' src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-
-<!-- Add new style -->
-
-  <style type="text/css">
-
-.cb-slideshow,
-.cb-slideshow:after { 
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-    z-index: 0; 
-}
-.cb-slideshow:after { 
-    content: '';
-    /*background: transparent url(../images/pattern.png) repeat top left; */
-}
-
-.cb-slideshow li span { 
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    color: transparent;
-    background-size: cover;
-    background-position: 50% 50%;
-    background-repeat: none;
-    opacity: 0;
-    z-index: 0;
-    animation: imageAnimation 36s linear infinite 0s; 
-}
-
-.cb-slideshow li div { 
-    z-index: 1000;
-    position: absolute;
-    bottom: 30px;
-    left: 0px;
-    width: 100%;
-    text-align: center;
-    opacity: 0;
-    color: #fff;
-    animation: titleAnimation 36s linear infinite 0s; 
-}
-.cb-slideshow li div h3 { 
-    font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
-    font-size: 240px;
-    padding: 0;
-    line-height: 200px; 
-}
-
-.cb-slideshow li:nth-child(1) span { 
-    background-image: url('img/PMITOWER_banner.jpg') 
-}
-.cb-slideshow li:nth-child(2) span { 
-    background-image: url('img/MBI_banner.jpg');
-    animation-delay: 6s; 
-}
-.cb-slideshow li:nth-child(3) span { 
-    background-image: url('img/MAC_banner.jpg');
-    animation-delay: 12s; 
-}
-.cb-slideshow li:nth-child(4) span { 
-    background-image: url('img/CSC_banner.jpg');
-    animation-delay: 18s; 
-}
-.cb-slideshow li:nth-child(5) span { 
-    background-image: url('img/CSC_banner2.jpg');
-    animation-delay: 24s; 
-}
-.cb-slideshow li:nth-child(6) span { 
-    background-image: url('img/IMC_banner.jpg');
-    animation-delay: 30s; 
-}
-
-.cb-slideshow li:nth-child(2) div { 
-    animation-delay: 6s; 
-}
-.cb-slideshow li:nth-child(3) div { 
-    animation-delay: 12s; 
-}
-.cb-slideshow li:nth-child(4) div { 
-    animation-delay: 18s; 
-}
-.cb-slideshow li:nth-child(5) div { 
-    animation-delay: 24s; 
-}
-.cb-slideshow li:nth-child(6) div { 
-    animation-delay: 30s; 
-}
-
-@keyframes imageAnimation { 
-    0% { opacity: 0; animation-timing-function: ease-in; }
-    8% { opacity: 1; animation-timing-function: ease-out; }
-    17% { opacity: 1 }
-    25% { opacity: 0 }
-    100% { opacity: 0 }
-}
-
-@keyframes titleAnimation { 
-    0% { opacity: 0 }
-    8% { opacity: 1 }
-    17% { opacity: 1 }
-    19% { opacity: 0 }
-    100% { opacity: 0 }
-}
-
-@keyframes imageAnimation { 
-  0% {
-      opacity: 0;
-      animation-timing-function: ease-in;
-  }
-  8% {
-      opacity: 1;
-      transform: scale(1.05);
-      animation-timing-function: ease-out;
-  }
-  17% {
-      opacity: 1;
-      transform: scale(1.1) rotate(3deg);
-  }
-  25% {
-      opacity: 0;
-      transform: scale(1.1) rotate(3deg);
-  }
-  100% { opacity: 0 }
-}
-
-@keyframes titleAnimation { 
-  0% {
-      opacity: 0;
-      transform: translateX(200px);
-  }
-  8% {
-      opacity: 1;
-      transform: translateX(0px);
-  }
-  17% {
-      opacity: 1;
-      transform: translateX(0px);
-  }
-  19% {
-      opacity: 0;
-      transform: translateX(-400px);
-  }
-  25% { opacity: 0 }
-  100% { opacity: 0 }
-}
-
-ul{
-     list-style:none;
-}
-
-.no-cssanimations .cb-slideshow li span{
-  opacity: 1;
-}
-
-@media screen and (max-width: 1140px) { 
-    .cb-slideshow li div h3 { font-size: 140px }
-}
-@media screen and (max-width: 600px) { 
-    .cb-slideshow li div h3 { font-size: 80px }
-}
-
-.bgform{
-    background-color: #ffffff;
-    opacity: 1;
-    color: black;
-    position: relative;
-    border-radius: 15px;
-}
-.wb{
-    font-weight: bolder;
-}
-
-.loginbg{
-    background-color: #ffaa00;
-    border-color: #ffaa00;
-}
-
-.imgsze{
-    height: 20px;
-    width: 20px;
-}
-
-.bksze {
-    height: 30px;
-    width: 80px;
-}
-.bksze:hover{
-    opacity: 0.5;
-}
-.blk{
-    color: #000000;
-}
-
-.frgtpass{
-    color: red;
-}
-
-
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Dosis:300,400,500,,600,700,700i|Lato:300,300i,400,400i,700,700i" rel="stylesheet">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script type='text/javascript' src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src='js/script.js'></script>
+<style type="text/css">    
 .loader {
             position: fixed;
             left: 0px;
@@ -326,13 +121,8 @@ ul{
             /*background-size:200px 120px;*/
         }
 </style>
-
-
-
-<!-- end of style -->
-    
 </head>
-<body class="login-page">
+<body class="login-page" >
 <div id = "myDiv" style="display:none;" class="loader"></div>
 <!-- end of code -->
 <div class="login-box">
@@ -341,15 +131,15 @@ ul{
         <div class="card-header text-center">
             
             <a href="#" class="h5">
-            <img class="mb-4 img-fluid mx-auto d-block" src="img/obanana.png" alt="">    
+            <img class="mb-2 img-fluid mx-auto d-block newoblogo" src="img/obfinallogo.png" alt="">    
             <b>Human Resource Information System</b> </a>
         </div>
         <div class="card-body">
           <!-- <p class="login-box-msg">Sign in to start your session</p> -->
 
-          <form action="" method="post" name="login">
+          <form action="" method="post" name="login" onsubmit="show()">
             <div class="input-group mb-3">
-              <input type="text" name="userid" id="userid" class="form-control" placeholder="Emp. Code Ex. OBN000000" autocomplete="off" onkeyup="this.value = this.value.toUpperCase();"/>
+              <input type="text" name="userid" id="userid" class="form-control" placeholder="Email" autocomplete="on" required/>
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fa fa-user"></span>
@@ -357,9 +147,7 @@ ul{
               </div>
             </div>
             <div class="input-group mb-3">
-              <input
-                type="password" name="password" id="password" class="form-control" placeholder="Password" autocomplete="off"
-              />
+              <input type="password" name="password" id="password" class="form-control" placeholder="Password" autocomplete="off" required/>
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fa fa-lock"></span>
@@ -380,18 +168,19 @@ ul{
                 }
             ?>
           <div class="social-auth-links text-center mt-2 mb-3">
-            <input type="submit" class="btn btn-login btn-block" name="loginSubmit" value="Login" onclick="show()">
+            <input type="submit" class="btn btn-login btn-block" name="loginSubmit" value="Login" >
             <div class="row">
-                <div class="col-sm-6">
-                    <a href="newhireaccess/newemployee_entry.php" class="btn btn-block btn-login-emp mt-2">
+                <!-- <h6>Forgot password?Kindly contact the administrator.</h6> -->
+<!--                 <div class="col-sm-6">
+                    <a href="newhireaccess/newemployee_entry.php" class="btn btn-block btn-login-emp mt-2" onclick="show()">
                         <i class="fas fa-users"></i> New Employee
                     </a>
                 </div>
                 <div class="col-sm-6">
-                    <a href="applicantprofile/applicant_entry.php" class="btn btn-block btn-login-emp mt-2">
+                    <a href="applicantprofile/applicant_entry.php" class="btn btn-block btn-login-emp mt-2" onclick="show()">
                         <i class="fas fa-file "></i> Applicant
                     </a>
-                </div>
+                </div> -->
             </div>
           </div>
           </form>
@@ -443,7 +232,7 @@ ul{
         $url = 'pages/admin.php';
         $url_2 = 'pages/employee.php';
 
-        if ($empUserType === 'Admin')
+        if ($empUserType == 'Admin' || $empUserType == 'HR Generalist' ||$empUserType == 'HR Manager' || $empUserType == 'Group Head' || $empUserType == 'HR Generalist' ||$empUserType == 'HR Manager' || $empUserType == 'Group Head' ||$empUserType == 'President' )
         {
             header("Location: $url");
         }

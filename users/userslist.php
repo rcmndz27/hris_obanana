@@ -5,7 +5,26 @@ Class UsersList{
     public function GetAllUsersList(){
         global $connL;
 
-        echo '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in employee code">
+        echo '
+        <div class="form-row">  
+                    <div class="col-lg-1">
+                        <select class="form-select" name="state" id="maxRows">
+                             <option value="5000">ALL</option>
+                             <option value="5">5</option>
+                             <option value="10">10</option>
+                             <option value="15">15</option>
+                             <option value="20">20</option>
+                             <option value="50">50</option>
+                             <option value="70">70</option>
+                             <option value="100">100</option>
+                        </select> 
+                </div>         
+                <div class="col-lg-8">
+                </div>                               
+                <div class="col-lg-3">        
+                    <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for employee account.." title="Type in employee details"> 
+                        </div>                     
+                </div>         
         <table id="allUsersList" class="table table-striped table-sm">
         <thead>
             <tr>
@@ -22,7 +41,7 @@ Class UsersList{
         </thead>
         <tbody>';
 
-        $query = "SELECT * from mf_user";
+        $query = "SELECT * from dbo.mf_user";
         $stmt =$connL->prepare($query);
         $stmt->execute();
         $result = $stmt->fetch();
@@ -40,18 +59,32 @@ Class UsersList{
               
                 echo '
                 <tr>
-                <td>' . $result['userid']. '</td>
+                <td >' . $result['userid']. '</td>
                 <td>' . $result['username']. '</td>
-                <td>' . $result['usertype']. '</td>
+                <td id="usr'.$result['userid'].'">' . $result['usertype']. '</td>
                 <td>' . $result['useremail']. '</td>
-                <td>' . $result['status']. '</td>';
-                echo'<td><button type="button" class="hactv" onclick="editUsrModal('. $empcd.','. $name.','. $usrtyp.','. $usrmail.','. $stts.')" title="Update User/Change Password">
+                <td id="st'.$result['userid'].'">' . $result['status']. '</td>';
+
+                if( $result['locked_acnt'] == 1){
+                echo'<td><button type="button" class="btn btn-info btn-sm" onclick="editUsrModal('. $empcd.','. $name.')" title="Update User/Change Password">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button type="button" class="hdeactv" onclick="deleteLogsModal('. $empcd.')" title="Unblocked User">
+                            <button id="ub'.$result['userid'].'" type="button" class="btn btn-warning btn-sm" onclick="deleteLogsModal('. $empcd.')" title="Unblocked User">
                                 <i class="fas fa-lock-open"></i>
                             </button>
+                            <button type="button" class="btn btn-danger btn-sm" onclick="resetPassword('. $empcd.')" title="Reset Password">
+                                <i class="fas fa-power-off"></i>
+                            </button>                             
                             </td>';
+                } else{
+                    echo'<td><button type="button" class="btn btn-info btn-sm" onclick="editUsrModal('. $empcd.','. $name.')" title="Update User/Change Password">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm" onclick="resetPassword('. $empcd.')" title="Reset Password">
+                                <i class="fas fa-power-off"></i>
+                            </button>                            
+                            </td>';
+                }
                 
                 
             } while ($result = $stmt->fetch());
@@ -61,7 +94,20 @@ Class UsersList{
         }else { 
             echo '<tfoot><tr><td colspan="6" class="text-center">No Results Found</td></tr></tfoot>'; 
         }
-        echo '</table>';
+        echo '</table>
+        <div class="pagination-container">
+        <nav>
+          <ul class="pagination">
+            
+            <li data-page="prev" >
+                <span> << <span class="sr-only">(current)</span></span></li>
+    
+          <li data-page="next" id="prev">
+                  <span> >> <span class="sr-only">(current)</span></span>
+            </li>
+          </ul>
+        </nav>
+      </div>                 ';
     }
 
 

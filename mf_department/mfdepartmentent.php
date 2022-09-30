@@ -2,17 +2,18 @@
 
 Class MfdepartmentEnt{
 
-public function InseryMfdepartmentEnt($code,$descs)
+public function InsertMfdepartmentEnt($code,$descs)
     {
         global $connL;
 
-            $query = "INSERT INTO mf_dept (code,descs) VALUES(:code,:descs)";
+            $query = "INSERT INTO mf_dept (code,descs,status) VALUES(:code,:descs,:status)";
     
                 $stmt =$connL->prepare($query);
 
                 $param = array(
                     ":code"=> $code,
-                    ":descs" => $descs                                        
+                    ":descs" => $descs,
+                    ":status" => 'Active'                                       
                 );
 
             $result = $stmt->execute($param);

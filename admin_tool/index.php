@@ -8,7 +8,7 @@
     {
         include("../_header.php");
 
-        if ($empUserType == "Admin")
+        if ($empUserType == 'Admin' || $empUserType == 'HR Generalist' ||$empUserType == 'HR Manager' || $empUserType == 'Group Head')
         {
             include("../admin_tool/newhire-access.php");
         }

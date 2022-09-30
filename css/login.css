@@ -16,8 +16,10 @@ body {
   background-size: cover;
   background-color: #ffff;
   font-family: 'Dosis', sans-serif;
+  background-image:  url('../img/loginbg.jpg');
 }
 
+<<<<<<< HEAD
 .login-page {
   -ms-flex-align: center;
   align-items: center;
@@ -33,6 +35,9 @@ body {
 
 
 .deactv {
+=======
+.debtn btn-info {
+>>>>>>> origin/login
   width: 100%;
   background-color: #fbec1e;
   border-color: #fbec1e;
@@ -42,7 +47,7 @@ body {
   border-radius: 1rem;
 }
 
-.deactv:hover {
+.debtn btn-info:hover {
   opacity: 0.5;
 }
 .btn {
@@ -189,6 +194,12 @@ body {
   border: 1px solid #ffaa00;
   color: #333;
 } */
+
+.newoblogo{
+
+    height: 120px;
+    margin-top: 20px;
+}
 
 .forgetlink {
   color: #000;

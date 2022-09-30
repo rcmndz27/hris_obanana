@@ -52,12 +52,16 @@ $(function(){
         if(format.test(eadd)){
           // return swal('correct email');
         } else {
-          return        swal({
-                          title: "Oops...wrong email format",
-                          text: "example: useremp@yahoo.com",
-                          icon: "error",
-                          dangerMode: true
-                        });
+            swal({
+           title: "Oops...wrong email format",
+           text: "example: useremp@yahoo.com",
+            type: "error",
+             icon: "error",
+              dangerMode: true
+            }).then(function() {
+                var input2 = document.getElementById('emailadd');
+                input2.value = '';                       
+            }); 
         }   
 
     });
@@ -148,9 +152,15 @@ $(function(){
                                             data: param
                                         },
                                         success: function (result) {
-                                            console.log('success: ' + result);
-                                            swal({text:"Successfully added applicant details!",icon:"success"});
-                                            window.location.href ='../index.php';
+                                            // console.log('success: ' + result);
+                                                    swal({
+                                                    title: "Success!", 
+                                                    text: "Successfully added new applicant details!", 
+                                                    type: "success",
+                                                    icon: "success",
+                                                    }).then(function() {
+                                                        location.href = '../index.php';
+                                                    });                                            
                                         },
                                         error: function (result) {
                                             // console.log('error: ' + result);

@@ -3,30 +3,27 @@
 
     if (empty($_SESSION['userid']))
     {
-        echo '<script type="text/javascript">alert("Please login first!!");</script>';
-        header('refresh:1;url=../index.php' );
+        include_once('../loginfirst.php');
+        exit();
     }
     else
     {
         include('../_header.php');
         include('../controller/dashboard.php');
+        
+        if ($empUserType == 'Admin' || $empUserType == 'HR Generalist' ||$empUserType == 'HR Manager' || $empUserType == 'Group Head' ||  $empUserType =='Team Manager' ||  $empUserType =='President')
+        {
+  
+        }else{
+            echo '<script type="text/javascript">swal({text:"You do not have access here!",icon:"error"});';
+            echo "window.location.href = '../index.php';";
+            echo "</script>";
+        }         
     }    
 ?>
 
+<link rel="stylesheet" type="text/css" href="../pages/">
 <script type='text/javascript' src='../js/chart.min.js'></script>
-<style type="text/css">
-    
-.mbt {
-    background-color: #faf9f9;
-    padding: 30px;
-    border-radius: 0.25rem;
-}
-
-.pad{
-    padding: 5px 5px 5px 5px;
-    font-weight: bolder;
-}
-</style>
 <div class="container">
     <div class="section-title">
           <h1>DEMOGRAPHIC REPORT</h1>
@@ -72,7 +69,6 @@
     </div>
  </div>
 </div>
-<br><br>
-
 
 <script type='text/javascript' src='../js/dashboardchart.js'></script>
+<?php include("../_footer.php");?>

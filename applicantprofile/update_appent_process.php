@@ -12,8 +12,5 @@
         UpdateManpowerEnt($man_pow,$rowid);
         UpdateStatAppEnt($rowid);
     }
-    else {
-
-    }
 
 ?>

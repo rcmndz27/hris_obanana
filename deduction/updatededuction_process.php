@@ -1,5 +1,7 @@
 <?php
 
+            date_default_timezone_set('Asia/Manila');
+
     include('../deduction/updatededuction.php');
     include('../config/db.php');
 
@@ -8,15 +10,14 @@
     $deduction_id = $_POST["deduction_id"];
     $period_cutoff = $_POST["period_cutoff"];
     $amount = $_POST["amount"];
-    $effectivity_date = $_POST["effectivity_date"];        
+    $effectivity_date = $_POST["effectivity_date"];  
+    $status = $_POST["status"];        
+    $dedcid = $_POST["dedcid"];        
 
 
     if ($action == 1)
     {
-        UpdateDeduction($emp_code,$deduction_id,$period_cutoff,$amount,$effectivity_date);
-    }
-    else {
-
+        UpdateDeduction($emp_code,$deduction_id,$period_cutoff,$amount,$effectivity_date,$status,$dedcid);
     }
 
 ?>

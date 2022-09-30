@@ -1,0 +1,166 @@
+table,th,td{
+
+                border: 1px solid #dee2e6;
+                font-weight: 600;
+                font-size: 15px;
+ }   
+
+.table2 {
+        text-align: left;
+        width: 1070px;
+        height: 600px;
+        display: block;
+        font-size: 15px;
+        overflow-y:auto;
+        overflow-x:auto;
+}
+
+.table3{
+    text-align: center;
+    width: 100%;
+    height: 600px;
+    display: block;
+    font-size: 15px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.table4 {
+    text-align: left;
+    /* width: 1070px; */
+    /* height: 600px; */
+    display: block;
+    font-size: 15px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+  
+table {
+        border: 1px solid #dee2e6;
+        color: #ffff;
+        margin-bottom: 100px;
+        border: 2px solid black;
+        background-color: white;
+        text-align: center;
+        table-layout: fixed;
+        width:100%;
+}
+
+
+
+thead th {
+  min-width: 120px;
+
+}
+
+
+td:first-child{
+  position:sticky;
+  left:0;
+  z-index:0;
+  background-color:#c9c9c9;
+}
+
+td:last-child{
+  position:sticky;
+  right:0;
+  z-index:0;
+  background-color:#c9c9c9;
+}
+
+th:not(:first-child):not(:last-child){
+  position:sticky;
+  top: 0;
+  z-index:0;
+  background-color: #c9c9c9;
+}
+
+th:first-child{
+  position:sticky;
+  top: 0;
+  left: 0;
+  z-index:1;
+  background-color: #c9c9c9;
+}
+
+th:last-child{
+  position:sticky;
+  top: 0;
+  right: 0;
+  z-index:1;
+  background-color: #c9c9c9;
+}
+
+.editatt{
+    height: 500px;
+    overflow: auto;
+}
+
+
+.paytop{
+text-align: left;
+}
+
+.evac{
+    width: 500px;
+}
+
+.btn-save{
+background-color: #b52020;
+border-color: #b52020;
+color: #ffff;
+}
+.savebtn{
+    background-color: #b52020;
+    border-color: #b52020;
+    color: #ffff;
+    width: 200px;
+    font-weight: bolder;
+}
+.mbot{
+    font-weight: bolder;
+    font-size: 17px;
+    margin-top: -50px;
+}
+
+.mleft{
+    margin-left: 50px;
+}
+
+.bgen{
+    font-weight: bolder;
+}
+
+#myInput {
+  background-image: url('../img/searchicon.png');
+  background-size: 30px;
+  background-position: 5px 5px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;  
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+.svepay{
+
+    background-color: #b52020;
+    border-color: #b52020;
+    color: #ffff;
+    width: 200px;
+    font-weight: bolder;
+
+}
+
+
+.mbt {
+    background-color: #faf9f9;
+    padding: 30px;
+    border-radius: 0.25rem;
+}
+
+.pad{
+    padding: 5px 5px 5px 5px;
+    font-weight: bolder;
+}

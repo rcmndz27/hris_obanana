@@ -25,18 +25,19 @@ $(function(){
 
     $('#Submit').click(function(){
 
-        var empcode = $('#emp_code').children("option:selected").val();
-        var emp_code = empcode.split(" - ");
+        var emp_code = $('#emp_code').val();
+        var username = document.getElementById(emp_code).innerHTML;
 
 
         if (CheckInput() === true) {
    
             param = {
                 'Action': 'InsertUsersEnt',
-                'userid': emp_code[0],
-                'username': emp_code[1],
-                'userpassword': $('#password').val(),
+                'userid': emp_code,
+                'username': username,
+                'userpassword': 'abc123',
                 'usertype': $('#emp_level').val(),
+                'eMplogName': $('#eMplogName').val(),
                 'status': $( "#status option:selected" ).text()
               
 
@@ -44,9 +45,9 @@ $(function(){
     
             param = JSON.stringify(param);
 
-            // swal(param);
-            // exit();
-
+        // console.log(param);
+        // return false;
+        
                      swal({
                           title: "Are you sure you want to add this users details?",
                           text: "Please make sure all information are true and correct.",

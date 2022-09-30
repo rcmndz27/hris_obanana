@@ -1,5 +1,7 @@
 <?php
 
+            date_default_timezone_set('Asia/Manila');
+
     include('../salary/updatesalary.php');
     include('../config/db.php');
 
@@ -15,9 +17,6 @@
     if ($action == 1)
     {
         UpdateSalary($emp_code,$bank_type,$bank_no,$pay_rate,$amount,$status);
-    }
-    else {
-
     }
 
 ?>

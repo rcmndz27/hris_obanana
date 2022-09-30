@@ -7,10 +7,11 @@
     $rowid = $_POST["rowid"];
     $descsb = $_POST["descsb"];
     $descsb_name = $_POST["descsb_name"];
+    $status = $_POST["status"];
 
     if ($action == 1)
     {
-        UpdateBank($rowid,$descsb,$descsb_name);
+        UpdateBank($rowid,$descsb,$descsb_name,$status);
     }
     else {
 

@@ -3,7 +3,7 @@ var message=" This function is not allowed here.";
 function clickIE4(){
       if (event.button==2)
       {
-            alert(message);
+            swal(message);
             return false;
       }
 }
@@ -13,7 +13,7 @@ function clickNS4(e){
       {
             if (e.which==2||e.which==3)
             {
-                  alert(message);
+                  
                   return false;
             }
       }
@@ -29,4 +29,5 @@ else if (document.all&&!document.getElementById)
       document.onmousedown=clickIE4;
 }
 
-document.oncontextmenu = new Function("alert(message);return false;")
+
+document.oncontextmenu = new Function('swal({text:"This function is not allowed here!",icon:"warning"});return false;')

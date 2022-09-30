@@ -61,23 +61,26 @@ else
     <!-- <script type="text/javascript" src='../js/script.js'></script> -->
     </head>
 <body>
-
+<div id = "myDiv" style="display:none;" class="loader"></div>
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
-
       <img src='../img/obanana.png'alt="" class="ob_logo"/>
       <nav id="navbar" class="navbar">
           <ul>
                 <li><a class="nav-link active" href="#"><i class="fas fa-users fa-fw"></i>  &nbsp;NEW EMPLOYEE</a></li>
-                <li><a class="nav-link" href="../index.php"><i class="fas fa-home fa-fw"></i>  &nbsp;LOGIN</a></li>
+<!--                 <li><a class="nav-link" href="../index.php" onclick="show()"><i class="fas fa-home fa-fw"></i>  &nbsp;LOGIN</a></li> -->
 
             </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
     </div>
-  </header><!-- End Header -->
-  <br>
- <!-- <script src="../assets/js/main.js"></script> -->
+  </header><br><!-- End Header -->
 </body>
+
+<script type="text/javascript">
+         function show() {
+            document.getElementById("myDiv").style.display="block";
+        }
+</script>
 

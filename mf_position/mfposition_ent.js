@@ -12,7 +12,8 @@ $(function(){
         var inputValues = [];
     
         inputValues = [
-            $('#position')
+            $('#position'),
+            $('#status')
         ];
 
 
@@ -26,12 +27,13 @@ $(function(){
 
 
         if (CheckInput() === true) {
-
-
-   
+        
             param = {
                 'Action': 'InsertMfpositionEnt',
-                'position': $('#position').val()                
+                'position': $('#position').val(),
+                'department': $('#department').val(),
+                'status': $('#status').children("option:selected").val(),
+                'empCode': $('#empCode').val(),                  
             }
     
             param = JSON.stringify(param);
@@ -46,8 +48,8 @@ $(function(){
                           buttons: true,
                           dangerMode: true,
                         })
-                        .then((appEnt) => {
-                          if (appEnt) {
+                        .then((posEnt) => {
+                          if (posEnt) {
                                     $.ajax({
                                         type: 'POST',
                                         url: '../mf_position/mfpositionent_process.php',
@@ -55,12 +57,18 @@ $(function(){
                                             data: param
                                         },
                                         success: function (result) {
-                                            console.log('success: ' + result);
-                                            swal({text:"Successfully added job position!",icon:"success"});
-                                            location.reload();
+                                            // console.log('success: ' + result);
+                                            swal({
+                                            title: "Success!", 
+                                            text: "Successfully added the job details!", 
+                                            type: "success",
+                                            icon: "success",
+                                            }).then(function() {
+                                                location.href = '../mf_position/mfpositionlist_view.php';
+                                            }); 
                                         },
                                         error: function (result) {
-                                            console.log('error: ' + result);
+                                            // console.log('error: ' + result);
                                         }
                                     }); //ajax
                           } else {

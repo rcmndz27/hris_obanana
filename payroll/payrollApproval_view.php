@@ -6,71 +6,37 @@
 
     if (empty($_SESSION['userid']))
     {
-        echo '<script type="text/javascript">alert("Please login first!!");</script>';
-        header( "refresh:1;url=../index.php" );
+        include_once('../loginfirst.php');
+        exit();
     }
     else
     {
         include('../_header.php');
         include('../payroll/payrollApproval.php');
+        include('../payroll/payrollapp_reg.php');
 
-        if ($empType == 'Staff')
+        if ($empUserType == 'Admin' || $empUserType == 'Finance' ||  $empUserType == 'Group Head' || $empUserType == 'President')
         {
-            echo '<span class="etcMessage">
-                    <script type="text/javascript">
-                        alert("This page is RESTRICTED!!");
-                        $("etcMessage").remove();
-                    </script>
-                </span';
-        }
-        else
-        {
-
-        }
+  
+        }else{
+            echo '<script type="text/javascript">swal({text:"You do not have access here!",icon:"error"});';
+            echo "window.location.href = '../index.php';";
+            echo "</script>";
+        } 
     }
 ?>
-<style type="text/css">
-     table,th{
-
-                border: 1px solid #dee2e6;
-                font-weight: 700;
-                font-size: 14px;
- }   
-
-
-table,td{
-
-                border: 1px solid #dee2e6;
- }  
-
- th,td{
-    border: 1px solid #dee2e6;
- }
-  
-table {
-        border: 1px solid #dee2e6;
-        color: #ffff;
-        margin-bottom: 100px;
-        border: 2px solid black;
-        background-color: white;
-    }
-.mbt {
-    background-color: #faf9f9;
-    padding: 30px;
-    border-radius: 0.25rem;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="../payroll/payroll_app.css">
+<link rel="stylesheet" type="text/css" href="../payroll/payroll_appreg.css">
 <div class="container">
     <div class="section-title">
-          <h1>PAYROLL APPROVAL</h1>
+          <h1>PAYROLL LIST</h1>
         </div>
     <div class="main-body mbt">
-
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item active" aria-current="page"><b><i class='fas fa-money-check fa-fw'>
-                        </i>&nbsp;PAYROLL APPROVAL</b></li>
+                        </i>&nbsp;PAYROLL LIST</b></li>
             </ol>
           </nav>
 
@@ -78,17 +44,120 @@ table {
                 <div class="col-md-12">
                     <div class="panel-body">
                         <div id="contents" class="table-responsive-sm table-body">
-                            <?php ShowAllPayroll(); ?>
-                                
+                            <?php ShowAllPayroll(); ?>                             
                         </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+
+    <div class="modal fade" id="viewPayReg" tabindex="-1" role="dialog" aria-labelledby="informationModalTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title bb" id="popUpModalTitle">VIEW PAYROLL REGISTER <i class="fas fa-money-bill"></i></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times; </span>
+                    </button>
+                </div>
+        <div class="modal-body">
+            <div class="main-body">
+                <fieldset class="fieldset-border">
+                            <div class="d-flex justify-content-center">
+                                <legend class="fieldset-border pad">
+                                </legend>
+                             </div>
+                        <div class="form-row">                             
+            <div class="row pt-3">
+                <div class="col-md-12">
+                    <div class="panel-body">
+                        <div id="contents2" class="table-responsive-sm table-body">
+                     </div>
+                    </div>
+                </div>
+            </div>
+                        </div> <!-- form row closing -->
+                    </fieldset> 
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CLOSE</button>
+                                </div> 
+                        </div> <!-- main body closing -->
+                    </div> <!-- modal body closing -->
+                </div> <!-- modal content closing -->
+            </div> <!-- modal dialog closing -->
+        </div><!-- modal fade closing -->
+
+
+    </div> <!-- main body mbt closing -->
+</div><!-- container closing -->
 
 
 <script type='text/javascript'>
+
+
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("payrollAppRegList");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+
+
+
+function ViewPyReg(perfrom,perto,stats)
+    {
+        $('#viewPayReg').modal('toggle');
+
+        var url = "../payroll/payrollapp_process.php";
+        var period_from = perfrom;
+        var period_to = perto;
+
+        // console.log(period_from);
+        // console.log(period_to);
+        // console.log(payroll_status);
+        // return false;
+
+        $.post (
+            url,
+            {
+                _action: 1,
+                period_from: period_from,
+                period_to: period_to        
+            },
+            function(data) { 
+                $("#contents2").html(data).show(); 
+                $("#payrollAppRegList").tableExport({
+                    headers: true,
+                    footers: true,
+                    formats: ['xlsx'],
+                    filename: 'id',
+                    bootstrap: false,
+                    exportButtons: true,
+                    position: 'top',
+                    ignoreRows: null,
+                    ignoreCols: null,
+                    trimWhitespace: true,
+                    RTL: false,
+                    sheetname: 'Payroll Register View'
+                });
+                $(".btn btn-primary").prepend('<i class="fas fa-file-export"></i> ');
+            }
+       );
+    }
+
     function ApprovePayroll()
     {
                  var url = "../payroll/payrollApprovalProcess.php";     
@@ -106,10 +175,18 @@ table {
                                     {
                                         choice: 1
                                     },
-                                    function(data) { location.reload(true); }
+                                    function(data) { 
+                                            swal({
+                                            title: "Success!", 
+                                            text: "Successfully approved payroll details!", 
+                                            type: "success",
+                                            icon: "success",
+                                            }).then(function() {
+                                                location.href = '../payroll/payrollApproval_view.php';
+                                            });   
+                                    }
                                 );
-                            swal({text:"Successfully activated the payroll!",icon:"success"});
-                            location.reload();
+
                           } else {
                             swal({text:"You cancel the approval of payroll!",icon:"error"});
                           }
@@ -134,9 +211,17 @@ table {
                                     {
                                         choice: 2
                                     },
-                                    function(data) { location.reload(true); }
+                                    function(data) { 
+                                            swal({
+                                            title: "Oops!", 
+                                            text: "Successfully rejected payroll details!", 
+                                            type: "info",
+                                            icon: "info",
+                                            }).then(function() {
+                                                location.href = '../payroll/payrollApproval_view.php';
+                                            });  
+                                    }
                                 );
-                            swal({text:"Successfully rejected the payroll!",icon:"success"});
                             location.reload();
                           } else {
                             swal({text:"You cancel the rejection of payroll!",icon:"error"});
@@ -145,7 +230,8 @@ table {
       
     }
 
+    
+
 </script>
-<script type='text/javascript' src='../js/tableFilter.js'></script>
 
 <?php include('../_footer.php');?>

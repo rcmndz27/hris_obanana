@@ -9,43 +9,21 @@
         include('../overtime/overtime-approval.php');
 
         $overtimeApproval = new OvertimeApproval();
+
+
+        if ($empUserType == 'Admin' || $empUserType == 'HR Generalist' ||$empUserType == 'HR Manager' || $empUserType == 'Group Head' ||  $empUserType =='Team Manager' ||  $empUserType =='President' ||  $empUserType =='Finance')
+        {
+  
+        }else{ 
+            echo '<script type="text/javascript">swal({text:"You do not have access here!",icon:"error"});';
+            echo "window.location.href = '../index.php';";
+            echo "</script>";
+        }
     }
 ?>
 
-
+<link rel="stylesheet" type="text/css" href="../overtime/otapp.css">
 <script type='text/javascript' src='../overtime/overtime-approval.js'></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<style type="text/css">
-table,th{
-
-                border: 1px solid #dee2e6;
-                font-weight: 700;
-                font-size: 14px;
- }   
-
-
-table,td{
-
-                border: 1px solid #dee2e6;
- }  
-
- th,td{
-    border: 1px solid #dee2e6;
- }
-  
-table {
-        border: 1px solid #dee2e6;
-        color: #ffff;
-        margin-bottom: 100px;
-        border: 2px solid black;
-        background-color: white;
-    }
-.mbt {
-    background-color: #faf9f9;
-    padding: 30px;
-    border-radius: 0.25rem;
-}
-</style>
 <div class="container">
     <div class="section-title">
           <h1>OVERTIME APPROVAL</h1>
@@ -78,8 +56,8 @@ table {
                 </div>
 
                 <div class="modal-footer">
-                        <button type="button" class="backbut" data-dismiss="modal"><i class="fas fa-times-circle"></i> CANCEL</button>
-                        <button type="button" class="subbut" id="submit"><i class="fas fa-check-circle"></i> SUBMIT</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CANCEL</button>
+                        <button type="button" class="btn btn-success" id="submit"><i class="fas fa-check-circle"></i> SUBMIT</button>
                 </div>
 
             </div>
@@ -87,7 +65,7 @@ table {
     </div>
 
     <div class="row">
-        <div class="col-md-12 pt-3">
+        <div class="col-md-12">
             <?php $overtimeApproval->GetOTSummary($empCode);?>
         </div>
     </div>

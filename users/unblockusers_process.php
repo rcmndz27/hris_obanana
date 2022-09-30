@@ -11,8 +11,6 @@
     {
         UnblockUsers($emp_code);
     }
-    else {
-
-    }
+    
 
 ?>

@@ -1,55 +1,55 @@
- var pdfFile;
+//  var pdfFile;
 
-function GetWfhFile() {
-    var selectedfile = document.getElementById("attachment").files;
-    if (selectedfile.length > 0) {
-        var uploadedFile = selectedfile[0];
-        var fileReader = new FileReader();
-        var fl = uploadedFile.name;
+// function GetWfhFile() {
+//     var selectedfile = document.getElementById("attachment").files;
+//     if (selectedfile.length > 0) {
+//         var uploadedFile = selectedfile[0];
+//         var fileReader = new FileReader();
+//         var fl = uploadedFile.name;
 
-        fileReader.onload = function (fileLoadedEvent) {
-            var srcData = fileLoadedEvent.target.result;
-            pdfFile =  fl;
-        }
-        fileReader.readAsDataURL(uploadedFile);
-    }
-}
-
-
-function uploadFile() {
-
-   var files = document.getElementById("attachment").files;
-
-   if(files.length > 0 ){
-
-      var formData = new FormData();
-      formData.append("file", files[0]);
-
-      var xhttp = new XMLHttpRequest();
+//         fileReader.onload = function (fileLoadedEvent) {
+//             var srcData = fileLoadedEvent.target.result;
+//             pdfFile =  fl;
+//         }
+//         fileReader.readAsDataURL(uploadedFile);
+//     }
+// }
 
 
-      xhttp.open("POST", "ajaxfile.php", true);
+// function uploadFile() {
 
-      xhttp.onreadystatechange = function() {
-         if (this.readyState == 4 && this.status == 200) {
+//    var files = document.getElementById("attachment").files;
 
-           var response = this.responseText;
-           if(response == 1){
-              alert("Upload successfully.");
-           }else{
-              alert("File not uploaded.");
-           }
-         }
-      };
+//    if(files.length > 0 ){
 
-      // Send request with data
-      xhttp.send(formData);
+//       var formData = new FormData();
+//       formData.append("file", files[0]);
 
-   }else{
-      // alert("Please select a file");
-   }
+//       var xhttp = new XMLHttpRequest();
 
-}
+
+//       xhttp.open("POST", "ajaxfile.php", true);
+
+//       xhttp.onreadystatechange = function() {
+//          if (this.readyState == 4 && this.status == 200) {
+
+//            var response = this.responseText;
+//            if(response == 1){
+//               alert("Upload successfully.");
+//            }else{
+//               alert("File not uploaded.");
+//            }
+//          }
+//       };
+
+//       // Send request with data
+//       xhttp.send(formData);
+
+//    }else{
+//       // alert("Please select a file");
+//    }
+
+// }
 
 
  $(function(){
@@ -61,7 +61,9 @@ function uploadFile() {
 
         inputValues = [
             
-            $('#remarks'),
+            $('#wfh_task')
+            // ,$('#wfh_output')
+            // ,$('#wfh_percentage')
             
         ];
 
@@ -70,57 +72,79 @@ function uploadFile() {
     }
 
 
-            $('#wfhdateto').change(function(){
 
-                if($('#wfhdateto').val() < $('#wfhdate').val()){
+            // $('#wfhdateto').change(function(){
 
-                    alert('`WFH Date To` must be greater than `WFH Date From`');
+            //     if($('#wfhdateto').val() < $('#wfhdate').val()){
 
-                    var input2 = document.getElementById('wfhdateto');
-                    input2.value = $('#wfhdate').val();
-                }else{
-                    // alert('Error');
-                }   
+            //         swal({text:"WFH date TO must be greater than WFH Date From!",icon:"error"});
+
+            //         var input2 = document.getElementById('wfhdateto');
+            //         input2.value = '';               
+
+            //     }else{
+            //         // alert('Error');
+            //     }   
+
+            // });
 
 
-            });
+            // $('#wfhdate').change(function(){
+
+            //         var input2 = document.getElementById('wfhdateto');
+            //         document.getElementById("wfhdateto").min = $('#wfhdate').val();
+            //         input2.value = '';
+
+            // });
 
 $('#Submit').click(function(){
 
  
-            var dte = $('#wfhdate').val();
-            var dte_to = $('#wfhdateto').val();
+            // var dte = $('#wfhdate').val();
+            // var dte_to = $('#wfhdateto').val();
 
-            dateArr = []; 
+            // dateArr = []; 
 
-            var start = new Date(dte);
-            var date = new Date(dte_to);
-            var end = date.setDate(date.getDate() + 1);
+            // var start = new Date(dte);
+            // var date = new Date(dte_to);
+            // var end = date.setDate(date.getDate() + 1);
 
-            while(start < end){
-               dateArr.push(moment(start).format('MM-DD-YYYY'));
-               var newDate = start.setDate(start.getDate() + 1);
-               start = new Date(newDate);  
-            }
+            // while(start < end){
+            //    dateArr.push(moment(start).format('MM-DD-YYYY'));
+            //    var newDate = start.setDate(start.getDate() + 1);
+            //    start = new Date(newDate);  
+            // }
 
-            const ite_date = dateArr.length === 0  ? dte : dateArr ;
+            // const ite_date = dateArr.length === 0  ? dte : dateArr ;
+
+            var e_req = $('#e_req').val();
+            var n_req = $('#n_req').val();
+            var e_appr = $('#e_appr').val();
+            var n_appr = $('#n_appr').val();            
+
 
 
             if (CheckInput() === true) {
 
                 param = {
                     "Action":"ApplyWfhApp",
-                    "wfhdate": ite_date,
-                    "remarks": $('#remarks').val(),
-                    "attachment": pdfFile
-                };
+                    "wfhdate": $('#wfhdate').val(),
+                    "wfh_task": $('#wfh_task').val(),
+                    "wfh_output": $('#wfh_output').val(),
+                    "wfh_percentage": 0,
+                    "e_req": e_req,
+                    "n_req": n_req,
+                    "e_appr": e_appr,
+                    "n_appr": n_appr                    
+                    
+               };
                 
                 param = JSON.stringify(param);
 
-                    
-                    if($('#wfhdateto').val() >= $('#wfhdate').val()){
-                        
-                        swal({
+                // alert(param);
+                // exit();
+                
+                      swal({
                           title: "Are you sure?",
                           text: "You want to apply this work from home?",
                           icon: "success",
@@ -128,6 +152,7 @@ $('#Submit').click(function(){
                           dangerMode: true,
                         })
                         .then((applyWfh) => {
+                            document.getElementById("myDiv").style.display="block";
                           if (applyWfh) {
                                     $.ajax({
                                         type: "POST",
@@ -135,22 +160,28 @@ $('#Submit').click(function(){
                                         data: {data:param} ,
                                         success: function (data){
                                             console.log("success: "+ data);
-                                            $('#popUpModal').modal('toggle');
-                                            location.reload();
+                                                swal({
+                                                title: "Success!", 
+                                                text: "Successfully added work from home details!", 
+                                                type: "success",
+                                                icon: "success",
+                                                }).then(function() {
+                                                    location.href = '../wfhome/wfh_app_view.php';
+                                                });
                                         },
                                         error: function (data){
                                             swal('error');
                                         }
-                                    });//ajax
+                                    });
                           } else {
-                            swal("Your cancel your work from home!");
+                            document.getElementById("myDiv").style.display="none";
+                            swal({text:"You cancel your work from home!!",icon:"error"});
                           }
                         });
 
-                    }else{
-                        swal({text:"WFH Date TO must be greater than WFH Date From!",icon:"error"});
-                    }
  
+            }else{
+                swal({text:"Kindly fill up blank fields!",icon:"error"});
             }
 
       

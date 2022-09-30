@@ -40,19 +40,12 @@ $(function(){
         var inputValues = [];
     
         inputValues = [
-            $('#empimgpic'),
-            $('#preffieldwork'),
-            $('#preffieldwork1'),
-            $('#positiontitle'),
-            $('#positiontitle1'),
-            $('#reason_position'),
-            $('#expected_salary'),
-            $('#howtoapply'),
+            $('#emp_code'),
+            $('#positiontitle'),  
             $('#firstname'),
             $('#lastname'),
             $('#emp_address'),
             $('#emp_address2'),
-            $('#telno'),
             $('#celno'),
             $('#emailaddress'),
             $('#birthdate'),
@@ -60,9 +53,17 @@ $(function(){
             $('#age'),
             $('#nationality'),
             $('#sex'),
-            $('#marital_status'),
-            $('#contactpersonname'),
-            $('#contactpersonno')
+            $('#marital_status')                      
+            // $('#empimgpic'),
+            // $('#telno'),            
+            // $('#reason_position'),
+            // $('#expected_salary'),
+            // $('#preffieldwork'),
+            // $('#preffieldwork1'),
+            // $('#positiontitle1'),
+            // $('#howtoapply'),
+            // $('#contactpersonname'),
+            // $('#contactpersonno')
         ];
 
         var result = (CheckInputValue(inputValues) === '0') ? true : false;
@@ -91,24 +92,80 @@ $(function(){
                 }   
     });
 
-   
+        $('#sss_no').change(function(){
+            var str = document.getElementById('sss_no').value;
+                    avr = str.replace(/[^a-zA-Z0-9]/g, '');;
+            document.getElementById('sss_no').value = avr;
+        });
+
+        $('#phil_no').change(function(){
+            var str = document.getElementById('phil_no').value;
+                avr = str.replace(/[^a-zA-Z0-9]/g, '');;
+            document.getElementById('phil_no').value = avr;
+        });
+    
+        $('#pagibig_no').change(function(){
+            var str = document.getElementById('pagibig_no').value;
+                avr = str.replace(/[^a-zA-Z0-9]/g, '');;
+            document.getElementById('pagibig_no').value = avr;
+        });
+
+        $('#tin_no').change(function(){
+            var str = document.getElementById('tin_no').value;
+                avr = str.replace(/[^a-zA-Z0-9]/g, '');;
+            document.getElementById('tin_no').value = avr;
+        });
+
+
+        $('#celno').change(function(){
+            var str = document.getElementById('celno').value;
+                    avr = str.replace(/[^a-zA-Z0-9]/g, '');;
+            document.getElementById('celno').value = avr;
+        });
+
+        $('#celno1').change(function(){
+            var str = document.getElementById('celno1').value;
+                avr = str.replace(/[^a-zA-Z0-9]/g, '');;
+            document.getElementById('celno1').value = avr;
+        });
+    
+        $('#telno').change(function(){
+            var str = document.getElementById('telno').value;
+                avr = str.replace(/[^a-zA-Z0-9]/g, '');;
+            document.getElementById('telno').value = avr;
+        });
+
+        $('#telno1').change(function(){
+            var str = document.getElementById('telno1').value;
+                avr = str.replace(/[^a-zA-Z0-9]/g, '');;
+            document.getElementById('telno1').value = avr;
+        });
+
+        $('#contactpersonno').change(function(){
+            var str = document.getElementById('contactpersonno').value;
+                avr = str.replace(/[^a-zA-Z0-9]/g, '');;
+            document.getElementById('contactpersonno').value = avr;
+        });
+        
+
+
 
     $('#birthdate').change(function(){
 
-    var dot = $('#birthdate').val();
+        var dot = $('#birthdate').val();
 
-    var currentDate = new Date(dot);
-    var day = ("0" + (currentDate.getDate())).slice(-2);
-    var month = ("0" + (currentDate.getMonth() + 1)).slice(-2);
-    var year = currentDate.getFullYear()
-    var dobb =  month + "/" + day + "/" + year;
+        var currentDate = new Date(dot);
+        var day = ("0" + (currentDate.getDate())).slice(-2);
+        var month = ("0" + (currentDate.getMonth() + 1)).slice(-2);
+        var year = currentDate.getFullYear()
+        var dobb =  month + "/" + day + "/" + year;
 
-    var dob = new Date(dobb);
+        var dob = new Date(dobb);
 
-    var age = getAge(dobb);
+        var age = getAge(dobb);
 
-    var ages = document.getElementById('age');
-    ages.value = age;
+        var ages = document.getElementById('age');
+        ages.value = age;
 
     });
 
@@ -146,8 +203,8 @@ $(function(){
 
     $('#perma').click(function(){
     
-        var input2 = document.getElementById('emp_address2');
-        input2.value = $('#emp_address').val();
+        var empad = document.getElementById('emp_address2');
+        empad.value = $('#emp_address').val();
 
     });
 
@@ -169,13 +226,18 @@ $(function(){
 
         if(format.test(eadd)){
           // return swal('correct email');
-        } else {
-          return        swal({
-                          title: "Oops...wrong email format",
-                          text: "example: useremp@yahoo.com",
-                          icon: "error",
-                          dangerMode: true
-                        });
+        } else {      
+            swal({
+           title: "Oops...wrong email format",
+           text: "example: useremp@yahoo.com",
+            type: "error",
+             icon: "error",
+              dangerMode: true
+            }).then(function() {
+                var input2 = document.getElementById('emailaddress');
+                input2.value = '';                       
+            });          
+
         }   
 
     });
@@ -187,12 +249,16 @@ $(function(){
         if(format.test(eadd)){
           // return swal('correct email');
         } else {
-          return        swal({
-                          title: "Oops...wrong email format",
-                          text: "example: useremp@yahoo.com",
-                          icon: "error",
-                          dangerMode: true
-                        });
+            swal({
+           title: "Oops...wrong email format",
+           text: "example: useremp@yahoo.com",
+            type: "error",
+             icon: "error",
+              dangerMode: true
+            }).then(function() {
+                var input2 = document.getElementById('emailaddress1');
+                input2.value = '';                       
+            }); 
         }   
 
     });
@@ -241,13 +307,14 @@ $(function(){
     
             param = {
                 'Action': 'InsertNewEmpEnt',
+                "emp_code": $('#emp_code').val(),
                 "emp_pic_loc": empImgFile,
-                'preffieldwork': $('#preffieldwork').val(),
-                'preffieldwork1': $('#preffieldwork1').val(),
+                // 'preffieldwork': $('#preffieldwork').val(),
+                // 'preffieldwork1': $('#preffieldwork1').val(),
                 'positiontitle': $('#positiontitle').val(),
-                'positiontitle1': $('#positiontitle1').val(),  
-                'reason_position': $('#reason_position').val(),
-                'expected_salary': $('#expected_salary').val(),  
+                // 'positiontitle1': $('#positiontitle1').val(),  
+                // 'reason_position': $('#reason_position').val(),
+                // 'expected_salary': $('#expected_salary').val(),  
                 'howtoapply': $( "#howtoapply option:selected" ).text(),
                 'referredby': $('#referredby').val(),                                
                 'firstname': $('#firstname').val(),
@@ -265,9 +332,9 @@ $(function(){
                 'birthdate':$( "#birthdate" ).val(),                       
                 'birthplace':$( "#birthplace" ).val(),
                 'nationality':$( "#nationality" ).val(),
-                'residence_certno':$( "#residence_certno" ).val(),
-                'residence_certdate':$( "#residence_certdate" ).val(),
-                'residence_certplace':$( "#residence_certplace" ).val(),
+                // 'residence_certno':$( "#residence_certno" ).val(),
+                // 'residence_certdate':$( "#residence_certdate" ).val(),
+                // 'residence_certplace':$( "#residence_certplace" ).val(),
                 'tin_no':$( "#tin_no" ).val(),
                 'sss_no':$( "#sss_no" ).val(),
                 'phil_no':$( "#phil_no" ).val(),
@@ -296,16 +363,16 @@ $(function(){
                 'contactpersonname':$( "#contactpersonname" ).val(),
                 'contactpersonno':$( "#contactpersonno" ).val(),
                 'contactpersonaddress':$( "#contactpersonaddress" ).val(),
-                'legalconvictioncharge':$( "#legalconvictioncharge" ).val(),
-                'legalconvictiondate':$( "#legalconvictiondate" ).val(),
-                'legalconvictionwhere':$( "#legalconvictionwhere" ).val(),
-                'legalconviction':$( "#legalconviction" ).val(),
-                'civilcase':$( "#civilcase" ).val(),
-                'conname': $("input[name='conname[]']").map(function(){return $(this).val();}).get(),
-                'conoccupation': $("input[name='conoccupation[]']").map(function(){return $(this).val();}).get(),
-                'concompany': $("input[name='concompany[]']").map(function(){return $(this).val();}).get(),
-                'conconviction': $("input[name='conconviction[]']").map(function(){return $(this).val();}).get(),                                
-                'rightsemployee':$( "#rightsemployee" ).val(),
+                // 'legalconvictioncharge':$( "#legalconvictioncharge" ).val(),
+                // 'legalconvictiondate':$( "#legalconvictiondate" ).val(),
+                // 'legalconvictionwhere':$( "#legalconvictionwhere" ).val(),
+                // 'legalconviction':$( "#legalconviction" ).val(),
+                // 'civilcase':$( "#civilcase" ).val(),
+                // 'conname': $("input[name='conname[]']").map(function(){return $(this).val();}).get(),
+                // 'conoccupation': $("input[name='conoccupation[]']").map(function(){return $(this).val();}).get(),
+                // 'concompany': $("input[name='concompany[]']").map(function(){return $(this).val();}).get(),
+                // 'conconviction': $("input[name='conconviction[]']").map(function(){return $(this).val();}).get(),                                
+                // 'rightsemployee':$( "#rightsemployee" ).val(),
                 'schoolfrom': $("input[name='schoolfrom[]']").map(function(){return $(this).val();}).get(),
                 'schoolto': $("input[name='schoolto[]']").map(function(){return $(this).val();}).get(),
                 'schoolname': $("input[name='schoolname[]']").map(function(){return $(this).val();}).get(),
@@ -323,10 +390,13 @@ $(function(){
                 'duties': $("input[name='duties[]']").map(function(){return $(this).val();}).get(),
                 'reasonforleaving': $("input[name='reasonforleaving[]']").map(function(){return $(this).val();}).get()
             }
-    
+        
+
             param = JSON.stringify(param);
 
-
+            // console.log(param);
+            // return false;
+            
             var files = document.getElementById("empimgpic").files;
 
                    if(files.length > 0 ){
@@ -362,11 +432,17 @@ $(function(){
                                                 },
                                                 success: function (result) {                                            
                                                     console.log('success: ' + result);
-                                                    swal({text:"Successfully added applicant details!",icon:"success"});
-                                                    window.location.href ='../index.php';
+                                                    swal({
+                                                    title: "Success!", 
+                                                    text: "Successfully added new employee details!", 
+                                                    type: "success",
+                                                    icon: "success",
+                                                    }).then(function() {
+                                                        location.href = '../index.php';
+                                                    });
                                                 },
                                                 error: function (result) {
-                                                    console.log('error: ' + result);
+                                                    // console.log('error: ' + result);
                                                 }
                                             }); //ajax
                                   } else {

@@ -100,7 +100,7 @@ ul ol {
   margin-bottom: 0; }
 
 dt {
-  font-weight: 700; }
+  font-weight: 600; }
 
 dd {
   margin-bottom: .5rem;
@@ -427,7 +427,7 @@ kbd {
   kbd kbd {
     padding: 0;
     font-size: 100%;
-    font-weight: 700; }
+    font-weight: 600; }
 
 pre {
   display: block;
@@ -3498,7 +3498,7 @@ input[type="button"].btn-block {
   display: inline-block;
   padding: 0.25em 0.4em;
   font-size: 75%;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1;
   text-align: center;
   white-space: nowrap;
@@ -3627,7 +3627,7 @@ input[type="button"].btn-block {
   color: inherit; }
 
 .alert-link {
-  font-weight: 700; }
+  font-weight: 600; }
 
 .alert-dismissible {
   padding-right: 4rem; }
@@ -3974,7 +3974,7 @@ input[type="button"].btn-block {
 .close {
   float: right;
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1;
   color: #182024;
   text-shadow: 0 1px 0 #f5f5f5;
@@ -7612,7 +7612,7 @@ table {
     height: 50px;
     overflow: scroll; }
   table thead {
-    font-weight: 700;
+    font-weight: 600;
     background-color: #182024;
     color: #f5f5f5; }
   table td {
@@ -7658,7 +7658,7 @@ input[type=file]::before {
 
 .button {
   border: none;
-  font-weight: 700;
+  font-weight: 600;
   -webkit-transition: 1s all ease;
   -ms-transition: 1s all ease;
   -moz-transition: 1s all ease;
@@ -7704,7 +7704,7 @@ input[type=file]::before {
   color: #03288b;
   border: none;
   background-color: transparent;
-  font-weight: 700;
+  font-weight: 600;
   text-decoration: underline; }
 
 .tableBtn:hover {
@@ -7740,7 +7740,7 @@ input[type=file]::before {
     transition: 1s all ease; }
     .navsContainer .head_nav .navbar-brand {
       color: inherit;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 2.1rem;
       -webkit-transition: 0.5s all ease;
       -ms-transition: 0.5s all ease;
@@ -7778,7 +7778,7 @@ input[type=file]::before {
     color: #c0c0c0;
     background-color: #f5f5f5;
     z-index: 10;
-    font-weight: 700;
+    font-weight: 600;
     margin-left: 5px;
     -webkit-transition: transform 150ms ease-out, font-size 150ms ease-out;
     -ms-transition: transform 150ms ease-out, font-size 150ms ease-out;
@@ -8749,7 +8749,7 @@ input[type=file]::before {
     height: 50px;
     overflow: scroll; }
   .travelorderContainer #history table thead, .leaveapplicationContainer #history table thead, .otapplicationContainer #history table thead {
-    font-weight: 700;
+    font-weight: 600;
     background-color: #182024;
     color: #f5f5f5; }
 .travelorderContainer #summary, .travelorderContainer #history, .leaveapplicationContainer #summary, .leaveapplicationContainer #history, .otapplicationContainer #summary, .otapplicationContainer #history {
@@ -8819,7 +8819,7 @@ input[type=file]::before {
     .profileSettingsContainer #contents #contents-info .editbar .errMessage {
       margin-right: auto;
       color: maroon;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 0.9rem; }
   .profileSettingsContainer #contents #contents-info .content-block-info {
     padding-left: 0;
