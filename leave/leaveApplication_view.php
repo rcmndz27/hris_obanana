@@ -28,8 +28,10 @@
         $astmt =$connL->prepare($aquery);
         $astmt->execute($aparam);
         $ar = $astmt->fetch();
-        $e_appr = $ar['emailaddress'];
-        $n_appr = $ar['firstname'].' '.$ar['lastname'];        
+        $e_appr = (isset($ar['emailaddress'])) ? $ar['emailaddress'] : 'n/a' ;
+        $afname = (isset($ar['firstname'])) ? $ar['firstname'] : 'n/a' ; 
+        $alname = (isset($ar['lastname'])) ? $ar['lastname'] : 'n/a' ;
+        $n_appr = $afname.' '.$afname;        
 
         $querys = 'SELECT * FROM dbo.employee_leave WHERE emp_code = :empcode ';
         $params = array(":empcode" => $_SESSION['userid']);

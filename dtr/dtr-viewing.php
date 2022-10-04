@@ -71,7 +71,7 @@ Class EmployeeAttendance{
                         $swork = (isset($result['timein']) || isset($result['timeout']) ?  round($result['workhours'],2): '');
     
                         echo    "<tr>".
-                                "<td>" . $result['fullname'] . "</td>".
+                                "<td>" . $result['name'] . "</td>".
                                 "<td class=".$class.">" . date('F d, Y', strtotime($result['punch_date'])) . "</td>".
                                 "<td>" . $timeIn . "</td>".
                                 "<td>" . $timeOut . "</td>".
