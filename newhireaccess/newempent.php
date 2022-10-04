@@ -3,13 +3,13 @@
 
 Class NewEmpEnt{
 
-public function InsertNewEmpEnt($emp_code,$emp_pic_loc,$positiontitle,$howtoapply,$referredby,$firstname,$middlename,$lastname,$maidenname,$emp_address,$emp_address2,$telno,$telno1,$celno,$celno1,$emailaddress,$emailaddress1,$birthdate,$birthplace,$nationality,$tin_no,$sss_no,$phil_no,$pagibig_no,$tax_status,$married_dependents,$sex,$marital_status,$spousename,$spousebirthdate,$spouseoccupation,$spousecompany,$fathername,$fatheroccupation,$fatherbirthdate,$mothername,$motheroccupation,$motherbirthdate,$companyrelatives,$contactpersonname,$contactpersonno,$contactpersonaddress)
+public function InsertNewEmpEnt($emp_code,$emp_pic_loc,$positiontitle,$department,$howtoapply,$referredby,$firstname,$middlename,$lastname,$maidenname,$emp_address,$emp_address2,$telno,$telno1,$celno,$celno1,$emailaddress,$emailaddress1,$birthdate,$birthplace,$nationality,$tin_no,$sss_no,$phil_no,$pagibig_no,$tax_status,$married_dependents,$sex,$marital_status,$spousename,$spousebirthdate,$spouseoccupation,$spousecompany,$fathername,$fatheroccupation,$fatherbirthdate,$mothername,$motheroccupation,$motherbirthdate,$companyrelatives,$contactpersonname,$contactpersonno,$contactpersonaddress)
     {
         global $connL;
 
-    $query = "INSERT INTO employee_profile (emp_code,badgeno,emp_pic_loc,position,positiontitle,howtoapply,referredby,firstname,middlename,lastname,maidenname,emp_address,emp_address2,telno,telno1,celno,celno1,emailaddress,emailaddress1,birthdate,birthplace,nationality,tin_no,sss_no,phil_no,pagibig_no,tax_status,married_dependents,sex,marital_status,spousename,spousebirthdate,spouseoccupation,spousecompany,fathername,fatheroccupation,fatherbirthdate,mothername,motheroccupation,motherbirthdate,companyrelatives,contactpersonname,contactpersonno,contactpersonaddress,datehired,audituser,auditdate) 
+    $query = "INSERT INTO employee_profile (emp_code,badgeno,emp_pic_loc,position,department,howtoapply,referredby,firstname,middlename,lastname,maidenname,emp_address,emp_address2,telno,telno1,celno,celno1,emailaddress,emailaddress1,birthdate,birthplace,nationality,tin_no,sss_no,phil_no,pagibig_no,tax_status,married_dependents,sex,marital_status,spousename,spousebirthdate,spouseoccupation,spousecompany,fathername,fatheroccupation,fatherbirthdate,mothername,motheroccupation,motherbirthdate,companyrelatives,contactpersonname,contactpersonno,contactpersonaddress,datehired,audituser,auditdate) 
 
-        VALUES(:emp_code,:badgeno,:emp_pic_loc,:position,:positiontitle,:howtoapply,:referredby,:firstname,:middlename,:lastname,:maidenname,:emp_address,:emp_address2,:telno,:telno1,:celno,:celno1,:emailaddress,:emailaddress1,:birthdate,:birthplace,:nationality,:tin_no,:sss_no,:phil_no,:pagibig_no,:tax_status,:married_dependents,:sex,:marital_status,:spousename,:spousebirthdate,:spouseoccupation,:spousecompany,:fathername,:fatheroccupation,:fatherbirthdate,:mothername,:motheroccupation,:motherbirthdate,:companyrelatives,:contactpersonname,:contactpersonno,:contactpersonaddress,:datehired,:audituser,:auditdate)";
+        VALUES(:emp_code,:badgeno,:emp_pic_loc,:position,:department,:howtoapply,:referredby,:firstname,:middlename,:lastname,:maidenname,:emp_address,:emp_address2,:telno,:telno1,:celno,:celno1,:emailaddress,:emailaddress1,:birthdate,:birthplace,:nationality,:tin_no,:sss_no,:phil_no,:pagibig_no,:tax_status,:married_dependents,:sex,:marital_status,:spousename,:spousebirthdate,:spouseoccupation,:spousecompany,:fathername,:fatheroccupation,:fatherbirthdate,:mothername,:motheroccupation,:motherbirthdate,:companyrelatives,:contactpersonname,:contactpersonno,:contactpersonaddress,:datehired,:audituser,:auditdate)";
 
                 $stmt =$connL->prepare($query);
 
@@ -18,7 +18,7 @@ public function InsertNewEmpEnt($emp_code,$emp_pic_loc,$positiontitle,$howtoappl
                 ":badgeno"=> $emp_code,
                 ":emp_pic_loc"=> $emp_pic_loc,
                 ":position"=> $positiontitle,
-                ":positiontitle"=> $positiontitle,
+                ":department"=> $department,
                 ":howtoapply"=> $howtoapply,
                 ":referredby"=> $referredby,
                 ":firstname"=> $firstname,

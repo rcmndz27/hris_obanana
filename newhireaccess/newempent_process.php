@@ -16,6 +16,7 @@ if($newempent->{"Action"} == "InsertNewEmpEnt")
     // $preffieldwork = $newempent->{"preffieldwork"};
     // $preffieldwork1 = $newempent->{"preffieldwork1"};
     $positiontitle = $newempent->{"positiontitle"};
+    $department = $newempent->{"department"};
     // $positiontitle1 = $newempent->{"positiontitle1"};
     // $reason_position = $newempent->{"reason_position"};
     // $expected_salary = $newempent->{"expected_salary"};
@@ -93,7 +94,7 @@ if($newempent->{"Action"} == "InsertNewEmpEnt")
     $arrduties = $newempent->{"duties"};
     $arrreasonforleaving = $newempent->{"reasonforleaving"}; 
    
-    $newEmpEnt->InsertNewEmpEnt($emp_code,$emp_pic_loc,$positiontitle,$howtoapply,$referredby,$firstname,$middlename,$lastname,$maidenname,$emp_address,$emp_address2,$telno,$telno1,$celno,$celno1,$emailaddress,$emailaddress1,$birthdate,$birthplace,$nationality,$tin_no,$sss_no,$phil_no,$pagibig_no,$tax_status,$married_dependents,$sex,$marital_status,$spousename,$spousebirthdate,$spouseoccupation,$spousecompany,$fathername,$fatheroccupation,$fatherbirthdate,$mothername,$motheroccupation,$motherbirthdate,$companyrelatives,$contactpersonname,$contactpersonno,$contactpersonaddress);
+    $newEmpEnt->InsertNewEmpEnt($emp_code,$emp_pic_loc,$positiontitle,$department,$howtoapply,$referredby,$firstname,$middlename,$lastname,$maidenname,$emp_address,$emp_address2,$telno,$telno1,$celno,$celno1,$emailaddress,$emailaddress1,$birthdate,$birthplace,$nationality,$tin_no,$sss_no,$phil_no,$pagibig_no,$tax_status,$married_dependents,$sex,$marital_status,$spousename,$spousebirthdate,$spouseoccupation,$spousecompany,$fathername,$fatheroccupation,$fatherbirthdate,$mothername,$motheroccupation,$motherbirthdate,$companyrelatives,$contactpersonname,$contactpersonno,$contactpersonaddress);
 
     foreach($arrdepname as $key => $value){
             $depname = $value;

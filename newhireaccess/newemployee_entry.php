@@ -91,14 +91,22 @@
                                 </div>   
 
                                                              
-                                <div class="col-lg-10">
+                                <div class="col-lg-5">
                                     <div class="form-group">
                                         <label class="control-label" for="positionList">Position Title:<span class="req">*</span></label>
-                                        <input type="text" class="form-control inputtext" name="positiontitle"
-                                            id="positiontitle" placeholder="Job Title" required>
+     
+                                <?php $dd->GenerateDropDown("positiontitle", $mf->GetJobPosition("jobpos")); ?>                                           
 
                                     </div>
-                                </div>                                                               
+                                </div> 
+                                <div class="col-lg-5">
+                                    <div class="form-group">
+                                        <label class="control-label" for="department">Department:<span class="req">*</span></label>
+     
+                                <?php $dd->GenerateDropDown("department", $mf->GetAllDepartment("alldep")); ?>                                            
+
+                                    </div>
+                                </div>                                                                                                
                             </div> 
 <!--                         
 <div class="form-row mb-2">
@@ -186,7 +194,7 @@ id="expected_salary" placeholder="P 00,000.00">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label" for="Permanent">(B) Permanent Address<span class="req">*</span></label>
-                                        <label class="note"><input class="btn samea" id="perma" value="SAME IN (A)"></label>
+                                        <label class="note"><input class="btn samea" id="perma" value="SAME IN (A)" onkeydown="return false;"></label>
                                   <textarea class="form-control" id="emp_address2" name="emp_address2" rows="2"
                                     cols="90" placeholder="Address....."></textarea>
                                     </div>

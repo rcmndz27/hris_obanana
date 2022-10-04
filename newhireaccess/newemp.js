@@ -41,7 +41,8 @@ $(function(){
     
         inputValues = [
             $('#emp_code'),
-            $('#positiontitle'),  
+            // $('#positiontitle'),  
+            // $('#department'),  
             $('#firstname'),
             $('#lastname'),
             $('#emp_address'),
@@ -312,6 +313,7 @@ $(function(){
                 // 'preffieldwork': $('#preffieldwork').val(),
                 // 'preffieldwork1': $('#preffieldwork1').val(),
                 'positiontitle': $('#positiontitle').val(),
+                'department': $('#department').val(),
                 // 'positiontitle1': $('#positiontitle1').val(),  
                 // 'reason_position': $('#reason_position').val(),
                 // 'expected_salary': $('#expected_salary').val(),  
