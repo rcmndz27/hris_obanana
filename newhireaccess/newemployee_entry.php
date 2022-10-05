@@ -90,15 +90,23 @@
                                     </div>
                                 </div>   
 
+                                <div class="col-lg-2">
+                                    <div class="form-group">
+                                        <label class="control-label" for="employeeid">Employee ID:</label>
+                                        <input type="text" class="form-control" name="emp_id"
+                                            id="emp_id" placeholder="Employee ID">                                        
+                                    </div>
+                                </div>                                 
+
                                                              
-                                <div class="col-lg-5">
+                                <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="control-label" for="positionList">Position Title:<span class="req">*</span></label>
                                         <input type="text" class="form-control inputtext" name="positiontitle"
                                             id="positiontitle" placeholder="Position Title">                                        
                                     </div>
                                 </div> 
-                                <div class="col-lg-5">
+                                <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="control-label" for="department">Department:<span class="req">*</span></label>
                                     <input type="text" class="form-control inputtext" name="department"
@@ -129,7 +137,7 @@
                                         <label class="control-label" for="Referred By">Remarks:</label>
                                         <div id="refby_show">
                                             <input type="text" class="form-control inputtext" name="referredby"
-                                                id="referredby" placeholder="Referred by">
+                                                id="referredby" placeholder="Remarks">
                                         </div>
                                         <div id="refby_dis">
                                             <input type="text" class="form-control inputtext" placeholder="Referred by" readonly>

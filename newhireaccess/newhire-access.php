@@ -35,7 +35,7 @@ Class NewHireAccess{
         $result = $stmt->fetch();
         if($result){
             do { 
-                $fullname =  $result['lastname'].','.$result['firstname'].' '.substr($result['middlename'],0,1).'.';
+                $fullname =  $result['lastname'].','.$result['firstname'];
                 $empcd = "'".$result['emp_code']."'";
                 $emppicloc = "'".$result['emp_pic_loc']."'";
                  $day[] = $result;
@@ -98,6 +98,7 @@ Class NewHireAccess{
                         document.getElementById('birthplace').value = nameD[i][33];
                         document.getElementById('sex').value = nameD[i][28];
                         document.getElementById('marital_status').value = nameD[i][29];  
+                        document.getElementById('emp_id').value = nameD[i][98];  
                         console.log(nameD[i][89]) ;
                         if(nameD[i][89] == 4){
                             document.getElementById('reporting_to').disabled = true;

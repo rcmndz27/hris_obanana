@@ -41,8 +41,8 @@ $(function(){
     
         inputValues = [
             $('#emp_code'),
-            // $('#positiontitle'),  
-            // $('#department'),  
+            $('#positiontitle'),  
+            $('#department'),  
             $('#firstname'),
             $('#lastname'),
             $('#emp_address'),
@@ -55,16 +55,6 @@ $(function(){
             $('#nationality'),
             $('#sex'),
             $('#marital_status')                      
-            // $('#empimgpic'),
-            // $('#telno'),            
-            // $('#reason_position'),
-            // $('#expected_salary'),
-            // $('#preffieldwork'),
-            // $('#preffieldwork1'),
-            // $('#positiontitle1'),
-            // $('#howtoapply'),
-            // $('#contactpersonname'),
-            // $('#contactpersonno')
         ];
 
         var result = (CheckInputValue(inputValues) === '0') ? true : false;
@@ -309,14 +299,10 @@ $(function(){
             param = {
                 'Action': 'InsertNewEmpEnt',
                 "emp_code": $('#emp_code').val(),
+                "emp_id": $('#emp_id').val(),
                 "emp_pic_loc": 'nophoto.png',
-                // 'preffieldwork': $('#preffieldwork').val(),
-                // 'preffieldwork1': $('#preffieldwork1').val(),
                 'positiontitle': $('#positiontitle').val(),
                 'department': $('#department').val(),
-                // 'positiontitle1': $('#positiontitle1').val(),  
-                // 'reason_position': $('#reason_position').val(),
-                // 'expected_salary': $('#expected_salary').val(),  
                 'howtoapply': $( "#howtoapply option:selected" ).text(),
                 'referredby': $('#referredby').val(),                                
                 'firstname': $('#firstname').val(),
@@ -334,9 +320,6 @@ $(function(){
                 'birthdate':$( "#birthdate" ).val(),                       
                 'birthplace':$( "#birthplace" ).val(),
                 'nationality':$( "#nationality" ).val(),
-                // 'residence_certno':$( "#residence_certno" ).val(),
-                // 'residence_certdate':$( "#residence_certdate" ).val(),
-                // 'residence_certplace':$( "#residence_certplace" ).val(),
                 'tin_no':$( "#tin_no" ).val(),
                 'sss_no':$( "#sss_no" ).val(),
                 'phil_no':$( "#phil_no" ).val(),
@@ -365,16 +348,6 @@ $(function(){
                 'contactpersonname':$( "#contactpersonname" ).val(),
                 'contactpersonno':$( "#contactpersonno" ).val(),
                 'contactpersonaddress':$( "#contactpersonaddress" ).val(),
-                // 'legalconvictioncharge':$( "#legalconvictioncharge" ).val(),
-                // 'legalconvictiondate':$( "#legalconvictiondate" ).val(),
-                // 'legalconvictionwhere':$( "#legalconvictionwhere" ).val(),
-                // 'legalconviction':$( "#legalconviction" ).val(),
-                // 'civilcase':$( "#civilcase" ).val(),
-                // 'conname': $("input[name='conname[]']").map(function(){return $(this).val();}).get(),
-                // 'conoccupation': $("input[name='conoccupation[]']").map(function(){return $(this).val();}).get(),
-                // 'concompany': $("input[name='concompany[]']").map(function(){return $(this).val();}).get(),
-                // 'conconviction': $("input[name='conconviction[]']").map(function(){return $(this).val();}).get(),                                
-                // 'rightsemployee':$( "#rightsemployee" ).val(),
                 'schoolfrom': $("input[name='schoolfrom[]']").map(function(){return $(this).val();}).get(),
                 'schoolto': $("input[name='schoolto[]']").map(function(){return $(this).val();}).get(),
                 'schoolname': $("input[name='schoolname[]']").map(function(){return $(this).val();}).get(),
@@ -422,7 +395,7 @@ $(function(){
                                         type: "success",
                                         icon: "success",
                                         }).then(function() {
-                                            location.href = '../index.php';
+                                            location.href = '../newhireaccess/newhireaccess_view.php';
                                         });
                                     },
                                     error: function (result) {

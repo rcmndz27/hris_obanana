@@ -128,7 +128,10 @@
         <div class='col-md-5' >          
             <button type="button" id="search" class="btn btn-warning mr-2" onclick="generateEmpStatus();">
               <i class="fas fa-search-plus"></i> GENERATE                      
-            </button>  
+            </button> 
+            
+              <a href="../newhireaccess/newemployee_entry.php" class="text-light" target="_blank"><button type="button" id="search" class="btn btn-primary mr-2" ><i class="fas fa-user"></i>  ADD USER </button></a>                    
+                       
         </div>
         <div class='col-md-4' >     
             <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search..." title="Type in employee name">
@@ -163,12 +166,18 @@
                              </div>
                             <div class="form-row">
 
-                            <div class="col-lg-12">
+                            <div class="col-lg-9">
                                 <div class="form-group">
                                 <label class="control-label" for="collegeCourse">Upload Photo</label>
                                 <input class="d-block" type="file" name="empimgpic" id="empimgpic" accept="image/png, image/jpeg" onChange="GetEmpImgFile()">
                                 </div>
                             </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label" for="department">Employee ID</label>
+                                        <input type="text" id="emp_id" class="form-control">
+                                    </div>
+                                </div>                            
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label class="control-label" for="department">Employee Code</label>
@@ -554,6 +563,7 @@ function GetEmpImgFile() {
         var minimum_wage = $( "#minimum_wage option:selected" ).val();
         var pay_type = $( "#pay_type option:selected" ).val();
         var emp_status = $( "#emp_status option:selected" ).val();
+        var emp_id = $('#emp_id').val();
         if(emplevel[0] == 4){
              var rt =  'none';
         }else{
@@ -638,7 +648,8 @@ function GetEmpImgFile() {
                                             emp_status : emp_status,
                                             reporting_to: rt,
                                             emp_pic : emp_pic,
-                                            rowid: rowid                
+                                            rowid: rowid,
+                                            emp_id: emp_id                
                                         },
                                         function(data) {
                                             // console.log('success: ' + data);
