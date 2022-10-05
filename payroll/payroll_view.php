@@ -89,7 +89,7 @@ else
             </select>
         </div>
         <div class='col-md-2' id="s15th">
-            <?php $dd->GenerateDropDown("ddcutoff", $mf->GetTKList("tkview")); ?>
+            <?php $dd->GenerateDropDown("ddcutoff", $mf->GetAllCutoffPay("payview")); ?>
         </div>
         
         <div class='col-md-2' id="s30th">
