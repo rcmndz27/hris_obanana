@@ -37,7 +37,7 @@ require '../vendor/autoload.php';
                     echo"
                         <tr>
                             <td>".$result['lastname'].",".$result['firstname']." ".$result['middlename']."</td>
-                            <td>"."<button style='width: 9.375rem;' class='penLeave btnPending ".$result['otrid']." ' id='".$result['emp_code']."' type='submit'>".$result['ot_req_hrs']."</button>
+                            <td>"."<button style='width: 9.375rem;' class='penLeave btnPending ".$result['otrid']." ' id='".$result['emp_code']."' type='submit'>".round($result['ot_req_hrs'],2)."</button>
                             <button id='alertot".$result['otrid']."' value='".$otFiled."' hidden></button></td>
                         </tr>";
                 } while($result = $stmt->fetch());
@@ -80,13 +80,13 @@ require '../vendor/autoload.php';
             if($result){
                 do{
 
-                    $actualOT = (isset($result['ot_req_hrs']) ? $result['ot_req_hrs'] : 0);
+                    $actualOT = (isset($result['ot_req_hrs']) ? round($result['ot_req_hrs'],2) : 0);
 
                     echo"
                         <tr id='clv".$result['rowid']."'>
                             <td>".date('F d, Y',strtotime($result['ot_date']))."</td>
                             <td>".$result['remarks']."</td>
-                            <td>".$result['ot_req_hrs']."</td>
+                            <td>".round($result['ot_req_hrs'],2)."</td>
                             <td>".$result['ot_ren_hrs']."</td>
                             <td>"."<input type='number' id='ac".$result['rowid']."' class='form-control' value='".round($actualOT,2)."' max='".round($actualOT,2)."' onkeydown='return false' min='0.5' step='0.5'>"."</td>
                             <td hidden>"."<input type='text' class='form-control' value='".$result['reporting_to']."' >"."</td>

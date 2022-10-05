@@ -153,7 +153,7 @@ var rowid = data;
                     icon: "success",
                     }).then(function(e) {
                         document.getElementById('st'+rowid).innerHTML = 'Active';
-                        document.getElementById('act'+rowid).innerHTML = '<button type="button" class="debtn btn-info" onclick="deactivatePlant('+rowid+')"><i class="fas fa-times-circle"></i> DE-ACTIVATE</button>';
+                        document.getElementById('act'+rowid).innerHTML = '<button type="button" class="debtn btn-info btn-sm" onclick="deactivatePlant('+rowid+')"><i class="fas fa-times-circle"></i> DE-ACTIVATE</button>';
                     }); 
                     }   
                 );
@@ -196,7 +196,7 @@ var rowid = data;
                                         icon: "success",
                                         }).then(function(e) {
                                             document.getElementById('st'+rowid).innerHTML = 'De-Activated';
-                                            document.getElementById('act'+rowid).innerHTML = '<button type="button" class="btn btn-info" onclick="activatePlant('+rowid+')"><i class="fas fa-check-circle"></i>ACTIVATE</button>';
+                                            document.getElementById('act'+rowid).innerHTML = '<button type="button" class="btn btn-info btn-sm" onclick="activatePlant('+rowid+')"><i class="fas fa-check-circle"></i>ACTIVATE</button>';
                                         });
 
                                      }

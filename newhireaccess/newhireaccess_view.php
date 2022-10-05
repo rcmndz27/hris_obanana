@@ -114,30 +114,34 @@
           </nav>
 
         <div class="form-row">
+            <div class='col-sm-1'>
             <label for="payroll_period" class="col-form-label pad">Status:</label>
-            <div class='col-md-2'>
+            </div>
+            <div class='col-md-2' >
               <select class="form-select" id="empStatus" name="empStatus" value="">
                 <option value="Active">Active</option>
                 <option value="Resigned">Resigned</option>
                 <option value="Terminated">Terminated</option>
                 <option value="Separated">Separated</option>
-              </select>
-                
-            </div>           
-            <button type="button" id="search" class="btn btn-warning" onclick="generateEmpStatus();">
+              </select>    
+          </div>
+        <div class='col-md-5' >          
+            <button type="button" id="search" class="btn btn-warning mr-2" onclick="generateEmpStatus();">
               <i class="fas fa-search-plus"></i> GENERATE                      
-            </button>                                      
+            </button>  
+        </div>
+        <div class='col-md-4' >     
+            <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search..." title="Type in employee name">
+        </div>                                              
         </div>
 
-
-    <div class="pt-3">
+    <div class="pt-1">
         <div class="row">
             <div class="col-md-12">
                     <div id='contents'></div>  
             </div>
         </div>
     </div>
-
 
 
     <div class="modal fade" id="HireEmp" tabindex="-1" role="dialog" aria-labelledby="informationModalTitle"

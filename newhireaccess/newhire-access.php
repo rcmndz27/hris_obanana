@@ -11,7 +11,6 @@ Class NewHireAccess{
                 <div class="col-lg-8">
                 </div>                               
                 <div class="col-lg-4">        
-                    <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search..." title="Type in employee name"> 
                         </div>                     
                 </div>  
         <table id="allEmpList" class="table empp table-striped table-sm">
@@ -49,7 +48,7 @@ Class NewHireAccess{
                 <td>' . $result['location'] . '</td>
                 <td>' . $result['emp_type'] . '</td>
                 <td>' . $result['emp_status'] . '</td>';
-                echo '<td><button type="button" class="btn btn-info btn-sm" onclick="viewEmpModal('.$empcd.','.$emppicloc.')" title="View Employee Profile"><i class="fas fa-binoculars"></i>
+                echo '<td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewEmpModal('.$empcd.','.$emppicloc.')" title="View Employee Profile"><i class="fas fa-binoculars"></i>
                             </button><button type="button" class="btn btn-warning btn-sm" onclick="updateEmpModal('.$empcd.')" title="Update Employee Profile">
                                 <i class="fas fa-edit"></i>
                             </button></td>

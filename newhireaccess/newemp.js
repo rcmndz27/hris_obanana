@@ -309,7 +309,7 @@ $(function(){
             param = {
                 'Action': 'InsertNewEmpEnt',
                 "emp_code": $('#emp_code').val(),
-                "emp_pic_loc": empImgFile,
+                "emp_pic_loc": 'nophoto.png',
                 // 'preffieldwork': $('#preffieldwork').val(),
                 // 'preffieldwork1': $('#preffieldwork1').val(),
                 'positiontitle': $('#positiontitle').val(),
@@ -398,76 +398,81 @@ $(function(){
 
             // console.log(param);
             // return false;
-            
-            var files = document.getElementById("empimgpic").files;
 
-                   if(files.length > 0 ){
+                 swal({
+                      title: "Are you sure you want to submit this employee details?",
+                      text: "Please make sure all information are true and correct.",
+                      icon: "success",
+                      buttons: true,
+                      dangerMode: true,
+                    })
+                    .then((newEmp) => {
+                      if (newEmp) {
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '../newhireaccess/newempent_process.php',
+                                    data: {
+                                        data: param
+                                    },
+                                    success: function (result) {                                            
+                                        console.log('success: ' + result);
+                                        swal({
+                                        title: "Success!", 
+                                        text: "Successfully added new employee details!", 
+                                        type: "success",
+                                        icon: "success",
+                                        }).then(function() {
+                                            location.href = '../index.php';
+                                        });
+                                    },
+                                    error: function (result) {
+                                        console.log('error: ' + result);
+                                    }
+                                }); //ajax
+                      } else {
+                        swal({text:"You cancel the submission of your applicant details!",icon:"error"});
+                      }
+                    });
 
-                      var formData = new FormData();
-                      formData.append("file", files[0]);
 
-                      var xhttp = new XMLHttpRequest();
-
-                      // Set POST method and ajax file path
-                      xhttp.open("POST", "newemp_uploadajaxfile.php", true);
-
-                      // call on request changes state
-                      xhttp.onreadystatechange = function() {
-                         if (this.readyState == 4 && this.status == 200) {
-
-                           var response = this.responseText;
-                           if(response == 1){
-                               swal({
-                                  title: "Are you sure you want to submit this employee details?",
-                                  text: "Please make sure all information are true and correct.",
-                                  icon: "success",
-                                  buttons: true,
-                                  dangerMode: true,
-                                })
-                                .then((newEmp) => {
-                                  if (newEmp) {
-                                            $.ajax({
-                                                type: 'POST',
-                                                url: '../newhireaccess/newempent_process.php',
-                                                data: {
-                                                    data: param
-                                                },
-                                                success: function (result) {                                            
-                                                    console.log('success: ' + result);
-                                                    swal({
-                                                    title: "Success!", 
-                                                    text: "Successfully added new employee details!", 
-                                                    type: "success",
-                                                    icon: "success",
-                                                    }).then(function() {
-                                                        location.href = '../index.php';
-                                                    });
-                                                },
-                                                error: function (result) {
-                                                    // console.log('error: ' + result);
-                                                }
-                                            }); //ajax
-                                  } else {
-                                    swal({text:"You cancel the submission of your applicant details!",icon:"error"});
-                                  }
-                                });
-                           }else{
-                              swal("File not uploaded.");
-                           }
-                         }
-                      };
-
-                      // Send request with data
-                      xhttp.send(formData);
-
-                   }else{
-                      swal("Please select an image file");
-                   }
-                    
-
-                }else{
+                    }else{
                     swal({text:"Please fill-up all required (*) fields. ",icon:"error"});
                 }
+
+            // var files = document.getElementById("empimgpic").files;
+
+            //        if(files.length > 0 ){
+
+            //           var formData = new FormData();
+            //           formData.append("file", files[0]);
+
+            //           var xhttp = new XMLHttpRequest();
+
+            //           // Set POST method and ajax file path
+            //           xhttp.open("POST", "newemp_uploadajaxfile.php", true);
+
+            //           // call on request changes state
+            //           xhttp.onreadystatechange = function() {
+            //              if (this.readyState == 4 && this.status == 200) {
+
+            //                var response = this.responseText;
+            //                if(response == 1){
+
+            //                }else{
+            //                   swal("File not uploaded.");
+            //                }
+            //              }
+            //           };
+
+            //           // Send request with data
+            //           xhttp.send(formData);
+
+            //        }else{
+            //           // swal("Please select an image file");
+            //        }
+                    
+
+ 
             });
 
 

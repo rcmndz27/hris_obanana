@@ -161,7 +161,7 @@ function GetPayrollList($action, $dtFrom, $dtTo,$location,$empCode){
             "<td id='slhnp".$r['badge_no']."'>" . round($r['sick_leave_nopay'],2) . "</td>".
             "<td id='vlhnp".$r['badge_no']."'>" . round($r['vacation_leave_nopay'],2) . "</td>";
             echo'<td>
-            <button type="button" class="btn btn-info btn-sm" onclick="viewAllAttendanceEmp('.$badgeno.','.$pfrom.','.$pto.')" title="View Attendance Logs">
+            <button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewAllAttendanceEmp('.$badgeno.','.$pfrom.','.$pto.')" title="View Attendance Logs">
             <i class="fas fa-clock"></i>
             </button> 
             <button type="button" class="btn btn-danger btn-sm" onclick="viewPayrollLogs('.$badgeno.','.$pfrom.','.$pto.')" title="View Attendance Audit Logs">

@@ -38,7 +38,7 @@ else
 <div id = "myDiv" style="display:none;" class="loader"></div>
 <div class="container">
     <div class="section-title">
-          <h2></h2>
+          <h2><br></h2>
         </div>
     <div class="main-body mbt">
           <!-- Breadcrumb -->
@@ -48,7 +48,6 @@ else
                         </i>&nbsp; GENERATE SCRIPTS MODULE</b></li>
             </ol>
           </nav>
-
                 <ul class="nav nav-tabs tabrec" id="myTab" name="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <a class="nav-link active" id="attendance-tab" name="attendance-tab" data-toggle="tab"
@@ -61,11 +60,7 @@ else
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="offb-tab" name="offb-tab" data-toggle="tab" href="#offb"
                             role="tab" aria-controls="offb" aria-selected="false">OFFICIAL BUSINESS</a>
-                    </li>                                            
-<!--                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="correct-tab" name="correct-tab" data-toggle="tab" href="#correct"
-                            role="tab" aria-controls="correct" aria-selected="false">DTR Correction</a>
-                    </li>    -->                 
+                    </li>                                                        
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="leave-tab" name="leave-tab" data-toggle="tab" href="#leave"
                             role="tab" aria-controls="leave" aria-selected="false">Leave</a>

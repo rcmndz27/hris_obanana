@@ -164,7 +164,7 @@ function GetPayrollList($action, $dtFrom, $dtTo,$location,$empCode){
             echo'<td><button type="button"class="btn btn-warning btn-sm mr-1 mb-1" 
             onclick="editAttModal('.$empn.','.$badgeno.','.$rwd.')" title="Edit Attendance"><i class="fas fa-edit"></i>
             </button>
-            <button type="button" class="btn btn-info btn-sm mr-1 mb-1" onclick="viewAllAttendanceEmp('.$badgeno.','.$pfrom.','.$pto.')" title="View Attendance Logs">
+            <button type="button" class="btn btn-info btn-sm btn-sm mr-1 mb-1" onclick="viewAllAttendanceEmp('.$badgeno.','.$pfrom.','.$pto.')" title="View Attendance Logs">
             <i class="fas fa-clock"></i>
             </button>
             <button type="button" class="btn btn-danger btn-sm mr-1 mb-1" onclick="viewPayrollLogs('.$badgeno.','.$pfrom.','.$pto.')" title="View Attendance Audit Logs">

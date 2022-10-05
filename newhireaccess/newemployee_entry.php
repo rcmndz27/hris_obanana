@@ -60,7 +60,7 @@
                         <div class="form-row">
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                <label class="control-label" for="collegeCourse">Upload Photo <span class="req">*</span></label>
+                                <label class="control-label" for="collegeCourse">Upload Photo </label>
                                 <input class="d-block" type="file" name="empimgpic" id="empimgpic" accept="image/png, image/jpeg" onChange="GetEmpImgFile()">
                                 </div>
                             </div>
@@ -94,34 +94,19 @@
                                 <div class="col-lg-5">
                                     <div class="form-group">
                                         <label class="control-label" for="positionList">Position Title:<span class="req">*</span></label>
-     
-                                <?php $dd->GenerateDropDown("positiontitle", $mf->GetJobPosition("jobpos")); ?>                                           
-
+                                        <input type="text" class="form-control inputtext" name="positiontitle"
+                                            id="positiontitle" placeholder="Position Title">                                        
                                     </div>
                                 </div> 
                                 <div class="col-lg-5">
                                     <div class="form-group">
                                         <label class="control-label" for="department">Department:<span class="req">*</span></label>
-     
-                                <?php $dd->GenerateDropDown("department", $mf->GetAllDepartment("alldep")); ?>                                            
-
+                                    <input type="text" class="form-control inputtext" name="department"
+                                            id="department" placeholder="Department Title">
                                     </div>
                                 </div>                                                                                                
                             </div> 
-<!--                         
-<div class="form-row mb-2">
-<div class="col-lg-6">
-<label class="control-label" for="reasonsfor">Reason for wishing to be considered for the position at hand:<span class="req">*</span></label>
-<textarea class="form-control" id="reason_position" name="reason_position" rows="1"
-cols="90" placeholder="Reason....."></textarea>
-</div>
-<div class="col-lg-6">
-<label class="control-label" for="expect_salary">Expected Minimum Salary:<span class="req">*</span></label>
-<input type="text" class="form-control inputtext" onkeypress="return onlyNumberKey(event)"name="expected_salary"
-id="expected_salary" placeholder="P 00,000.00">
-</div>                            
-</div>   
--->
+
                           <div class="form-row">
                                 <div class="col-lg-8">
                                     <div class="form-group">
@@ -135,12 +120,13 @@ id="expected_salary" placeholder="P 00,000.00">
                                             <option value="JobStreet">JobStreet</option>
                                             <option value="Website">Website</option>
                                             <option value="Referred By">Referred By</option>
+                                            <option value="Others">Others</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label class="control-label" for="Referred By">Referred By:</label>
+                                        <label class="control-label" for="Referred By">Remarks:</label>
                                         <div id="refby_show">
                                             <input type="text" class="form-control inputtext" name="referredby"
                                                 id="referredby" placeholder="Referred by">
@@ -269,21 +255,7 @@ id="expected_salary" placeholder="P 00,000.00">
                                 </div>
                             
                             </div>
-<!-- 
-                            <div class="form-row">
-                                <div class="col-lg-6">
-                                    <label class="control-label" for="residence_certno">Residence Certificate No. :</label>
-                                    <input type="text" class="form-control" name="residence_certno" id="residence_certno" placeholder="Certificate No....">
-                                </div>
-                                <div class="col-lg-2">
-                                    <label class="control-label" for="residence_certdate">Date Issued:</label>
-                                    <input type="date" class="form-control" name="residence_certdate" id="residence_certdate">
-                                </div>  
-                                <div class="col-lg-4">
-                                    <label class="control-label" for="residence_certplace">Place Issued:</label>
-                                    <input type="text" class="form-control" name="residence_certplace" id="residence_certplace" placeholder="Place Issued....">
-                                </div>                                                               
-                            </div><br> -->
+
                             <div class="form-row">
                                 <div class="col-lg-3">
                                     <div class="form-group">

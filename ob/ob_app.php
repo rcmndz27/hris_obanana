@@ -88,7 +88,7 @@ Class ObApp{
                 <td>' . $result['stats'] . '</td>';
 
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm" onclick="viewObModal('.$obdestination.','.$obdate.','.$obtime.','.$obpurpose.','.$obpercmp.','.$stats.')" title="View Official Business">
+                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewObModal('.$obdestination.','.$obdate.','.$obtime.','.$obpurpose.','.$obpercmp.','.$stats.')" title="View Official Business">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewObHistoryModal('.$obid.')" title="View Logs">
@@ -189,7 +189,7 @@ Class ObApp{
                 <td>' . $result['stats'] . '</td>';
 
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm" onclick="viewObModal('.$obdestination.','.$obdate.','.$obtime.','.$obpurpose.','.$obpercmp.','.$stats.')" title="View Official Business">
+                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewObModal('.$obdestination.','.$obdate.','.$obtime.','.$obpurpose.','.$obpercmp.','.$stats.')" title="View Official Business">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewObHistoryModal('.$obid.')" title="View Logs">
@@ -290,7 +290,7 @@ Class ObApp{
                 <td id="st'.$result['rowdy'].'">' . $result['stats'] . '</td>';
                 if($result['stats'] == 'PENDING' || $result['stats'] == 'APPROVED'){
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm" onclick="viewObModal('.$obdestination.','.$obdate.','.$obtime.','.$obpurpose.','.$obpercmp.','.$stats.','.$appr_over.')" title="View Official Business">
+                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewObModal('.$obdestination.','.$obdate.','.$obtime.','.$obpurpose.','.$obpercmp.','.$stats.','.$appr_over.')" title="View Official Business">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewObHistoryModal('.$obid.')" title="View Logs">
@@ -302,7 +302,7 @@ Class ObApp{
                             </td>';
                 }else{
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm" onclick="viewObModal('.$obdestination.','.$obdate.','.$obtime.','.$obpurpose.','.$obpercmp.','.$stats.','.$appr_over.')" title="View Official Business">
+                <td><button type="button" class="btn btn-info btn-sm btn-sm btn-sm" onclick="viewObModal('.$obdestination.','.$obdate.','.$obtime.','.$obpurpose.','.$obpercmp.','.$stats.','.$appr_over.')" title="View Official Business">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewObHistoryModal('.$obid.')" title="View Logs">

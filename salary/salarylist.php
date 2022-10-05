@@ -59,9 +59,9 @@ Class SalaryList{
                 <td id="bn'.$result['emp_code'].'">' . $result['bank_no']. '</td> 
                 <td id="pr'.$result['emp_code'].'">' . $result['pay_rate']. '</td> 
                 <td id="am'.$result['emp_code'].'" hidden>'.round($result['amount'],3).'</td>
-                <td id="amtn'.$result['emp_code'].'">₱ ' . number_format($result['amount'],0,'.',',').'</td>
+                <td id="amtn'.$result['emp_code'].'">₱ ' . number_format($result['amount'],2,'.',',').'</td>
                 <td id="st'.$result['emp_code'].'">' . $result['status'] . '</td>';
-                echo'<td><button type="button" class="btn btn-info btn-sm" onclick="editSalaryModal('.$empcd.','.$fname.')" title="Update Salary">
+                echo'<td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="editSalaryModal('.$empcd.','.$fname.')" title="Update Salary">
                                 <i class="fas fa-edit"></i>
                             </button>
                             <button type="button" class="btn btn-danger btn-sm" onclick="viewSalaryLogs('.$empcd.')" title="Salary Logs">

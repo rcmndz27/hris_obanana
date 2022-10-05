@@ -57,11 +57,11 @@ Class PlantillaList{
                 ';
 
                 if($result['status'] === 'Open' or $result['status'] === 'De-Activated'){
-                echo '<td id="act'.$result['rowid'].'"><button type="button" class="btn btn-info" onclick="activatePlant('.$result['rowid'].')">
+                echo '<td id="act'.$result['rowid'].'"><button type="button" class="btn btn-info btn-sm" onclick="activatePlant('.$result['rowid'].')">
                                 <i class="fas fa-check-circle"></i> ACTIVATE
                             </button></td>';
                 }else{
-                    echo '<td id="act'.$result['rowid'].'"><button type="button" class="debtn btn-info" onclick="deactivatePlant('.$result['rowid'].');">
+                    echo '<td id="act'.$result['rowid'].'"><button type="button" class="debtn btn-info btn-sm" onclick="deactivatePlant('.$result['rowid'].');">
                                <i class="fas fa-times-circle"></i> DE-ACTIVATE
                             </button></td>';
                 }

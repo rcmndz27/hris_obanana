@@ -65,7 +65,7 @@ Class AllowancesList{
     <td id="amtn'.$result['benefits_emp_id'].'">₱ ' . number_format($result['amount'],2,'.',',').'</td>
     <td id="ed'.$result['benefits_emp_id'].'">' . date('Y-m-d', strtotime($result['effectivity_date'])) . '</td>
     <td id="st'.$result['benefits_emp_id'].'">' . $result['status']. '</td>';
-    echo'<td><button type="button" class="btn btn-info btn-sm" onclick="editAlwModal('.$empcd.','.$benfid.','.$flname.')">
+    echo'<td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="editAlwModal('.$empcd.','.$benfid.','.$flname.')">
                     <i class="fas fa-edit"></i>
                 </button>
                 <button type="button" class="btn btn-danger btn-sm" onclick="viewAlwLogs('.$empcd.')" title="Allowances Logs">
