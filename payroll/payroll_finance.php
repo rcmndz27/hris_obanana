@@ -114,7 +114,8 @@ function GetPayrollList($action, $dtFrom, $dtTo,$location,$empCode){
     if($r){
         do {
             $empn = "'".$r['employee']."'";
-            $badgeno = "'".$r['badge_no']."'"; 
+            $badgeno = "'".$r['badge_no']."'";
+            $eCode = "'".$r['emp_code']."'";  
             $rwd = "'".$r['rowid']."'"; 
             $pfrom = "'".date('Y-m-d', strtotime($r['period_from']))."'"; 
             $pto = "'".date('Y-m-d', strtotime($r['period_to']))."'"; 
@@ -166,7 +167,10 @@ function GetPayrollList($action, $dtFrom, $dtTo,$location,$empCode){
             </button> 
             <button type="button" class="btn btn-danger btn-sm" onclick="viewPayrollLogs('.$badgeno.','.$pfrom.','.$pto.')" title="View Attendance Audit Logs">
             <i class="fas fa-history"></i>
-            </button>                                       
+            </button>      
+            <button type="button" class="btn btn-secondary btn-sm mr-1 mb-1" onclick="viewApprovedForms('.$eCode.','.$pfrom.','.$pto.')" title="View Approved Forms">
+            <i class="fas fa-suitcase fa-fw"></i>
+            </button>                                             
             </td></tr>';
 
 
