@@ -89,10 +89,10 @@ else
             </select>
         </div>
         <div class='col-md-2' id="s15th">
-            <?php $dd->GenerateDropDown("ddcutoff", $mf->GetTKList("tkview")); ?>
+            <?php $dd->GenerateDropDown("ddcutoff", $mf->GetAllCutoffCO("payrollco")); ?>
         </div>
         
-        <div class='col-md-2' id="s30th">
+        <div class='col-md-2' id="s30th"> 
             <?php $dd->GenerateDropDown("ddcutoff30", $mf->GetTKList("tkview")); ?>
         </div>                    
         <button type="button" id="search" class="btn btn-success mr-2" onmousedown="javascript:generatePayrll()">
@@ -585,6 +585,20 @@ aria-hidden="true">
             $("#s30th").show();
         }
     });
+
+    $('#ddcutoff').change(function(){
+
+        var ddcutoff = $(this).find(':selected').data('val');
+        if(ddcutoff == 0){
+            var ddval = '15th';
+            $("#s30th").hide();
+        }else{
+            var ddval = '30th';
+            $("#s30th").show();
+        }
+        document.getElementById('spay').value =  ddval;  
+    });
+
 
     $('#pendingEntry').click(function(e){
         e.preventDefault();

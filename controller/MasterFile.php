@@ -89,7 +89,7 @@
                 {
                     while ($r = $sql->fetch(PDO::FETCH_ASSOC))
                     {
-                        array_push( $data, array($r["rowid"], date("m/d/Y", strtotime($r["pyrollco_from"])) . " - " . date("m/d/Y", strtotime($r["pyrollco_to"]))) );
+                        array_push( $data, array($r["co_type"], date("m/d/Y", strtotime($r["pyrollco_from"])) . " - " . date("m/d/Y", strtotime($r["pyrollco_to"]))) );
                     }
                 }
 
