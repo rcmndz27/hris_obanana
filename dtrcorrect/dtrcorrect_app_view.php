@@ -134,14 +134,14 @@ swal({text:"You stop the cancellation of your dtr correction.",icon:"error"});
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item active" aria-current="page"><b><i class='fas fa-clock fa-fw'>
-                        </i>&nbsp;DTR CORRECTION APPLICATION</b></li>
+              <li class="breadcrumb-item active font-weight-bold" aria-current="page"><i class='fas fa-clock fa-fw mr-1'>
+                        </i>DTR Correction Application</li>
             </ol>
           </nav>
 <div class="pt-3">
         <div class="row align-items-end justify-content-end">
             <div class="col-md-12 mb-3">
-                <button type="button" class="btn btn-warning" id="applydtrcorrect"><i class="fas fa-plus-circle"></i> APPLY DTR CORRECTION </button>
+                <button type="button" class="btn btn-warning" id="applydtrcorrect"><i class="fas fa-plus-circle mr-1"></i> Apply DTR Correction</button>
             </div>
         </div>
 
@@ -181,7 +181,7 @@ swal({text:"You stop the cancellation of your dtr correction.",icon:"error"});
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title bb" id="popUpModalTitle">APPLY DTR CORRECTION <i class="fas fa-clock"></i></h5>
+                    <h5 class="modal-title bb" id="popUpModalTitle"><i class="fas fa-clock mr-1"></i>DTR Correction Form</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times; </span>
                     </button>
@@ -276,7 +276,7 @@ swal({text:"You stop the cancellation of your dtr correction.",icon:"error"});
         <div class="modal-dialog modal-sg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title bb" id="popUpModalTitle">VIEW DTR CORRECTION <i class="fas fa-clock"></i></h5>
+                    <h5 class="modal-title bb" id="popUpModalTitle"><i class="fas fa-clock"></i> View DTR Correction</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times; </span>
                     </button>
@@ -342,7 +342,7 @@ swal({text:"You stop the cancellation of your dtr correction.",icon:"error"});
         <div class="modal-dialog modal-sg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title bb" id="popUpModalTitle">VIEW WORK FROM HOME LOGS   <i class='fas fa-clock'></i></i></h5>
+                    <h5 class="modal-title bb" id="popUpModalTitle"> <i class='fas fa-clock mr-1'></i> View DTR Correction Logs</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times; </span>
                     </button>

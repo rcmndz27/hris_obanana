@@ -74,13 +74,13 @@ else
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item active" aria-current="page"><b><i class='fas fa-money-check fa-fw'>
-              </i>&nbsp;PAYROLL TIMEKEEPING VIEW</b></li>
+              <li class="breadcrumb-item active font-weight-bold" aria-current="page"><i class='fas fa-money-check fa-fw mr-1'>
+              </i>Payroll Timekeeping View</li>
           </ol>
       </nav>
 
       <div class="form-row">
-        <label for="payroll_period" class="col-form-label pad">PAYROLL PERIOD:</label>
+        <label for="payroll_period" class="col-form-label pad">Payroll Period:</label>
         <input type="text" name="empCode" id="empCode" value="<?php echo $empCode; ?>" hidden>
         <div class='col-lg-1' id="slct">
             <select class="form-select" id="spay">
@@ -89,22 +89,22 @@ else
             </select>
         </div>
         <div class='col-md-2' id="s15th">
-            <?php $dd->GenerateDropDown("ddcutoff", $mf->GetAllCutoffPay("payview")); ?>
+            <?php $dd->GenerateDropDown("ddcutoff", $mf->GetTKList("tkview")); ?>
         </div>
         
         <div class='col-md-2' id="s30th">
             <?php $dd->GenerateDropDown("ddcutoff30", $mf->GetTKList("tkview")); ?>
         </div>                    
         <button type="button" id="search" class="btn btn-success mr-2" onmousedown="javascript:generatePayrll()">
-            <i class="fas fa-search-plus"></i> GENERATE                      
+            <i class="fas fa-search-plus"></i> Generate                      
         </button>
-        <button type="button" class="btn btn-warning mr-2" id="usersEntry"><i class="fas fa-plus-circle"></i> ADD USER </button>
+        <button type="button" class="btn btn-warning mr-2" id="usersEntry"><i class="fas fa-plus-circle mr-1"></i> Add Employee </button>
 
         <?php 
         if($tkstat == 'READY' || $tkstat == 'DELETED') {
-            echo '<button type="button" class="btn btn-primary" onclick="savetk()"><i class="fas fa-save"></i> SAVE TIMEKEEPING </button>';
+            echo '<button type="button" class="btn btn-primary" onclick="savetk()"><i class="fas fa-save mr-1"></i> Save Timekeeping</button>';
         }else if($tkstat == 'SAVED' && $empUserType == 'Admin') {
-            echo "<button class='btn btn-primary' onclick='ApprovePayView()'><i class='fas fa-save'></i> GENERATE PAYROLL</button>"; 
+            echo "<button class='btn btn-primary' onclick='ApprovePayView()'><i class='fas fa-save'></i> Generate Payroll</button>";
 
         }else{
 
@@ -129,7 +129,7 @@ else
        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title bb" id="popUpModalTitle">UPDATE EMPLOYEE ATTENDANCE <i class="fas fa-money-check fa-fw"></i></h5>
+                <h5 class="modal-title bb" id="popUpModalTitle"><i class="fas fa-money-check fa-fw"></i> Update Employee Attendance</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times; </span>
                 </button>
@@ -413,7 +413,7 @@ else
         <div class="modal-dialog modal-xs modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title bb" id="popUpModalTitle">USERS ENTRY  <i class="fas fa-minus-circle"></i></h5>
+                    <h5 class="modal-title bb" id="popUpModalTitle"><i class="fas fa-plus-circle mr-1"></i>Users Entry</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times; </span>
                     </button>
@@ -458,7 +458,7 @@ aria-hidden="true">
 <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title bb" id="popUpModalTitle">VIEW ATTENDANCE LOGS   <i class="fas fa-suitcase"></i></h5>
+            <h5 class="modal-title bb" id="popUpModalTitle"><i class="fas fa-suitcase mr-1"></i>View Attendance Logs</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times; </span>
             </button>
@@ -497,7 +497,7 @@ aria-hidden="true">
 <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title bb" id="popUpModalTitle">VIEW ATTENDANCE PAYROLL LOGS  <i class="fas fa-money-bill"></i></h5>
+            <h5 class="modal-title bb" id="popUpModalTitle"><i class="fas fa-money-bill mr-1"></i>View Attendance Payroll Logs</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times; </span>
             </button>
@@ -538,7 +538,7 @@ aria-hidden="true">
 <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title bb" id="popUpModalTitle">VIEW APPROVED FORMS  <i class="fas fa-money-bill"></i></h5>
+            <h5 class="modal-title bb" id="popUpModalTitle"><i class="fas fa-money-bill mr-1"></i>View Approved Forms</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times; </span>
             </button>

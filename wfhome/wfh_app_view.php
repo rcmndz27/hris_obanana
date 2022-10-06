@@ -258,14 +258,14 @@ function timeOutModal(lvid,empcd,attid){
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item active" aria-current="page"><b><i class='fas fa-warehouse fa-fw'>
-                        </i>&nbsp;WORK FROM HOME APPLICATION</b></li>
+              <li class="breadcrumb-item active font-weight-bold" aria-current="page"><b><i class='fas fa-warehouse fa-fw mr-1'>
+                        </i>Work From Home Application</b></li>
             </ol>
           </nav>
 <div class="pt-3">
         <div class="row align-items-end justify-content-end">
             <div class="col-md-12 mb-3">
-                <button type="button" class="btn btn-warning" id="applyWfh"><i class="fas fa-plus-circle"></i> APPLY WORK FROM HOME </button>
+                <button type="button" class="btn btn-warning" id="applyWfh"><i class="fas fa-plus-circle mr-1"></i> Apply Work From Home </button>
             </div>
         </div>
 
@@ -305,7 +305,7 @@ function timeOutModal(lvid,empcd,attid){
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title bb" id="popUpModalTitle">APPLY WORK FROM HOME <i class="fas fa-warehouse"></i></h5>
+                    <h5 class="modal-title bb" id="popUpModalTitle"><i class="fas fa-warehouse mr-1"></i>Work From Home Application Form </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times; </span>
                     </button>
@@ -333,13 +333,6 @@ function timeOutModal(lvid,empcd,attid){
                                         <input type="date" id="wfhdate" name="wfhdate" class="form-control" 
                                             value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>">
                                     </div>
-<!--                                     <div class="col-md-2 d-inline">
-                                        <label for="">WFH Date To:</label><span class="req">*</span>
-                                    </div>
-                                    <div class="col-md-3 d-inline">
-                                        <input type="date" id="wfhdateto" name="wfhdateto" class="form-control"
-                                            value="<?php echo date('Y-m-d'); ?>">
-                                    </div> -->
                             </div>
 
                       
@@ -471,7 +464,7 @@ function timeOutModal(lvid,empcd,attid){
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title bb" id="popUpModalTitle">VIEW WORK FROM HOME <i class="fas fa-warehouse"></i></h5>
+                    <h5 class="modal-title bb" id="popUpModalTitle"><i class="fas fa-warehouse mr-1"></i>View Work From Home</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times; </span>
                     </button>
@@ -543,7 +536,7 @@ function timeOutModal(lvid,empcd,attid){
         <div class="modal-dialog modal-sg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title bb" id="popUpModalTitle">VIEW WORK FROM HOME LOGS   <i class='fas fa-warehouse'></i></i></h5>
+                <h5 class="modal-title bb" id="popUpModalTitle"><i class='fas fa-warehouse mr-1'></i>View Work From Home Logs</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times; </span>
                     </button>

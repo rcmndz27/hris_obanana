@@ -61,6 +61,26 @@ $i++;
 }else{
 }
 
+//GET OB
+$queryob = "SELECT * from tr_offbusiness where status = 2 and emp_code = :empcode";
+$stmtob =$connL->prepare($queryob);
+$paramob = array(":empcode" => $empCode);
+$stmtob->execute($paramob);
+$rsob = $stmtob->fetch();
+
+if(!empty($rsob)){
+do { 
+$d = new data();
+$d->start = date('Y-m-d',strtotime($rsob['ob_date']));
+$d->title = $rsob['ob_purpose'];
+$d->color = '#FD0A84';
+$d->textColor = '#FFFFFF';
+array_push($totalVal,$d);  
+$i++;
+} while ($rsob = $stmtob->fetch());                     
+}else{
+}
+
 //GET ATTENDANCE
 $queryd = "exec xp_attendance_portal_admin :empcode";
 $stmtd =$connL->prepare($queryd);
@@ -672,7 +692,7 @@ swal({text:"You cancel your time out!",icon:"warning"});
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">EMPLOYEE HANDBOOK
+                        <div class="text-xs font-weight-bold text-primary text-capitalize mb-1">EMPLOYEE HANDBOOK
                             <?php echo date("Y") ?> </div>
                             <div class="row no-gutters align-items-center">
                                 <a href="../uploads/COD_HANDBOOK.pdf" target="_blank">
@@ -696,7 +716,7 @@ swal({text:"You cancel your time out!",icon:"warning"});
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Total Work Days <br><?php echo date("F Y") ?> 
+                            <div class="text-xs font-weight-bold text-danger text-capitalize mb-1">Total Work Days <br><?php echo date("F Y") ?> 
                         </div>
                         <div class="row no-gutters align-items-center">
                         <div class="col-auto">
@@ -718,7 +738,7 @@ swal({text:"You cancel your time out!",icon:"warning"});
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Total Overtime <br><?php echo date("F Y") ?> 
+                            <div class="text-xs font-weight-bold text-secondary text-capitalize mb-1">Total Overtime <br><?php echo date("F Y") ?> 
                         </div>
                         <div class="row no-gutters align-items-center">
                         <div class="col-auto">
@@ -740,7 +760,7 @@ swal({text:"You cancel your time out!",icon:"warning"});
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Undertime <br><?php echo date("F Y") ?> 
+                            <div class="text-xs font-weight-bold text-success text-capitalize mb-1">Total Undertime <br><?php echo date("F Y") ?> 
                         </div>
                         <div class="row no-gutters align-items-center">
                         <div class="col-auto">
@@ -762,7 +782,7 @@ swal({text:"You cancel your time out!",icon:"warning"});
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Lates <br><?php echo date("F Y") ?> 
+                        <div class="text-xs font-weight-bold text-info text-capitalize mb-1">Total Lates <br><?php echo date("F Y") ?> 
                     </div>
                     <div class="row no-gutters align-items-center">
                         <div class="col-auto">
@@ -784,7 +804,7 @@ swal({text:"You cancel your time out!",icon:"warning"});
         <div class="card-body">
             <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Today's Time-In: <br><?php echo date("F d, Y");  if(isset($wfhd)){echo': WFH';}   ?> 
+                    <div class="text-xs font-weight-bold text-warning text-capitalize mb-1">Today's Time-In: <br><?php echo date("F d, Y");  if(isset($wfhd)){echo': WFH';}   ?> 
                 </div>
                 <div class="row no-gutters align-items-center">
                     <div class="col-auto">

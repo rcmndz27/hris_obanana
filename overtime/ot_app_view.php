@@ -100,30 +100,30 @@
                 .then((cnclOT) => {
                   if (cnclOT) {
                     $.post (
-                            url,
-                            {
-                                choice: 1,
-                                otid:otid,
-                                emp_code:emp_code
-                            },
-                            function(data) { 
-                                // console.log(data);
-                                    swal({
-                                    title: "Oops!", 
-                                    text: "Successfully cancelled overtime!", 
-                                    type: "info",
-                                    icon: "info",
-                                    }).then(function() {
-                                        document.getElementById('st'+otid).innerHTML = 'CANCELLED';
-                                        document.querySelector('#clv').remove();
-                                    });  
-                            }
-                        );
-                  } else {
-                    swal({text:"You stop the cancellation of your overtime.",icon:"error"});
-                  }
-                });
-      
+                    url,
+                    {
+                        choice: 1,
+                        otid:otid,
+                        emp_code:emp_code
+                    },
+                    function(data) { 
+                        // console.log(data);
+                    swal({
+                    title: "Oops!", 
+                    text: "Successfully cancelled overtime!", 
+                    type: "info",
+                    icon: "info",
+                    }).then(function() {
+                        document.getElementById('st'+otid).innerHTML = 'CANCELLED';
+                        document.querySelector('#clv').remove();
+                    });  
+                    }
+                );
+          } else {
+            swal({text:"You stop the cancellation of your overtime.",icon:"error"});
+          }
+        });
+
     }
 
 </script>
@@ -134,15 +134,14 @@
 <script src="../overtime/moment-range.js"></script>
 <div class="container">
     <div class="section-title">
-          <h1>OVERTIME APPLICATION</h1>
+          <h1><br></h1>
         </div>
     <div class="main-body mbt">
 
-          <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item active" aria-current="page"><b><i class='fas fa-hourglass fa-fw'>
-                        </i>&nbsp;OVERTIME APPLICATION</b></li>
+              <li class="breadcrumb-item active font-weight-bold" aria-current="page"><i class='fas fa-hourglass fa-fw mr-1'>
+                </i>Overtime Application</li>
             </ol>
           </nav>
    
@@ -150,7 +149,7 @@
 
         <div class="row align-items-end justify-content-end">
             <div class="col-md-12 mb-3">
-                <button type="button" class="btn btn-warning" id="applyOvertime"><i class="fas fa-plus-circle"></i> APPLY OVERTIME</button>
+                <button type="button" class="btn btn-warning" id="applyOvertime"><i class="fas fa-plus-circle"></i> Apply Overtime</button>
             </div>
         </div>
 
@@ -170,8 +169,8 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title bb" id="popUpModalTitle">APPLY OVERTIME <i class="fas fa-hourglass fa-fw">
-                        </i></h5>
+                    <h5 class="modal-title bb" id="popUpModalTitle"><i class="fas fa-hourglass fa-fw mr-1">
+                        </i>Overtime Application Form </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times; </span>
                     </button>
@@ -248,7 +247,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title bb" id="popUpModalTitle">VIEW OVERTIME <i class="fas fa-hourglass fa-fw fa-fw"></i></h5>
+                    <h5 class="modal-title bb" id="popUpModalTitle"><i class="fas fa-hourglass fa-fw mr-1"></i> View Overtime</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times; </span>
                     </button>
@@ -338,7 +337,7 @@
         <div class="modal-dialog modal-sg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title bb" id="popUpModalTitle">VIEW OVERTIME LOGS   <i class="fas fa-hourglass fa-fw"></i></h5>
+                    <h5 class="modal-title bb" id="popUpModalTitle"><i class="fas fa-hourglass fa-fw mr-1"></i>View Overtime Logs</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times; </span>
                     </button>

@@ -38,8 +38,8 @@ else
       <!-- Breadcrumb -->
       <nav aria-label="breadcrumb" class="main-breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item active" aria-current="page"><b><i class='fas fa-money-bill-wave fa-fw'>
-          </i>&nbsp;PAYSLIP VIEW</b></li>
+          <li class="breadcrumb-item active font-weight-bold" aria-current="page"><i class='fas fa-money-bill-wave fa-fw mr-1'>
+          </i>Payslip View</li>
       </ol>
   </nav>
 
@@ -50,14 +50,14 @@ else
     <select class="form-control" id="empName" name="empName" value="" hidden>
         <option value="<?php echo $empName ?>"><?php echo $empName ?></option>
     </select>
-    <label for="payroll_period" class="col-form-label pad">PAYROLL PERIOD:</label>
+    <label for="payroll_period" class="col-form-label pad">Payroll Period:</label>
 
     <div class='col-md-3'>
         <?php $dd->GenerateDropDown("ddcutoff", $mf->GetTKList("tkview")); ?>
     </div>
 
     <div class="col-md-3 d-flex">
-        <button type="button" id="search" class="btn btn-warning" onclick="genePayrl()" ><i class="fas fa-search-plus"></i>GENERATE                    
+        <button type="button" id="search" class="btn btn-warning" onclick="genePayrl()" ><i class="fas fa-search-plus mr-1"></i>Generate                    
         </button>
         <a href='javascript:generatePDF()'><img src="../img/expdf.png" height="40" class="pdfimg" id='expdf'></a>
     </div>

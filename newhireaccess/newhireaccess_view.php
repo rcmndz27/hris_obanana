@@ -566,7 +566,9 @@ function GetEmpImgFile() {
         var emp_id = $('#emp_id').val();
         if(emplevel[0] == 4){
              var rt =  'none';
+             console.log('none');
         }else{
+            console.log('with');
             var reporting_to = $('#reporting_to').children("option:selected").val();
              var reportingto = reporting_to.split(" - ");
              var rt = reportingto[0];

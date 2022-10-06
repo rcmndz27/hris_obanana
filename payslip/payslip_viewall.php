@@ -21,7 +21,8 @@
         $dd = new DropDown();
         $empCode = $_SESSION['userid'];
 
-        if ($empUserType == 'Admin' || $empUserType == 'Finance' || $empUserType == 'Group Head' || $empUserType == 'President')
+        if ($empUserType == 'Admin' || $empUserType == 'Finance' || $empUserType == 'Group Head' || $empUserType == 'President' 
+            || $empUserType == 'HR Generalist')
         {
   
         }else{
@@ -45,18 +46,18 @@
     <div class="main-body mbt">
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item active" aria-current="page"><b><i class='fas fa-money-check fa-fw'>
-                        </i>&nbsp;PAYSLIP ALL VIEWING </b></li>
+              <li class="breadcrumb-item active" aria-current="page"><b><i class='fas fa-money-check fa-fw mr-1'>
+                        </i>Payslip All Employee Viewing</li>
             </ol>
           </nav>
 
       <div class="form-row pt-3">
-                <label for="employeepaylist" class="col-form-label pad">EMPLOYEE:</label>
+                <label for="employeepaylist" class="col-form-label pad">Employee:</label>
                 <div class="col-md-3">      
                         <?php $dd->GenerateSingleGenDropDown("emppay", $mf->GetAttEmployeeNames("allempnames")); ?>
                 </div>
 
-                <label for="payroll_period" class="col-form-label pad">PAY-PERIOD:</label>
+                <label for="payroll_period" class="col-form-label pad">Pay-Period:</label>
 
                 <div class='col-md-3'>
                     <?php $dd->GenerateDropDown("ddcutoff", $mf->GetAllPayCutoff("paycut")); ?>
@@ -65,7 +66,7 @@
 
                 <div class="col-md-2 d-flex">
                         <button type="button" id="search" class="btn btn-warning" onclick="filterAtt()">
-                            <i class="fas fa-search-plus"></i>GENERATE                       
+                            <i class="fas fa-search-plus mr-1"></i>Generate                       
                         </button>
                         <a href='javascript:generatePDF()'><img src="../img/expdf.png" height="40" class="pdfimg" id='expdf'></a>                        
                 </div>

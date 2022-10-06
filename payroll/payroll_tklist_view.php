@@ -76,13 +76,13 @@ else
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item active" aria-current="page"><b><i class='fas fa-money-check fa-fw'>
-              </i>&nbsp;PAYROLL TIMEKEEPING LIST VIEW</b></li>
+              <li class="breadcrumb-item active font-weight-bold" aria-current="page"><i class='fas fa-money-check fa-fw mr-1'>
+              </i>Payroll Timekeeping List View</li>
           </ol>
       </nav>
 
       <div class="form-row">
-        <label for="payroll_period" class="col-form-label pad">PAYROLL PERIOD:</label>
+        <label for="payroll_period" class="col-form-label pad">Payroll Period:</label>
         <input type="text" name="empCode" id="empCode" value="<?php echo $empCode; ?>" hidden>
         <div class='col-lg-1' id="slct">
             <select class="form-select" id="spay">
@@ -119,7 +119,7 @@ else
        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title bb" id="popUpModalTitle">UPDATE EMPLOYEE ATTENDANCE <i class="fas fa-money-check fa-fw"></i></h5>
+                <h5 class="modal-title bb" id="popUpModalTitle"><i class="fas fa-money-check fa-fw mr-1"></i>Update Employee Attendance </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times; </span>
                 </button>

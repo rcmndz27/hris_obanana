@@ -66,10 +66,10 @@ Class SalaryAdjList{
                 <td>' . date('m/d/Y', strtotime($result['period_from'])) . '</td>
                 <td>' . date('m/d/Y', strtotime($result['period_to'])) . '</td>
                 <td>' . $result['description']. '</td>
-                <td>' . $result['amount'].'</td>                
+                <td>' . round($result['amount'],2).'</td>                
                 <td>' . $result['remarks']. '</td>';
                 echo'<td><button type="button" class="btn btn-info btn-sm" onclick="editSalAdjModal('.$empcd.','.$percutoff.','.$descript.','.$amnt.','.$remark.','.$incdecr.')">
-                                <i class="fas fa-edit"></i> UPDATE
+                                <i class="fas fa-edit"></i> Update
                             </button></td>';
                 
                 

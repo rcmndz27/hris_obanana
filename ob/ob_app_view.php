@@ -136,7 +136,7 @@
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item active" aria-current="page"><b><i class='fas fa-building'></i>&nbsp;OFFICIAL BUSINESS APPLICATION</b></li>
+              <li class="breadcrumb-item active font-weight-bold" aria-current="page"><i class='fas fa-building mr-1'></i> Official Business Application</li>
             </ol>
           </nav>
    
@@ -144,7 +144,7 @@
 
         <div class="row align-items-end justify-content-end">
             <div class="col-md-12 mb-3">
-                <button type="button" class="btn btn-warning" id="applyOfBus"><i class="fas fa-plus-circle"></i> APPLY OFFICIAL BUSINESS</button>
+                <button type="button" class="btn btn-warning" id="applyOfBus"><i class="fas fa-plus-circle mr-1"></i> Apply Official Business</button>
             </div>
         </div>
 
@@ -164,7 +164,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title bb" id="popUpModalTitle">APPLY OFFICIAL BUSINESS <i class='fas fa-building'></i>
+                    <h5 class="modal-title bb" id="popUpModalTitle"><i class='fas fa-building mr-1'></i>Official Business Application Form 
                         </i></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times; </span>
@@ -252,7 +252,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title bb" id="popUpModalTitle">VIEW OFFICIAL BUSINESS <i class="fas fa-building"></i></h5>
+                    <h5 class="modal-title bb" id="popUpModalTitle"> <i class="fas fa-building mr-1"></i>View Official Business</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times; </span>
                     </button>
@@ -324,7 +324,7 @@
         <div class="modal-dialog modal-sg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title bb" id="popUpModalTitle">VIEW OFFICIAL BUSINESS LOGS   <i class='fas fa-building'></i></i></h5>
+                    <h5 class="modal-title bb" id="popUpModalTitle"> <i class='fas fa-building mr-1'></i>View Official Business Logs</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times; </span>
                     </button>

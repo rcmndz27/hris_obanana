@@ -172,8 +172,8 @@ function cancelLeave(lvid,empcd)
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item active" aria-current="page"><b><i class='fas fa-suitcase fa-fw'>
-                        </i>&nbsp;LEAVE APPLICATION</b></li>
+              <li class="breadcrumb-item active font-weight-bold" aria-current="page"><i class='fas fa-suitcase fa-fw mr-1'>
+                        </i>Leave Application Form</li>
             </ol>
           </nav>
     <div class="pt-3">
@@ -188,7 +188,7 @@ function cancelLeave(lvid,empcd)
         </div>
         <div class="row align-items-end justify-content-end">
             <div class="col-md-12 mb-3">
-                <button type="button" class="btn btn-warning" id="applyLeave"><i class="fas fa-plus-circle"></i> APPLY LEAVE</button>
+                <button type="button" class="btn btn-warning" id="applyLeave"><i class="fas fa-plus-circle mr-1"></i> Apply Leave</button>
             </div>
         </div>
 
@@ -209,8 +209,8 @@ function cancelLeave(lvid,empcd)
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                        <h5 class="modal-title bb" id="popUpModalTitle">APPLY LEAVE <i class="fas fa-suitcase ">
-                        </i></h5>
+                        <h5 class="modal-title bb" id="popUpModalTitle"><i class="fas fa-suitcase mr-1">
+                        </i> Leave Application Form </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -490,7 +490,7 @@ function cancelLeave(lvid,empcd)
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title bb" id="popUpModalTitle">VIEW LEAVE <i class="fas fa-suitcase fa-fw"></i></h5>
+                    <h5 class="modal-title bb" id="popUpModalTitle"><i class="fas fa-suitcase fa-fw mr-1"></i>View Leave</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times; </span>
                     </button>
@@ -579,7 +579,7 @@ function cancelLeave(lvid,empcd)
         <div class="modal-dialog modal-sg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title bb" id="popUpModalTitle">VIEW LEAVE LOGS   <i class="fas fa-suitcase"></i></h5>
+                    <h5 class="modal-title bb" id="popUpModalTitle"><i class="fas fa-suitcase mr-1"></i>View Leave Logs</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times; </span>
                     </button>
