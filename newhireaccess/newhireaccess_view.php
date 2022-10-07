@@ -537,6 +537,14 @@ function GetEmpImgFile() {
         }else{
             var empFIle = empImgFile;
         }
+
+        var empd = $('#emp_id').val();
+        if(empd == null){
+            var empdc = 0;
+        }else{
+            var empdc = empd;
+        }
+
         var url = "../newhireaccess/update_newhireaccess_process.php";
         var rowid = $('#rowid').val();
         var emp_pic = empFIle;
@@ -567,7 +575,7 @@ function GetEmpImgFile() {
         var minimum_wage = $( "#minimum_wage option:selected" ).val();
         var pay_type = $( "#pay_type option:selected" ).val();
         var emp_status = $( "#emp_status option:selected" ).val();
-        var emp_id = $('#emp_id').val();
+        var emp_id = empd;
         if(emplevel[0] == 4){
              var rt =  'none';
         }else{
