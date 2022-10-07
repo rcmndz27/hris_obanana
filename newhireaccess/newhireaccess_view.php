@@ -575,7 +575,7 @@ function GetEmpImgFile() {
         var minimum_wage = $( "#minimum_wage option:selected" ).val();
         var pay_type = $( "#pay_type option:selected" ).val();
         var emp_status = $( "#emp_status option:selected" ).val();
-        var emp_id = empd;
+        var emp_id = empdc;
         if(emplevel[0] == 4){
              var rt =  'none';
         }else{
