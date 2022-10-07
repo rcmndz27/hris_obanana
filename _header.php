@@ -316,7 +316,9 @@ rel="stylesheet">
                               <li class='dropdown'><a href='#'><i class='fas fa-money-check fa-fw'></i><span>Payroll</span><i class='bi bi-chevron-right'></i></a>
                                 <ul>
                                   <li><a href='../payroll/payroll_view.php' onclick='show()'>Payroll Timekeeping View</a></li>
+                                  <li><a href='../payroll/payroll_viewemp.php' onclick='show()'>Payroll Timekeeping per Employee View</a></li>
                                   <li><a href='../payroll/payroll_view_register.php' onclick='show()'>Payroll Register View ".$apprf."</a></li>
+                                  <li><a href='../payroll/payroll_view_register_emp.php' onclick='show()'>Payroll Register per Employee View ".$apprf."</a></li>                                  
                                   <li><a href='../payslip/payslip_viewall.php' onclick='show()'>Payslip All Employee</a></li>
                                   <li><a href='../salaryadjustment/salaryadjustmentlist_view.php' onclick='show()'>Salary Adjustment Management</a></li> 
                                   <li><a href='../payroll/payroll_tklist_view.php' onclick='show()'>Payroll Timekeeping List</a></li> 
@@ -342,6 +344,7 @@ rel="stylesheet">
                                   <li><a href='../allowances/allowanceslist_view.php' onclick='show()'>Allowances Management</a></li>
                                   <li><a href='../users/userslist_view.php' onclick='show()'>Users Management</a></li>                                                  
                                   <li><a href='../payroll_att/gen_att_view.php' onclick='show()'>Generate Scripts</a></li>
+                                  <li><a href='../payroll_att/gen_attemp_view.php' onclick='show()'>Generate Scripts per Employee</a></li>                                  
                                   <li><a href='../leavebalance/leavebalancelist_view.php' onclick='show()'>Employee Leave Balance</a></li>                                                                
                                 </ul>
                               </li>

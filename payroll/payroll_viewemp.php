@@ -42,10 +42,10 @@ else
     $stmtpf->execute($parampf);
     $resultpf = $stmtpf->fetch();   
 
-    $querytk = 'SELECT remarks from logs_timekeep where pay_from = :dfrom and pay_to = :dto AND rowid = (SELECT MAX(rowid) from logs_timekeep)';
+    $querytk = 'SELECT remarks from logs_timekeep where rowid = (SELECT MAX(rowid) from logs_timekeep)';
     $stmttk = $connL->prepare($querytk);
-    $paramtk = array(":dfrom" => $rfrom,":dto" => $rto);
-    $stmttk->execute($paramtk);
+    // $paramtk = array(":dfrom" => $rfrom,":dto" => $rto);
+    $stmttk->execute();
     $rtk = $stmttk->fetch();
     $tkstat = (isset($rtk['remarks'])) ? $rtk['remarks'] : 'n/a' ;         
 
@@ -75,7 +75,7 @@ else
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item active font-weight-bold" aria-current="page"><i class='fas fa-money-check fa-fw mr-1'>
-              </i>Payroll Timekeeping View</li>
+              </i>Payroll Timekeeping per Employee View</li>
           </ol>
       </nav>
 
@@ -94,16 +94,19 @@ else
         
         <div class='col-md-2' id="s30th"> 
             <?php $dd->GenerateDropDown("ddcutoff30", $mf->GetTKList("tkview")); ?>
-        </div>                    
+        </div> 
+        <div class='col-md-1 mr-1'>
+            <?php $dd->GenerateSingleGenDropDown("allempnames", $mf->GetAttEmployeeNames("allempnames")); ?> 
+        </div>                           
         <button type="button" id="search" class="btn btn-success mr-2" onmousedown="javascript:generatePayrll()">
             <i class="fas fa-search-plus"></i> Generate                      
         </button>
         <button type="button" class="btn btn-warning mr-2" id="usersEntry"><i class="fas fa-plus-circle mr-1"></i> Add Employee </button>
 
         <?php 
-        if($tkstat == 'READY' || $tkstat == 'DELETED') {
+        if($tkstat == 'READY EMP' || $tkstat == 'DELETED EMP') {
             echo '<button type="button" class="btn btn-primary" onclick="savetk()"><i class="fas fa-save mr-1"></i> Save Timekeeping</button>';
-        }else if($tkstat == 'SAVED' && $empUserType == 'Admin') {
+        }else if($tkstat == 'SAVED EMP' && $empUserType == 'Admin') {
             echo "<button class='btn btn-primary' onclick='ApprovePayView()'><i class='fas fa-save'></i> Generate Payroll</button>";
 
         }else{
@@ -429,14 +432,14 @@ else
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="control-label" for="allempnames">Employee Code/Name<span class="req">*</span></label>
-                                        <?php $dd->GenerateSingleGenDropDown("allempnames", $mf->GetAttEmployeeNames("allempnames")); ?> 
+                                        <?php $dd->GenerateSingleGenDropDown("addempnames", $mf->GetAttEmployeeNames("allempnames")); ?> 
                                     </div>
                                 </div> 
 
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label class="control-label" for="allempnames">Payroll Period/Location<span class="req">*</span></label>
-                                    <?php $dd->GenerateDropDown("ddcutoff", $mf->GetAllCutoffPay("payview")); ?>
+                                        <label class="control-label" for="payrollperiod">Payroll Period/Location<span class="req">*</span></label>
+                                            <?php $dd->GenerateDropDown("addcutoff", $mf->GetAllCutoffCO("payrollco")); ?>
                                     </div>
                                 </div>  
                                 <input type="text" name="eMplogName" id="eMplogName" value="<?php echo $empName ?>" hidden>
@@ -614,14 +617,14 @@ aria-hidden="true">
 
     $('#Submit').click(function(){
 
-        var bdno = $('#allempnames').val();
-        var cutoff = $('#ddcutoff').children("option:selected").val();
+        var bdno = $('#addempnames').val();
+        var cutoff = $('#addcutoff').children("option:selected").val();
         var det = cutoff.split(" - ");
         var name =  document.getElementById(bdno).innerHTML;
         var logname = $('#eMplogName').val();
 
             param = {
-                'Action': 'InsertUsersAtt',
+                'Action': 'InsertUsersAttEmp',
                 'bdno': bdno,
                 'name': name,
                 'pfrom': det[0],
@@ -682,21 +685,24 @@ aria-hidden="true">
             var url = "../payroll/payrollrep_process.php";
             var dates = cutoff.split(" - ");
             var empCode = $('#empCode').val();
+            var emp_code = $('#allempnames').val();
+
             document.getElementById('pfromt').innerHTML = dates[0];
             document.getElementById('ptot').innerHTML = dates[1];
             $.post (
                 url,
                 {
-                    _action: 1,
+                    _action: 2,
                     _from: dates[0],
                     _to: dates[1],
                     _location: 'Makati',
-                    _empCode: empCode
+                    _empCode: empCode,
+                    emp_code: emp_code
                     
                 },
                 function(data) { 
                     $("#contents").html(data).show();
-                    $("#payrollList").tableExport({
+                    $("#payrollEmpList").tableExport({
                         headers: true,
                         footers: true,
                         formats: ['xlsx'],
@@ -1309,13 +1315,13 @@ function savetk()
                 $.post (
                     url,
                     {
-                        choice: 1,
+                        choice: 2,
                         emp_code: empCode,
                         pfrom:dates[0],
                         pto: dates[1],
                         ppay:ppay
                     },
-                    function(data) {window.location.replace("../payroll/payroll_view.php"); }
+                    function(data) {window.location.replace("../payroll/payroll_viewemp.php"); }
                     );
 
             } else {
@@ -1332,12 +1338,13 @@ function ApprovePayView()
 {   
     $("body").css("cursor", "progress");
     var empCode = $('#empCode').val();
-    var url = "../payroll/payrollViewProcess.php";
+    var url = "../payroll/payrollViewEmpProcess.php";
 
     if($('#spay').val() == '15th'){    
         var cutoff = $('#ddcutoff').children("option:selected").val();
         var dates = cutoff.split(" - ");
         var ppay =  $('#spay').val();
+        var emp_code =  $('#allempnames').val();
 
         // console.log(dates[0]);
         // console.log(dates[1]);
@@ -1360,7 +1367,8 @@ function ApprovePayView()
                         emp_code: empCode,
                         pfrom:dates[0],
                         pto: dates[1],
-                        ppay:ppay
+                        ppay:ppay,
+                        badgeno: emp_code
                     },
                     function(data) {window.location.replace("../payroll/payroll_view.php"); }
                     );
@@ -1375,6 +1383,7 @@ function ApprovePayView()
         var cutoff30 = $('#ddcutoff30').children("option:selected").val();
         var dates30 = cutoff30.split(" - ");
         var ppay =  $('#spay').val();
+        var emp_code =  $('#allempnames').val();
 
         // console.log(dates[0]);
         // console.log(dates[1]);
@@ -1401,7 +1410,8 @@ function ApprovePayView()
                         pto: dates30[1],
                         pfrom30:dates[0],
                         pto30: dates[1],                        
-                        ppay:ppay
+                        ppay:ppay,
+                        badgeno : emp_code
                     },
                     function(data) {
                         window.location.replace("../payroll/payroll_view.php"); 
