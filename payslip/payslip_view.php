@@ -31,7 +31,7 @@ else
 <div id = "myDiv" style="display:none;" class="loader"></div>
 <div class="container">
     <div class="section-title">
-      <h1>PAYSLIP VIEW</h1>
+      <h1><br></h1>
   </div>
   <div class="main-body mbt">
 
@@ -43,30 +43,30 @@ else
       </ol>
   </nav>
 
-  <div class="form-row pt-3">
-    <select class="form-control" id="empCode" name="empCode" value="" hidden>
-        <option value="<?php echo $empCode ?>"><?php echo $empCode ?></option>
-    </select>
-    <select class="form-control" id="empName" name="empName" value="" hidden>
-        <option value="<?php echo $empName ?>"><?php echo $empName ?></option>
-    </select>
-    <label for="payroll_period" class="col-form-label pad">Payroll Period:</label>
-
-    <div class='col-md-3'>
-        <?php $dd->GenerateDropDown("ddcutoff", $mf->GetTKList("tkview")); ?>
-    </div>
-
-    <div class="col-md-3 d-flex">
-        <button type="button" id="search" class="btn btn-warning" onclick="genePayrl()" ><i class="fas fa-search-plus mr-1"></i>Generate                    
-        </button>
-        <a href='javascript:generatePDF()'><img src="../img/expdf.png" height="40" class="pdfimg" id='expdf'></a>
-    </div>
-</div>
-<div class="row pt-4">
-    <div class="col-md-12 mbot d-flex justify-content-center">
-        <div id='contents'></div>
-    </div>
-</div>
+    <div class="form-row pt-3">
+            <select class="form-control" id="empCode" name="empCode" value="" hidden>
+                <option value="<?php echo $empCode ?>"><?php echo $empCode ?></option>
+            </select>
+            <select class="form-control" id="empName" name="empName" value="" hidden>
+                <option value="<?php echo $empName ?>"><?php echo $empName ?></option>
+            </select>
+            <label class="control-label pad" for="dateTo">Payroll Period::</label>
+            <div class="col-md-3">
+                    <?php $dd->GenerateDropDown("ddcutoff", $mf->GetTKList("tkview")); ?>
+            </div>
+            <div class="col-md-2">
+                <button type="button" id="search" class="btn btn-warning" onclick="genePayrl()" ><i class="fas fa-search-plus mr-1"></i>Generate                    
+                </button>
+                <a href='javascript:generatePDF()'><img src="../img/expdf.png" height="40" class="pdfimg" id='expdf'></a>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel-body">
+                <div id="contents" class="form-row pt-3 d-flex justify-content-center"></div>
+            </div>
+        </div>
+    </div>    
 </div>
 </div>
 
@@ -103,7 +103,6 @@ else
                 _from: dates[0],
                 _to: dates[1],
                 _empCode: empCode
-                
             },
             function(data) { $("#contents").html(data).show(); 
             document.getElementById("myDiv").style.display="none";}

@@ -69,6 +69,26 @@ $i++;
 }else{
 }
 
+//GET OB
+$queryob = "SELECT * from tr_offbusiness where status = 2 and emp_code = :empcode";
+$stmtob =$connL->prepare($queryob);
+$paramob = array(":empcode" => $empCode);
+$stmtob->execute($paramob);
+$rsob = $stmtob->fetch();
+
+if(!empty($rsob)){
+do { 
+$d = new data();
+$d->start = date('Y-m-d',strtotime($rsob['ob_date']));
+$d->title = $rsob['ob_purpose'];
+$d->color = '#FD0A84';
+$d->textColor = '#FFFFFF';
+array_push($totalVal,$d);  
+$i++;
+} while ($rsob = $stmtob->fetch());                     
+}else{
+}
+
 //GET ATTENDANCE
 $queryd = "exec xp_attendance_portal_admin :empcode";
 $stmtd =$connL->prepare($queryd);
