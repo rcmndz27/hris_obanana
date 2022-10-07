@@ -656,14 +656,14 @@ function GetEmpImgFile() {
                                         },
                                         function(data) {
                                             console.log('success: ' + data);
-                                                    // swal({
-                                                    // title: "Success!", 
-                                                    // text: "Successfully updated employee detailss!", 
-                                                    // type: "success",
-                                                    // icon: "success",
-                                                    // }).then(function() {
-                                                    //    window.location.reload();
-                                                    // });
+                                                    swal({
+                                                    title: "Success!", 
+                                                    text: "Successfully updated employee detailss!", 
+                                                    type: "success",
+                                                    icon: "success",
+                                                    }).then(function() {
+                                                       window.location.reload();
+                                                    });
                                             }
                                     );
 
