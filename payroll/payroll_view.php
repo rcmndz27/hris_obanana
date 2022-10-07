@@ -83,7 +83,7 @@ else
         <label for="payroll_period" class="col-form-label pad">Payroll Period:</label>
         <input type="text" name="empCode" id="empCode" value="<?php echo $empCode; ?>" hidden>
         <div class='col-lg-1' id="slct">
-            <select class="form-select" id="spay">
+            <select class="form-select" id="spay" disabled>
                 <option value="15th">15th Payroll</option>
                 <option value="30th">30th Payroll</option>
             </select>

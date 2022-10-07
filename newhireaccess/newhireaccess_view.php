@@ -108,8 +108,8 @@
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item active bb" aria-current="page"><b><i class='fas fa-users fa-fw'>
-                        </i>&nbsp;ALL EMPLOYEE LIST - 201 MASTERFILE</b></li>
+              <li class="breadcrumb-item active bb" aria-current="page"><i class='fas fa-users fa-fw mr-1'>
+                        </i>All Employee List - 201 Masterfile</li>
             </ol>
           </nav>
 
@@ -126,11 +126,11 @@
               </select>    
           </div>
         <div class='col-md-5' >          
-            <button type="button" id="search" class="btn btn-warning mr-2" onclick="generateEmpStatus();">
-              <i class="fas fa-search-plus"></i> GENERATE                      
+            <button type="button" id="search" class="btn btn-warning mr-1" onclick="generateEmpStatus();">
+              <i class="fas fa-search-plus"></i> Generate                      
             </button> 
             
-              <a href="../newhireaccess/newemployee_entry.php" class="text-light" target="_blank"><button type="button" id="search" class="btn btn-primary mr-2" ><i class="fas fa-user"></i>  ADD USER </button></a>                    
+              <a href="../newhireaccess/newemployee_entry.php" class="text-light" target="_blank"><button type="button" id="search" class="btn btn-primary mr-2" ><i class="fas fa-user"></i>Add User</button></a>                    
                        
         </div>
         <div class='col-md-4' >     
@@ -393,7 +393,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title bb" id="popUpModalTitle">VIEW EMPLOYEE PROFILE <i class="fas fa-profile fa-fw fa-fw"></i></h5>
+                    <h5 class="modal-title bb" id="popUpModalTitle"><i class="fas fa-profile fa-fw"></i>View Employee Profile</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times; </span>
                     </button>
@@ -532,10 +532,14 @@ function GetEmpImgFile() {
     {
 
 
-
+        if(empImgFile == null){
+            var empFIle = 'nophoto.png';
+        }else{
+            var empFIle = empImgFile;
+        }
         var url = "../newhireaccess/update_newhireaccess_process.php";
         var rowid = $('#rowid').val();
-        var emp_pic = empImgFile;
+        var emp_pic = empFIle;
         var lastname = $('#lnameg').val();
         var firstname = $('#fnameg').val();
         var middlename = $('#mnameg').val();
@@ -566,14 +570,11 @@ function GetEmpImgFile() {
         var emp_id = $('#emp_id').val();
         if(emplevel[0] == 4){
              var rt =  'none';
-             console.log('none');
         }else{
-            console.log('with');
             var reporting_to = $('#reporting_to').children("option:selected").val();
              var reportingto = reporting_to.split(" - ");
              var rt = reportingto[0];
         }
-
 
         // console.log(rowid);
         // return false;
@@ -654,15 +655,15 @@ function GetEmpImgFile() {
                                             emp_id: emp_id                
                                         },
                                         function(data) {
-                                            // console.log('success: ' + data);
-                                                    swal({
-                                                    title: "Success!", 
-                                                    text: "Successfully updated employee detailss!", 
-                                                    type: "success",
-                                                    icon: "success",
-                                                    }).then(function() {
-                                                       window.location.reload();
-                                                    });
+                                            console.log('success: ' + data);
+                                                    // swal({
+                                                    // title: "Success!", 
+                                                    // text: "Successfully updated employee detailss!", 
+                                                    // type: "success",
+                                                    // icon: "success",
+                                                    // }).then(function() {
+                                                    //    window.location.reload();
+                                                    // });
                                             }
                                     );
 
