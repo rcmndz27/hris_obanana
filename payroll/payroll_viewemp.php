@@ -679,6 +679,7 @@ aria-hidden="true">
     function generatePayrll()
     {
 
+
         var cutoff = $('#ddcutoff').children("option:selected").val();
         if(typeof(cutoff) != "undefined" && cutoff !== null) {
             document.getElementById("myDiv").style.display="block";
@@ -1370,7 +1371,7 @@ function ApprovePayView()
                         ppay:ppay,
                         badgeno: emp_code
                     },
-                    function(data) {window.location.replace("../payroll/payroll_view.php"); }
+                    function(data) {window.location.replace("../payroll/payroll_viewemp.php"); }
                     );
 
             } else {
@@ -1414,7 +1415,7 @@ function ApprovePayView()
                         badgeno : emp_code
                     },
                     function(data) {
-                        window.location.replace("../payroll/payroll_view.php"); 
+                        window.location.replace("../payroll/payroll_viewemp.php"); 
                     }
                     );
 

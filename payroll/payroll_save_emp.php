@@ -18,7 +18,7 @@
             $params = array(
                 ":pay_from" => $pfrom,
                 ":pay_to" => $pto,
-                ":remarks" => 'GENERATED',
+                ":remarks" => 'GENERATED EMP',
                 ":audituser" => $empCode,
                 ":auditdate" => date('Y-m-d H:i:s'),
             );                                
@@ -48,7 +48,7 @@
             $params = array(
                 ":pay_from" => $pfrom,
                 ":pay_to" => $pto,
-                ":remarks" => 'GENERATED',
+                ":remarks" => 'GENERATED EMP',
                 ":audituser" => $empCode,
                 ":auditdate" => date('Y-m-d H:i:s'),
             );                                

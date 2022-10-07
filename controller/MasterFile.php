@@ -763,7 +763,7 @@
                 $data = [];
                
 
-                $sql = $connL->prepare(@"SELECT rowid,emp_code,(lastname +','+firstname+' '+middlename) as fullname FROM dbo.employee_profile where emp_status = 'Active' ORDER by lastname ASC");
+                $sql = $connL->prepare(@"SELECT rowid,emp_code,(lastname +','+firstname+' '+middlename) as fullname FROM dbo.employee_profile where emp_status = 'Active' and emp_code = (select emp_code from payroll where payroll_status = 'R') ORDER by lastname ASC");
                 $sql->execute();
 
                 if ($type == "allempcode")
