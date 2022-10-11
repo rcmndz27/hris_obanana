@@ -42,14 +42,14 @@
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item active bb" aria-current="page"><b><i class='fas fa-money-bill-wave fa-fw'>
-                        </i>&nbsp;SALARY MANAGEMENT LIST</b></li>
+              <li class="breadcrumb-item active font-weight-bold" aria-current="page"><i class='fas fa-money-bill-wave fa-fw mr-1'>
+                        </i>Salary Management List</li>
             </ol>
           </nav>
     <div class="pt-3">
         <div class="row align-items-end justify-content-end">
             <div class="col-md-12 mb-3">
-                <button type="button" class="btn btn-warning" id="salaryEntry"><i class="fas fa-plus-circle"></i> ADD NEW EMPLOYEE SALARY </button>
+                <button type="button" class="btn btn-warning" id="salaryEntry"><i class="fas fa-plus-circle"></i> Add New Employee Salary </button>
             </div>
         </div>
         <div class="row">
@@ -154,7 +154,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title bb" id="popUpModalTitle">UPDATE SALARY ENTRY <i class="fas fa-money-bill"></i></h5>
+                    <h5 class="modal-title bb" id="popUpModalTitle"><i class="fas fa-money-bill mr-1"></i>Update Salary Entry</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times; </span>
                     </button>
@@ -235,7 +235,7 @@ aria-hidden="true">
 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title bb" id="popUpModalTitle">VIEW SALARY LOGS  <i class="fas fa-money-bill"></i></h5>
+            <h5 class="modal-title bb" id="popUpModalTitle"><i class="fas fa-money-bill mr-1"></i>View Salary Logs</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times; </span>
             </button>
