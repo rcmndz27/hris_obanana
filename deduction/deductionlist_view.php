@@ -41,8 +41,8 @@
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item active bb" aria-current="page"><b><i class='fas fa-money-bill-wave fa-fw'>
-                        </i>&nbsp;DEDUCTION MANAGEMENT LIST</b></li>
+              <li class="breadcrumb-item active font-weight-bold" aria-current="page"><i class='fas fa-money-bill-wave fa-fw mr-1'>
+                        </i>Deduction Management List</li>
             </ol>
           </nav>
     <div class="pt-3">

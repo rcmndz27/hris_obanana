@@ -43,7 +43,7 @@ Class SalaryAdjList{
         <tbody>';
 
         $query = "SELECT a.emp_code,lastname+', '+firstname as fullname,period_to,period_from,description,remarks,amount,
-        inc_decr from dbo.employee_salaryadj_management a left join employee_profile b
+        inc_decr,salaryadj_id from dbo.employee_salaryadj_management a left join employee_profile b
         on a.emp_code = b.emp_code ORDER by period_from DESC ";
         $stmt =$connL->prepare($query);
         $stmt->execute();
@@ -59,7 +59,8 @@ Class SalaryAdjList{
                 $descript = "'".$result['description']."'";
                 $amnt = "'".round($result['amount'],3)."'";
                 $remark = "'".$result['remarks']."'";   
-                $incdecr = "'".$result['inc_decr']."'";               
+                $incdecr = "'".$result['inc_decr']."'";     
+                $salaryadjid = "'".$result['salaryadj_id']."'";               
                 echo '
                 <tr>
                 <td>' . $result['fullname']. '</td>
@@ -68,7 +69,7 @@ Class SalaryAdjList{
                 <td>' . $result['description']. '</td>
                 <td>' . round($result['amount'],2).'</td>                
                 <td>' . $result['remarks']. '</td>';
-                echo'<td><button type="button" class="btn btn-info btn-sm" onclick="editSalAdjModal('.$empcd.','.$percutoff.','.$descript.','.$amnt.','.$remark.','.$incdecr.')">
+                echo'<td><button type="button" class="btn btn-info btn-sm" onclick="editSalAdjModal('.$empcd.','.$percutoff.','.$descript.','.$amnt.','.$remark.','.$incdecr.','.$salaryadjid.')">
                                 <i class="fas fa-edit"></i> Update
                             </button></td>';
                 

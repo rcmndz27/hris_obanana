@@ -157,6 +157,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="control-label" for="empcode">Employee Code<span class="req">*</span></label>
+                                        <input type="text" class="form-control" name="saladjid" id="saladjid" hidden>
                                         <input type="text" class="form-control" name="empcode" id="empcode" readonly>
                                     </div>
                                 </div> 
@@ -227,7 +228,7 @@
 
 
 
-    function editSalAdjModal(empcd,percutoff,descrip,amnts,rremark,inc){
+    function editSalAdjModal(empcd,percutoff,descrip,amnts,rremark,inc,saladjid){
           
         $('#updateSalAdj').modal('toggle');
 
@@ -243,11 +244,9 @@
         var pyrte = document.getElementById('amnt');
         pyrte.value =  amnts;  
 
-        var at = document.getElementById('remark');
-        at.value =  rremark;
-
-        var ats = document.getElementById('inc_de');
-        ats.value =  inc;  
+        document.getElementById('remark').value =  rremark;
+        document.getElementById('inc_de').value =  inc;  
+        document.getElementById('saladjid').value =  saladjid;          
                             
     }
 
@@ -266,10 +265,11 @@
         var amount = document.getElementById("amnt").value;
         var inc_decr = document.getElementById("inc_de").value;
         var remarks = document.getElementById("remark").value;  
+        var saladjid = document.getElementById("saladjid").value;  
 
 
-        // swal(amount);
-        // exit();
+        // console.log(saladjid);
+        // return false;        
 
         $('#contents').html('');
 
@@ -292,7 +292,8 @@
                                         description: description,
                                         amount: amount,
                                         inc_decr: inc_decr,               
-                                        remarks: remarks 
+                                        remarks: remarks,
+                                        saladjid: saladjid 
                                         
                                     },
                                     function(data) { 
