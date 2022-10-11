@@ -52,7 +52,7 @@ else
                         <a class="nav-link active" id="attendance-tab" name="attendance-tab" data-toggle="tab"
                             href="#attendance" role="tab" aria-controls="attendance" aria-selected="true">Attendance</a>
                     </li>
-                    <li class="nav-item" role="presentation">
+<!--                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="wfhome-tab" name="wfhome-tab" data-toggle="tab" href="#wfhome"
                             role="tab" aria-controls="wfhome" aria-selected="false">Work From Home</a>
                     </li>    
@@ -67,7 +67,7 @@ else
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="overtime-tab" name="overtime-tab" data-toggle="tab" href="#overtime" role="tab"
                             aria-controls="overtime" aria-selected="false">Overtime</a>
-                    </li>             
+                    </li>    -->          
                 </ul>
                
                 <!-- ATTENDANCE -->
@@ -160,37 +160,7 @@ else
                             </div>
                         </div>      
                     </fieldset>
-                </div>                                    
-                <!-- DTRC -->
-<!--                 <div class="tab-pane fade" id="correct" role="tabpanel" aria-labelledby="correct-tab">
-                    <fieldset class="fieldset-border">
-                        <div class="d-flex justify-content-center">
-                            <legend class="fieldset-border pad">
-                                Generate DTR Correction for Payroll
-                            </legend>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-lg-2">
-                                <div class="form-group">
-                                    <label for="employeepaylist" class="col-form-label pad">PAYROLL PERIOD:</label>   
-
-                                </div>
-                            </div>
-                            <div class="col-lg-7">
-                                <div class="form-group">
-                                    <?php $dd->GenerateDropDown("ungendtrc", $mf->UnGetAllCutoffPay("unpayview")); ?>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <button type="button" id="search" class="btn btn-warning" onclick="genDtrcPay();">
-                                        <i class="fas fa-search-plus"></i>GENERATE                       
-                                    </button> 
-                                </div>
-                            </div>
-                        </div>      
-                    </fieldset>
-                </div>  -->               
+                </div>                                                
                 <!-- leave -->
                 <div class="tab-pane fade" id="leave" role="tabpanel" aria-labelledby="leave-tab">
                     <fieldset class="fieldset-border">
@@ -378,54 +348,7 @@ else
     }
 
 
-    // function genDtrcPay()
-    // {
-
-    //     var url = "../payroll_att/gen_dtrc_process.php";
-    //     var date = $('#ungendtrc').children("option:selected").val();
-    //     var dates = date.split(" - ");
-    //     var eMplogName = $('#eMplogName').val();
-
-    //     // console.log(dates[0]);  
-    //     // console.log(dates[1]);  
-    //     // console.log(eMplogName);
-    //     // return false;
-
-    //     swal({
-    //       title: "Are you sure?",
-    //       text: "You want to generate this dtr correction to attendance?",
-    //       icon: "success",
-    //       buttons: true,
-    //       dangerMode: true,
-    //   })
-    //     .then((genAttPay) => {
-    //       document.getElementById("myDiv").style.display="block";
-    //       if (genAttPay) {
-    //         $.post (
-    //             url,
-    //             {
-    //                 action: 1,
-    //                 pyrollco_from: dates[0] ,
-    //                 pyrollco_to: dates[1] ,
-    //                 eMplogName: eMplogName                           
-    //             },
-    //             function(data) {                 
-    //                 swal({
-    //                     title: "Success!", 
-    //                     text: "Successfully generated dtr correction to attendance!", 
-    //                     type: "success",
-    //                     icon: "success",
-    //                 }).then(function() {                        
-    //                     location.href = '../payroll_att/gen_att_view.php';
-    //                 });  
-    //             });
-    //     } else {
-    //         document.getElementById("myDiv").style.display="none";
-    //         swal({text:"You cancel the generation of dtr correction to attendance!",icon:"error"});
-    //     }
-    // });
-
-    // }
+  
 
 
      function genObPay()
