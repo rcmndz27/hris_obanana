@@ -93,7 +93,7 @@ else
         </div>
         
         <div class='col-md-2' id="s30th"> 
-            <?php $dd->GenerateDropDown("ddcutoff30", $mf->GetAllCutoffCO("payrollco")); ?>
+            <?php $dd->GenerateDisabledDropDown("ddcutoff30", $mf->GetAllCutoffCO("payrollco")); ?>
         </div>                    
         <button type="button" id="search" class="btn btn-success mr-2" onmousedown="javascript:generatePayrll()">
             <i class="fas fa-search-plus"></i> Generate                      
@@ -588,6 +588,9 @@ aria-hidden="true">
 
     $('#ddcutoff').change(function(){
 
+        var selectElem = document.getElementById('ddcutoff');
+        var index = selectElem.selectedIndex;
+
         var ddcutoff = $(this).find(':selected').data('val');
         if(ddcutoff == 0){
             var ddval = '15th';
@@ -595,8 +598,13 @@ aria-hidden="true">
         }else{
             var ddval = '30th';
             $("#s30th").show();
+            document.getElementById('ddcutoff30').selectedIndex = index+1;
         }
         document.getElementById('spay').value =  ddval;  
+        
+
+         console.log(index);
+
     });
 
 
@@ -685,6 +693,10 @@ aria-hidden="true">
             document.getElementById('pfromt').innerHTML = dates[0];
             document.getElementById('ptot').innerHTML = dates[1];
 
+            var selectElem = document.getElementById('ddcutoff');
+            var index = selectElem.selectedIndex;
+
+
             var ddcutoff = $(this).find(':selected').data('val');
             if(ddcutoff == 0){
                 var ddval = '15th';
@@ -692,6 +704,7 @@ aria-hidden="true">
             }else{
                 var ddval = '30th';
                 $("#s30th").show();
+                document.getElementById('ddcutoff30').selectedIndex = index+1;
             }   
             document.getElementById('spay').value =  ddval; 
                      

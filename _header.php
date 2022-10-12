@@ -342,6 +342,7 @@ rel="stylesheet">
                                   <li><a href='../salary/salarylist_view.php' onclick='show()'>Salary Management</a></li>
                                   <li><a href='../deduction/deductionlist_view.php' onclick='show()'>Deduction Management</a></li>
                                   <li><a href='../allowances/allowanceslist_view.php' onclick='show()'>Allowances Management</a></li>
+                                  <li><a href='../loans/loanslist_view.php' onclick='show()'>Loans Management</a></li>                                  
                                   <li><a href='../users/userslist_view.php' onclick='show()'>Users Management</a></li>                                                  
                                   <li><a href='../payroll_att/gen_att_view.php' onclick='show()'>Generate Scripts</a></li>
                                   <li><a href='../payroll_att/gen_attemp_view.php' onclick='show()'>Generate Scripts per Employee</a></li>                                  
