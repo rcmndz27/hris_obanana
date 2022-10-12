@@ -93,7 +93,7 @@ else
         </div>
         
         <div class='col-md-2' id="s30th"> 
-            <?php $dd->GenerateDropDown("ddcutoff30", $mf->GetTKList("tkview")); ?>
+            <?php $dd->GenerateDropDown("ddcutoff30", $mf->GetAllCutoffCO("payrollco")); ?>
         </div>                    
         <button type="button" id="search" class="btn btn-success mr-2" onmousedown="javascript:generatePayrll()">
             <i class="fas fa-search-plus"></i> Generate                      
@@ -400,7 +400,7 @@ else
             </fieldset> 
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CLOSE</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Close</button>
                         </div> 
                         </div> <!-- main body closing -->
                     </div> <!-- modal body closing -->
@@ -484,7 +484,7 @@ aria-hidden="true">
                 </fieldset> 
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CLOSE</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Close</button>
                 </div> 
             </div> <!-- main body closing -->
         </div> <!-- modal body closing -->
@@ -523,7 +523,7 @@ aria-hidden="true">
                 </fieldset> 
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CLOSE</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Close</button>
                 </div> 
             </div> <!-- main body closing -->
         </div> <!-- modal body closing -->
@@ -564,7 +564,7 @@ aria-hidden="true">
                 </fieldset> 
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CLOSE</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Close</button>
                 </div> 
             </div> <!-- main body closing -->
         </div> <!-- modal body closing -->
@@ -684,6 +684,17 @@ aria-hidden="true">
             var empCode = $('#empCode').val();
             document.getElementById('pfromt').innerHTML = dates[0];
             document.getElementById('ptot').innerHTML = dates[1];
+
+            var ddcutoff = $(this).find(':selected').data('val');
+            if(ddcutoff == 0){
+                var ddval = '15th';
+                $("#s30th").hide();
+            }else{
+                var ddval = '30th';
+                $("#s30th").show();
+            }   
+            document.getElementById('spay').value =  ddval; 
+                     
             $.post (
                 url,
                 {

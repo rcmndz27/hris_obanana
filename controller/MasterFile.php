@@ -82,7 +82,7 @@
 
                
 
-                $sql = $connL->prepare(@"SELECT * FROM dbo.mf_pyrollco ORDER by pyrollco_from DESC");
+                $sql = $connL->prepare(@"SELECT * FROM dbo.mf_pyrollco where status = 'Active' ORDER by pyrollco_from DESC");
                 $sql->execute();
 
                 if ($type == "payrollco")

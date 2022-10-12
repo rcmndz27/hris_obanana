@@ -52,7 +52,7 @@ else
                         <a class="nav-link active" id="attendance-tab" name="attendance-tab" data-toggle="tab"
                             href="#attendance" role="tab" aria-controls="attendance" aria-selected="true">Attendance</a>
                     </li>
-                    <li class="nav-item" role="presentation">
+<!--                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="wfhome-tab" name="wfhome-tab" data-toggle="tab" href="#wfhome"
                             role="tab" aria-controls="wfhome" aria-selected="false">Work From Home</a>
                     </li>    
@@ -67,7 +67,7 @@ else
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="overtime-tab" name="overtime-tab" data-toggle="tab" href="#overtime" role="tab"
                             aria-controls="overtime" aria-selected="false">Overtime</a>
-                    </li>             
+                    </li>              -->
                 </ul>
                
                 <!-- ATTENDANCE -->

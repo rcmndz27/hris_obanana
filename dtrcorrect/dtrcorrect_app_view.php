@@ -329,7 +329,7 @@ swal({text:"You stop the cancellation of your dtr correction.",icon:"error"});
                             </div> <!-- form row closing -->
                     </fieldset> 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CLOSE</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Close</button>
                                 </div> 
                         </div> <!-- main body closing -->
                     </div> <!-- modal body closing -->
@@ -368,7 +368,7 @@ swal({text:"You stop the cancellation of your dtr correction.",icon:"error"});
                     </fieldset> 
 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CLOSE</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Close</button>
                                 </div> 
                         </div> <!-- main body closing -->
                     </div> <!-- modal body closing -->

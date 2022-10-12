@@ -41,14 +41,14 @@
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item active bb" aria-current="page"><b><i class='fas fa-money-bill-wave fa-fw'>
-                        </i>&nbsp;ALLOWANCE MANAGEMENT LIST</b></li>
+              <li class="breadcrumb-item active font-weight-bold" aria-current="page"><i class='fas fa-money-bill-wave fa-fw mr-1'>
+                        </i>Allowance Management List</li>
             </ol>
           </nav>
     <div class="pt-3">
         <div class="row align-items-end justify-content-end">
             <div class="col-md-12 mb-3">
-                <button type="button" class="btn btn-warning" id="allowancesEntry"><i class="fas fa-plus-circle"></i> ADD NEW EMPLOYEE ALLOWANCE</button>
+                <button type="button" class="btn btn-warning" id="allowancesEntry"><i class="fas fa-plus-circle"></i> Add New Employee Allowance</button>
             </div>
         </div>
         <div class="row">
@@ -68,7 +68,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title bb" id="popUpModalTitle">ALLOWANCES ENTRY <i class="fas fa-money-check"></i> </h5>
+                    <h5 class="modal-title bb" id="popUpModalTitle"><i class="fas fa-money-check mr-1"></i> Allowances Entry</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times; </span>
                     </button>
@@ -99,8 +99,8 @@
                                         </label>
                                         <select type="select" class="form-select" id="period_cutoff" name="period_cutoff" >
                                             <option value="Both">Both</option>
-                                            <option value="First Half">First Half</option>
-                                            <option value="Second Half">Second Half</option>
+                                            <option value="15th">15th</option>
+                                            <option value="30th">30th</option>
                                         </select>
                                     </div>
                                 </div> 
@@ -137,7 +137,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title bb" id="popUpModalTitle">UPDATE ALLOWANCES <i class="fas fa-money-check"></i> </h5>
+                    <h5 class="modal-title bb" id="popUpModalTitle"><i class="fas fa-money-check mr-1"></i>Update Allowances</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times; </span>
                     </button>
@@ -170,8 +170,8 @@
                                         </label>
                                         <select type="select" class="form-select" id="periodcutoff" name="periodcutoff" >
                                             <option value="Both">Both</option>
-                                            <option value="First Half">First Half</option>
-                                            <option value="Second Half">Second Half</option>
+                                            <option value="15th">15th</option>
+                                            <option value="30th">30th</option>
                                         </select>
                                     </div>
                                 </div> 
@@ -217,7 +217,7 @@ aria-hidden="true">
 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title bb" id="popUpModalTitle">VIEW ALLOWANCES LOGS  <i class="fas fa-money-bill"></i></h5>
+            <h5 class="modal-title bb" id="popUpModalTitle"><i class="fas fa-money-bill mr-1"></i>View Allowances Logs</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times; </span>
             </button>
@@ -243,7 +243,7 @@ aria-hidden="true">
                 </fieldset> 
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CLOSE</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Close</button>
                 </div> 
             </div> <!-- main body closing -->
         </div> <!-- modal body closing -->

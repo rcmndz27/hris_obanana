@@ -18,7 +18,7 @@ Class ObApp{
     public function GetAllObAppHistory($date_from,$date_to,$status){
         global $connL;
 
-        echo '<div class="form-row">  
+        echo '<div class="form-row mb-2">  
                     <div class="col-lg-1">
                         <select class="form-select" name="state" id="maxRows">
                              <option value="5000">ALL</option>
@@ -122,7 +122,7 @@ Class ObApp{
  public function GetAllObRepHistory($date_from,$date_to,$empCode){
         global $connL;
 
-        echo '<div class="form-row">  
+        echo '<div class="form-row mb-2">  
                     <div class="col-lg-1">
                         <select class="form-select" name="state" id="maxRows">
                              <option value="5000">ALL</option>

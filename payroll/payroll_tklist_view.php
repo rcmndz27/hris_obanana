@@ -430,7 +430,7 @@ else
             </fieldset> 
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CLOSE</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Close</button>
                         </div> 
                         </div> <!-- main body closing -->
                     </div> <!-- modal body closing -->
@@ -514,7 +514,7 @@ aria-hidden="true">
                 </fieldset> 
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CLOSE</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Close</button>
                 </div> 
             </div> <!-- main body closing -->
         </div> <!-- modal body closing -->
@@ -554,7 +554,7 @@ aria-hidden="true">
                 </fieldset> 
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CLOSE</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Close</button>
                 </div> 
             </div> <!-- main body closing -->
         </div> <!-- modal body closing -->
@@ -593,7 +593,7 @@ aria-hidden="true">
                 </fieldset> 
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> CLOSE</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Close</button>
                 </div> 
             </div> <!-- main body closing -->
         </div> <!-- modal body closing -->
