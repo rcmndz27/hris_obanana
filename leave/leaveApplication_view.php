@@ -64,7 +64,7 @@
 
 
 
-    function viewLeaveModal(datefl,leavedesc,leavetyp,datefr,dateto,remark,appdays,appr_oved,actlcnt,appr_over){
+    function viewLeaveModal(datefl,leavedesc,leavetyp,datefr,dateto,remark,appdays,appr_oved,actlcnt,appr_over,attachment){
 
         $('#viewLeaveModal').modal('toggle');
         document.getElementById('datefl').value =  datefl;   
@@ -76,7 +76,16 @@
         document.getElementById('appdays').value =  appdays;  
         document.getElementById('appr_oved').value =  appr_oved;  
         document.getElementById('actlcnt').value =  actlcnt;        
-        document.getElementById('appr_over').value =  appr_over;        
+        document.getElementById('appr_over').value =  appr_over; 
+        if(!attachment){
+            $('#viewattachment').hide();
+        }else{
+            $('#viewattachment').show();
+            document.getElementById('viewattachment').setAttribute('href','../uploads/'+attachment);
+        }
+        
+
+               
 }
 
     function viewLeaveHistoryModal(lvlogid)
@@ -172,8 +181,7 @@ function cancelLeave(lvid,empcd)
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item active font-weight-bold" aria-current="page"><i class='fas fa-suitcase fa-fw mr-1'>
-                        </i>Leave Application Form</li>
+              <li class="breadcrumb-item active font-weight-bold" aria-current="page"><i class='fas fa-suitcase fa-fw mr-1'></i>Leave Application Form</li>
             </ol>
           </nav>
     <div class="pt-3">
@@ -374,14 +382,14 @@ function cancelLeave(lvid,empcd)
                                 <label for="">Leave From:</label><span class="req">*</span>
                             </div>
                             <div class="col-md-3 d-inline">
-                                <input type="date" id="dateFrom" name="dateFrom" class="form-control"
+                                <input type="date" id="dateFrom" name="dateFrom" class="form-control inputtext"
                                     >
                             </div>
                             <div class="col-md-1 d-inline">
                                 <label for="">To:</label><span class="req">*</span>
                             </div>
                             <div class="col-md-3 d-inline">
-                                <input type="date" id="dateTo" name="dateTo" class="form-control"
+                                <input type="date" id="dateTo" name="dateTo" class="form-control inputtext"
                                     >
                             </div>
                             <div class="col-md-3 d-inline">
@@ -426,10 +434,10 @@ function cancelLeave(lvid,empcd)
 
                              <div class="row pb-2">
                                 <div class="col-md-2">
-                                    <label for="Attachment" id="LabelAttachment">Attachment:</label>
+                                    <label for="Attachment" id="LabelAttachment">Attachment:</label><span class="req">*</span>
                                 </div>
                                 <div class="col-md-10">
-                                    <input type="file" name="medicalfiles" id="medicalfiles" accept=".pdf" onChange="GetMedFile()">
+                                    <input type="file" name="medicalfiles" id="medicalfiles" class="inputtext" accept=".pdf,.jpg,.png" onChange="GetMedFile()">
                                 </div>
                             </div>
                         
@@ -562,11 +570,15 @@ function cancelLeave(lvid,empcd)
                                         <label class="control-label" for="appr_oved">Status</label>
                                         <input type="text" id="appr_oved" name="appr_oved" class="form-control" readonly>
                                     </div>
-                                </div>                                
+                                </div> 
+
+                             
                             </div> <!-- form row closing -->
                     </fieldset> 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Close</button>
+                            <?php   echo"<a title='Attachment' id='viewattachment' class='font-weight-bold' href=''  
+                                target='popup'><button type='button' class='btn btn-primary '><i class='text-white fas fa-paperclip mr-1'></i>View Attachment</button></a>";   ?>                                      
+                                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Close</button>
                                 </div> 
                         </div> <!-- main body closing -->
                     </div> <!-- modal body closing -->

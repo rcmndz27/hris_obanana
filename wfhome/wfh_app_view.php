@@ -50,7 +50,7 @@
 <script type="text/javascript">
     
 
-        function viewWfhModal(wfhdate,wfhtask,wfhoutput,wfhoutput2,wfhpercentage,wfhstats,approver){
+        function viewWfhModal(wfhdate,wfhtask,wfhoutput,wfhoutput2,wfhpercentage,wfhstats,approver,attachment){
    
         $('#viewWfhModal').modal('toggle');
         document.getElementById('wfhdates').value =  wfhdate;   
@@ -59,7 +59,13 @@
         document.getElementById('wfhoutput2').value =  wfhoutput2;  
         document.getElementById('wfhpercentage').value =  wfhpercentage;  
         document.getElementById('wfhstats').value =  wfhstats;  
-        document.getElementById('approver').value =  approver;                          
+        document.getElementById('approver').value =  approver;   
+                if(!attachment){
+            $('#viewattachment').hide();
+        }else{
+            $('#viewattachment').show();
+            document.getElementById('viewattachment').setAttribute('href','../uploads/'+attachment);
+        }                       
     }
 
     function viewWfhHistoryModal(lvlogid)
@@ -258,8 +264,7 @@ function timeOutModal(lvid,empcd,attid){
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item active font-weight-bold" aria-current="page"><b><i class='fas fa-warehouse fa-fw mr-1'>
-                        </i>Work From Home Application</b></li>
+              <li class="breadcrumb-item active font-weight-bold" aria-current="page"><b><i class='fas fa-warehouse fa-fw mr-1'></i>Work From Home Application</b></li>
             </ol>
           </nav>
 <div class="pt-3">
@@ -333,9 +338,7 @@ function timeOutModal(lvid,empcd,attid){
                                         <input type="date" id="wfhdate" name="wfhdate" class="form-control" 
                                             value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>">
                                     </div>
-                            </div>
-
-                      
+                            </div>                    
                             <div class="form-row align-items-center mb-2">
                                    <div class="col-md-2 d-inline">
                                         <label for="">Task:</label><span class="req">*</span>
@@ -344,6 +347,14 @@ function timeOutModal(lvid,empcd,attid){
                                          <textarea class="form-control inputtext" id="wfh_task" name="wfh_task" rows="4" cols="50" ></textarea> 
                                     </div>
                             </div>
+                         <div class="row pb-2">
+                            <div class="col-md-2">
+                                <label for="Attachment" id="LabelAttachment">Attachment:</label><span class="req">*</span>
+                            </div>
+                            <div class="col-md-10">
+                                <input type="file" name="attachment" id="attachment" class="inputtext" accept=".pdf,.jpg,.png" onChange="GetAttFile()" >
+                            </div>
+                        </div>                            
                     
                     </div>
                 </div>
@@ -351,7 +362,7 @@ function timeOutModal(lvid,empcd,attid){
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Cancel</button>
-                    <button type="button" class="btn btn-success" id="Submit" ><i class="fas fa-check-circle"></i> Submit</button>
+                    <button type="button" class="btn btn-success" id="Submit" onclick="uploadFile();"><i class="fas fa-check-circle"></i> Submit</button>
                 </div>
 
             </div>
@@ -523,7 +534,9 @@ function timeOutModal(lvid,empcd,attid){
                             </div> <!-- form row closing -->
                     </fieldset> 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Close</button>
+                            <?php   echo"<a title='Attachment' id='viewattachment' class='font-weight-bold' href='' style='color:#ffff;'  
+                                target='popup'><button type='button' class='btn btn-primary'><i class='text-white fas fa-paperclip mr-1'></i>View Attachment</button></a>"; ?>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Close</button>
                                 </div> 
                         </div> <!-- main body closing -->
                     </div> <!-- modal body closing -->

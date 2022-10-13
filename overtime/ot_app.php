@@ -297,6 +297,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
                 $stats = "'".$result['stats']."'";
                 $otid = "'".$result['rowdy']."'";
                 $empcode = "'".$result['emp_code']."'";
+                $atch = "'".$result['attachment']."'";
                 echo '
                 <tr>
                 <td>' . date('F d, Y', strtotime($result['ot_date'])) . '</td>
@@ -309,7 +310,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
                 <td id="st'.$result['rowdy'].'">' . $result['stats'] . '</td>';
                 if($result['stats'] == 'PENDING' || $result['stats'] == 'APPROVED'){
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewOtModal('.$otdate.','.$ottype.','.$otstartdtime.','.$otenddtime.','.$remark.','.$otreqhrs.','.$otrenhrs.','.$rejectreason.','.$stats.','.$appr_over.')" title="View Overtime">
+                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewOtModal('.$otdate.','.$ottype.','.$otstartdtime.','.$otenddtime.','.$remark.','.$otreqhrs.','.$otrenhrs.','.$rejectreason.','.$stats.','.$appr_over.','.$atch.')" title="View Overtime">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewOtHistoryModal('.$otid.')" title="View Logs">
@@ -321,7 +322,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
                             </td>';
                 }else{
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewOtModal('.$otdate.','.$ottype.','.$otstartdtime.','.$otenddtime.','.$remark.','.$otreqhrs.','.$otrenhrs.','.$rejectreason.','.$stats.','.$appr_over.')" title="View Overtime">
+                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewOtModal('.$otdate.','.$ottype.','.$otstartdtime.','.$otenddtime.','.$remark.','.$otreqhrs.','.$otrenhrs.','.$rejectreason.','.$stats.','.$appr_over.','.$atch.')" title="View Overtime">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewOtHistoryModal('.$otid.')" title="View Logs">
@@ -353,7 +354,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
       </div>';
     }
 
-    public function InsertAppliedOtApp($empCode,$empReportingTo,$otDate,$otStartDtime,$otEndDtime,$remarks,$e_req,$n_req,$e_appr,$n_appr){
+    public function InsertAppliedOtApp($empCode,$empReportingTo,$otDate,$otStartDtime,$otEndDtime,$remarks,$e_req,$n_req,$e_appr,$n_appr,$attachment){
 
         global $connL;
 
@@ -408,8 +409,8 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
         // echo 'night diff with insert and update';
         //  exit();
 
-        $query = "INSERT INTO tr_overtime (emp_code,ot_date,datefiled,reporting_to,ot_start_dtime,ot_end_dtime,ot_req_hrs,remarks,audituser, auditdate) 
-        VALUES(:emp_code,:otDate,:datefiled,:empReportingTo,:otStartDtime,:otEndDtime,:otReqHrs, :remarks,:audituser,:auditdate) ";
+        $query = "INSERT INTO tr_overtime (emp_code,ot_date,datefiled,reporting_to,ot_start_dtime,ot_end_dtime,ot_req_hrs,remarks,attachment,audituser,auditdate) 
+        VALUES(:emp_code,:otDate,:datefiled,:empReportingTo,:otStartDtime,:otEndDtime,:otReqHrs,:remarks,:attachment,:audituser,:auditdate) ";
 
         $stmt =$connL->prepare($query);
 
@@ -422,6 +423,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
         ":otEndDtime"=> $fixed_date,
         ":otReqHrs"=> $total_fxs,
         ":remarks"=> $remarks,
+        ":attachment"=> $attachment,
         ":audituser" => $empCode,
         ":auditdate"=>date('m-d-Y H:i:s')
         );
@@ -434,8 +436,8 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
         $query_pay->bindValue(':empCode',$empCode);
         $query_pay->execute(); 
 
-        $queryt = "INSERT INTO tr_overtime (emp_code,ot_date,datefiled,reporting_to,ot_start_dtime,ot_end_dtime,ot_req_hrs,remarks,audituser, auditdate) 
-        VALUES(:emp_code,:otDate,:datefiled,:empReportingTo,:otStartDtime,:otEndDtime,:otReqHrs, :remarks,:audituser,:auditdate) ";
+        $queryt = "INSERT INTO tr_overtime (emp_code,ot_date,datefiled,reporting_to,ot_start_dtime,ot_end_dtime,ot_req_hrs,remarks,attachment,audituser, auditdate) 
+        VALUES(:emp_code,:otDate,:datefiled,:empReportingTo,:otStartDtime,:otEndDtime,:otReqHrs,:remarks,:attachment,:audituser,:auditdate) ";
 
         $stmtt =$connL->prepare($queryt);
 
@@ -448,6 +450,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
         ":otEndDtime"=> $otend_d,
         ":otReqHrs"=> $total_fxe,
         ":remarks"=> $remarks,
+        ":attachment"=> $attachment,
         ":audituser" => $empCode,
         ":auditdate"=>date('m-d-Y H:i:s')
         );
@@ -466,8 +469,8 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
         // echo 'night diff with insert only';
         // exit();
         
-        $queryt = "INSERT INTO tr_overtime (emp_code,ot_date,datefiled,reporting_to,ot_start_dtime,ot_end_dtime,ot_req_hrs,remarks,audituser, auditdate) 
-        VALUES(:emp_code,:otDate,:datefiled,:empReportingTo,:otStartDtime,:otEndDtime,:otReqHrs, :remarks,:audituser,:auditdate) ";
+        $queryt = "INSERT INTO tr_overtime (emp_code,ot_date,datefiled,reporting_to,ot_start_dtime,ot_end_dtime,ot_req_hrs,remarks,attachment,audituser, auditdate) 
+        VALUES(:emp_code,:otDate,:datefiled,:empReportingTo,:otStartDtime,:otEndDtime,:otReqHrs,:remarks,:attachment,:audituser,:auditdate) ";
 
         $stmtt =$connL->prepare($queryt);
 
@@ -480,6 +483,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
         ":otEndDtime"=> $otend_d,
         ":otReqHrs"=> $total,
         ":remarks"=> $remarks,
+        ":attachment"=> $attachment,
         ":audituser" => $empCode,
         ":auditdate"=>date('m-d-Y H:i:s')
         );
@@ -497,8 +501,8 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
         // echo 'regular pay only';
         // exit();
 
-        $query = "INSERT INTO tr_overtime (emp_code,ot_date,datefiled,reporting_to,ot_start_dtime,ot_end_dtime,ot_req_hrs,remarks,audituser, auditdate) 
-        VALUES(:emp_code,:otDate,:datefiled,:empReportingTo,:otStartDtime,:otEndDtime,:otReqHrs, :remarks,:audituser,:auditdate) ";
+        $query = "INSERT INTO tr_overtime (emp_code,ot_date,datefiled,reporting_to,ot_start_dtime,ot_end_dtime,ot_req_hrs,remarks,attachment,audituser, auditdate) 
+        VALUES(:emp_code,:otDate,:datefiled,:empReportingTo,:otStartDtime,:otEndDtime,:otReqHrs,:remarks,:attachment,:audituser,:auditdate) ";
 
         $stmt =$connL->prepare($query);
 
@@ -512,6 +516,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
         ":otReqHrs"=> $total,
         ":remarks"=> $remarks,
         ":audituser" => $empCode,
+        ":attachment"=> $attachment,
         ":auditdate"=>date('m-d-Y H:i:s')
         );
 
@@ -577,8 +582,8 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
         $cmdui->execute();     
 
 
-        $queryUI = "INSERT INTO tr_overtime (emp_code,ot_date,datefiled,reporting_to,ot_start_dtime,ot_end_dtime,ot_req_hrs,remarks,audituser, auditdate) 
-        VALUES(:emp_code,:otDate,:datefiled,:empReportingTo,:otStartDtime,:otEndDtime,:otReqHrs,:remarks,:audituser,:auditdate) ";
+        $queryUI = "INSERT INTO tr_overtime (emp_code,ot_date,datefiled,reporting_to,ot_start_dtime,ot_end_dtime,ot_req_hrs,remarks,attachment,audituser, auditdate) 
+        VALUES(:emp_code,:otDate,:datefiled,:empReportingTo,:otStartDtime,:otEndDtime,:otReqHrs,:remarks,:attachment,:audituser,:auditdate) ";
 
         $stmtUI =$connL->prepare($queryUI);
 
@@ -591,6 +596,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
         ":otEndDtime"=> $rot_end,
         ":otReqHrs"=> $totfxe,
         ":remarks"=> $remarks,
+        ":attachment"=> $attachment,
         ":audituser" => $empCode,
         ":auditdate"=>date('m-d-Y H:i:s')
         );

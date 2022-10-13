@@ -407,7 +407,7 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                     a.emp_code,(CASE when approved = 1 then 'PENDING'
                     when   approved = 2 then 'APPROVED'
                     when   approved = 3 then 'REJECTED'
-                    when   approved = 4 then 'CANCELLED' ELSE 'N/A' END) as approved,b.firstname+' '+b.lastname as approver 
+                    when   approved = 4 then 'CANCELLED' ELSE 'N/A' END) as approved,b.firstname+' '+b.lastname as approver,medicalfile 
                     FROM dbo.tr_leave a left join employee_profile b
                     on a.approval = b.emp_code
                     where a.emp_code = :emp_code ORDER BY date_from DESC, leavetype";
@@ -431,6 +431,7 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                 $actlcnt = "'".$result['actl_cnt']."'";
                 $leaveid = "'".$result['rowid']."'";
                 $empcode = "'".$result['emp_code']."'";
+                $medicalfile = "'".$result['medicalfile']."'";
                 echo '
                 <tr>
                 <td id="ld'.$result['rowid'].'">' . date('F d, Y', strtotime($result['date_from'])) . '</td>
@@ -443,7 +444,7 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
     
                 if($result['approved'] == 'PENDING' || $result['approved'] == 'APPROVED'){
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewLeaveModal('.$datefl.','.$leavedesc.','.$leavetyp.','.$datefr.','.$dateto.','.$remark.','.$appdays.','.$appr_oved.','.$actlcnt.','.$appr_over.')" title="View Leave">
+                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewLeaveModal('.$datefl.','.$leavedesc.','.$leavetyp.','.$datefr.','.$dateto.','.$remark.','.$appdays.','.$appr_oved.','.$actlcnt.','.$appr_over.','.$medicalfile.')" title="View Leave">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewLeaveHistoryModal('.$leaveid.')" title="View Logs">
@@ -455,7 +456,7 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                             </td>';
                 }else{
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewLeaveModal('.$datefl.','.$leavedesc.','.$leavetyp.','.$datefr.','.$dateto.','.$remark.','.$appdays.','.$appr_oved.','.$actlcnt.','.$appr_over.')" title="View Leave">
+                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewLeaveModal('.$datefl.','.$leavedesc.','.$leavetyp.','.$datefr.','.$dateto.','.$remark.','.$appdays.','.$appr_oved.','.$actlcnt.','.$appr_over.','.$medicalfile.')" title="View Leave">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewLeaveHistoryModal('.$leaveid.')" title="View Logs">

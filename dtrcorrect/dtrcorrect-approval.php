@@ -97,8 +97,8 @@ require '../vendor/autoload.php';
 
                             if(empty($attchmnt)){
                             }else {
-                            echo"<button type='button' class='btn btn-primary btn-sm'><a title='Attachment' href='../uploads/dtrc/".$result['attachment']."' style='color:#ffff;font-weight:bold;'  
-                            target='popup' onclick='window.open('../uploads/dtrc/".$result['attachment']."' ','popup','width=600,height=600,scrollbars=no,resizable=no'); return false;'><i class='fas fa-paperclip'></i></a></button>&nbsp;";  
+                            echo"<a title='Attachment' href='../uploads/".$result['attachment']."'   
+                                target='popup'); return false;'><button type='button' class='btn btn-primary btn-sm text-white font-weight-bold mr-1'><i class='fas fa-paperclip'></i></button></a>";  
                             }  
                             echo"<button class='btn btn-success btn-sm btnApproved' id='".$result['rowid']."'><i class='fas fa-check'></i></button> &nbsp".
                                 "<button class='btn btn-danger btn-sm btnRejectd' id='".$result['rowid']."'><i class='fas fa-times'></i></button>&nbsp;";

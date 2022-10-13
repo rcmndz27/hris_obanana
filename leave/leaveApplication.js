@@ -101,6 +101,9 @@ $(function(){
         inputValues = [
             
             $('#leaveDesc'),
+            $('#dateFrom'),
+            $('#dateTo'),
+            $('#medicalfiles')
             
         ];
 

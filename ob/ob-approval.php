@@ -53,7 +53,7 @@ require '../vendor/autoload.php';
 
             global $connL;
 
-            $query = "SELECT count(a.ob_date) as obcnt, a.ob_date ,a.ob_destination,a.ob_reporting,a.ob_time,a.ob_purpose,a.ob_percmp,b.firstname,b.middlename,b.lastname,a.emp_code,a.remarks,a.rowid from tr_offbusiness a left join employee_profile b on a.emp_code = b.emp_code WHERE a.ob_reporting = :reporting_to AND a.emp_code = :emp_code and status = 1 GROUP BY a.ob_date,a.ob_destination,a.ob_reporting,a.ob_time,a.ob_purpose,a.ob_percmp,b.firstname,b.middlename,b.lastname,a.emp_code,a.remarks,a.rowid";
+            $query = "SELECT count(a.ob_date) as obcnt, a.ob_date ,a.ob_destination,a.ob_reporting,a.ob_time,a.ob_purpose,a.ob_percmp,b.firstname,b.middlename,b.lastname,a.emp_code,a.remarks,a.rowid,a.attachment from tr_offbusiness a left join employee_profile b on a.emp_code = b.emp_code WHERE a.ob_reporting = :reporting_to AND a.emp_code = :emp_code and status = 1 GROUP BY a.ob_date,a.ob_destination,a.ob_reporting,a.ob_time,a.ob_purpose,a.ob_percmp,b.firstname,b.middlename,b.lastname,a.emp_code,a.remarks,a.rowid,a.attachment";
             $stmt =$connL->prepare($query);
             $param = array(":reporting_to" => $empReportingTo , ":emp_code" => $empId );
             $stmt->execute($param);
@@ -93,7 +93,8 @@ require '../vendor/autoload.php';
                             <td hidden>"."<input type='text' class='form-control' 
                             value='".$result['ob_reporting']."' >"."</td>
                             <td>".
-
+                            "<a title='Attachment' href='../uploads/".$result['attachment']."'   
+                                target='popup'); return false;'><button type='button' class='btn btn-primary btn-sm text-white font-weight-bold mr-1'><i class='fas fa-paperclip'></i></button></a>".
                                 "<button class='btn btn-success btn-sm btnApproved' id='".$result['rowid']."'><i class='fas fa-check'></i></button> &nbsp".
                                 "<button class='btn btn-danger btn-sm btnRejectd' id='".$result['rowid']."'><i class='fas fa-times'></i></button> &nbsp;";
 

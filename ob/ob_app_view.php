@@ -53,7 +53,7 @@
 <script type="text/javascript">
     
 
-    function viewObModal(obdestination,obdate,obtime,obpurpose,obpercmp,stats,approver){
+    function viewObModal(obdestination,obdate,obtime,obpurpose,obpercmp,stats,approver,attachment){
             $('#viewObModal').modal('toggle');
             document.getElementById('obdestination').value =  obdestination;   
             document.getElementById('obdate').value =  obdate;  
@@ -61,7 +61,13 @@
             document.getElementById('obpurpose').value =  obpurpose;  
             document.getElementById('obpercmp').value =  obpercmp;  
             document.getElementById('stats').value =  stats;   
-            document.getElementById('approver').value =  approver;                                         
+            document.getElementById('approver').value =  approver; 
+                    if(!attachment){
+            $('#viewattachment').hide();
+        }else{
+            $('#viewattachment').show();
+            document.getElementById('viewattachment').setAttribute('href','../uploads/'+attachment);
+        }                                        
     }
 
     function viewObHistoryModal(lvlogid)
@@ -236,6 +242,14 @@
                                 <textarea class="form-control inputtext" id="ob_purpose" name="ob_purpose" rows="4" cols="50" ></textarea>
                             </div>
                         </div>
+                         <div class="row pb-2">
+                            <div class="col-md-2">
+                                <label for="Attachment" id="LabelAttachment">Attachment:</label><span class="req">*</span>
+                            </div>
+                            <div class="col-md-10">
+                                <input type="file" name="attachment" id="attachment" class="inputtext" accept=".pdf,.jpg,.png" onChange="GetAttFile()" >
+                            </div>
+                        </div>                         
 
                     </div>
                 </div>
@@ -311,6 +325,8 @@
                             </div> <!-- form row closing -->
                     </fieldset> 
                                 <div class="modal-footer">
+                            <?php   echo"<a title='Attachment' id='viewattachment' class='font-weight-bold' href='' style='color:#ffff;'  
+                                target='popup'><button type='button' class='btn btn-primary'><i class='text-white fas fa-paperclip mr-1'></i>View Attachment</button></a>"; ?>                                    
                                     <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Close</button>
                                 </div> 
                         </div> <!-- main body closing -->

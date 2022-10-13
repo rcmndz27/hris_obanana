@@ -55,7 +55,7 @@
 
 <script type="text/javascript">
     
-    function viewOtModal(otdate,ottype,otstartdtime,otenddtime,remark,otreqhrs,otrenhrs,rejectreason,stats,approver){
+    function viewOtModal(otdate,ottype,otstartdtime,otenddtime,remark,otreqhrs,otrenhrs,rejectreason,stats,approver,attachment){
         $('#viewOtModal').modal('toggle');
         document.getElementById('otdatev').value =  otdate;   
         document.getElementById('ottypev').value =  ottype;  
@@ -66,7 +66,13 @@
         document.getElementById('otrenhrsv').value =  otrenhrs;  
         document.getElementById('rejectreasonv').value =  rejectreason;    
         document.getElementById('statsv').value =  stats;
-        document.getElementById('approver').value =  approver;                                     
+        document.getElementById('approver').value =  approver;
+                if(!attachment){
+            $('#viewattachment').hide();
+        }else{
+            $('#viewattachment').show();
+            document.getElementById('viewattachment').setAttribute('href','../uploads/'+attachment);
+        }                                     
     }
 
     function viewOtHistoryModal(lvlogid)
@@ -210,17 +216,7 @@
                             <div class="col-md-3 d-inline">
                                 <input type="time" id="otenddtime" name="otenddtime" class="form-control inputtext">
                             </div>
-                        </div>
-                        <!-- 
-                        <div class="form-row align-items-center mb-2" id="planot">
-                        <div class="col-md-2 d-inline">
-                        <label for="">Plan OT(hrs):</label><span class="req">*</span>
-                        </div>
-                        <div class="col-md-3 d-inline">
-                        <input class="form-control" type="number" name="otreqhrs" id="otreqhrs"  min="1" max="10" onkeypress="return false" onchange="myChangeFunction()" placeholder="0">              
-                        </div>
                         </div> 
-                        -->
                         <div class="form-row mb-2">
                             <div class="col-md-2 d-inline">
                                 <label for='leaveDesc'>Remarks:</label><span class="req">*</span>
@@ -229,14 +225,21 @@
                                 <textarea class="form-control inputtext" id="remarks" name="remarks" rows="4" cols="50" ></textarea>
                             </div>
                         </div>
-
+                         <div class="row pb-2">
+                            <div class="col-md-2">
+                                <label for="Attachment" id="LabelAttachment">Attachment:</label><span class="req">*</span>
+                            </div>
+                            <div class="col-md-10">
+                                <input type="file" name="attachment" id="attachment" class="inputtext" accept=".pdf,.jpg,.png" onChange="GetAttFile()">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Cancel</button>
-                    <button type="button" class="btn btn-success" id="Submit" ><i class="fas fa-check-circle"></i> Submit</button>
+                    <button type="button" class="btn btn-success" id="Submit" onclick="uploadFile();"><i class="fas fa-check-circle"></i> Submit</button>
                 </div>
 
             </div>
@@ -324,7 +327,9 @@
                             </div> <!-- form row closing -->
                     </fieldset> 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Close</button>
+                            <?php   echo"<a title='Attachment' id='viewattachment' class='font-weight-bold' href='' style='color:#ffff;'  
+                                target='popup'><button type='button' class='btn btn-primary'><i class='text-white fas fa-paperclip mr-1'></i>View Attachment</button></a>";   ?>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Close</button>
                                 </div> 
                         </div> <!-- main body closing -->
                     </div> <!-- modal body closing -->

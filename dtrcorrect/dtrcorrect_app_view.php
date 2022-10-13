@@ -51,7 +51,7 @@
 <script type="text/javascript">
 
 
-function viewdtrcorrectModal(dtrcdate,timein,timeout,rmrks,stts,approver){
+function viewdtrcorrectModal(dtrcdate,timein,timeout,rmrks,stts,approver,attachment){
 
 $('#viewdtrcorrectModal').modal('toggle');
 document.getElementById('dtrcdate').value =  dtrcdate;   
@@ -60,6 +60,12 @@ document.getElementById('timeout').value =  timeout;
 document.getElementById('rmrks').value =  rmrks;  
 document.getElementById('stts').value =  stts; 
 document.getElementById('approver').value =  approver;                          
+        if(!attachment){
+            $('#viewattachment').hide();
+        }else{
+            $('#viewattachment').show();
+            document.getElementById('viewattachment').setAttribute('href','../uploads/'+attachment);
+        }
 }
 
 function viewdtrcorrectHistoryModal(lvlogid)
@@ -329,6 +335,8 @@ swal({text:"You stop the cancellation of your dtr correction.",icon:"error"});
                             </div> <!-- form row closing -->
                     </fieldset> 
                                 <div class="modal-footer">
+                            <?php   echo"<a title='Attachment' id='viewattachment' class='font-weight-bold' href='' style='color:#ffff;'  
+                                target='popup'><button type='button' class='btn btn-primary'><i class='text-white fas fa-paperclip mr-1'></i>View Attachment</button></a>"; ?>                                    
                                     <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Close</button>
                                 </div> 
                         </div> <!-- main body closing -->

@@ -280,6 +280,7 @@ Class ObApp{
                 $obid = "'".$result['rowdy']."'";
                 $appr_over = "'".$result['approver']."'";
                 $empcode = "'".$result['emp_code']."'";
+                $atch = "'".$result['attachment']."'";
                 echo '
                 <tr>
                 <td>' . date('F d, Y', strtotime($result['ob_date'])). '</td>                
@@ -290,7 +291,7 @@ Class ObApp{
                 <td id="st'.$result['rowdy'].'">' . $result['stats'] . '</td>';
                 if($result['stats'] == 'PENDING' || $result['stats'] == 'APPROVED'){
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewObModal('.$obdestination.','.$obdate.','.$obtime.','.$obpurpose.','.$obpercmp.','.$stats.','.$appr_over.')" title="View Official Business">
+                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewObModal('.$obdestination.','.$obdate.','.$obtime.','.$obpurpose.','.$obpercmp.','.$stats.','.$appr_over.','.$atch.')" title="View Official Business">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewObHistoryModal('.$obid.')" title="View Logs">
@@ -302,7 +303,7 @@ Class ObApp{
                             </td>';
                 }else{
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm btn-sm" onclick="viewObModal('.$obdestination.','.$obdate.','.$obtime.','.$obpurpose.','.$obpercmp.','.$stats.','.$appr_over.')" title="View Official Business">
+                <td><button type="button" class="btn btn-info btn-sm btn-sm btn-sm" onclick="viewObModal('.$obdestination.','.$obdate.','.$obtime.','.$obpurpose.','.$obpercmp.','.$stats.','.$appr_over.','.$atch.')" title="View Official Business">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewObHistoryModal('.$obid.')" title="View Logs">
@@ -335,12 +336,12 @@ Class ObApp{
     }
 
     public function InsertAppliedObApp($empCode,$empReportingTo,$ob_time,$ob_destination,$ob_purpose,$ob_percmp, 
-            $obDate,$e_req,$n_req,$e_appr,$n_appr){
+            $obDate,$e_req,$n_req,$e_appr,$n_appr,$attachment){
 
         global $connL;
 
-            $query = "INSERT INTO tr_offbusiness (emp_code,date_filed,ob_date,ob_reporting,ob_time,ob_destination,ob_purpose,ob_percmp,audituser,auditdate) 
-                VALUES(:emp_code,:date_filed,:ob_date,:ob_reporting,:ob_time,:ob_destination,:ob_purpose,:ob_percmp,:audituser,:auditdate) ";
+            $query = "INSERT INTO tr_offbusiness (emp_code,date_filed,ob_date,ob_reporting,ob_time,ob_destination,ob_purpose,ob_percmp,attachment,audituser,auditdate) 
+                VALUES(:emp_code,:date_filed,:ob_date,:ob_reporting,:ob_time,:ob_destination,:ob_purpose,:ob_percmp,:attachment,:audituser,:auditdate) ";
     
                 $stmt =$connL->prepare($query);
 
@@ -353,6 +354,7 @@ Class ObApp{
                     ":ob_destination"=> $ob_destination,
                     ":ob_purpose"=> $ob_purpose,
                     ":ob_percmp"=> $ob_percmp,
+                    ":attachment"=> $attachment,
                     ":audituser" => $empCode,
                     ":auditdate"=>date('m-d-Y H:i:s')
                 );
