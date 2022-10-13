@@ -102,7 +102,7 @@ document.getElementById('time_out').value =  null;
             
             $('#dtrc_date'),
             // $('#time_in'),
-            // $('#attachment'),
+            $('#attachment'),
             $('#remarks')
             
         ];

@@ -66,7 +66,7 @@ and a.date_from = b.period_from and a.date_to = b.period_to
 left join employee_leave c on a.emp_code = c.emp_code
 where a.date_from = :datefrom and a.date_to = :dateto and a.emp_code = :empcode";
 $stmt =$connL->prepare($query);
-$param = array(":empcode" => $empCode,":datefrom" => $dtFrom,":dateto" => $dtTo,":dfrhol1" => $dtFrom,":dthol1" => $dtTo,":dfrhol2" => $dtFrom,":dthol2" => $dtTo,);
+$param = array(":empcode" => $empCode,":datefrom" => $dtFrom,":dateto" => $dtTo,":dfrhol1" => $dtFrom,":dthol1" => $dtTo,":dfrhol2" => $dtFrom,":dthol2" => $dtTo);
 $stmt->execute($param);
 $r = $stmt->fetch();     
 

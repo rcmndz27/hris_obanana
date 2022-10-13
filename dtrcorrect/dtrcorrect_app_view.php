@@ -252,10 +252,10 @@ swal({text:"You stop the cancellation of your dtr correction.",icon:"error"});
                     </div>   
                      <div class="row pb-2">
                         <div class="col-md-2">
-                            <label for="Attachment" id="LabelAttachment">Attachment:</label>
+                            <label for="Attachment" id="LabelAttachment">Attachment:<span class="req">*</span></label>
                         </div>
                         <div class="col-md-10">
-                            <input type="file" name="attachment" id="attachment" accept=".pdf,.jpg,.png" onChange="GetAttachFile()">
+                            <input type="file" class="inputtext" name="attachment" id="attachment" accept=".pdf,.jpg,.png" onChange="GetAttachFile()">
                         </div>
                     </div>                                             
             </div>
