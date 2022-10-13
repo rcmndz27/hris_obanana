@@ -27,7 +27,7 @@
         $cmp = $resulty['company'];
         $subemp = strlen($cmp);
         
-        $query = 'EXEC hrissys_test.dbo.xp_attendance_portal :emp_code,:startDate,:endDate';
+        $query = 'EXEC xp_attendance_portal :emp_code,:startDate,:endDate';
         $param = array(":emp_code" => substr($empcode,$subemp), ":startDate" => $dateStart, ":endDate" => $dateEnd );
         $stmt =$connL->prepare($query);
         $stmt->execute($param);

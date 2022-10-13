@@ -24,7 +24,7 @@ Class EmployeeAttendance{
         {
 
             $param = array(":startDate" => $dateFrom, ":endDate" => $dateTo );
-            $query = 'EXEC hrissys_test.dbo.xp_all_attendance_portal :startDate,:endDate';
+            $query = 'EXEC xp_all_attendance_portal :startDate,:endDate';
             $stmt =$connL->prepare($query);
             $stmt->execute($param);
             $result = $stmt->fetch();
@@ -32,7 +32,7 @@ Class EmployeeAttendance{
 
 
             $param = array(":emp_ssn" => $empCodeParam, ":startDate" => $dateFrom, ":endDate" => $dateTo );
-            $query = 'EXEC hrissys_test.dbo.xp_attendance_portal :emp_ssn,:startDate,:endDate';
+            $query = 'EXEC xp_attendance_portal :emp_ssn,:startDate,:endDate';
             $stmt =$connL->prepare($query);
             $stmt->execute($param);
             $result = $stmt->fetch();
