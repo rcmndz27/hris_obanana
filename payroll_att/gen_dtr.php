@@ -5,12 +5,12 @@ function GenDtr(){
 
            
     global $connL;
-    global $dbConnection;
+    global $connL;
 
-    $cmd2 = $connL->prepare('EXEC hrissys_test.dbo.LoadEmployeeDTROBNDetails');
+    $cmd2 = $connL->prepare('EXEC LoadEmployeeDTROBNDetails');
     $cmd2->execute();
 
-    $cmd = $dbConnection->prepare('EXEC hrissys_dev.dbo.LoadEmployeeDTRDetails');
+    $cmd = $connL->prepare('EXEC LoadEmployeeDTRDetails');
     $cmd->execute();
                                        
 }

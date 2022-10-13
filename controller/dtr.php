@@ -12,7 +12,7 @@
         public function GetAttendanceList($dateStart, $dateEnd, $empcode){
 
         global $connL;
-        global $dbConnection;
+        global $connL;
 
         $totalWork = 0;
         $totalLate = 0;
