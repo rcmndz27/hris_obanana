@@ -316,7 +316,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewOtHistoryModal('.$otid.')" title="View Logs">
                                 <i class="fas fa-history"></i>
                             </button>                           
-                            <button type="button" id="clv" class="btn btn-danger btn-sm" onclick="cancelOvertime('.$otid.','.$empcode.')" title="Cancel Overtime">
+                            <button type="button" id="clv'.$result['rowdy'].'" class="btn btn-danger btn-sm" onclick="cancelOvertime('.$otid.','.$empcode.')" title="Cancel Overtime">
                                 <i class="fas fa-ban"></i>
                             </button>
                             </td>';

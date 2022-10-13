@@ -51,78 +51,78 @@
 <script type="text/javascript">
 
 
-function viewdtrcorrectModal(dtrcdate,timein,timeout,rmrks,stts,approver,attachment){
+    function viewdtrcorrectModal(dtrcdate,timein,timeout,rmrks,stts,approver,attachment){
 
-$('#viewdtrcorrectModal').modal('toggle');
-document.getElementById('dtrcdate').value =  dtrcdate;   
-document.getElementById('timein').value =  timein;  
-document.getElementById('timeout').value =  timeout;  
-document.getElementById('rmrks').value =  rmrks;  
-document.getElementById('stts').value =  stts; 
-document.getElementById('approver').value =  approver;                          
+        $('#viewdtrcorrectModal').modal('toggle');
+        document.getElementById('dtrcdate').value =  dtrcdate;   
+        document.getElementById('timein').value =  timein;  
+        document.getElementById('timeout').value =  timeout;  
+        document.getElementById('rmrks').value =  rmrks;  
+        document.getElementById('stts').value =  stts; 
+        document.getElementById('approver').value =  approver;                          
         if(!attachment){
             $('#viewattachment').hide();
         }else{
             $('#viewattachment').show();
             document.getElementById('viewattachment').setAttribute('href','../uploads/'+attachment);
         }
-}
+    }
 
-function viewdtrcorrectHistoryModal(lvlogid)
-{
-$('#viewdtrcorrectHistoryModal').modal('toggle');
-var url = "../dtrcorrect/dtrcorrect_viewlogs.php";
-var lvlogid = lvlogid;
+    function viewdtrcorrectHistoryModal(lvlogid)
+    {
+        $('#viewdtrcorrectHistoryModal').modal('toggle');
+        var url = "../dtrcorrect/dtrcorrect_viewlogs.php";
+        var lvlogid = lvlogid;
 
-$.post (
-url,
-{
-_action: 1,
-lvlogid: lvlogid             
-},
-function(data) { $("#contents2").html(data).show(); }
-);
-}
+        $.post (
+            url,
+            {
+                _action: 1,
+                lvlogid: lvlogid             
+            },
+            function(data) { $("#contents2").html(data).show(); }
+            );
+    }
 
 function canceldtrcorrect(lvid,empcd)
 {
 
-var url = "../dtrcorrect/canceldtrcorrectProcess.php";  
-var dtrcorrectid = lvid;   
-var emp_code = empcd;   
-swal({
-title: "Are you sure?",
-text: "You want to cancel this dtr correction?",
-icon: "warning",
-buttons: true,
-dangerMode: true,
-})
-.then((cnclDTR) => {
-if (cnclDTR) {
-$.post (
-url,
-{
-choice: 1,
-dtrcorrectid:dtrcorrectid,
-emp_code:emp_code
-},
-function(data) { 
+    var url = "../dtrcorrect/canceldtrcorrectProcess.php";  
+    var dtrcorrectid = lvid;   
+    var emp_code = empcd;   
+    swal({
+        title: "Are you sure?",
+        text: "You want to cancel this dtr correction?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((cnclDTR) => {
+        if (cnclDTR) {
+            $.post (
+                url,
+                {
+                    choice: 1,
+                    dtrcorrectid:dtrcorrectid,
+                    emp_code:emp_code
+                },
+                function(data) { 
 // console.log(data);
 swal({
-title: "Oops!", 
-text: "Successfully cancelled dtr correction!", 
-type: "info",
-icon: "info",
+    title: "Oops!", 
+    text: "Successfully cancelled dtr correction!", 
+    type: "info",
+    icon: "info",
 }).then(function() {
-document.getElementById('st'+dtrcorrectid).innerHTML = 'CANCELLED';
-document.querySelector('#clv').remove();
+    document.getElementById('st'+dtrcorrectid).innerHTML = 'CANCELLED';
+    $('#clv'+dtrcorrectid).hide();
 });  
 }
 );
-} else {
-swal({text:"You stop the cancellation of your dtr correction.",icon:"error"});
-}
-});
+        } else {
+            swal({text:"You stop the cancellation of your dtr correction.",icon:"error"});
+        }
+    });
 }
 
 </script>

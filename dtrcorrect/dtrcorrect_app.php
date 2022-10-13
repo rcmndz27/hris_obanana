@@ -296,7 +296,7 @@ public function GetAlldtrcorrectAppHistory($date_from,$date_to,$status){
                 <button type="button" class="btn btn-warning btn-sm" onclick="viewdtrcorrectHistoryModal('.$dtrcid.')" title="View Logs">
                     <i class="fas fa-history"></i>
                 </button>                           
-                <button type="button" id="clv" class="btn btn-danger btn-sm" onclick="canceldtrcorrect('.$dtrcid.','.$empcode.')" title="Cancel DTR Correction">
+                <button type="button" id="clv'.$result['rowdy'].'" class="btn btn-danger btn-sm" onclick="canceldtrcorrect('.$dtrcid.','.$empcode.')" title="Cancel DTR Correction">
                     <i class="fas fa-ban"></i>
                 </button>
                 </td>';

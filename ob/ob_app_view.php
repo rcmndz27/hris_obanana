@@ -92,6 +92,7 @@
          var url = "../ob/cancelObProcess.php";  
          var obid = lvid;   
          var emp_code = empcd;   
+         
             swal({
                   title: "Are you sure?",
                   text: "You want to cancel this work from home?",
@@ -117,7 +118,7 @@
                                     icon: "info",
                                     }).then(function() {
                                         document.getElementById('st'+obid).innerHTML = 'CANCELLED';
-                                        document.querySelector('#clv').remove();
+                                         $('#clv'+obid).hide();
                                     });  
                             }
                         );

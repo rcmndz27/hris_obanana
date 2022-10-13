@@ -450,7 +450,7 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewLeaveHistoryModal('.$leaveid.')" title="View Logs">
                                 <i class="fas fa-history"></i>
                             </button>                           
-                            <button type="button" id="clv" class="btn btn-danger btn-sm" onclick="cancelLeave('.$leaveid.','.$empcode.')" title="Cancel Leave">
+                            <button type="button" id="clv'.$result['rowid'].'" class="btn btn-danger btn-sm" onclick="cancelLeave('.$leaveid.','.$empcode.')" title="Cancel Leave">
                                 <i class="fas fa-ban"></i>
                             </button>
                             </td>';

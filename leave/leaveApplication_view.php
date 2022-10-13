@@ -129,7 +129,8 @@ function cancelLeave(lvid,empcd)
 
  var url = "../leave/cancelLeaveProcess.php";  
  var leaveid = lvid;   
- var emp_code = empcd;   
+ var emp_code = empcd; 
+
     swal({
           title: "Are you sure?",
           text: "You want to cancel this leave?",
@@ -155,7 +156,7 @@ function cancelLeave(lvid,empcd)
                             icon: "info",
                             }).then(function() {
                                 document.getElementById('st'+leaveid).innerHTML = 'CANCELLED';
-                                document.querySelector('#clv').remove();
+                                $('#clv'+leaveid).hide();
                             });  
                     }
                 );

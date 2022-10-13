@@ -87,12 +87,12 @@
         );
     }
 
-    function cancelWfh(lvid,empcd)
-        {
+    function cancelWfh(lvid,empcd) {
 
      var url = "../wfhome/cancelWfhProcess.php";  
      var wfhid = lvid;   
-     var emp_code = empcd;   
+     var emp_code = empcd;  
+     
         swal({
               title: "Are you sure?",
               text: "You want to cancel this work from home?",
@@ -118,7 +118,9 @@
                         icon: "info",
                         }).then(function() {
                             document.getElementById('st'+wfhid).innerHTML = 'CANCELLED';
-                            document.querySelector('#clv').remove();
+                             $('#clv'+wfhid).hide();
+                             $('#tin'+wfhid).hide();
+                             $('#tout'+wfhid).hide();
                         });  
                 }
             );

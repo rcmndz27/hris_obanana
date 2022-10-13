@@ -96,6 +96,7 @@
          var url = "../overtime/cancelOvertimeProcess.php";  
          var otid = lvid;   
          var emp_code = empcd;   
+
             swal({
                   title: "Are you sure?",
                   text: "You want to cancel this overtime?",
@@ -121,7 +122,7 @@
                     icon: "info",
                     }).then(function() {
                         document.getElementById('st'+otid).innerHTML = 'CANCELLED';
-                        document.querySelector('#clv').remove();
+                        $('#clv'+otid).hide();
                     });  
                     }
                 );
