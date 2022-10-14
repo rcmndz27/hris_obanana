@@ -304,7 +304,7 @@
                                 <div class="col-lg-8">
                                     <div class="form-group">
                                         <label class="control-label" for="remarkv">Description</label>
-                                        <input type="text" id="remarkv" name="remarkv" class="form-control" readonly>
+                                <textarea class="form-control inputtext" id="remarkv" name="remarkv" rows="4" cols="50" disabled></textarea >                                        
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -624,3 +624,14 @@ function limitPagging(){
 
 
 <?php include("../_footer.php");?>
+
+
+<!-- <button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewOtModal('10-13-2022','Regular Overtime Pay','06:33 PM','10:00 PM','asd asd ','3.4500000000000002','0.0','n/a','CANCELLED','Geia Gamad','profpic.png')"
+ title="View Overtime">
+                                <i class="fas fa-binoculars"></i>
+                            </button>
+
+
+                            <button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewOtModal('10-13-2022','Regular Night Differential Pay','10:00 PM','11:33 PM','Yes I know. I didnt personally downvote it; I just observed in what way it doesnt answer the question. What you wrote - that would be a complete answer: showing a beginner how in php one extends from getting one character to multiple characters. Useful addition to the Qamp;A - thank you','1.55','0.0','n/a','CANCELLED','Geia Gamad','')" title="View Overtime">
+                                <i class="fas fa-binoculars"></i>
+                            </button> -->

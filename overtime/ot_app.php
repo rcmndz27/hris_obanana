@@ -285,11 +285,12 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
 
         if($result){
             do { 
+
                 $otdate = "'".date('m-d-Y', strtotime($result['ot_date']))."'";
                 $ottype = "'".(isset($result['ot_type']) ? $result['ot_type'] : 'n/a')."'";
                 $otstartdtime = "'".date('h:i A', strtotime($result['ot_start_dtime']))."'";
                 $otenddtime = "'".date('h:i A', strtotime($result['ot_end_dtime']))."'";
-                $remark = "'".(isset($result['remarks']) ? $result['remarks'] : 'n/a')."'";
+                $remark = "'".(isset($result['remarks']) ?  trim(str_replace("'",'',$result['remarks'])) : 'n/a')."'";
                 $otreqhrs = "'".$result['ot_req_hrs']."'";
                 $otrenhrs = "'".$result['ot_ren_hrs']."'";
                 $appr_over = "'".$result['approver']."'";
@@ -298,6 +299,12 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
                 $otid = "'".$result['rowdy']."'";
                 $empcode = "'".$result['emp_code']."'";
                 $atch = "'".$result['attachment']."'";
+                $lenr = strlen($result['remarks']);
+                if($lenr > 20){
+                    $rmrks = substr($result['remarks'], 0, 20).'....';
+                }else{
+                    $rmrks = $result['remarks'];
+                }
                 echo '
                 <tr>
                 <td>' . date('F d, Y', strtotime($result['ot_date'])) . '</td>
@@ -306,7 +313,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
                 <td>' . date('h:i A', strtotime($result['ot_end_dtime'])) . '</td>
                 <td>' . round($result['ot_req_hrs'],2) . '</td> 
                 <td>' . round($result['ot_ren_hrs'],2) . '</td>
-                <td>' . wordwrap($result['remarks'], 20, "<br>", true) . '</td>
+                <td>' . $rmrks.'</td>
                 <td id="st'.$result['rowdy'].'">' . $result['stats'] . '</td>';
                 if($result['stats'] == 'PENDING' || $result['stats'] == 'APPROVED'){
                 echo'
