@@ -27,7 +27,7 @@ Class OtApp{
                              <option value="5">5</option>
                              <option value="10">10</option>
                              <option value="15">15</option>
-                             <option value="20">20</option>
+                             <option value="35">35</option>
                              <option value="50">50</option>
                              <option value="70">70</option>
                              <option value="100">100</option>
@@ -137,7 +137,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
                              <option value="5">5</option>
                              <option value="10">10</option>
                              <option value="15">15</option>
-                             <option value="20">20</option>
+                             <option value="35">35</option>
                              <option value="50">50</option>
                              <option value="70">70</option>
                              <option value="100">100</option>
@@ -244,7 +244,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
                              <option value="5">5</option>
                              <option value="10">10</option>
                              <option value="15">15</option>
-                             <option value="20">20</option>
+                             <option value="35">35</option>
                              <option value="50">50</option>
                              <option value="70">70</option>
                              <option value="100">100</option>
@@ -291,7 +291,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
                 $otstartdtime = "'".date('h:i A', strtotime($result['ot_start_dtime']))."'";
                 $otenddtime = "'".date('h:i A', strtotime($result['ot_end_dtime']))."'";
                 $remarkz = "'".(isset($result['remarks']) ?  trim(str_replace("'",'',$result['remarks'])) : 'n/a')."'";
-                $remark = preg_replace( "/\r|\n/", "", $remarkz);
+                $remark = preg_replace( "/\r|\n/", "", $remarkz );
                 $otreqhrs = "'".$result['ot_req_hrs']."'";
                 $otrenhrs = "'".$result['ot_ren_hrs']."'";
                 $appr_over = "'".$result['approver']."'";
@@ -301,8 +301,8 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
                 $empcode = "'".$result['emp_code']."'";
                 $atch = "'".$result['attachment']."'";
                 $lenr = strlen($result['remarks']);
-                if($lenr > 20){
-                    $rmrks = substr($result['remarks'], 0, 20).'....';
+                if($lenr > 35){
+                    $rmrks = substr($result['remarks'], 0, 35).'....';
                 }else{
                     $rmrks = $result['remarks'];
                 }
