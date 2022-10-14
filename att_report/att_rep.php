@@ -69,7 +69,7 @@
 
             $total_lates = 0;
 
-            $query = 'EXEC hrissys_test.dbo.xp_attendance_portal_late :startDate,:endDate';
+            $query = 'EXEC xp_attendance_portal_late :startDate,:endDate';
             $param = array(":startDate" => $dateStart, ":endDate" => $dateEnd);
             $stmt =$connL->prepare($query);
             $stmt->execute($param);
@@ -123,7 +123,7 @@
             global $connL;
             $total_ut = 0;
 
-            $query = 'EXEC hrissys_test.dbo.xp_attendance_portal_ut :startDate,:endDate';
+            $query = 'EXEC xp_attendance_portal_ut :startDate,:endDate';
             $param = array(":startDate" => $dateStart, ":endDate" => $dateEnd);
             $stmt =$connL->prepare($query);
             $stmt->execute($param);
@@ -176,7 +176,7 @@
             $total_nologin = 0;
             $total_nologout = 0;
 
-            $query = 'EXEC hrissys_test.dbo.xp_attendance_portal_nologs :startDate,:endDate';
+            $query = 'EXEC xp_attendance_portal_nologs :startDate,:endDate';
             $param = array(":startDate" => $dateStart, ":endDate" => $dateEnd);
             $stmt =$connL->prepare($query);
             $stmt->execute($param);

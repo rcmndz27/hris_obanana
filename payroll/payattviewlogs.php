@@ -26,7 +26,7 @@
             $param = array(":emp_ssn" => $emp_code, ":startDate" => $dateFrom, ":endDate" => $dateTo );
         }
 
-        $query = 'EXEC hrissys_test.dbo.xp_attendance_portal :emp_ssn,:startDate,:endDate';
+        $query = 'EXEC xp_attendance_portal :emp_ssn,:startDate,:endDate';
         $stmt =$connL->prepare($query);
         $stmt->execute($param);
         $result = $stmt->fetch();
