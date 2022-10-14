@@ -290,7 +290,8 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
                 $ottype = "'".(isset($result['ot_type']) ? $result['ot_type'] : 'n/a')."'";
                 $otstartdtime = "'".date('h:i A', strtotime($result['ot_start_dtime']))."'";
                 $otenddtime = "'".date('h:i A', strtotime($result['ot_end_dtime']))."'";
-                $remark = "'".(isset($result['remarks']) ?  trim(str_replace("'",'',$result['remarks'])) : 'n/a')."'";
+                $remarkz = "'".(isset($result['remarks']) ?  trim(str_replace("'",'',$result['remarks'])) : 'n/a')."'";
+                $remark = trim(preg_replace('/\s\s+/', ' ', $remarkz));
                 $otreqhrs = "'".$result['ot_req_hrs']."'";
                 $otrenhrs = "'".$result['ot_ren_hrs']."'";
                 $appr_over = "'".$result['approver']."'";
