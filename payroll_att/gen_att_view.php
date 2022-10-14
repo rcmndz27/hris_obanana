@@ -286,7 +286,7 @@ else
                         type: "success",
                         icon: "success",
                     }).then(function() {                        
-                        location.href = '../payroll_att/gen_att_view.php';
+                        location.href = '../payroll/payroll_view.php';
                     });  
                 });
         } else {
