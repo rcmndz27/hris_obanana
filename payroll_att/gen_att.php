@@ -8,7 +8,7 @@ function GenAttendance($eMplogName,$pyrollco_from,$pyrollco_to){
 
     // ATTENDANCE
 
-    $cmd = $connL->prepare('EXEC hrissys_test.dbo.insert_xp_attendance_portal :emp_name,:pay_from,:pay_to');
+    $cmd = $connL->prepare('EXEC insert_xp_attendance_portal :emp_name,:pay_from,:pay_to');
     $cmd->bindValue(':emp_name',$eMplogName);
     $cmd->bindValue(':pay_from',$pyrollco_from);
     $cmd->bindValue(':pay_to',$pyrollco_to);
@@ -47,7 +47,7 @@ function GenAttendance($eMplogName,$pyrollco_from,$pyrollco_to){
 
     // WORK FROM HOME
 
-    $cmdwfh = $connL->prepare('EXEC hrissys_test.dbo.GenerateWfhToAttendance :pay_from,:pay_to,:eMplogName');
+    $cmdwfh = $connL->prepare('EXEC GenerateWfhToAttendance :pay_from,:pay_to,:eMplogName');
     $cmdwfh->bindValue(':pay_from',$pyrollco_from);
     $cmdwfh->bindValue(':pay_to',$pyrollco_to);
     $cmdwfh->bindValue(':eMplogName',$eMplogName);
@@ -72,7 +72,7 @@ function GenAttendance($eMplogName,$pyrollco_from,$pyrollco_to){
 
     // OFFIICIAL BUSINESS 
 
-    $cmdob = $connL->prepare('EXEC hrissys_test.dbo.GenerateOBToAttendance :pay_from,:pay_to,:eMplogName');
+    $cmdob = $connL->prepare('EXEC GenerateOBToAttendance :pay_from,:pay_to,:eMplogName');
     $cmdob->bindValue(':pay_from',$pyrollco_from);
     $cmdob->bindValue(':pay_to',$pyrollco_to);
     $cmdob->bindValue(':eMplogName',$eMplogName);
@@ -97,7 +97,7 @@ function GenAttendance($eMplogName,$pyrollco_from,$pyrollco_to){
 
     // LEAVE
 
-    $cmdlv = $connL->prepare('EXEC hrissys_test.dbo.GenerateLeaveToAttendance :pay_from,:pay_to,:eMplogName');
+    $cmdlv = $connL->prepare('EXEC GenerateLeaveToAttendance :pay_from,:pay_to,:eMplogName');
     $cmdlv->bindValue(':pay_from',$pyrollco_from);
     $cmdlv->bindValue(':pay_to',$pyrollco_to);
     $cmdlv->bindValue(':eMplogName',$eMplogName);
@@ -124,12 +124,12 @@ function GenAttendance($eMplogName,$pyrollco_from,$pyrollco_to){
 
     //OVERTIME 
 
-    $cmdot2 = $connL->prepare('EXEC hrissys_test.dbo.GenerateActualOtRendered :pay_from,:pay_to');
+    $cmdot2 = $connL->prepare('EXEC GenerateActualOtRendered :pay_from,:pay_to');
     $cmdot2->bindValue(':pay_from',$pyrollco_from);
     $cmdot2->bindValue(':pay_to',$pyrollco_to);
     $cmdot2->execute();
 
-    $cmdot = $connL->prepare('EXEC hrissys_test.dbo.GenerateOTToAttendance :pay_from,:pay_to');
+    $cmdot = $connL->prepare('EXEC GenerateOTToAttendance :pay_from,:pay_to');
     $cmdot->bindValue(':pay_from',$pyrollco_from);
     $cmdot->bindValue(':pay_to',$pyrollco_to);
     $cmdot->execute();
@@ -159,7 +159,7 @@ function GenEmpAttendance($eMplogName,$pyrollco_from,$pyrollco_to){
            
     global $connL;
 
-    $cmd = $connL->prepare('EXEC hrissys_test.dbo.insert_xp_attendance_portal :emp_name,:pay_from,:pay_to');
+    $cmd = $connL->prepare('EXEC insert_xp_attendance_portal :emp_name,:pay_from,:pay_to');
     $cmd->bindValue(':emp_name',$eMplogName);
     $cmd->bindValue(':pay_from',$pyrollco_from);
     $cmd->bindValue(':pay_to',$pyrollco_to);
