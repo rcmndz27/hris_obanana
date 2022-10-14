@@ -431,7 +431,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
         $result = $stmt->execute($param);
         echo $result;
 
-        $query_pay = $connL->prepare('EXEC hrissys_test.dbo.GenerateOTType :ot_date,:empCode');
+        $query_pay = $connL->prepare('EXEC GenerateOTType :ot_date,:empCode');
         $query_pay->bindValue(':ot_date',$otDate);
         $query_pay->bindValue(':empCode',$empCode);
         $query_pay->execute(); 
@@ -458,7 +458,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
         $resultt = $stmtt->execute($paramt);
         echo $resultt;        
 
-        $query_payt = $connL->prepare('EXEC hrissys_test.dbo.GenerateOTNDType :ot_date,:empCode');
+        $query_payt = $connL->prepare('EXEC GenerateOTNDType :ot_date,:empCode');
         $query_payt->bindValue(':ot_date',$otDate);
         $query_payt->bindValue(':empCode',$empCode);
         $query_payt->execute(); 
@@ -491,7 +491,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
         $resultt = $stmtt->execute($paramt);
         echo $resultt;        
 
-        $query_payt = $connL->prepare('EXEC hrissys_test.dbo.GenerateOTNDType :ot_date,:empCode');
+        $query_payt = $connL->prepare('EXEC GenerateOTNDType :ot_date,:empCode');
         $query_payt->bindValue(':ot_date',$otDate);
         $query_payt->bindValue(':empCode',$empCode);
         $query_payt->execute(); 
@@ -523,7 +523,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
         $result = $stmt->execute($param);
         echo $result;   
 
-        $query_pay = $connL->prepare('EXEC hrissys_test.dbo.GenerateOTType :ot_date,:empCode');
+        $query_pay = $connL->prepare('EXEC GenerateOTType :ot_date,:empCode');
         $query_pay->bindValue(':ot_date',$otDate);
         $query_pay->bindValue(':empCode',$empCode);
         $query_pay->execute(); 
@@ -604,7 +604,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
         $resultUI = $stmtUI->execute($paramUI);
         echo $resultUI;      
 
-        $query_payUI = $connL->prepare('EXEC hrissys_test.dbo.GenerateOTRNDNType :ot_date,:empCode,:res_id');
+        $query_payUI = $connL->prepare('EXEC GenerateOTRNDNType :ot_date,:empCode,:res_id');
         $query_payUI->bindValue(':ot_date',$otDate);
         $query_payUI->bindValue(':empCode',$empCode);
         $query_payUI->bindValue(':res_id',$res_id);
@@ -612,7 +612,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
                 
     }else if(($hi_start >= '22:00' or $hi_start < '06:00') and ($hi_end >= '22:00' or $hi_end < '06:00')){
 
-        $query_payio = $connL->prepare('EXEC hrissys_test.dbo.GenerateOTRNDType :res_id');
+        $query_payio = $connL->prepare('EXEC GenerateOTRNDType :res_id');
         $query_payio->bindValue(':res_id',$res_id);
         $query_payio->execute(); 
 
