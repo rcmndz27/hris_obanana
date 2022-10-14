@@ -937,7 +937,7 @@
                 $data = [];
                
 
-                $sql = $connL->prepare(@"SELECT pyrollco_from,pyrollco_to,rowid from mf_pyrollco where pyrollco_from not in (select period_from from att_summary) and pyrollco_from not in (select period_to from att_summary) ORDER BY period_from DESC");
+                $sql = $connL->prepare(@"SELECT pyrollco_from,pyrollco_to,rowid from mf_pyrollco where pyrollco_from not in (select period_from from att_summary) and pyrollco_from not in (select period_to from att_summary) ORDER BY pyrollco_from DESC");
                 $sql->execute();
 
                 if ($type == "ungenpco")
