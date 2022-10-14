@@ -687,7 +687,7 @@ swal({text:"You cancel your time out!",icon:"warning"});
 
            <div class="row">  
     <!-- All Act Emp-->
-    <div class="col-xl-2 col-md-3 mb-4">
+    <div class="col-xl-2 col-md-6 mb-4">
         <div class="card border-left-primary shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
@@ -1008,14 +1008,14 @@ swal({text:"You cancel your time out!",icon:"warning"});
     <div class="col-md-3">
     <div class="card">
         <div class="d-flex flex-row align-items-center justify-content-between">
-            <h5 class="m-0 font-weight-bold">Legend: 
+            <h6 class="m-0 font-weight-bold">Legend: 
                 <div class="onsite"></div><i class="ilgnd">Onsite</i>
                 <div class="wfhome"></div><i class="ilgnd">WFH</i>
                 <div class="obsched"></div><i class="ilgnd">OB</i>
                 <div class="leaveschd"></div><i class="ilgnd">Leave</i>
                 <div class="holisched"></div><i class="ilgnd">Holiday</i>
                 <div class="noinnout"></div><i class="ilgnd">No In/No Out</i>
-            </h5>
+            </h6>
               
         </div>
     </div>
