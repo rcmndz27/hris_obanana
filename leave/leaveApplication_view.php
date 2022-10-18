@@ -55,6 +55,22 @@
             $totalVal = [];
         }
 
+        $queryd = "EXEC disableddates :empcode";
+        $paramd = array(":empcode" => $_SESSION['userid']);
+        $stmtd =$connL->prepare($queryd);
+        $stmtd->execute($paramd);
+        $rsd = $stmtd->fetch();
+
+        if(!empty($rsd)){
+            $disdate = [];
+            do { 
+                array_push($disdate,$rsd['punch_date']);
+                
+            } while ($rsd = $stmtd->fetch());
+        }else{
+            $disdate = [];
+        }        
+
     }    
 ?>
 
@@ -633,28 +649,196 @@ function cancelLeave(lvid,empcd)
 
 <script type="text/javascript">
 
-             $('#dateFrom').change(function(){
+   var allhaftday = 1;
 
+
+    function CheckInput() {
+
+        var inputValues = [];
+
+        inputValues = [
+            
+            $('#leaveDesc'),
+            $('#dateFrom'),
+            $('#dateTo'),
+            $('#medicalfiles')
+            
+        ];
+
+        var result = (CheckInputValue(inputValues) === '0') ? true : false;
+        return result;
+    }
+
+    $('#Submit').click(function(){
+             
+                var leave_pay ;
+
+                if($('#leaveType').val() === 'Sick Leave' && $('#leave_pay1:checked').val() === 'WithPay'){
+                    leave_pay = 'Sick Leave';
+                }else if($('#leaveType').val() === 'Sick Leave' && $('#leave_pay2:checked').val() === 'WithoutPay'){
+                    leave_pay = 'Sick Leave without Pay';
+                }else if($('#leaveType').val() === 'Vacation Leave' && $('#leave_pay1:checked').val() === 'WithPay'){
+                    leave_pay = 'Vacation Leave';
+                }else if($('#leaveType').val() === 'Vacation Leave' && $('#leave_pay2:checked').val() === 'WithoutPay'){
+                    leave_pay = 'Vacation Leave without Pay';
+                }else{
+                    leave_pay = $('#leaveType').val();
+              
+                }   
+
+                  var checkBox = document.getElementById("halfDay");
+                  if (checkBox.checked == true){
+                    leaveCount = 0.5;
+                  } else {
+                     leaveCount = 1.0;
+                  }
+                  
                 var dte = $('#dateFrom').val();
-                var disableDates  =  <?php echo json_encode($totalVal) ;?>;
-
-                if(disableDates.includes(dte)){
-                    document.getElementById('dateFrom').value = '';
-                }
-
-            });
-
-             $('#dateTo').change(function(){
-
                 var dte_to = $('#dateTo').val();
-                var disableDates  =  <?php echo json_encode($totalVal) ;?>;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                dateArr = []; 
 
+                var start = new Date(dte);
+                var date = new Date(dte_to);
+                var end = date.setDate(date.getDate() + 1);
 
-                if(disableDates.includes(dte_to)){
-                    document.getElementById('dateTo').value = '';
+                while(start < end){
+                   dateArr.push(moment(start).format('YYYY-MM-DD'));
+                   var newDate = start.setDate(start.getDate() + 1);
+                   start = new Date(newDate);  
                 }
 
-            });
+                var ite_date = dateArr.length === 0  ? dte : dateArr ;
+                var disableDates  =  <?php echo json_encode($disdate) ;?>;
+
+                var arr2 = Object.values(ite_date);
+                var arr1 = Object.values(disableDates);
+
+                arr2 = arr2.reduce(function (prev, value) {
+
+                    var isDuplicate = false;
+                    for (var i = 0; i < arr1.length; i++) {
+                        if (value == arr1[i]) {
+                            isDuplicate = true;
+                            break;
+                        }
+                    }
+                      
+                    if (!isDuplicate) {
+                        prev.push(value);
+                    }
+                       
+                    return prev;
+                        
+                }, []);
+
+                var itdate = arr2;
+
+                // console.log(JSON.stringify(arr2));
+                // return false;
+
+                var e_req = $('#e_req').val();
+                var n_req = $('#n_req').val();
+                var e_appr = $('#e_appr').val();
+                var n_appr = $('#n_appr').val();
+
+            if (CheckInput() === true) {
+
+                param = {
+                    "Action":"ApplyLeave",
+                    "leavetype": leave_pay,
+                    "datebirth": $('#dateBirth').val(),
+                    "datestartmaternity": $('#dateStartMaternity').val(),
+                    "leaveDate": itdate,
+                    "leavedesc" : $('#leaveDesc').val(),
+                    "medicalfile": pdfFile,
+                    "leaveCount": leaveCount,
+                    "allhalfdayMark": allhaftday,
+                    "e_req": e_req,
+                    "n_req": n_req,
+                    "e_appr": e_appr,
+                    "n_appr": n_appr
+    
+                };
+                
+                param = JSON.stringify(param);
+
+                // console.log(param);
+                // return false;
+
+                    if($('#dateTo').val() >= $('#dateFrom').val()){
+                        swal({
+                          title: "Are you sure?",
+                          text: "You want to apply this leave?",
+                          icon: "success",
+                          buttons: true,
+                          dangerMode: true,
+                        })
+                        .then((applyLeave) => {
+                            document.getElementById("myDiv").style.display="block";
+                          if (applyLeave) {
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "../leave/leaveApplicationProcess.php",
+                                        data: {data:param} ,
+                                        success: function (data){
+                                            // console.log("success: "+ data);
+                                                    swal({
+                                                    title: "Success!", 
+                                                    text: "Successfully added leave details!", 
+                                                    type: "success",
+                                                    icon: "success",
+                                                    }).then(function() {
+                                                        location.href = '../leave/leaveApplication_view.php';
+                                                    });
+                                        },
+                                        error: function (data){
+                                            // console.log("error: "+ data);    
+                                        }
+                                    });//ajax
+                          } else {
+                            document.getElementById("myDiv").style.display="none";
+                            swal({text:"You cancel your leave!",icon:"error"});
+                          }
+                        });
+                    
+                        }else{
+                            swal({text:"Leave Date TO must be greater than Leave Date From!",icon:"error"});
+                        }
+
+
+            }else{
+                swal({text:"Kindly fill up blank fields.",icon:"warning"});
+            }
+
+    
+        
+    });
+
+
+
+     $('#dateFrom').change(function(){
+
+        var dte = $('#dateFrom').val();
+        var disableDates  =  <?php echo json_encode($totalVal) ;?>;
+
+        if(disableDates.includes(dte)){
+            document.getElementById('dateFrom').value = '';
+        }
+
+    });
+
+     $('#dateTo').change(function(){
+
+        var dte_to = $('#dateTo').val();
+        var disableDates  =  <?php echo json_encode($totalVal) ;?>;
+
+
+        if(disableDates.includes(dte_to)){
+            document.getElementById('dateTo').value = '';
+        }
+
+    });
 
 
      function updateLeaveModal(leaveid){

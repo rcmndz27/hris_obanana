@@ -404,13 +404,11 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
         $daydate = date_format($date,"l");
         $wdays = array('Monday','Tuesday','Wednesday','Thursday','Friday');
 
-        // echo $otEndDtime;
+        // echo $otsd_d;
         // echo  "\r\n";
+        // echo  $otend_d;
         // echo  "\r\n";
-        // echo  $total_fxs;
-        // echo  "\r\n";
-        // echo  $total_fxe; 
-           
+        // exit();
 
     if(($otsd_dt < '22:00' and $otsd_dt > '06:00') and ($otend_dt > '22:00' or $otend_dt < '06:00') and in_array($daydate,$wdays)){
 
@@ -428,8 +426,8 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
         ":datefiled"=>date('m-d-Y'),
         ":empReportingTo" => $empReportingTo,
         ":otStartDtime" => $otsd_d,
-        ":otEndDtime"=> $fixed_date,
-        ":otReqHrs"=> $total_fxs,
+        ":otEndDtime"=> $otend_d,
+        ":otReqHrs"=> $total,
         ":remarks"=> $remarks,
         ":attachment"=> $attachment,
         ":audituser" => $empCode,
@@ -539,22 +537,22 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
     }
 
 
-    $resquery = "SELECT * FROM tr_overtime WHERE ot_date = :otDate and emp_code = :empCode and status = 1 and ot_type like '%Rest Day%'";
-    $resparam = array(':empCode' => $empCode,':otDate' => $otDate);
-    $resstmt =$connL->prepare($resquery);
-    $resstmt->execute($resparam);
-    $resresult = $resstmt->fetch();
-    $res_ot = round($resresult['ot_req_hrs']);
-    $res_date = $resresult['ot_date'];
-    $res_start = $resresult['ot_start_dtime'];
-    $res_end = $resresult['ot_end_dtime'];
-    $res_id = $resresult['rowid'];
-    $rot_start = date('m-d-Y H:i:s', strtotime($res_start));
-    $rot_end = date('m-d-Y H:i:s', strtotime($res_end));
-    $rot_10pm = date('m-d-Y 22:00:00', strtotime($res_date));
-    $hi_start = date('H:i', strtotime($res_start));
-    $hi_end = date('H:i', strtotime($res_end));  
-  
+$resquery = "SELECT * FROM tr_overtime WHERE ot_date = :otDate and emp_code = :empCode and status = 1 and ot_type like '%Rest Day%'";
+$resparam = array(':empCode' => $empCode,':otDate' => $otDate);
+$resstmt =$connL->prepare($resquery);
+$resstmt->execute($resparam);
+$resresult = $resstmt->fetch();
+$res_ot = round($resresult['ot_req_hrs']);
+$res_date = $resresult['ot_date'];
+$res_start = $resresult['ot_start_dtime'];
+$res_end = $resresult['ot_end_dtime'];
+$res_id = $resresult['rowid'];
+$rot_start = date('m-d-Y H:i:s', strtotime($res_start));
+$rot_end = date('m-d-Y H:i:s', strtotime($res_end));
+$rot_10pm = date('m-d-Y 22:00:00', strtotime($res_date));
+$hi_start = date('H:i', strtotime($res_start));
+$hi_end = date('H:i', strtotime($res_end));  
+
 
     if($hi_start > $hi_end){
         $hienddate1 = date('Y-m-d', strtotime($res_date. ' + 1 day')); 

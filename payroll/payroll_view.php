@@ -1040,7 +1040,7 @@ function updateAtt()
                     vacation_leave_nopay: vacation_leave_nopay                    
                 },
                 function(data) {   
-    console.log(data);                                        
+    // console.log(data);                                        
         swal({
             title: "Success!", 
             text: "Successfully updated the attendance details!", 

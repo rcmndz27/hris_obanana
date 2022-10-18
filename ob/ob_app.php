@@ -262,7 +262,7 @@ Class ObApp{
                     when   status = 2 then 'APPROVED'
                     when   status = 3 then 'REJECTED'
                     when   status = 4 then 'CANCELLED' ELSE 'N/A' END) as stats,a.rowid as rowdy,b.firstname+' '+b.lastname as approver,* FROM dbo.tr_offbusiness 
-                    a left join employee_profile b on a.ob_reporting = b.emp_code where a.emp_code = :emp_code ORDER BY date_filed DESC";
+                    a left join employee_profile b on a.ob_reporting = b.emp_code where a.emp_code = :emp_code ORDER BY ob_date DESC";
         $param = array(':emp_code' => $this->employeeCode);
         $stmt =$connL->prepare($query);
         $stmt->execute($param);
