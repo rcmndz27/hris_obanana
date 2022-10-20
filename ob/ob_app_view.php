@@ -513,8 +513,8 @@ $('#Submit').click(function(){
                 
                 param = JSON.stringify(param);
 
-                console.log(param);
-                return false;
+                // console.log(param);
+                // return false;
 
                             swal({
                               title: "Are you sure?",
