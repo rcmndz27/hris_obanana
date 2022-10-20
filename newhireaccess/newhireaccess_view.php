@@ -664,7 +664,7 @@ function GetEmpImgFile() {
                                             console.log('success: ' + data);
                                                     swal({
                                                     title: "Success!", 
-                                                    text: "Successfully updated employee detailss!", 
+                                                    text: "Successfully updated employee details!", 
                                                     type: "success",
                                                     icon: "success",
                                                     }).then(function() {

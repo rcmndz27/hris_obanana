@@ -57,9 +57,13 @@
             </select>
            <?php $dd->GenerateDropDown("ddcutoff", $mf->GetAllPayCutoffReg("paycutreg")); ?>
         </div>           
-        <button type="button" id="search" class="btn btn-danger" onmousedown="javascript:deletePayReg()">
-            <i class="fas fa-backspace mr-1"></i> Delete                      
-        </button>                                      
+        <button type="button" id="search" class="btn btn-danger mr-2" onmousedown="javascript:deletePayReg()">
+            <i class="fas fa-backspace mr-1 text-white"></i> Delete                      
+        </button> 
+        <button class='btn btn-primary' id='confirm' onclick='ConfirmPayRegView()'>
+          <i class='fas fa-check-square'></i> 
+        Confirm Payroll Register
+        </button>                                             
         </div>
             <div class="row">
                 <div class="col-md-12">
@@ -76,10 +80,13 @@
 
     var a = document.getElementById("ddcutoff").value;
     var b = document.getElementById("search");
+    var c = document.getElementById("confirm");
     if (a == null || a == "") {
       document.getElementById('ddcutoff').disabled = true
       document.getElementById("search").disabled = true;
+      document.getElementById("confirm").disabled = true;
       b.style.display = 'none';
+      c.style.display = 'none';
     }else{
 
     }

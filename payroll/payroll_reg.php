@@ -7,7 +7,7 @@ class PayrollRegApplication {
            
             global $connL;
 
-$query = "SELECT *,
+$query = "SELECT *,a.emp_code as empcd,
 COALESCE((b.tot_overtime_reg * (((month_pay * 12) / 313)/8) * 1.25),0) as tot_overtime_regamt,
 COALESCE((b.night_differential * (((month_pay * 12) / 313)/8) * 1.10),0) as night_differentialamt,
 COALESCE((b.night_differential_ot * (((month_pay * 12) / 313)/8) * 1.375),0) as night_differential_otamt,
@@ -32,7 +32,7 @@ COALESCE((b.tot_overtime_sprestholiday_nightdiff * (((month_pay * 12) /313)/8) *
 FROM payroll a left join att_summary b  on RIGHT(a.emp_code, LEN(a.emp_code) - 3) = b.badge_no
 and a.date_from = b.period_from and a.date_to = b.period_to
 left join employee_leave c on a.emp_code = c.emp_code
-where payroll_status = 'R'";
+where payroll_status = 'R' ORDER BY name ASC";
 $stmt =$connL->prepare($query);
 $stmt->execute();
 $r = $stmt->fetch();  
@@ -232,7 +232,7 @@ $hdmf_er = ($r['hdmf_er'] <> '0') ?  '&#8369;'.number_format($r['hdmf_er'],2,'.'
 
     echo "<tr>".
     "<td>" . $r['name'] . "</td>".
-    "<td>" . $r['emp_code'] . "</td>".
+    "<td>" . $r['empcd'] . "</td>".
     "<td>" . $r['bank_acctno'] . "</td>".
     "<td>" . $r['bank'] . "</td>".
     "<td>" . $r['position'] . "</td>".
@@ -324,7 +324,7 @@ $hdmf_er = ($r['hdmf_er'] <> '0') ?  '&#8369;'.number_format($r['hdmf_er'],2,'.'
     echo"</tbody><tfoot>".
     "</tr><tr>".
     "<td colspan='67' class='paytop'>".
-    "<button class='conPyrll' onclick='ConfirmPayRegView()'><i class='fas fa-check-square'></i> CONFIRM PAYROLL REGISTER</button></td>".
+    "</td>".
     "</tr></tfoot>";    
 
     }else { 

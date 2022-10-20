@@ -89,7 +89,7 @@ else
             </select>
         </div>
         <div class='col-md-2' id="s15th">
-            <?php $dd->GenerateDropDown("ddcutoff", $mf->GetAllCutoffCO("payrollco")); ?>
+            <?php $dd->GenerateSingleDropDown("ddcutoff", $mf->GetAllCutoffCO("payrollco")); ?>
         </div>
         
         <div class='col-md-2' id="s30th"> 
@@ -591,7 +591,7 @@ aria-hidden="true">
         var selectElem = document.getElementById('ddcutoff');
         var index = selectElem.selectedIndex;
 
-        var ddcutoff = $(this).find(':selected').data('val');
+        var ddcutoff = $('#ddcutoff').val();
         if(ddcutoff == 0){
             var ddval = '15th';
             $("#s30th").hide();
@@ -620,7 +620,7 @@ aria-hidden="true">
     $('#Submit').click(function(){
 
         var bdno = $('#allempnames').val();
-        var cutoff = $('#ddcutoff').children("option:selected").val();
+        var cutoff = $('#ddcutoff').find(":selected").text();
         var det = cutoff.split(" - ");
         var name =  document.getElementById(bdno).innerHTML;
         var logname = $('#eMplogName').val();
@@ -681,20 +681,20 @@ aria-hidden="true">
     function generatePayrll()
     {
 
-        var cutoff = $('#ddcutoff').children("option:selected").val();
-        if(typeof(cutoff) != "undefined" && cutoff !== null) {
+        
             document.getElementById("myDiv").style.display="block";
             var url = "../payroll/payrollrep_process.php";
+            var cutoff = $('#ddcutoff').find(":selected").text();
             var dates = cutoff.split(" - ");
             var empCode = $('#empCode').val();
+
             document.getElementById('pfromt').innerHTML = dates[0];
             document.getElementById('ptot').innerHTML = dates[1];
 
             var selectElem = document.getElementById('ddcutoff');
             var index = selectElem.selectedIndex;
 
-
-            var ddcutoff = $(this).find(':selected').data('val');
+            var ddcutoff = $('#ddcutoff').val();
             if(ddcutoff == 0){
                 var ddval = '15th';
                 $("#s30th").hide();
@@ -735,17 +735,7 @@ aria-hidden="true">
                     document.getElementById("myDiv").style.display="none"; 
                 }
                 );
-        }else{
 
-               swal({
-                    title: "Warning!", 
-                    text: "No generated timekeeping logs.", 
-                    icon: "warning",
-                }).then(function() {
-                    window.location.replace("../pages/admin.php"); 
-                }); 
-
-        }
     }
 
     function viewAllAttendanceEmp(bdno,pfrom,pto)
@@ -1286,7 +1276,7 @@ function updateAtt()
             }
 
 
-        function myFunction() {
+function myFunction() {
         var input, filter, table, tr, td, i, txtValue;
         input = document.getElementById("myInput");
         filter = input.value.toUpperCase();
@@ -1313,7 +1303,7 @@ function savetk()
     var empCode = $('#empCode').val();
     var url = "../payroll/payrollSaveTkProcess.php";
   
-        var cutoff = $('#ddcutoff').children("option:selected").val();
+        var cutoff = $('#ddcutoff').find(":selected").text();
         var dates = cutoff.split(" - ");
         var ppay =  $('#spay').val();
 
@@ -1356,12 +1346,11 @@ function ApprovePayView()
     var url = "../payroll/payrollViewProcess.php";
 
     if($('#spay').val() == '15th'){    
-        var cutoff = $('#ddcutoff').children("option:selected").val();
+        var cutoff = $('#ddcutoff').find(":selected").text();
         var dates = cutoff.split(" - ");
         var ppay =  $('#spay').val();
 
-        // console.log(dates[0]);
-        // console.log(dates[1]);
+        // console.log('15th');
         // return false;
 
             $('#contents').html('');
@@ -1383,7 +1372,17 @@ function ApprovePayView()
                         pto: dates[1],
                         ppay:ppay
                     },
-                    function(data) {window.location.replace("../payroll/payroll_view.php"); }
+                    function(data) {
+                            console.log('success: ' + data);
+                            swal({
+                            title: "Success!", 
+                            text: "Successfully generated payroll register!", 
+                            type: "success",
+                            icon: "success",
+                            }).then(function() {
+                               window.location.replace("../payroll/payroll_view_register.php");
+                            });
+                    }
                     );
 
             } else {
@@ -1391,16 +1390,13 @@ function ApprovePayView()
             }
         });        
     }else{ 
-        var cutoff = $('#ddcutoff').children("option:selected").val();
+        var cutoff = $('#ddcutoff').find(":selected").text();
         var dates = cutoff.split(" - ");
-        var cutoff30 = $('#ddcutoff30').children("option:selected").val();
+        var cutoff30 = $('#ddcutoff30').find(":selected").text();
         var dates30 = cutoff30.split(" - ");
         var ppay =  $('#spay').val();
 
-        // console.log(dates[0]);
-        // console.log(dates[1]);
-        // console.log(dates30[0]);
-        // console.log(dates30[1]);
+        // console.log('30th');
         // return false;
 
             $('#contents').html('');
@@ -1425,7 +1421,15 @@ function ApprovePayView()
                         ppay:ppay
                     },
                     function(data) {
-                        window.location.replace("../payroll/payroll_view.php"); 
+                    console.log('success: ' + data);
+                            swal({
+                            title: "Success!", 
+                            text: "Successfully generated payroll register!", 
+                            type: "success",
+                            icon: "success",
+                            }).then(function() {
+                               window.location.replace("../payroll/payroll_view_register.php");
+                            });
                     }
                     );
 
