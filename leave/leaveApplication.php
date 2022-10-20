@@ -591,11 +591,6 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                         <option value="Sick Leave">Sick Leave</option>
                         <option value="Maternity Leave">Maternity Leave</option>
                         <option value="Paternity Leave">Paternity Leave</option>
-                        <option value="Solo Parent Leave">Solo Parent Leave</option>
-                        <option value="Magna Carta Leave">Magna Carta Leave</option>
-                        <option value="Special Leave for Women">Special Leave for Women</option>
-                        <option value="Military Service Leave">Military Service Leave</option>
-                        <option value="Special Leave for Victim of Violence">Special Leave for Victim of Violence</option>
                         <option value="Floating Leave">Floating Leave</option>
 
                     ';    
@@ -607,37 +602,22 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                         echo '
                             <option value="Maternity Leave">Maternity Leave</option>
                             <option value="Paternity Leave">Paternity Leave</option>
-                            <option value="Solo Parent Leave">Solo Parent Leave</option>
-                            <option value="Magna Carta Leave">Magna Carta Leave</option>
-                            <option value="Special Leave for Women">Special Leave for Women</option>
-                            <option value="Military Service Leave">Military Service Leave</option>
-                            <option value="Special Leave for Victim of Violence">Special Leave for Victim of Violence</option>
                             <option value="Floating Leave">Floating Leave</option>
                         ';  
                     }elseif(($earned_vl !== 0) && ($earned_sl === 0)){
                         echo '
                             <option value="Maternity Leave">Maternity Leave</option>
                             <option value="Paternity Leave">Paternity Leave</option>
-                            <option value="Solo Parent Leave">Solo Parent Leave</option>
-                            <option value="Magna Carta Leave">Magna Carta Leave</option>
                             <option value="Vacation Leave">Vacation Leave</option>
                             <option value="Bereavement Leave">Bereavement Leave</option>
-                            <option value="Special Leave for Women">Special Leave for Women</option>
-                            <option value="Military Service Leave">Military Service Leave</option>
-                            <option value="Special Leave for Victim of Violence">Special Leave for Victim of Violence</option>
                             <option value="Floating Leave">Floating Leave</option>
                         ';
                     }elseif(($earned_vl === 0) && ($earned_sl !== 0)){
                         echo '
                             <option value="Maternity Leave">Maternity Leave</option>
                             <option value="Paternity Leave">Paternity Leave</option>
-                            <option value="Solo Parent Leave">Solo Parent Leave</option>
-                            <option value="Magna Carta Leave">Magna Carta Leave</option>
                             <option value="Sick Leave">Sick Leave</option>
                             <option value="Emergency Leave">Emergency Leave</option>
-                            <option value="Special Leave for Women">Special Leave for Women</option>
-                            <option value="Military Service Leave">Military Service Leave</option>
-                            <option value="Special Leave for Victim of Violence">Special Leave for Victim of Violence</option>
                             <option value="Floating Leave">Floating Leave</option>
                         ';   
                     }else{
@@ -687,11 +667,6 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                         <option value="Sick Leave">Sick Leave</option>
                         <option value="Maternity Leave">Maternity Leave</option>
                         <option value="Paternity Leave">Paternity Leave</option>
-                        <option value="Solo Parent Leave">Solo Parent Leave</option>
-                        <option value="Magna Carta Leave">Magna Carta Leave</option>
-                        <option value="Special Leave for Women">Special Leave for Women</option>
-                        <option value="Military Service Leave">Military Service Leave</option>
-                        <option value="Special Leave for Victim of Violence">Special Leave for Victim of Violence</option>
                         <option value="Floating Leave">Floating Leave</option>
 
                     ';    
@@ -703,42 +678,27 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                         echo '
                             <option value="Maternity Leave">Maternity Leave</option>
                             <option value="Paternity Leave">Paternity Leave</option>
-                            <option value="Solo Parent Leave">Solo Parent Leave</option>
-                            <option value="Magna Carta Leave">Magna Carta Leave</option>
-                            <option value="Special Leave for Women">Special Leave for Women</option>
-                            <option value="Military Service Leave">Military Service Leave</option>
-                            <option value="Special Leave for Victim of Violence">Special Leave for Victim of Violence</option>
                             <option value="Floating Leave">Floating Leave</option>
                         ';  
                     }elseif(($earned_vl !== 0) && ($earned_sl === 0)){
                         echo '
                             <option value="Maternity Leave">Maternity Leave</option>
                             <option value="Paternity Leave">Paternity Leave</option>
-                            <option value="Solo Parent Leave">Solo Parent Leave</option>
-                            <option value="Magna Carta Leave">Magna Carta Leave</option>
                             <option value="Vacation Leave">Vacation Leave</option>
                             <option value="Bereavement Leave">Bereavement Leave</option>
-                            <option value="Special Leave for Women">Special Leave for Women</option>
-                            <option value="Military Service Leave">Military Service Leave</option>
-                            <option value="Special Leave for Victim of Violence">Special Leave for Victim of Violence</option>
                             <option value="Floating Leave">Floating Leave</option>
                         ';
                     }elseif(($earned_vl === 0) && ($earned_sl !== 0)){
                         echo '
                             <option value="Maternity Leave">Maternity Leave</option>
                             <option value="Paternity Leave">Paternity Leave</option>
-                            <option value="Solo Parent Leave">Solo Parent Leave</option>
-                            <option value="Magna Carta Leave">Magna Carta Leave</option>
                             <option value="Sick Leave">Sick Leave</option>
                             <option value="Emergency Leave">Emergency Leave</option>
-                            <option value="Special Leave for Women">Special Leave for Women</option>
-                            <option value="Military Service Leave">Military Service Leave</option>
-                            <option value="Special Leave for Victim of Violence">Special Leave for Victim of Violence</option>
                             <option value="Floating Leave">Floating Leave</option>
                         ';   
                     }else{
 
-                        $cmd = $connL->prepare(@'SELECT leavetype FROM dbo.mf_leavetype');
+                        $cmd = $connL->prepare(@"SELECT leavetype FROM dbo.mf_leavetype where status = 'Active'");
                         $cmd->execute();
 
                         while ($r = $cmd->fetch(PDO::FETCH_ASSOC))
