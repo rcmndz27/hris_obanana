@@ -127,7 +127,7 @@ $stmtl->execute();
 $resultl = $stmtl->fetch();    
 
 //ANNOUNCEMENT
-$queryan = "SELECT * from logs_events where status = 1 or (date_to >= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) and status = 0)";
+$queryan = "SELECT * from logs_events where status = 1 or (date_to >= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) and status = 0) ORDER BY rowid desc";
 $stmtan =$connL->prepare($queryan);
 $stmtan->execute();
 $resultan = $stmtan->fetch();    
