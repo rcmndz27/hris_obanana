@@ -373,6 +373,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
             $otsd_tmp = $otDate.'T'.$otStartDtime;
             $otend_tmp = $otenddate1.'T'.$otEndDtime;
             $fxdate_tmp = $otDate.'T22:00';
+            $fxdate_tmp2 = $otDate.'T06:00';
             $otsd_d = date('m-d-Y H:i:s', strtotime($otsd_tmp));
             $otend_d = date('m-d-Y H:i:s', strtotime($otend_tmp));
             $otsd_dt = date('H:i', strtotime($otsd_tmp));
@@ -380,14 +381,19 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
             $otsd = strtotime($otsd_tmp);
             $otend = strtotime($otend_tmp);
             $fxdate = strtotime($fxdate_tmp);
+            $fxdate2 = strtotime($fxdate_tmp2);
             $total = round(($otend - $otsd)/3600,2);
             $total_fxs = round(($fxdate - $otsd)/3600,2);
             $total_fxe = round(($otend - $fxdate)/3600,2);
+            $total_fxs2 = round(($fxdate2 - $otsd)/3600,2);
+            $total_fxe2 = round(($otend - $fxdate2)/3600,2);             
         }else{
             $fixed_date = date('m-d-Y',strtotime($otDate)).' 22:00:00';
+            $fixed_date2 = date('m-d-Y',strtotime($otDate)).' 06:00:00';
             $otsd_tmp = $otDate.'T'.$otStartDtime;
             $otend_tmp = $otDate.'T'.$otEndDtime;
             $fxdate_tmp = $otDate.'T22:00';
+            $fxdate_tmp2 = $otDate.'T06:00';
             $otsd_d = date('m-d-Y H:i:s', strtotime($otsd_tmp));
             $otend_d = date('m-d-Y H:i:s', strtotime($otend_tmp));
             $otsd_dt = date('H:i', strtotime($otsd_tmp));
@@ -395,9 +401,12 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
             $otsd = strtotime($otsd_tmp);
             $otend = strtotime($otend_tmp);
             $fxdate = strtotime($fxdate_tmp);
+            $fxdate2 = strtotime($fxdate_tmp2);
             $total = round(($otend - $otsd)/3600,2);
             $total_fxs = round(($fxdate - $otsd)/3600,2);
-            $total_fxe = round(($otend - $fxdate)/3600,2);            
+            $total_fxe = round(($otend - $fxdate)/3600,2);
+            $total_fxs2 = round(($fxdate2 - $otsd)/3600,2);
+            $total_fxe2 = round(($otend - $fxdate2)/3600,2);                         
         }
 
 
@@ -502,6 +511,65 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
         $query_payt->bindValue(':ot_date',$otDate);
         $query_payt->bindValue(':empCode',$empCode);
         $query_payt->execute(); 
+
+    }else if(($otsd_dt >= '22:00' or $otsd_dt < '06:00') and ($otend_dt >= '06:00') and in_array($daydate,$wdays)){
+
+        // echo 'night diff with insert nd morning and update only';
+        // exit();
+
+        $query = "INSERT INTO tr_overtime (emp_code,ot_date,datefiled,reporting_to,ot_start_dtime,ot_end_dtime,ot_req_hrs,remarks,attachment,audituser,auditdate) 
+        VALUES(:emp_code,:otDate,:datefiled,:empReportingTo,:otStartDtime,:otEndDtime,:otReqHrs,:remarks,:attachment,:audituser,:auditdate) ";
+
+        $stmt =$connL->prepare($query);
+
+        $param = array(
+        ":emp_code"=> $empCode,
+        ":otDate" => $otDate,
+        ":datefiled"=>date('m-d-Y'),
+        ":empReportingTo" => $empReportingTo,
+        ":otStartDtime" => $otsd_d,
+        ":otEndDtime"=> $otend_d,
+        ":otReqHrs"=> $total,
+        ":remarks"=> $remarks,
+        ":attachment"=> $attachment,
+        ":audituser" => $empCode,
+        ":auditdate"=>date('m-d-Y H:i:s')
+        );
+
+        $result = $stmt->execute($param);
+        echo $result;
+
+        $query_pay = $connL->prepare('EXEC GenerateOTType :ot_date,:empCode');
+        $query_pay->bindValue(':ot_date',$otDate);
+        $query_pay->bindValue(':empCode',$empCode);
+        $query_pay->execute(); 
+
+        $queryte = "INSERT INTO tr_overtime (emp_code,ot_date,datefiled,reporting_to,ot_start_dtime,ot_end_dtime,ot_req_hrs,remarks,attachment,audituser, auditdate) 
+        VALUES(:emp_code,:otDate,:datefiled,:empReportingTo,:otStartDtime,:otEndDtime,:otReqHrs,:remarks,:attachment,:audituser,:auditdate) ";
+
+        $stmtte =$connL->prepare($queryte);
+
+        $paramte = array(
+        ":emp_code"=> $empCode,
+        ":otDate" => $otDate,
+        ":datefiled"=>date('m-d-Y'),
+        ":empReportingTo" => $empReportingTo,
+        ":otStartDtime" => $otsd_d,
+        ":otEndDtime"=> $fixed_date2,
+        ":otReqHrs"=> $total_fxs2,
+        ":remarks"=> $remarks,
+        ":attachment"=> $attachment,
+        ":audituser" => $empCode,
+        ":auditdate"=>date('m-d-Y H:i:s')
+        );
+
+        $resultte = $stmtte->execute($paramte);
+        echo $resultte;        
+
+        $query_payte = $connL->prepare('EXEC GenerateOTNDType :ot_date,:empCode');
+        $query_payte->bindValue(':ot_date',$otDate);
+        $query_payte->bindValue(':empCode',$empCode);
+        $query_payte->execute(); 
 
     }else if(($otsd_dt < '22:00' and $otsd_dt > '06:00') and ($otend_dt > '22:00' or $otend_dt < '06:00') and !in_array($daydate,$wdays)){
 
@@ -610,6 +678,65 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
         ":otStartDtime" => $otsd_d,
         ":otEndDtime"=> $otend_d,
         ":otReqHrs"=> $total,
+        ":remarks"=> $remarks,
+        ":attachment"=> $attachment,
+        ":audituser" => $empCode,
+        ":auditdate"=>date('m-d-Y H:i:s')
+        );
+
+        $resultte = $stmtte->execute($paramte);
+        echo $resultte;        
+
+        $query_payte = $connL->prepare('EXEC GenerateOTNDType :ot_date,:empCode');
+        $query_payte->bindValue(':ot_date',$otDate);
+        $query_payte->bindValue(':empCode',$empCode);
+        $query_payte->execute(); 
+
+    }else if(($otsd_dt >= '22:00' or $otsd_dt < '06:00') and ($otend_dt >= '06:00') and !in_array($daydate,$wdays)){
+
+        // echo 'night diff with insert nd morning and update only weekend';
+        // exit();
+
+        $query = "INSERT INTO tr_overtime (emp_code,ot_date,datefiled,reporting_to,ot_start_dtime,ot_end_dtime,ot_req_hrs,remarks,attachment,audituser,auditdate) 
+        VALUES(:emp_code,:otDate,:datefiled,:empReportingTo,:otStartDtime,:otEndDtime,:otReqHrs,:remarks,:attachment,:audituser,:auditdate) ";
+
+        $stmt =$connL->prepare($query);
+
+        $param = array(
+        ":emp_code"=> $empCode,
+        ":otDate" => $otDate,
+        ":datefiled"=>date('m-d-Y'),
+        ":empReportingTo" => $empReportingTo,
+        ":otStartDtime" => $otsd_d,
+        ":otEndDtime"=> $otend_d,
+        ":otReqHrs"=> $total,
+        ":remarks"=> $remarks,
+        ":attachment"=> $attachment,
+        ":audituser" => $empCode,
+        ":auditdate"=>date('m-d-Y H:i:s')
+        );
+
+        $result = $stmt->execute($param);
+        echo $result;
+
+        $query_pay = $connL->prepare('EXEC GenerateOTType :ot_date,:empCode');
+        $query_pay->bindValue(':ot_date',$otDate);
+        $query_pay->bindValue(':empCode',$empCode);
+        $query_pay->execute(); 
+
+        $queryte = "INSERT INTO tr_overtime (emp_code,ot_date,datefiled,reporting_to,ot_start_dtime,ot_end_dtime,ot_req_hrs,remarks,attachment,audituser, auditdate) 
+        VALUES(:emp_code,:otDate,:datefiled,:empReportingTo,:otStartDtime,:otEndDtime,:otReqHrs,:remarks,:attachment,:audituser,:auditdate) ";
+
+        $stmtte =$connL->prepare($queryte);
+
+        $paramte = array(
+        ":emp_code"=> $empCode,
+        ":otDate" => $otDate,
+        ":datefiled"=>date('m-d-Y'),
+        ":empReportingTo" => $empReportingTo,
+        ":otStartDtime" => $otsd_d,
+        ":otEndDtime"=> $fixed_date2,
+        ":otReqHrs"=> $total_fxs2,
         ":remarks"=> $remarks,
         ":attachment"=> $attachment,
         ":audituser" => $empCode,
