@@ -345,11 +345,8 @@
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                     <label class="control-label" for="work_sched_type">Work Schedule</label>
-                                        <select type="select" class="form-select" id="work_sched_type" name="work_sched_type" >
-                                            <option value="0">Compressed</option>
-                                            <option value="1">Regular</option>
-                                        </select>
-                                        </div>
+                                        <?php $dd->GenerateSingleDropDown("work_sched_type", $mf->GetWorkSched("schedtype")); ?>
+                                    </div>
                                 </div> 
 
                                 <div class="col-lg-3">

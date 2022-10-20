@@ -1015,6 +1015,34 @@
             }
         }
 
+        public function GetWorkSched($type)
+        {
+            global $connL;
+
+            try
+            {
+                $data = [];
+               
+
+                $sql = $connL->prepare(@"SELECT rowid,schedule_name FROM schedules ORDER by rowid ASC");
+                $sql->execute();
+
+                if ($type == "schedtype")
+                {
+                    while ($r = $sql->fetch(PDO::FETCH_ASSOC))
+                    {
+                       array_push( $data, array($r["rowid"],$r["schedule_name"]));
+                    }
+                }
+
+                return $data;
+            }
+            catch (Exception $e)
+            {
+                echo $e->getMessage();
+            }
+        }        
+
         public function GetAllEmployeeLevel($type)
         {
             global $connL;
