@@ -1,4 +1,4 @@
-
+                                                                                   
 <?php
 
 $now = new DateTime(null, new DateTimeZone('Asia/Taipei'));
@@ -368,6 +368,7 @@ rel="stylesheet">
                                   <li><a href='../mf_company/mfcompanylist_view.php' onclick='show()'>Company</a></li>
                                   <li><a href='../mf_deduction/mfdeductionlist_view.php' onclick='show()'>Deduction</a></li>
                                   <li><a href='../mf_department/mfdepartmentlist_view.php' onclick='show()'>Department</a></li>
+                                  <li><a href='../mf_sched/mfschedlist_view.php' onclick='show()'>Schedule</a></li>
                                 <li><a href='../mf_holiday/mfholidaylist_view.php' onclick='show()'>Holiday</a></li>  
                                 <li><a href='../mf_pyrollco/mfpyrollcolist_view.php' onclick='show()'>Payroll Cut-Off</a></li>  
                                 <li><a href='../mf_position/mfpositionlist_view.php' onclick='show()'>Job Position</a></li>

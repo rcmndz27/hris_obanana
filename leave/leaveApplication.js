@@ -69,7 +69,6 @@ $(function(){
     var approvedDays;
     var btnAccessed;
 
-    $('#advancefiling').hide();
     $('#leavepay').hide();
     $('#sickleavebal').hide();
     $('#vacleavebal').hide();
@@ -526,7 +525,6 @@ swal({
         if ($(this).val() == 'Sick Leave' && $('#sick_leavebal').val() === '0.0' && $('#emptype').val() === 'Regular') {
             $("#leave_pay2").prop("checked", true);
             $("#wpay").hide();
-            $('#advancefiling').show();
             $('#paternity').hide();
             $('#maternity').hide();
             $('#specialwomen').hide();
@@ -540,7 +538,6 @@ swal({
             $('#Submit').show();
         }else if ($(this).val() == 'Sick Leave' && $('#sick_leavebal').val() !== '0.0' && $('#emptype').val() === 'Regular') {
             $("#leavepay").show();
-            $('#advancefiling').show();
             $('#paternity').hide();
             $('#maternity').hide();
             $('#specialwomen').hide();
@@ -561,7 +558,6 @@ swal({
             $("#wpay").hide();
             $('#paternity').hide();
             $('#leavepay').show();
-            $('#advancefiling').hide();
             $('#maternity').hide();
             $('#specialwomen').hide();
             $('#specialviolence').hide();
@@ -576,7 +572,6 @@ swal({
             $("#leave_pay1").prop("checked", true);
             $('#paternity').hide();
             $('#leavepay').show();
-            $('#advancefiling').hide();
             $('#maternity').hide();
             $('#specialwomen').hide();
             $('#specialviolence').hide();
@@ -590,7 +585,6 @@ swal({
             $("#wpay").hide();
             $('#paternity').hide();
             $('#leavepay').show();
-            $('#advancefiling').hide();
             $('#maternity').hide();
             $('#specialwomen').hide();
             $('#specialviolence').hide();
@@ -604,7 +598,6 @@ swal({
             $("#wpay").hide();
             $('#paternity').hide();
             $('#leavepay').show();
-            $('#advancefiling').hide();
             $('#maternity').hide();
             $('#specialwomen').hide();
             $('#specialviolence').hide();
@@ -614,7 +607,6 @@ swal({
             $('#Submit').show();
         }else if ($(this).val() == 'Paternity Leave' && $('#civilstatus').val() == 'Single') {
             $('#paternity').show();
-            $('#advancefiling').hide();
             $('#maternity').hide();
             $('#specialwomen').hide();
             $('#specialviolence').hide();
@@ -625,7 +617,6 @@ swal({
             $('#Submit').hide();
         }else if ($(this).val() == 'Paternity Leave' && $('#civilstatus').val() == 'Married') {
             $('#paternity').show();
-            $('#advancefiling').hide();
             $('#maternity').hide();
             $('#specialwomen').hide();
             $('#specialviolence').hide();
@@ -636,7 +627,6 @@ swal({
             $('#Submit').show();
         }else if ($(this).val() == 'Maternity Leave') {
             $('#paternity').hide();
-            $('#advancefiling').hide();
             $('#maternity').show();
             $('#specialwomen').hide();
             $('#specialviolence').hide();
@@ -649,7 +639,6 @@ swal({
             $('#Submit').show();
         }else if ($(this).val() == 'Special Leave for Women') {
             $('#paternity').hide();
-            $('#advancefiling').hide();
             $('#maternity').hide();
             $('#specialwomen').show();
             $('#specialviolence').hide();
@@ -660,7 +649,6 @@ swal({
             $('#Submit').show();
         }else if ($(this).val() == 'Special Leave for Victim of Violence') {
             $('#paternity').hide();
-            $('#advancefiling').hide();
             $('#maternity').hide();
             $('#specialwomen').hide();
             $('#specialviolence').show();
@@ -671,7 +659,6 @@ swal({
             $('#Submit').show();
         }else if ($(this).val() == 'Solo Parent Leave' || $(this).val() == 'Bereavement Leave') {
             $('#paternity').hide();
-            $('#advancefiling').hide();
             $('#maternity').hide();
             $('#specialwomen').hide();
             $('#specialviolence').hide();
@@ -681,7 +668,7 @@ swal({
             $('#leavepay').hide();
             $('#Submit').show();
         } else {
-            $('#advancefiling').hide();
+
             $('#paternity').hide();
             $('#maternity').hide();
             $('#specialwomen').hide();

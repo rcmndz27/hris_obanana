@@ -500,6 +500,35 @@
             }
         }
 
+        public function GetEmployeeSalaryEmp($type)
+        {
+            global $connL;
+
+            try
+            {
+                $data = [];
+               
+
+                $sql = $connL->prepare(@"SELECT a.rowid,a.emp_code,(a.lastname +','+a.firstname+' '+a.middlename) as fullname from employee_profile a where a.emp_status = 'Active' and NOT EXISTS (SELECT * FROM employee_salary_management b where a.emp_code = b.emp_code) order by a.lastname asc");
+                $sql->execute();
+
+                if ($type == "empsalc")
+                {
+                    while ($r = $sql->fetch(PDO::FETCH_ASSOC))
+                    {
+                       array_push( $data, array($r["emp_code"],$r["fullname"]));
+                    }
+                }
+
+                return $data;
+            }
+            catch (Exception $e)
+            {
+                echo $e->getMessage();
+            }
+        }
+
+
 
         public function GetAllManpowerList($type)
         {
@@ -1002,7 +1031,7 @@
                 {
                     while ($r = $sql->fetch(PDO::FETCH_ASSOC))
                     {
-                       array_push( $data, array($r["level_id"],$r["level_id"]." - ".$r["level_description"]));
+                       array_push( $data, array($r["level_id"],$r["level_description"]));
                     }
                 }
 

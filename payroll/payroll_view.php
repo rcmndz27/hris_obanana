@@ -600,10 +600,7 @@ aria-hidden="true">
             $("#s30th").show();
             document.getElementById('ddcutoff30').selectedIndex = index+1;
         }
-        document.getElementById('spay').value =  ddval;  
-        
-
-         console.log(index);
+        document.getElementById('spay').value =  ddval;        
 
     });
 

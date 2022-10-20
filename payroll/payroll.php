@@ -64,7 +64,7 @@ function GetPayrollList($action, $dtFrom, $dtTo,$location,$empCode){
     echo "
 
     <input type='text' id='myInput' onkeyup='myFunction()' placeholder='Search for names..' title='Type in a name'>
-    <table id='payrollList' class='table table-striped table-sm table3'> 
+    <table id='payrollList' class='table table-sm table3'> 
     <thead>
     <tr>
     <th >Last Name</th>
@@ -119,48 +119,49 @@ function GetPayrollList($action, $dtFrom, $dtTo,$location,$empCode){
             $rwd = "'".$r['rowid']."'"; 
             $pfrom = "'".date('Y-m-d', strtotime($r['period_from']))."'"; 
             $pto = "'".date('Y-m-d', strtotime($r['period_to']))."'"; 
+            $onclick = 'onclick="editAttModal('.$empn.','.$badgeno.','.$rwd.')"';
 
 
-            echo "<tr>".
-            "<td id='ln".$r['badge_no']."'>" . $r['lastname'] . "</td>".
-            "<td id='fn".$r['badge_no']."'>" . $r['firstname'] . "</td>".
-            "<td id='mn".$r['badge_no']."'>" . $r['middlename'] . "</td>".
-            "<td>" . $r['badge_no'] . "</td>".
-            "<td id='empc".$r['badge_no']."' hidden>" . $r['emp_code'] . "</td>".
-            "<td id='pf".$r['badge_no']."' hidden>".date('Y-m-d', strtotime($r['period_from']))."</td>".
-            "<td id='pt".$r['badge_no']."' hidden>".date('Y-m-d', strtotime($r['period_to']))."</td>".
-            "<td id='toa".$r['badge_no']."'>" . round($r['tot_days_absent'],2) . "</td>".
-            "<td id='tow".$r['badge_no']."'>" . round($r['tot_days_work'],2) . "</td>".
-            "<td id='tol".$r['badge_no']."'>" . round($r['tot_lates'],2) . "</td>".
-            "<td id='tou".$r['badge_no']."'>" . round($r['total_undertime'],2) . "</td>".
-            "<td id='reg_ot".$r['badge_no']."'>" . round($r['tot_overtime_reg'],2) . "</td>".
-            "<td id='reg_ns".$r['badge_no']."'>" . round($r['night_differential'],2) . "</td>".
-            "<td id='reg_ns_ot".$r['badge_no']."'>" . round($r['night_differential_ot'],2) . "</td>".
-            "<td id='rh".$r['badge_no']."'>" . round($r['tot_regholiday'],2) . "</td>".
-            "<td id='rh_ot".$r['badge_no']."'>" . round($r['tot_overtime_regholiday'],2) . "</td>".
-            "<td id='rh_ns".$r['badge_no']."'>" . round($r['tot_regholiday_nightdiff'],2) . "</td>".
-            "<td id='rh_ns_ot".$r['badge_no']."'>" . round($r['tot_overtime_regholiday_nightdiff'],2) . "</td>".
-            "<td id='sh".$r['badge_no']."'>" . round($r['tot_spholiday'],2) . "</td>".
-            "<td id='sh_ot".$r['badge_no']."'>" . round($r['tot_overtime_spholiday'],2) . "</td>".
-            "<td id='sh_ns".$r['badge_no']."'>" . round($r['tot_spholiday_nightdiff'],2) . "</td>".
-            "<td id='sh_ns_ot".$r['badge_no']."'>" . round($r['tot_overtime_spholiday_nightdiff'],2) . "</td>".
-            "<td id='rd".$r['badge_no']."'>" . round($r['tot_rest'],2) . "</td>".
-            "<td id='rd_ot".$r['badge_no']."'>" . round($r['tot_overtime_rest'],2) . "</td>".
-            "<td id='rd_ns".$r['badge_no']."'>" . round($r['night_differential_rest'],2) . "</td>".
-            "<td id='rd_ns_ot".$r['badge_no']."'>" . round($r['night_differential_ot_rest'],2) . "</td>".
-            "<td id='rd_rh_ot".$r['badge_no']."'>" . round($r['tot_overtime_rest_regholiday'],2) . "</td>".
-            "<td id='rd_rh_ns".$r['badge_no']."'>" . round($r['night_differential_rest_regholiday'],2) . "</td>".
-            "<td id='rd_rh_ns_ot".$r['badge_no']."'>" . round($r['tot_overtime_night_diff_rest_regholiday'],2) . "</td>".
-            "<td id='rd_sh_ot".$r['badge_no']."'>" . round($r['tot_overtime_sprestholiday'],2) . "</td>".
-            "<td id='rd_sh_ns".$r['badge_no']."'>" . round($r['tot_sprestholiday_nightdiff'],2) . "</td>".
-            "<td id='rd_sh_ns_ot".$r['badge_no']."'>" . round($r['tot_overtime_sprestholiday_nightdiff'],2) . "</td>".
-            "<td id='toad".$r['badge_no']."'>" . round($r['total_adjstmenthrs'],2) . "</td>".
-            "<td id='wfh".$r['badge_no']."'>" . round($r['workfromhome'],2) . "</td>".
-            "<td id='ob".$r['badge_no']."'>" . round($r['offbusiness'],2) . "</td>".
-            "<td id='slh".$r['badge_no']."'>" . round($r['sick_leave'],2) . "</td>".
-            "<td id='vlh".$r['badge_no']."'>" . round($r['vacation_leave'],2) . "</td>".
-            "<td id='slhnp".$r['badge_no']."'>" . round($r['sick_leave_nopay'],2) . "</td>".
-            "<td id='vlhnp".$r['badge_no']."'>" . round($r['vacation_leave_nopay'],2) . "</td>";
+echo "<tr class='csor-pointer'>".
+"<td ".$onclick." id='ln".$r['badge_no']."'>" . $r['lastname'] . "</td>".
+"<td ".$onclick." id='fn".$r['badge_no']."'>" . $r['firstname'] . "</td>".
+"<td ".$onclick." id='mn".$r['badge_no']."'>" . $r['middlename'] . "</td>".
+"<td ".$onclick.">" . $r['badge_no'] . "</td>".
+"<td ".$onclick." id='empc".$r['badge_no']."' hidden>" . $r['emp_code'] . "</td>".
+"<td ".$onclick." id='pf".$r['badge_no']."' hidden>".date('Y-m-d', strtotime($r['period_from']))."</td>".
+"<td ".$onclick." id='pt".$r['badge_no']."' hidden>".date('Y-m-d', strtotime($r['period_to']))."</td>".
+"<td ".$onclick." id='toa".$r['badge_no']."'>" . round($r['tot_days_absent'],2) . "</td>".
+"<td ".$onclick." id='tow".$r['badge_no']."'>" . round($r['tot_days_work'],2) . "</td>".
+"<td ".$onclick." id='tol".$r['badge_no']."'>" . round($r['tot_lates'],2) . "</td>".
+"<td ".$onclick." id='tou".$r['badge_no']."'>" . round($r['total_undertime'],2) . "</td>".
+"<td ".$onclick." id='reg_ot".$r['badge_no']."'>" . round($r['tot_overtime_reg'],2) . "</td>".
+"<td ".$onclick." id='reg_ns".$r['badge_no']."'>" . round($r['night_differential'],2) . "</td>".
+"<td ".$onclick." id='reg_ns_ot".$r['badge_no']."'>" . round($r['night_differential_ot'],2) . "</td>".
+"<td ".$onclick." id='rh".$r['badge_no']."'>" . round($r['tot_regholiday'],2) . "</td>".
+"<td ".$onclick." id='rh_ot".$r['badge_no']."'>" . round($r['tot_overtime_regholiday'],2) . "</td>".
+"<td ".$onclick." id='rh_ns".$r['badge_no']."'>" . round($r['tot_regholiday_nightdiff'],2) . "</td>".
+"<td ".$onclick." id='rh_ns_ot".$r['badge_no']."'>" . round($r['tot_overtime_regholiday_nightdiff'],2) . "</td>".
+"<td ".$onclick." id='sh".$r['badge_no']."'>" . round($r['tot_spholiday'],2) . "</td>".
+"<td ".$onclick." id='sh_ot".$r['badge_no']."'>" . round($r['tot_overtime_spholiday'],2) . "</td>".
+"<td ".$onclick." id='sh_ns".$r['badge_no']."'>" . round($r['tot_spholiday_nightdiff'],2) . "</td>".
+"<td ".$onclick." id='sh_ns_ot".$r['badge_no']."'>" . round($r['tot_overtime_spholiday_nightdiff'],2) . "</td>".
+"<td ".$onclick." id='rd".$r['badge_no']."'>" . round($r['tot_rest'],2) . "</td>".
+"<td ".$onclick." id='rd_ot".$r['badge_no']."'>" . round($r['tot_overtime_rest'],2) . "</td>".
+"<td ".$onclick." id='rd_ns".$r['badge_no']."'>" . round($r['night_differential_rest'],2) . "</td>".
+"<td ".$onclick." id='rd_ns_ot".$r['badge_no']."'>" . round($r['night_differential_ot_rest'],2) . "</td>".
+"<td ".$onclick." id='rd_rh_ot".$r['badge_no']."'>" . round($r['tot_overtime_rest_regholiday'],2) . "</td>".
+"<td ".$onclick." id='rd_rh_ns".$r['badge_no']."'>" . round($r['night_differential_rest_regholiday'],2) . "</td>".
+"<td ".$onclick." id='rd_rh_ns_ot".$r['badge_no']."'>" . round($r['tot_overtime_night_diff_rest_regholiday'],2) . "</td>".
+"<td ".$onclick." id='rd_sh_ot".$r['badge_no']."'>" . round($r['tot_overtime_sprestholiday'],2) . "</td>".
+"<td ".$onclick." id='rd_sh_ns".$r['badge_no']."'>" . round($r['tot_sprestholiday_nightdiff'],2) . "</td>".
+"<td ".$onclick." id='rd_sh_ns_ot".$r['badge_no']."'>" . round($r['tot_overtime_sprestholiday_nightdiff'],2) . "</td>".
+"<td ".$onclick." id='toad".$r['badge_no']."'>" . round($r['total_adjstmenthrs'],2) . "</td>".
+"<td ".$onclick." id='wfh".$r['badge_no']."'>" . round($r['workfromhome'],2) . "</td>".
+"<td ".$onclick." id='ob".$r['badge_no']."'>" . round($r['offbusiness'],2) . "</td>".
+"<td ".$onclick." id='slh".$r['badge_no']."'>" . round($r['sick_leave'],2) . "</td>".
+"<td ".$onclick." id='vlh".$r['badge_no']."'>" . round($r['vacation_leave'],2) . "</td>".
+"<td ".$onclick." id='slhnp".$r['badge_no']."'>" . round($r['sick_leave_nopay'],2) . "</td>".
+"<td ".$onclick." id='vlhnp".$r['badge_no']."'>" . round($r['vacation_leave_nopay'],2) . "</td>";
             echo'<td><button type="button"class="btn btn-warning btn-sm mr-1 mb-1" 
             onclick="editAttModal('.$empn.','.$badgeno.','.$rwd.')" title="Edit Attendance"><i class="fas fa-edit"></i>
             </button>

@@ -244,7 +244,7 @@ public function GetAlldtrcorrectAppHistory($date_from,$date_to,$status){
                     <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for dtr correction.." title="Type in dtr correction details"> 
                         </div>                     
                 </div>         
-        <table id="dtrcorrectList" class="table table-striped table-sm">
+        <table id="dtrcorrectList" class="table table-sm">
         <thead>
             <tr>
                 <th>DTR Date</th>
@@ -281,13 +281,14 @@ public function GetAlldtrcorrectAppHistory($date_from,$date_to,$status){
                 $empcode = "'".$result['emp_code']."'";
                 $appr_over = "'".$result['approver']."'";
                 $atch = "'".$result['attachment']."'";
+                $onclick = 'onclick="viewdtrcorrectModal('.$dtrcdate.','.$timein.','.$timeout.','.$rmrks.','.$stts.','.$appr_over.','.$atch.')"';
                 echo '
-                <tr>
-                <td>'.date('F d, Y', strtotime($result['dtrc_date'])).'</td>
-                <td>'.$t_in.'</td>
-                <td>'.$t_out.'</td>
-                <td>'.$result['remarks'] .'</td>
-                <td id="st'.$result['rowdy'].'">'.$result['stats'].'</td>';
+                <tr class="csor-pointer">
+                <td '.$onclick.'>'.date('F d, Y', strtotime($result['dtrc_date'])).'</td>
+                <td '.$onclick.'>'.$t_in.'</td>
+                <td '.$onclick.'>'.$t_out.'</td>
+                <td '.$onclick.'>'.$result['remarks'] .'</td>
+                <td '.$onclick.' id="st'.$result['rowdy'].'">'.$result['stats'].'</td>';
                 if($result['stats'] == 'PENDING' || $result['stats'] == 'APPROVED'){
                 echo'
                 <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewdtrcorrectModal('.$dtrcdate.','.$timein.','.$timeout.','.$rmrks.','.$stts.','.$appr_over.','.$atch.')" title="View DTR Correction">

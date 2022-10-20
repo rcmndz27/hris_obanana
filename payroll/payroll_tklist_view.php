@@ -91,11 +91,11 @@ else
             </select>
         </div>
         <div class='col-md-2' id="s15th">
-            <?php $dd->GenerateDropDown("ddcutoff", $mf->GetTKList("tkview")); ?>
-        </div>
-        <div class='col-md-2' id="s30th">
-            <?php $dd->GenerateDropDown("ddcutoff30", $mf->GetTKList("tkview")); ?>
-        </div>                    
+            <?php $dd->GenerateDropDown("ddcutoff", $mf->GetAllCutoffCO("payrollco")); ?>
+        </div>        
+        <div class='col-md-2' id="s30th"> 
+            <?php $dd->GenerateDisabledDropDown("ddcutoff30", $mf->GetAllCutoffCO("payrollco")); ?>
+        </div>                       
         <button type="button" id="search" class="btn btn-success" onmousedown="javascript:generatePayrll()">
             <i class="fas fa-search-plus"></i> GENERATE                      
         </button>

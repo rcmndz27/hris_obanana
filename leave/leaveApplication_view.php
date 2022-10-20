@@ -106,6 +106,7 @@
 
     function viewLeaveHistoryModal(lvlogid)
     {
+
        $('#viewLeaveHistoryModal').modal('toggle');
         var url = "../leave/leave_viewlogs.php";
         var lvlogid = lvlogid;
@@ -116,7 +117,10 @@
                 _action: 1,
                 lvlogid: lvlogid             
             },
-            function(data) { $("#contents2").html(data).show(); }
+            function(data) { 
+        $("#contents2").html(data).show(); 
+        $('#viewLeaveModal').modal('hide');
+    }
         );
     }
 
@@ -143,6 +147,7 @@
 function cancelLeave(lvid,empcd)
 {
 
+ $('#viewLeaveModal').hide();
  var url = "../leave/cancelLeaveProcess.php";  
  var leaveid = lvid;   
  var emp_code = empcd; 
@@ -295,7 +300,7 @@ function cancelLeave(lvid,empcd)
                                 }
                                  ?>                                            
                          <!-- sick leave advance filing  -->
-                        <div id="advancefiling">
+<!--                         <div id="advancefiling">
                             <div class="row">
                                 <div class=col-md-2>
                                     <label for="">Advance Filing:</label>
@@ -314,7 +319,7 @@ function cancelLeave(lvid,empcd)
                                 </div>
                             </div>
                         </div>
-
+ -->
                         
                         <?php 
                         $emp_type = $r['emp_type'];
@@ -763,8 +768,8 @@ function cancelLeave(lvid,empcd)
                 
                 param = JSON.stringify(param);
 
-                // console.log(param);
-                // return false;
+                console.log(param);
+                return false;
 
                     if($('#dateTo').val() >= $('#dateFrom').val()){
                         swal({

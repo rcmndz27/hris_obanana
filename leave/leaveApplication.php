@@ -390,7 +390,7 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                     <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for leave.." title="Type in leave details"> 
                 </div>                     
         </div>         
-        <table id="leaveList" class="table table-striped table-sm">
+        <table id="leaveList" class="table table-sm">
         <thead>
             <tr>
                 <th>Leave Date</th>
@@ -432,15 +432,14 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                 $leaveid = "'".$result['rowid']."'";
                 $empcode = "'".$result['emp_code']."'";
                 $medicalfile = "'".$result['medicalfile']."'";
+                $onclick = 'onclick="viewLeaveModal('.$datefl.','.$leavedesc.','.$leavetyp.','.$datefr.','.$dateto.','.$remark.','.$appdays.','.$appr_oved.','.$actlcnt.','.$appr_over.','.$medicalfile.')"';
                 echo '
-                <tr>
-                <td id="ld'.$result['rowid'].'">' . date('F d, Y', strtotime($result['date_from'])) . '</td>
-                <td id="lt'.$result['rowid'].'">' . $result['leavetype'] . '</td>
-                <td id="ds'.$result['rowid'].'">' . $result['leave_desc'] . '</td>
-                <td id="lc'.$result['rowid'].'">' . $result['actl_cnt'] . '</td>
-                <td id="st'.$result['rowid'].'">' . $result['approved'] . '</td>';
-
-                // <button type="button" class="editL" onclick="updateLeaveModal('.$leaveid.')" title="View Leave"><i class="fas fa-edit"></i></button>
+                <tr class="csor-pointer" >
+                <td '.$onclick.'  id="ld'.$result['rowid'].'">' . date('F d, Y', strtotime($result['date_from'])) . '</td>
+                <td '.$onclick.' id="lt'.$result['rowid'].'">' . $result['leavetype'] . '</td>
+                <td '.$onclick.' id="ds'.$result['rowid'].'">' . $result['leave_desc'] . '</td>
+                <td '.$onclick.' id="lc'.$result['rowid'].'">' . $result['actl_cnt'] . '</td>
+                <td '.$onclick.' id="st'.$result['rowid'].'">' . $result['approved'] . '</td>';
     
                 if($result['approved'] == 'PENDING' || $result['approved'] == 'APPROVED'){
                 echo'

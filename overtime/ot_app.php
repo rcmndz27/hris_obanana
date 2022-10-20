@@ -256,7 +256,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
                     <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for overtime.." title="Type in overtime details"> 
                         </div>                     
                 </div>                  
-        <table id="otList" class="table table-striped table-sm">
+        <table id="otList" class="table table-sm">
         <thead>
             <tr>
                 <th>OT Date</th>
@@ -286,36 +286,37 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
         if($result){
             do { 
 
-                $otdate = "'".date('m-d-Y', strtotime($result['ot_date']))."'";
-                $ottype = "'".(isset($result['ot_type']) ? $result['ot_type'] : 'n/a')."'";
-                $otstartdtime = "'".date('h:i A', strtotime($result['ot_start_dtime']))."'";
-                $otenddtime = "'".date('h:i A', strtotime($result['ot_end_dtime']))."'";
-                $remarkz = "'".(isset($result['remarks']) ?  trim(str_replace("'",'',$result['remarks'])) : 'n/a')."'";
-                $remark = preg_replace( "/\r|\n/", "", $remarkz );
-                $otreqhrs = "'".$result['ot_req_hrs']."'";
-                $otrenhrs = "'".$result['ot_ren_hrs']."'";
-                $appr_over = "'".$result['approver']."'";
-                $rejectreason = "'".(isset($result['reject_reason']) ? $result['reject_reason'] : 'n/a')."'";
-                $stats = "'".$result['stats']."'";
-                $otid = "'".$result['rowdy']."'";
-                $empcode = "'".$result['emp_code']."'";
-                $atch = "'".$result['attachment']."'";
-                $lenr = strlen($result['remarks']);
-                if($lenr > 35){
-                    $rmrks = substr($result['remarks'], 0, 35).'....';
-                }else{
-                    $rmrks = $result['remarks'];
-                }
-                echo '
-                <tr>
-                <td>' . date('F d, Y', strtotime($result['ot_date'])) . '</td>
-                <td>' . $result['ot_type'] . '</td>
-                <td>' . date('h:i A', strtotime($result['ot_start_dtime'])) . '</td>
-                <td>' . date('h:i A', strtotime($result['ot_end_dtime'])) . '</td>
-                <td>' . round($result['ot_req_hrs'],2) . '</td> 
-                <td>' . round($result['ot_ren_hrs'],2) . '</td>
-                <td>' . $rmrks.'</td>
-                <td id="st'.$result['rowdy'].'">' . $result['stats'] . '</td>';
+            $otdate = "'".date('m-d-Y', strtotime($result['ot_date']))."'";
+            $ottype = "'".(isset($result['ot_type']) ? $result['ot_type'] : 'n/a')."'";
+            $otstartdtime = "'".date('h:i A', strtotime($result['ot_start_dtime']))."'";
+            $otenddtime = "'".date('h:i A', strtotime($result['ot_end_dtime']))."'";
+            $remarkz = "'".(isset($result['remarks']) ?  trim(str_replace("'",'',$result['remarks'])) : 'n/a')."'";
+            $remark = preg_replace( "/\r|\n/", "", $remarkz );
+            $otreqhrs = "'".$result['ot_req_hrs']."'";
+            $otrenhrs = "'".$result['ot_ren_hrs']."'";
+            $appr_over = "'".$result['approver']."'";
+            $rejectreason = "'".(isset($result['reject_reason']) ? $result['reject_reason'] : 'n/a')."'";
+            $stats = "'".$result['stats']."'";
+            $otid = "'".$result['rowdy']."'";
+            $empcode = "'".$result['emp_code']."'";
+            $atch = "'".$result['attachment']."'";
+            $lenr = strlen($result['remarks']);
+            $onclick = 'onclick="viewOtModal('.$otdate.','.$ottype.','.$otstartdtime.','.$otenddtime.','.$remark.','.$otreqhrs.','.$otrenhrs.','.$rejectreason.','.$stats.','.$appr_over.','.$atch.')"';
+            if($lenr > 35){
+                $rmrks = substr($result['remarks'], 0, 35).'....';
+            }else{
+                $rmrks = $result['remarks'];
+            }
+            echo '
+            <tr class="csor-pointer">
+            <td '.$onclick.'>' . date('F d, Y', strtotime($result['ot_date'])) . '</td>
+            <td '.$onclick.'>' . $result['ot_type'] . '</td>
+            <td '.$onclick.'>' . date('h:i A', strtotime($result['ot_start_dtime'])) . '</td>
+            <td '.$onclick.'>' . date('h:i A', strtotime($result['ot_end_dtime'])) . '</td>
+            <td '.$onclick.'>' . round($result['ot_req_hrs'],2) . '</td> 
+            <td '.$onclick.'>' . round($result['ot_ren_hrs'],2) . '</td>
+            <td '.$onclick.'>' . $rmrks.'</td>
+            <td '.$onclick.' id="st'.$result['rowdy'].'">' . $result['stats'] . '</td>';
                 if($result['stats'] == 'PENDING' || $result['stats'] == 'APPROVED'){
                 echo'
                 <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewOtModal('.$otdate.','.$ottype.','.$otstartdtime.','.$otenddtime.','.$remark.','.$otreqhrs.','.$otrenhrs.','.$rejectreason.','.$stats.','.$appr_over.','.$atch.')" title="View Overtime">
@@ -502,6 +503,127 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
         $query_payt->bindValue(':empCode',$empCode);
         $query_payt->execute(); 
 
+    }else if(($otsd_dt < '22:00' and $otsd_dt > '06:00') and ($otend_dt > '22:00' or $otend_dt < '06:00') and !in_array($daydate,$wdays)){
+
+        // echo 'night diff with insert and update weekend';
+        //  exit();
+
+        $query = "INSERT INTO tr_overtime (emp_code,ot_date,datefiled,reporting_to,ot_start_dtime,ot_end_dtime,ot_req_hrs,remarks,attachment,audituser,auditdate) 
+        VALUES(:emp_code,:otDate,:datefiled,:empReportingTo,:otStartDtime,:otEndDtime,:otReqHrs,:remarks,:attachment,:audituser,:auditdate) ";
+
+        $stmt =$connL->prepare($query);
+
+        $param = array(
+        ":emp_code"=> $empCode,
+        ":otDate" => $otDate,
+        ":datefiled"=>date('m-d-Y'),
+        ":empReportingTo" => $empReportingTo,
+        ":otStartDtime" => $otsd_d,
+        ":otEndDtime"=> $otend_d,
+        ":otReqHrs"=> $total,
+        ":remarks"=> $remarks,
+        ":attachment"=> $attachment,
+        ":audituser" => $empCode,
+        ":auditdate"=>date('m-d-Y H:i:s')
+        );
+
+        $result = $stmt->execute($param);
+        echo $result;
+
+        $query_pay = $connL->prepare('EXEC GenerateOTType :ot_date,:empCode');
+        $query_pay->bindValue(':ot_date',$otDate);
+        $query_pay->bindValue(':empCode',$empCode);
+        $query_pay->execute(); 
+
+        $queryt = "INSERT INTO tr_overtime (emp_code,ot_date,datefiled,reporting_to,ot_start_dtime,ot_end_dtime,ot_req_hrs,remarks,attachment,audituser, auditdate) 
+        VALUES(:emp_code,:otDate,:datefiled,:empReportingTo,:otStartDtime,:otEndDtime,:otReqHrs,:remarks,:attachment,:audituser,:auditdate) ";
+
+        $stmtt =$connL->prepare($queryt);
+
+        $paramt = array(
+        ":emp_code"=> $empCode,
+        ":otDate" => $otDate,
+        ":datefiled"=>date('m-d-Y'),
+        ":empReportingTo" => $empReportingTo,
+        ":otStartDtime" => $fixed_date,
+        ":otEndDtime"=> $otend_d,
+        ":otReqHrs"=> $total_fxe,
+        ":remarks"=> $remarks,
+        ":attachment"=> $attachment,
+        ":audituser" => $empCode,
+        ":auditdate"=>date('m-d-Y H:i:s')
+        );
+
+        $resultt = $stmtt->execute($paramt);
+        echo $resultt;        
+
+        $query_payt = $connL->prepare('EXEC GenerateOTNDType :ot_date,:empCode');
+        $query_payt->bindValue(':ot_date',$otDate);
+        $query_payt->bindValue(':empCode',$empCode);
+        $query_payt->execute(); 
+
+
+    }else if(($otsd_dt >= '22:00' or $otsd_dt < '06:00') and ($otend_dt >= '22:00' or $otend_dt < '06:00') and !in_array($daydate,$wdays)){
+
+        // echo 'night diff with insert only weekend';
+        // exit();
+        
+
+        $query = "INSERT INTO tr_overtime (emp_code,ot_date,datefiled,reporting_to,ot_start_dtime,ot_end_dtime,ot_req_hrs,remarks,attachment,audituser,auditdate) 
+        VALUES(:emp_code,:otDate,:datefiled,:empReportingTo,:otStartDtime,:otEndDtime,:otReqHrs,:remarks,:attachment,:audituser,:auditdate) ";
+
+        $stmt =$connL->prepare($query);
+
+        $param = array(
+        ":emp_code"=> $empCode,
+        ":otDate" => $otDate,
+        ":datefiled"=>date('m-d-Y'),
+        ":empReportingTo" => $empReportingTo,
+        ":otStartDtime" => $otsd_d,
+        ":otEndDtime"=> $otend_d,
+        ":otReqHrs"=> $total,
+        ":remarks"=> $remarks,
+        ":attachment"=> $attachment,
+        ":audituser" => $empCode,
+        ":auditdate"=>date('m-d-Y H:i:s')
+        );
+
+
+        $result = $stmt->execute($param);
+        echo $result;
+
+        $query_pay = $connL->prepare('EXEC GenerateOTType :ot_date,:empCode');
+        $query_pay->bindValue(':ot_date',$otDate);
+        $query_pay->bindValue(':empCode',$empCode);
+        $query_pay->execute(); 
+
+        $queryte = "INSERT INTO tr_overtime (emp_code,ot_date,datefiled,reporting_to,ot_start_dtime,ot_end_dtime,ot_req_hrs,remarks,attachment,audituser, auditdate) 
+        VALUES(:emp_code,:otDate,:datefiled,:empReportingTo,:otStartDtime,:otEndDtime,:otReqHrs,:remarks,:attachment,:audituser,:auditdate) ";
+
+        $stmtte =$connL->prepare($queryte);
+
+        $paramte = array(
+        ":emp_code"=> $empCode,
+        ":otDate" => $otDate,
+        ":datefiled"=>date('m-d-Y'),
+        ":empReportingTo" => $empReportingTo,
+        ":otStartDtime" => $otsd_d,
+        ":otEndDtime"=> $otend_d,
+        ":otReqHrs"=> $total,
+        ":remarks"=> $remarks,
+        ":attachment"=> $attachment,
+        ":audituser" => $empCode,
+        ":auditdate"=>date('m-d-Y H:i:s')
+        );
+
+        $resultte = $stmtte->execute($paramte);
+        echo $resultte;        
+
+        $query_payte = $connL->prepare('EXEC GenerateOTNDType :ot_date,:empCode');
+        $query_payte->bindValue(':ot_date',$otDate);
+        $query_payte->bindValue(':empCode',$empCode);
+        $query_payte->execute(); 
+
     }else{
 
         // echo 'regular pay only';
@@ -537,97 +659,96 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
     }
 
 
-$resquery = "SELECT * FROM tr_overtime WHERE ot_date = :otDate and emp_code = :empCode and status = 1 and ot_type like '%Rest Day%'";
-$resparam = array(':empCode' => $empCode,':otDate' => $otDate);
-$resstmt =$connL->prepare($resquery);
-$resstmt->execute($resparam);
-$resresult = $resstmt->fetch();
-$res_ot = round($resresult['ot_req_hrs']);
-$res_date = $resresult['ot_date'];
-$res_start = $resresult['ot_start_dtime'];
-$res_end = $resresult['ot_end_dtime'];
-$res_id = $resresult['rowid'];
-$rot_start = date('m-d-Y H:i:s', strtotime($res_start));
-$rot_end = date('m-d-Y H:i:s', strtotime($res_end));
-$rot_10pm = date('m-d-Y 22:00:00', strtotime($res_date));
-$hi_start = date('H:i', strtotime($res_start));
-$hi_end = date('H:i', strtotime($res_end));  
+// $resquery = "SELECT * FROM tr_overtime WHERE ot_date = :otDate and emp_code = :empCode and status = 1 and ot_type like '%Rest Day%'";
+// $resparam = array(':empCode' => $empCode,':otDate' => $otDate);
+// $resstmt =$connL->prepare($resquery);
+// $resstmt->execute($resparam);
+// $resresult = $resstmt->fetch();
+// $res_ot = round($resresult['ot_req_hrs']);
+// $res_date = $resresult['ot_date'];
+// $res_start = $resresult['ot_start_dtime'];
+// $res_end = $resresult['ot_end_dtime'];
+// $res_id = $resresult['rowid'];
+// $rot_start = date('m-d-Y H:i:s', strtotime($res_start));
+// $rot_end = date('m-d-Y H:i:s', strtotime($res_end));
+// $rot_10pm = date('m-d-Y 22:00:00', strtotime($res_date));
+// $hi_start = date('H:i', strtotime($res_start));
+// $hi_end = date('H:i', strtotime($res_end));  
 
 
-    if($hi_start > $hi_end){
-        $hienddate1 = date('Y-m-d', strtotime($res_date. ' + 1 day')); 
-        $hi_stmp = $res_date.'T'.$hi_start;
-        $hi_etmp = $hienddate1.'T'.$hi_end; 
-        $hi10_tmp = $otDate.'T22:00';    
-        $fxhistart = strtotime($hi_stmp);
-        $fxhiend = strtotime($hi_etmp);  
-        $fxhi10 = strtotime($hi10_tmp); 
-        $totfxhi = round(($fxhiend - $fxhistart)/3600,2);   
-        $totfxs = round(($fxhi10 - $fxhistart)/3600,2);
-        $totfxe = round(($fxhiend - $fxhi10)/3600,2);       
-    }else{
-        $hi_stmp = $res_date.'T'.$hi_start;
-        $hi_etmp = $res_date.'T'.$hi_end;
-        $hi10_tmp = $otDate.'T22:00';
-        $fxhistart = strtotime($hi_stmp);
-        $fxhiend = strtotime($hi_etmp);
-        $fxhi10 = strtotime($hi10_tmp);        
-        $totfxhi = round(($fxhiend - $fxhistart)/3600,2);   
-        $totfxs = round(($fxhi10 - $fxhistart)/3600,2);
-        $totfxe = round(($fxhiend - $fxhi10)/3600,2);   
-    }    
+//     if($hi_start > $hi_end){
+//         $hienddate1 = date('Y-m-d', strtotime($res_date. ' + 1 day')); 
+//         $hi_stmp = $res_date.'T'.$hi_start;
+//         $hi_etmp = $hienddate1.'T'.$hi_end; 
+//         $hi10_tmp = $otDate.'T22:00';    
+//         $fxhistart = strtotime($hi_stmp);
+//         $fxhiend = strtotime($hi_etmp);  
+//         $fxhi10 = strtotime($hi10_tmp); 
+//         $totfxhi = round(($fxhiend - $fxhistart)/3600,2);   
+//         $totfxs = round(($fxhi10 - $fxhistart)/3600,2);
+//         $totfxe = round(($fxhiend - $fxhi10)/3600,2);       
+//     }else{
+//         $hi_stmp = $res_date.'T'.$hi_start;
+//         $hi_etmp = $res_date.'T'.$hi_end;
+//         $hi10_tmp = $otDate.'T22:00';
+//         $fxhistart = strtotime($hi_stmp);
+//         $fxhiend = strtotime($hi_etmp);
+//         $fxhi10 = strtotime($hi10_tmp);        
+//         $totfxhi = round(($fxhiend - $fxhistart)/3600,2);   
+//         $totfxs = round(($fxhi10 - $fxhistart)/3600,2);
+//         $totfxe = round(($fxhiend - $fxhi10)/3600,2);   
+//     }    
 
 
-    if(($hi_start < '22:00' and $hi_start > '06:00') and ($hi_end > '22:00' or $hi_end < '06:00')){
+//     if(($hi_start < '22:00' and $hi_start > '06:00') and ($hi_end > '22:00' or $hi_end < '06:00')){
 
-        $cmdui = $connL->prepare("UPDATE dbo.tr_overtime SET ot_end_dtime = :rot_10pm,ot_req_hrs = :totfxs 
-            where rowid = :res_id");
-        $cmdui->bindValue('rot_10pm',$rot_10pm);
-        $cmdui->bindValue('totfxs',$totfxs);
-        $cmdui->bindValue('res_id',$res_id);
-        $cmdui->execute();     
+//         $cmdui = $connL->prepare("UPDATE dbo.tr_overtime SET ot_end_dtime = :rot_10pm,ot_req_hrs = :totfxs 
+//             where rowid = :res_id");
+//         $cmdui->bindValue('rot_10pm',$rot_10pm);
+//         $cmdui->bindValue('totfxs',$totfxs);
+//         $cmdui->bindValue('res_id',$res_id);
+//         $cmdui->execute();     
 
 
-        $queryUI = "INSERT INTO tr_overtime (emp_code,ot_date,datefiled,reporting_to,ot_start_dtime,ot_end_dtime,ot_req_hrs,remarks,attachment,audituser, auditdate) 
-        VALUES(:emp_code,:otDate,:datefiled,:empReportingTo,:otStartDtime,:otEndDtime,:otReqHrs,:remarks,:attachment,:audituser,:auditdate) ";
+//         $queryUI = "INSERT INTO tr_overtime (emp_code,ot_date,datefiled,reporting_to,ot_start_dtime,ot_end_dtime,ot_req_hrs,remarks,attachment,audituser, auditdate) 
+//         VALUES(:emp_code,:otDate,:datefiled,:empReportingTo,:otStartDtime,:otEndDtime,:otReqHrs,:remarks,:attachment,:audituser,:auditdate) ";
 
-        $stmtUI =$connL->prepare($queryUI);
+//         $stmtUI =$connL->prepare($queryUI);
 
-        $paramUI = array(
-        ":emp_code"=> $empCode,
-        ":otDate" => $res_date,
-        ":datefiled"=>date('m-d-Y'),
-        ":empReportingTo" => $empReportingTo,
-        ":otStartDtime" => $rot_10pm,
-        ":otEndDtime"=> $rot_end,
-        ":otReqHrs"=> $totfxe,
-        ":remarks"=> $remarks,
-        ":attachment"=> $attachment,
-        ":audituser" => $empCode,
-        ":auditdate"=>date('m-d-Y H:i:s')
-        );
+//         $paramUI = array(
+//         ":emp_code"=> $empCode,
+//         ":otDate" => $res_date,
+//         ":datefiled"=>date('m-d-Y'),
+//         ":empReportingTo" => $empReportingTo,
+//         ":otStartDtime" => $rot_10pm,
+//         ":otEndDtime"=> $rot_end,
+//         ":otReqHrs"=> $totfxe,
+//         ":remarks"=> $remarks,
+//         ":attachment"=> $attachment,
+//         ":audituser" => $empCode,
+//         ":auditdate"=>date('m-d-Y H:i:s')
+//         );
 
-        $resultUI = $stmtUI->execute($paramUI);
-        echo $resultUI;      
+//         $resultUI = $stmtUI->execute($paramUI);
+//         echo $resultUI;      
 
-        $query_payUI = $connL->prepare('EXEC GenerateOTRNDNType :ot_date,:empCode,:res_id');
-        $query_payUI->bindValue(':ot_date',$otDate);
-        $query_payUI->bindValue(':empCode',$empCode);
-        $query_payUI->bindValue(':res_id',$res_id);
-        $query_payUI->execute();                   
+//         $query_payUI = $connL->prepare('EXEC GenerateOTRNDNType :ot_date,:empCode,:res_id');
+//         $query_payUI->bindValue(':ot_date',$otDate);
+//         $query_payUI->bindValue(':empCode',$empCode);
+//         $query_payUI->bindValue(':res_id',$res_id);
+//         $query_payUI->execute();                   
                 
-    }else if(($hi_start >= '22:00' or $hi_start < '06:00') and ($hi_end >= '22:00' or $hi_end < '06:00')){
+//     }else if(($hi_start >= '22:00' or $hi_start < '06:00') and ($hi_end >= '22:00' or $hi_end < '06:00')){
 
-        $query_payio = $connL->prepare('EXEC GenerateOTRNDType :res_id');
-        $query_payio->bindValue(':res_id',$res_id);
-        $query_payio->execute(); 
+//         $query_payio = $connL->prepare('EXEC GenerateOTRNDType :res_id');
+//         $query_payio->bindValue(':res_id',$res_id);
+//         $query_payio->execute(); 
 
-    }else{
-        // echo 'as is';
-    }    
+//     }else{
+//         // echo 'as is';
+//     }    
 
      
-
         $squery = "SELECT lastname+', '+firstname as [fullname] FROM employee_profile WHERE emp_code = :empCode";
         $sparam = array(':empCode' => $empCode);
         $sstmt =$connL->prepare($squery);

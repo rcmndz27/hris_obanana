@@ -130,7 +130,7 @@
               <i class="fas fa-search-plus"></i> Generate                      
             </button> 
             
-              <a href="../newhireaccess/newemployee_entry.php" class="text-light" target="_blank"><button type="button" id="search" class="btn btn-primary mr-2" ><i class="fas fa-user"></i>Add User</button></a>                    
+              <a href="../newhireaccess/newemployee_entry.php" class="text-light" target="_blank"><button type="button" id="search" class="btn btn-primary mr-2" ><i class="fas fa-user mr-2"></i>Add User</button></a>                    
                        
         </div>
         <div class='col-md-4' >     
@@ -571,6 +571,7 @@ function GetEmpImgFile() {
         var emp_type = $( "#emp_type option:selected" ).text();
         var emp_level = $('#emp_level').children("option:selected").val();
         var emplevel = emp_level.split(" - ");
+        var elevel = $('#emp_level').val();
         var work_sched_type = $( "#work_sched_type option:selected" ).val();
         var minimum_wage = $( "#minimum_wage option:selected" ).val();
         var pay_type = $( "#pay_type option:selected" ).val();
@@ -584,7 +585,7 @@ function GetEmpImgFile() {
              var rt = reportingto[0];
         }
 
-        // console.log(rowid);
+        // console.log(emplevel[0]);
         // return false;
 
             var files = document.getElementById("empimgpic").files;

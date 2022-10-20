@@ -13,6 +13,14 @@ table   {
  font-family: "Dosis", sans-serif;
 }
 
+.csor-pointer{
+    cursor: pointer;
+}
+
+.csor-pointer:hover{
+    background-color: #dee2e6;
+    color: black;
+}
 
 
 .addNoteBut {

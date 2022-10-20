@@ -244,7 +244,7 @@ Class ObApp{
                     <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for official business.." title="Type in official business details"> 
                         </div>                     
                 </div>          
-        <table id="obList" class="table table-striped table-sm">
+        <table id="obList" class="table table-sm">
         <thead>
             <tr>
                 <th>OB Date</th>
@@ -281,14 +281,15 @@ Class ObApp{
                 $appr_over = "'".$result['approver']."'";
                 $empcode = "'".$result['emp_code']."'";
                 $atch = "'".$result['attachment']."'";
+                $onclick = 'onclick="viewObModal('.$obdestination.','.$obdate.','.$obtime.','.$obpurpose.','.$obpercmp.','.$stats.','.$appr_over.','.$atch.')"';
                 echo '
-                <tr>
-                <td>' . date('F d, Y', strtotime($result['ob_date'])). '</td>                
-                <td>' . $result['ob_destination'] . '</td>
-                <td>' . date('h:i a', strtotime($result['ob_time'])) . '</td>
-                <td>' . $result['ob_purpose'] . '</td>
-                <td>' . $result['ob_percmp'] . '</td>
-                <td id="st'.$result['rowdy'].'">' . $result['stats'] . '</td>';
+                <tr class="csor-pointer">
+                <td '.$onclick.'>' . date('F d, Y', strtotime($result['ob_date'])). '</td>                
+                <td '.$onclick.'>' . $result['ob_destination'] . '</td>
+                <td '.$onclick.'>' . date('h:i a', strtotime($result['ob_time'])) . '</td>
+                <td '.$onclick.'>' . $result['ob_purpose'] . '</td>
+                <td '.$onclick.'>' . $result['ob_percmp'] . '</td>
+                <td '.$onclick.' id="st'.$result['rowdy'].'">' . $result['stats'] . '</td>';
                 if($result['stats'] == 'PENDING' || $result['stats'] == 'APPROVED'){
                 echo'
                 <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewObModal('.$obdestination.','.$obdate.','.$obtime.','.$obpurpose.','.$obpercmp.','.$stats.','.$appr_over.','.$atch.')" title="View Official Business">

@@ -30,6 +30,7 @@
 <script type="text/javascript" src="../salaryadjustment/salaryadjustment_ent.js"></script>
 <script type='text/javascript' src='../js/validator.js'></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<body onload="javascript:generateEmpStatus();">
 <div class="container">
     <div class="section-title">
           <h1>ALL PAYROLL ADJUSTMENT MANAGEMENT LIST</h1>
@@ -38,28 +39,52 @@
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item active font-weight-bold" aria-current="page"><i class='fas fa-money-bill-wave fa-fw mr-1'>
-                        </i>Salary Adjustment Management List</li>
+              <li class="breadcrumb-item active font-weight-bold" aria-current="page"><i class='fas fa-money-bill-wave fa-fw mr-1'> </i>Salary Adjustment Management List</li>
             </ol>
           </nav>
-    <div class="pt-3">
-        <div class="row align-items-end justify-content-end">
-            <div class="col-md-12 mb-3">
-                <button type="button" class="btn btn-warning" id="salaryAdjEntry"><i class="fas fa-plus-circle mr-1"></i> Add Salary Adjustment </button>
-            </div>
+    <div class="form-row">
+        <div class='col-sm-1'>
+            <label for="payroll_period" class="col-form-label pad">Status:</label>
         </div>
+            <div class='col-md-2' >
+              <select class="form-select" id="empStatus" name="empStatus" value="">
+                <option value="Active">Active</option>
+                <option value="Resigned">Resigned</option>
+                <option value="Terminated">Terminated</option>
+                <option value="Separated">Separated</option>
+              </select>    
+          </div>
+        <div class='col-md-4' >          
+            <button type="button" id="search" class="btn btn-primary text-white mr-1" onclick="generateEmpStatus();">
+              <i class="fas fa-search-plus"></i> Generate                      
+            </button>  
+        <button type="button" class="btn btn-warning" id="salaryAdjEntry"><i class="fas fa-plus-circle"></i> Add New Employee Salary </button>                                              
+        </div>
+      <div class="col-md-1">
+            <select class="form-select" name="state" id="maxRows">
+                <option value="5000">ALL</option>                
+                 <option value="5">5</option>
+                 <option value="10">10</option>
+                 <option value="15">15</option>
+                 <option value="20">20</option>
+                 <option value="50">50</option>
+                 <option value="70">70</option>
+                 <option value="100">100</option>
+            </select> 
+        </div>          
+        <div class='col-md-4' >     
+            <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for employee salary..." title="Type in employee name">
+        </div>                                              
+    </div>  
+
+    <div class="pt-1">
         <div class="row">
             <div class="col-md-12">
-                <div class="panel-body">
-                    <div id="tableList" class="table-responsive-sm table-body">
-                        <?php $allSalaryList->GetAllSalaryAdjList(); ?>
-
-                    </div>
-                </div>
+                    <div id='contents'></div>  
             </div>
         </div>
     </div>
-
+  
 
     <div class="modal fade" id="popUpModal" tabindex="-1" role="dialog" aria-labelledby="informationModalTitle"
         aria-hidden="true">
@@ -213,9 +238,47 @@
 
     </div> <!-- main body mbt closing -->
 </div><!-- container closing -->
+</body>
+
+<script type="text/javascript">
 
 
-<script>
+     function generateEmpStatus()
+    {
+        document.getElementById("myDiv").style.display="block";
+        var url = "../salaryadjustment/salaryadjustmentlist_process.php";
+        var empStatus = $('#empStatus').val();
+
+        $.post (
+            url,
+            {   
+                empStatus:empStatus
+                
+            },
+            function(data) { 
+                $("#contents").html(data).show();
+                $("#allSalaryAdjList").tableExport({
+                    headers: true,
+                    footers: true,
+                    formats: ['xlsx'],
+                    filename: 'id',
+                    bootstrap: false,
+                    exportButtons: true,
+                    position: 'top',
+                    ignoreRows: null,
+                    ignoreCols: null,
+                    trimWhitespace: true,
+                    RTL: false,
+                    sheetname: 'SalaryAdjustmentEmployees'
+                });
+            $(".fa-file-export").remove();
+            $(".btn btn-primary").prepend('<i class="fas fa-file-export"></i>');      
+                document.getElementById("myDiv").style.display="none"; 
+            }
+            );
+    }    
+
+
 
     function onlyNumberKey(evt) {
           
