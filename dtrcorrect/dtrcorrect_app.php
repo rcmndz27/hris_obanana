@@ -414,6 +414,10 @@ public function GetAlldtrcorrectAppHistory($date_from,$date_to,$status){
                     ":auditdate"=>date('m-d-Y H:i:s')
                 );
 
+
+                // var_dump($param);
+                // exit();
+
             $result = $stmt->execute($param);
 
             echo $result;

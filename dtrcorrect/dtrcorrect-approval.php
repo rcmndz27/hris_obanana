@@ -164,16 +164,36 @@ require '../vendor/autoload.php';
 
 
         if(isset($ea_date)){
-                if(isset($ea_in) and isset($ea_out)){
+                if(isset($ea_in) and isset($ea_out) and !isset($p_in) and isset($p_out)){
                     $queryn = "UPDATE employee_attendance SET timein = :timein, timeout = :timeout , emp_id = 0
                     WHERE emp_code = :emp_code AND punch_date = :punch_date";
                     $stmtn =$connL->prepare($queryn);
                     $paramn = array(
                         ":emp_code"=> $ea_empc,
                         ":punch_date"=> $ea_date,
-                        ":timein" => $p_in,
+                        ":timein" => $ea_in,
                         ":timeout"=> $p_out
                     );
+
+                    // var_dump($paramn);
+                    // echo "test 1"; 
+                    // exit();
+                    $stmtn->execute($paramn);
+                }else if(isset($ea_in) and isset($ea_out) and isset($p_in) and !isset($p_out)){
+                    $queryn = "UPDATE employee_attendance SET timein = :timein, timeout = :timeout , emp_id = 0
+                    WHERE emp_code = :emp_code AND punch_date = :punch_date";
+                    $stmtn =$connL->prepare($queryn);
+                    $paramn = array(
+                        ":emp_code"=> $ea_empc,
+                        ":punch_date"=> $ea_date,
+                        ":timein" => $ea_in,
+                        ":timeout"=> $p_out
+                    );
+
+                    // var_dump($paramn);
+
+                    // echo "test 2 "; 
+                    // exit();
                     $stmtn->execute($paramn);
                 }else if(isset($ea_in) and !isset($ea_out)){
                     $queryn = "UPDATE employee_attendance SET timeout = :timeout , emp_id = 0
@@ -184,6 +204,9 @@ require '../vendor/autoload.php';
                         ":punch_date"=> $ea_date,
                         ":timeout" => $p_out
                     );   
+
+                    // echo "test 2"; 
+                    // exit();
                     $stmtn->execute($paramn);
                 }else{
                     $queryn = "UPDATE employee_attendance SET timein = :timein , emp_id = 0
@@ -195,6 +218,9 @@ require '../vendor/autoload.php';
                         ":punch_date"=> $ea_date,
                         ":timein" => $p_in
                     );
+
+                    // echo "test 3"; 
+                    // exit();
                     $stmtn->execute($paramn);                                     
                 }
         }else{
@@ -211,6 +237,9 @@ require '../vendor/autoload.php';
                 ":timein" => $p_in,
                 ":timeout"=> $p_out
             );
+
+            // echo "test 41"; 
+            // exit();
 
              $resultm = $stmtm->execute($paramm);
             echo $resultm;
