@@ -424,7 +424,8 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                 $leavetyp = "'".$result['leavetype']."'";
                 $datefr = "'".date('m-d-Y', strtotime($result['date_from']))."'";
                 $dateto = "'".date('m-d-Y', strtotime($result['date_to']))."'";
-                $remark = "'".(isset($result['remarks']) ? $result['remarks'] : 'n/a')."'";
+                $remarkz = "'".(isset($result['remarks']) ?  trim(str_replace("'",'',$result['remarks'])) : 'n/a')."'";
+                $remark = preg_replace( "/\r|\n/", "", $remarkz );
                 $appdays = "'".$result['app_days']."'";
                 $appr_oved = "'".$result['approved']."'";
                 $appr_over = "'".$result['approver']."'";
