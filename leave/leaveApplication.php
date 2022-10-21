@@ -420,11 +420,11 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
             do { 
 
                 $datefl = "'".date('m-d-Y', strtotime($result['datefiled']))."'";
-                $leavedesc = "'".$result['leave_desc']."'";
+                $remarks = "'".$result['remarks']."'";
                 $leavetyp = "'".$result['leavetype']."'";
                 $datefr = "'".date('m-d-Y', strtotime($result['date_from']))."'";
                 $dateto = "'".date('m-d-Y', strtotime($result['date_to']))."'";
-                $leavedescz = "'".(isset($result['remarks']) ?  trim(str_replace("'",'',$result['leave_desc'])) : 'n/a')."'";
+                $leavedescz = "'".(isset($result['leave_desc']) ?  trim(str_replace("'",'',$result['leave_desc'])) : 'n/a')."'";
                 $leave_desc = preg_replace( "/\r|\n/", "", $leavedescz );
                 $appdays = "'".$result['app_days']."'";
                 $appr_oved = "'".$result['approved']."'";
