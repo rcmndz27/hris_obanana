@@ -424,8 +424,8 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                 $leavetyp = "'".$result['leavetype']."'";
                 $datefr = "'".date('m-d-Y', strtotime($result['date_from']))."'";
                 $dateto = "'".date('m-d-Y', strtotime($result['date_to']))."'";
-                $remarkz = "'".(isset($result['remarks']) ?  trim(str_replace("'",'',$result['remarks'])) : 'n/a')."'";
-                $remark = preg_replace( "/\r|\n/", "", $remarkz );
+                $leavedescz = "'".(isset($result['remarks']) ?  trim(str_replace("'",'',$result['leave_desc'])) : 'n/a')."'";
+                $leave_desc = preg_replace( "/\r|\n/", "", $leavedescz );
                 $appdays = "'".$result['app_days']."'";
                 $appr_oved = "'".$result['approved']."'";
                 $appr_over = "'".$result['approver']."'";
@@ -438,7 +438,7 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                 <tr class="csor-pointer" >
                 <td '.$onclick.'  id="ld'.$result['rowid'].'">' . date('F d, Y', strtotime($result['date_from'])) . '</td>
                 <td '.$onclick.' id="lt'.$result['rowid'].'">' . $result['leavetype'] . '</td>
-                <td '.$onclick.' id="ds'.$result['rowid'].'">' . $result['leave_desc'] . '</td>
+                <td '.$onclick.' id="ds'.$result['rowid'].'">' . $leave_desc . '</td>
                 <td '.$onclick.' id="lc'.$result['rowid'].'">' . $result['actl_cnt'] . '</td>
                 <td '.$onclick.' id="st'.$result['rowid'].'">' . $result['approved'] . '</td>';
     
