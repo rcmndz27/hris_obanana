@@ -438,7 +438,7 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                 <tr class="csor-pointer" >
                 <td '.$onclick.'  id="ld'.$result['rowid'].'">' . date('F d, Y', strtotime($result['date_from'])) . '</td>
                 <td '.$onclick.' id="lt'.$result['rowid'].'">' . $result['leavetype'] . '</td>
-                <td '.$onclick.' id="ds'.$result['rowid'].'">' . $leavedesc . '</td>
+                <td '.$onclick.' id="ds'.$result['rowid'].'">' . $result['leave_desc']. '</td>
                 <td '.$onclick.' id="lc'.$result['rowid'].'">' . $result['actl_cnt'] . '</td>
                 <td '.$onclick.' id="st'.$result['rowid'].'">' . $result['approved'] . '</td>';
     
