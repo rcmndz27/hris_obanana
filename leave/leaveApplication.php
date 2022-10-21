@@ -420,7 +420,7 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
             do { 
 
                 $datefl = "'".date('m-d-Y', strtotime($result['datefiled']))."'";
-                $remarks = "'".$result['remarks']."'";
+                $remark = "'".$result['remarks']."'";
                 $leavetyp = "'".$result['leavetype']."'";
                 $datefr = "'".date('m-d-Y', strtotime($result['date_from']))."'";
                 $dateto = "'".date('m-d-Y', strtotime($result['date_to']))."'";
