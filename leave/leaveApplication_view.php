@@ -31,7 +31,7 @@
         $e_appr = (isset($ar['emailaddress'])) ? $ar['emailaddress'] : 'n/a' ;
         $afname = (isset($ar['firstname'])) ? $ar['firstname'] : 'n/a' ; 
         $alname = (isset($ar['lastname'])) ? $ar['lastname'] : 'n/a' ;
-        $n_appr = $afname.' '.$afname;        
+        $n_appr = $afname.' '.$alname;        
 
         $querys = 'SELECT * FROM dbo.employee_leave WHERE emp_code = :empcode ';
         $params = array(":empcode" => $_SESSION['userid']);
