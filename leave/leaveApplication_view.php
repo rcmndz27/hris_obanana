@@ -768,8 +768,8 @@ function cancelLeave(lvid,empcd)
                 
                 param = JSON.stringify(param);
 
-                console.log(param);
-                return false;
+                // console.log(param);
+                // return false;
 
                     if($('#dateTo').val() >= $('#dateFrom').val()){
                         swal({
@@ -787,18 +787,18 @@ function cancelLeave(lvid,empcd)
                                         url: "../leave/leaveApplicationProcess.php",
                                         data: {data:param} ,
                                         success: function (data){
-                                            // console.log("success: "+ data);
-                                                    swal({
-                                                    title: "Success!", 
-                                                    text: "Successfully added leave details!", 
-                                                    type: "success",
-                                                    icon: "success",
-                                                    }).then(function() {
-                                                        location.href = '../leave/leaveApplication_view.php';
-                                                    });
+                                            console.log("success: "+ data);
+                                                    // swal({
+                                                    // title: "Success!", 
+                                                    // text: "Successfully added leave details!", 
+                                                    // type: "success",
+                                                    // icon: "success",
+                                                    // }).then(function() {
+                                                    //     location.href = '../leave/leaveApplication_view.php';
+                                                    // });
                                         },
                                         error: function (data){
-                                            // console.log("error: "+ data);    
+                                            console.log("error: "+ data);    
                                         }
                                     });//ajax
                           } else {
