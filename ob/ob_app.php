@@ -274,7 +274,8 @@ Class ObApp{
                 $obdestination = "'".(isset($result['ob_destination']) ? $result['ob_destination'] : 'n/a')."'";
                 $obdate = "'".date('m-d-Y', strtotime($result['ob_date']))."'";
                 $obtime = "'".date('h:i a', strtotime($result['ob_time']))."'";
-                $obpurpose = "'".$result['ob_purpose']."'";
+                $obpurposz = "'".(isset($result['ob_purpose']) ?  trim(str_replace("'",'',$result['ob_purpose'])) : 'n/a')."'";
+                $obpurpose = preg_replace( "/\r|\n/", "", $obpurposz );                  
                 $obpercmp = "'".$result['ob_percmp']."'";
                 $stats = "'".$result['stats']."'";
                 $obid = "'".$result['rowdy']."'";

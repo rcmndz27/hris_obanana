@@ -356,7 +356,7 @@ when   status = 4 then 'CANCELLED' ELSE 'N/A' END) as stats,a.rowid  as wfhid,a.
 FROM dbo.tr_workfromhome a
 left join employee_attendance b
 on RIGHT(A.emp_code, LEN(A.emp_code) - 3) = b.emp_code
-and a.wfh_date = b.punch_date where a.emp_code = :emp_code and a.wfh_date = :wfh_date and status = 2 ORDER BY wfh_date DESC";
+and a.wfh_date = b.punch_date where a.emp_code = :emp_code and a.wfh_date = :wfh_date and status in (1,2) ORDER BY wfh_date DESC";
 $spparam = array(':emp_code' => $empCode,':wfh_date' => date('Y-m-d'));
 $spstmt =$connL->prepare($spquery);
 $spstmt->execute($spparam);

@@ -303,7 +303,8 @@ public function GetAllWfhRepHistory($date_from,$date_to,$empCode){
             do { 
 
                 $wfhdate = "'".date('m-d-Y', strtotime($result['wfh_date']))."'";
-                $wfhtask = "'".$result['wfh_task']."'";
+                $wfhtaskz = "'".(isset($result['wfh_task']) ?  trim(str_replace("'",'',$result['wfh_task'])) : 'n/a')."'";
+                $wfhtask = preg_replace( "/\r|\n/", "", $wfhtaskz );                
                 $wfhoutput = "'".$result['wfh_output']."'";
                 $wfhoutput2 = "'".$result['wfh_output2']."'";
                 $wfhpercentage = "'".$result['wfh_percentage']."'";
