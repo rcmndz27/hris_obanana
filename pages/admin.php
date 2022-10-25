@@ -121,7 +121,7 @@ $stmtu->execute();
 $resultu = $stmtu->fetch();
 
 //NO TIME-IN
-$queryl = "SELECT lastname+','+firstname as [fullname],emp_pic_loc from employee_profile where ranking = 1 and emp_status = 'Active' and badgeno not in (SELECT a.emp_code from employee_attendance a left join employee_profile b on a.emp_code = b.badgeno where a.punch_date = CONVERT(date, GETDATE()) and b.emp_status = 'Active')";
+$queryl = "SELECT lastname+','+firstname as [fullname],up_avatar from employee_profile where ranking = 1 and emp_status = 'Active' and badgeno not in (SELECT a.emp_code from employee_attendance a left join employee_profile b on a.emp_code = b.badgeno where a.punch_date = CONVERT(date, GETDATE()) and b.emp_status = 'Active')";
 $stmtl =$connL->prepare($queryl);
 $stmtl->execute();
 $resultl = $stmtl->fetch();    
@@ -870,7 +870,7 @@ swal({text:"You cancel your time out!",icon:"warning"});
         <div class="card-body cdbody">
               <?php  
                 if($resultl){
-                    $ppic = (isset($resultl['emp_pic_loc'])) ? $resultl['emp_pic_loc'] : 'nophoto.jpg' ;
+                    $ppic = (isset($resultl['up_avatar'])) ? $resultl['up_avatar'] : 'nophoto.jpg' ;
                     do { 
                 echo ' <div class="row">
                     <div class="col-sm-1">
@@ -900,7 +900,7 @@ swal({text:"You cancel your time out!",icon:"warning"});
               <?php  
                 if($resulty){
                     do { 
-                    $ppic = (isset($resulty['emp_pic_loc'])) ? $resulty['emp_pic_loc'] : 'nophoto.jpg' ;
+                    $ppic = (isset($resulty['up_avatar'])) ? $resulty['up_avatar'] : 'nophoto.jpg' ;
                     $fname =$resulty['fullname'] ;                        
                 echo ' <div class="row">
                     <div class="col-sm-1">
@@ -975,12 +975,11 @@ swal({text:"You cancel your time out!",icon:"warning"});
         <div class="card-body cdbody">
               <?php  
                 if($resultu){
-                    $ppic = (isset($resultu['emp_pic_loc'])) ? $resultu['emp_pic_loc'] : 'nophoto.jpg' ;
-
                     do { 
+                        $ppic = (isset($resultu['up_avatar'])) ? $resultu['up_avatar'] : 'nophoto.jpg' ;
                 echo ' <div class="row">
                     <div class="col-sm-1">
-                      <h6 class="mb-0"><img class="rounded-circle" style="width:30px;height:30px;" src="../img/'.$ppic.'"></h6>
+                      <h6 class="mb-0"><img class="rounded-circle" style="width:30px;height:30px;" src="../uploads/employees/'.$ppic.'"></h6>
                     </div>
                     <div class="col-sm-9 text-secondary"><b>
                       '.$resultu['lastname'].', '.$resultu['firstname'].'</b><br>'.$resultu['department'].'<br>'.date('F d', strtotime($resultu['birthdate'])).'  
