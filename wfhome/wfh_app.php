@@ -91,7 +91,7 @@ Class WfhApp{
                 $empcode = "'".$result['empcd']."'";
                 $attid = "'".$result['attid']."'";
                 $atch = "'".$result['attachment']."'";
-                $onclick = 'onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhoutput2.','.$wfhpercentage.','.$wfhstats.','.$atch.')"';
+                $onclick = 'onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhpercentage.','.$wfhstats.','.$atch.')"';
                 echo "
                 <tr class='csor-pointer'>
                 <td ".$onclick.">" . date('F d, Y', strtotime($result['wfh_date']))."</td>
@@ -209,7 +209,7 @@ public function GetAllWfhRepHistory($date_from,$date_to,$empCode){
                 $empcode = "'".$result['empcd']."'";
                 $attid = "'".$result['attid']."'";
                 $atch = "'".$result['attachment']."'";
-                $onclick = 'onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhoutput2.','.$wfhpercentage.','.$wfhstats.','.$atch.')"';
+                $onclick = 'onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhpercentage.','.$wfhstats.','.$atch.')"';
                 echo "
                 <tr class='csor-pointer'>
                 <td ".$onclick.">" . date('F d, Y', strtotime($result['wfh_date']))."</td>
