@@ -41,7 +41,7 @@ Class UsersList{
         </thead>
         <tbody>';
 
-        $query = "SELECT * from dbo.mf_user";
+        $query = "SELECT * from dbo.mf_user order by username ASC";
         $stmt =$connL->prepare($query);
         $stmt->execute();
         $result = $stmt->fetch();

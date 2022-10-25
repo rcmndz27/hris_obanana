@@ -21,8 +21,8 @@ Class DeductionList{
         </thead>
         <tbody>';
 
-        $query = "SELECT a.deduction_emp_id,c.firstname+' '+c.lastname as [fullname],a.emp_code,b.deduction_name,b.rowid,a.period_cutoff,a.amount,a.effectivity_date,a.status from dbo.employee_deduction_management a left join dbo.mf_deductions b on a.deduction_id = b.rowid left join employee_profile c on a.emp_code = c.emp_code 
-        where c.emp_status = :empStatus ORDER by a.deduction_emp_id DESC ";
+        $query = "SELECT a.deduction_emp_id,c.lastname+' '+c.firstname as [fullname],a.emp_code,b.deduction_name,b.rowid,a.period_cutoff,a.amount,a.effectivity_date,a.status from dbo.employee_deduction_management a left join dbo.mf_deductions b on a.deduction_id = b.rowid left join employee_profile c on a.emp_code = c.emp_code 
+        where c.emp_status = :empStatus ORDER by c.lastname ASC ";
         $param = array(":empStatus" => $empStatus);
         $stmt =$connL->prepare($query);
         $stmt->execute($param);

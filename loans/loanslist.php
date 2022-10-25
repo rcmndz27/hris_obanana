@@ -24,7 +24,7 @@ Class LoansList{
         </thead>
         <tbody>';
 
-        $query = "SELECT a.loan_id,c.firstname+' '+c.lastname as [fullname],a.emp_code,b.deduction_name as loan_name,b.rowid,a.loan_amount,a.loan_balance,a.loan_totpymt,a.loan_amort,a.loan_date,a.status from dbo.employee_loans_management a left join dbo.mf_deductions b on a.loandec_id = b.rowid left join employee_profile c  on a.emp_code = c.emp_code where c.emp_status = :empStatus ORDER by a.loan_id DESC";
+        $query = "SELECT a.loan_id,c.lastname+' '+c.firstname as [fullname],a.emp_code,b.deduction_name as loan_name,b.rowid,a.loan_amount,a.loan_balance,a.loan_totpymt,a.loan_amort,a.loan_date,a.status from dbo.employee_loans_management a left join dbo.mf_deductions b on a.loandec_id = b.rowid left join employee_profile c  on a.emp_code = c.emp_code where c.emp_status = :empStatus ORDER by c.lastname asC";
         $param = array(":empStatus" => $empStatus);
         $stmt =$connL->prepare($query);
         $stmt->execute($param);

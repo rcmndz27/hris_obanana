@@ -21,7 +21,7 @@ Class AllowancesList{
         </thead>
         <tbody>';
 
-        $query = "SELECT a.benefits_emp_id,c.firstname+' '+c.lastname as [fullname],a.emp_code,b.benefit_name,b.rowid,a.period_cutoff,a.amount,a.effectivity_date,a.status from dbo.employee_allowances_management a left join dbo.mf_benefits b on a.benefit_id = b.rowid left join employee_profile c  on a.emp_code = c.emp_code where c.emp_status = :empStatus  ORDER by a.benefits_emp_id DESC";
+        $query = "SELECT a.benefits_emp_id,c.lastname+' '+c.firstname as [fullname],a.emp_code,b.benefit_name,b.rowid,a.period_cutoff,a.amount,a.effectivity_date,a.status from dbo.employee_allowances_management a left join dbo.mf_benefits b on a.benefit_id = b.rowid left join employee_profile c  on a.emp_code = c.emp_code where c.emp_status = :empStatus  ORDER by c.lastname ASC";
         $param = array(":empStatus" => $empStatus);
         $stmt =$connL->prepare($query);
         $stmt->execute($param);
