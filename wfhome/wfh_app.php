@@ -319,8 +319,8 @@ public function GetAllWfhRepHistory($date_from,$date_to,$empCode){
             do { 
 
                 $wfhdate = "'".date('m-d-Y', strtotime($result['wfh_date']))."'";
-                $wfhtaskz = "'".(isset($result['wfh_task']) ?  trim(str_replace("'",'',$result['wfh_task'])) : 'n/a')."'";
-                $wfhtask = preg_replace( "/\r|\n/", "", $wfhtaskz );                
+                $wfhtaskz = "'".(isset($result['wfh_task']) ?  trim(str_replace('"',"",$result['wfh_task'])) : 'n/a')."'";
+                $wfhtask = preg_replace("/\r|\n/", "", $wfhtaskz );                
                 $wfhoutputz = "'".(isset($result['wfh_output']) ?  trim(str_replace("'",'',$result['wfh_output'])) : 'n/a')."'";
                 $wfhoutput = preg_replace( "/\r|\n/", "", $wfhoutputz );  
                 $wfhoutput2z = "'".(isset($result['wfh_output2']) ?  trim(str_replace("'",'',$result['wfh_output2'])) : 'n/a')."'";
@@ -542,7 +542,7 @@ public function GetAllWfhRepHistory($date_from,$date_to,$empCode){
         $mail->Host       = 'mail.obanana.com'; 
         $mail->SMTPAuth   = true;                                   
         $mail->Username   = 'hris-support@obanana.com';        
-        $mail->Password   = '@dmin123@dmin123';                              
+        $mail->Password   = '@dmin2021@dmin2022';                              
         $mail->SMTPSecure = 'tls';            
         $mail->Port       = 587;                                   
 
