@@ -88,11 +88,10 @@ Class WfhApp{
                 $wfhpercentage = "'".$result['wfh_percentage']."'";
                 $wfhstats = "'".$result['stats']."'";
                 $wfhid = "'".$result['wfhid']."'";
-                $appr_over = "'".$result['approver']."'";
                 $empcode = "'".$result['empcd']."'";
                 $attid = "'".$result['attid']."'";
                 $atch = "'".$result['attachment']."'";
-                $onclick = 'onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhoutput2.','.$wfhpercentage.','.$wfhstats.','.$appr_over.','.$atch.')"';
+                $onclick = 'onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhoutput2.','.$wfhpercentage.','.$wfhstats.','.$atch.')"';
                 echo "
                 <tr class='csor-pointer'>
                 <td ".$onclick.">" . date('F d, Y', strtotime($result['wfh_date']))."</td>
@@ -105,7 +104,7 @@ Class WfhApp{
                 <td ".$onclick." id='to".$result['wfhid']."'>".(isset($result['timeout']) ? date('h:i A', strtotime($result['timeout'])) : 'n/a') . "</td>
                 <td ".$onclick." id='st".$result['wfhid']."'>" . $result['stats']."</td>";
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhpercentage.','.$wfhstats.')" title="View Work From Home">
+                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhpercentage.','.$wfhstats.','.$atch.')" title="View Work From Home">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewWfhHistoryModal('.$wfhid.')" title="View Logs">
@@ -210,7 +209,7 @@ public function GetAllWfhRepHistory($date_from,$date_to,$empCode){
                 $empcode = "'".$result['empcd']."'";
                 $attid = "'".$result['attid']."'";
                 $atch = "'".$result['attachment']."'";
-                $onclick = 'onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhoutput2.','.$wfhpercentage.','.$wfhstats.','.$appr_over.','.$atch.')"';
+                $onclick = 'onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhoutput2.','.$wfhpercentage.','.$wfhstats.','.$atch.')"';
                 echo "
                 <tr class='csor-pointer'>
                 <td ".$onclick.">" . date('F d, Y', strtotime($result['wfh_date']))."</td>
@@ -223,7 +222,7 @@ public function GetAllWfhRepHistory($date_from,$date_to,$empCode){
                 <td ".$onclick." id='to".$result['wfhid']."'>".(isset($result['timeout']) ? date('h:i A', strtotime($result['timeout'])) : 'n/a') . "</td>
                 <td ".$onclick." id='st".$result['wfhid']."'>" . $result['stats']."</td>";
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhpercentage.','.$wfhstats.')" title="View Work From Home">
+                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhpercentage.','.$wfhstats.','.$atch.')" title="View Work From Home">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewWfhHistoryModal('.$wfhid.')" title="View Logs">

@@ -51,14 +51,20 @@
 <script type="text/javascript">
     
 
-function viewWfhModal(wfhdate,wfhtask,wfhoutput,wfhpercentage,wfhstats){
+function viewWfhModal(wfhdate,wfhtask,wfhoutput,wfhpercentage,wfhstats,attachment){
    
         $('#viewWfhModal').modal('toggle');
         document.getElementById('wfhdates').value =  wfhdate;   
         document.getElementById('wfhtask').value =  wfhtask;  
         document.getElementById('wfhoutput').value =  wfhoutput;  
         document.getElementById('wfhpercentage').value =  wfhpercentage;  
-        document.getElementById('wfhstats').value =  wfhstats;                          
+        document.getElementById('wfhstats').value =  wfhstats;   
+        if(!attachment){
+            $('#viewattachment').hide();
+        }else{
+            $('#viewattachment').show();
+            document.getElementById('viewattachment').setAttribute('href','../uploads/'+attachment);
+        }                                
     }
 
     function viewWfhHistoryModal(lvlogid)
@@ -199,6 +205,8 @@ function viewWfhModal(wfhdate,wfhtask,wfhoutput,wfhpercentage,wfhstats){
                             </div> <!-- form row closing -->
                     </fieldset> 
                                 <div class="modal-footer">
+                                <?php   echo"<a title='Attachment' id='viewattachment' class='font-weight-bold' href='' style='color:#ffff;'  
+                                target='popup'><button type='button' class='btn btn-primary'><i class='text-white fas fa-paperclip mr-1'></i>View Attachment</button></a>"; ?>                                  
                                     <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Close</button>
                                 </div> 
                         </div> <!-- main body closing -->

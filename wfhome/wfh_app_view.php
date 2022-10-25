@@ -60,7 +60,7 @@
         document.getElementById('wfhpercentage').value =  wfhpercentage;  
         document.getElementById('wfhstats').value =  wfhstats;  
         document.getElementById('approver').value =  approver;   
-                if(!attachment){
+        if(!attachment){
             $('#viewattachment').hide();
         }else{
             $('#viewattachment').show();
