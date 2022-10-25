@@ -79,25 +79,31 @@ Class WfhApp{
         if($result){
             do { 
 
+
                 $wfhdate = "'".date('m-d-Y', strtotime($result['wfh_date']))."'";
-                $wfhtask = "'".$result['wfh_task']."'";
+                $wfhtaskz = "'".(isset($result['wfh_task']) ?  trim(str_replace("'",'',$result['wfh_task'])) : 'n/a')."'";
+                $wfhtask = preg_replace( "/\r|\n/", "", $wfhtaskz );                
                 $wfhoutput = "'".$result['wfh_output']."'";
+                $wfhoutput2 = "'".$result['wfh_output2']."'";
                 $wfhpercentage = "'".$result['wfh_percentage']."'";
                 $wfhstats = "'".$result['stats']."'";
                 $wfhid = "'".$result['wfhid']."'";
+                $appr_over = "'".$result['approver']."'";
                 $empcode = "'".$result['empcd']."'";
                 $attid = "'".$result['attid']."'";
+                $atch = "'".$result['attachment']."'";
+                $onclick = 'onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhoutput2.','.$wfhpercentage.','.$wfhstats.','.$appr_over.','.$atch.')"';
                 echo "
-                <tr>
-                <td>" . date('F d,Y', strtotime($result['wfh_date']))."</td>
-                <td>" . $result['fullname']."</td>
-                <td>" . $result['wfh_task'] ."</td>
-                <td>" . (isset($result['wfh_output']) ? $result['wfh_output'] : 'n/a') ."</td>
-                <td>" . (isset($result['wfh_output2']) ? $result['wfh_output2'] : 'n/a') ."</td>
-                <td>" . $result['wfh_percentage']."</td>
-                <td id='ti".$result['wfhid']."'>".(isset($result['timein']) ? date('h:i A', strtotime($result['timein'])) : 'n/a') . "</td>
-                <td id='to".$result['wfhid']."'>".(isset($result['timeout']) ? date('h:i A', strtotime($result['timeout'])) : 'n/a') . "</td>
-                <td id='st".$result['wfhid']."'>" . $result['stats']."</td>";
+                <tr class='csor-pointer'>
+                <td ".$onclick.">" . date('F d, Y', strtotime($result['wfh_date']))."</td>
+                <td ".$onclick.">" . $result['fullname'] ."</td>
+                <td ".$onclick.">" . $result['wfh_task'] ."</td>
+                <td ".$onclick.">" . (isset($result['wfh_output']) ? $result['wfh_output'] : 'n/a') ."</td>
+                <td ".$onclick.">" . (isset($result['wfh_output2']) ? $result['wfh_output2'] : 'n/a') ."</td>
+                <td ".$onclick.">" . $result['wfh_percentage']."</td>
+                <td ".$onclick." id='ti".$result['wfhid']."'>".(isset($result['timein']) ? date('h:i A', strtotime($result['timein'])) : 'n/a') . "</td>
+                <td ".$onclick." id='to".$result['wfhid']."'>".(isset($result['timeout']) ? date('h:i A', strtotime($result['timeout'])) : 'n/a') . "</td>
+                <td ".$onclick." id='st".$result['wfhid']."'>" . $result['stats']."</td>";
                 echo'
                 <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhpercentage.','.$wfhstats.')" title="View Work From Home">
                                 <i class="fas fa-binoculars"></i>
@@ -193,24 +199,29 @@ public function GetAllWfhRepHistory($date_from,$date_to,$empCode){
             do { 
 
                 $wfhdate = "'".date('m-d-Y', strtotime($result['wfh_date']))."'";
-                $wfhtask = "'".$result['wfh_task']."'";
+                $wfhtaskz = "'".(isset($result['wfh_task']) ?  trim(str_replace("'",'',$result['wfh_task'])) : 'n/a')."'";
+                $wfhtask = preg_replace( "/\r|\n/", "", $wfhtaskz );                
                 $wfhoutput = "'".$result['wfh_output']."'";
+                $wfhoutput2 = "'".$result['wfh_output2']."'";
                 $wfhpercentage = "'".$result['wfh_percentage']."'";
                 $wfhstats = "'".$result['stats']."'";
                 $wfhid = "'".$result['wfhid']."'";
+                $appr_over = "'".$result['approver']."'";
                 $empcode = "'".$result['empcd']."'";
                 $attid = "'".$result['attid']."'";
+                $atch = "'".$result['attachment']."'";
+                $onclick = 'onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhoutput2.','.$wfhpercentage.','.$wfhstats.','.$appr_over.','.$atch.')"';
                 echo "
-                <tr>
-                <td>" . date('F d,Y', strtotime($result['wfh_date']))."</td>
-                <td>" . $result['fullname']."</td>
-                <td>" . $result['wfh_task'] ."</td>
-                <td>" . (isset($result['wfh_output']) ? $result['wfh_output'] : 'n/a') ."</td>
-                <td>" . (isset($result['wfh_output2']) ? $result['wfh_output2'] : 'n/a') ."</td>
-                <td>" . $result['wfh_percentage']."</td>
-                <td id='ti".$result['wfhid']."'>".(isset($result['timein']) ? date('h:i A', strtotime($result['timein'])) : 'n/a') . "</td>
-                <td id='to".$result['wfhid']."'>".(isset($result['timeout']) ? date('h:i A', strtotime($result['timeout'])) : 'n/a') . "</td>
-                <td id='st".$result['wfhid']."'>" . $result['stats']."</td>";
+                <tr class='csor-pointer'>
+                <td ".$onclick.">" . date('F d, Y', strtotime($result['wfh_date']))."</td>
+                <td ".$onclick.">" . $result['fullname'] ."</td>
+                <td ".$onclick.">" . $result['wfh_task'] ."</td>
+                <td ".$onclick.">" . (isset($result['wfh_output']) ? $result['wfh_output'] : 'n/a') ."</td>
+                <td ".$onclick.">" . (isset($result['wfh_output2']) ? $result['wfh_output2'] : 'n/a') ."</td>
+                <td ".$onclick.">" . $result['wfh_percentage']."</td>
+                <td ".$onclick." id='ti".$result['wfhid']."'>".(isset($result['timein']) ? date('h:i A', strtotime($result['timein'])) : 'n/a') . "</td>
+                <td ".$onclick." id='to".$result['wfhid']."'>".(isset($result['timeout']) ? date('h:i A', strtotime($result['timeout'])) : 'n/a') . "</td>
+                <td ".$onclick." id='st".$result['wfhid']."'>" . $result['stats']."</td>";
                 echo'
                 <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhpercentage.','.$wfhstats.')" title="View Work From Home">
                                 <i class="fas fa-binoculars"></i>
