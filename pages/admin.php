@@ -869,9 +869,9 @@ swal({text:"You cancel your time out!",icon:"warning"});
 
         <div class="card-body cdbody">
               <?php  
-                if($resultl){
-                    $ppic = (isset($resultl['up_avatar'])) ? $resultl['up_avatar'] : 'nophoto.jpg' ;
+                if($resultl){            
                     do { 
+                        $ppic = (isset($resultl['up_avatar'])) ? $resultl['up_avatar'] : 'nophoto.jpg' ;                        
                 echo ' <div class="row">
                     <div class="col-sm-1">
                       <h6 class="mb-0"><img class="rounded-circle" style="width:25px;height:25px;" src="../uploads/employees/'.$ppic.'"></h6>
@@ -935,9 +935,8 @@ swal({text:"You cancel your time out!",icon:"warning"});
         <div class="card-body cdbody">
               <?php  
                 if($resultp){
-                    $ppic = (isset($resultp['emppic'])) ? $resultp['emppic'] : 'nophoto.jpg' ;
-
                     do { 
+                        $ppic = (isset($resultp['emppic'])) ? $resultp['emppic'] : 'nophoto.jpg' ;                        
                 echo ' <div class="row">
                     <div class="col-sm-1">
                       <h6 class="mb-0"><img class="rounded-circle" style="width:30px;height:30px;" src="../uploads/employees/'.$ppic.'"></h6>
