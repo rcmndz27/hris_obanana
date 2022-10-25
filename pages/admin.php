@@ -874,7 +874,7 @@ swal({text:"You cancel your time out!",icon:"warning"});
                     do { 
                 echo ' <div class="row">
                     <div class="col-sm-1">
-                      <h6 class="mb-0"><img class="rounded-circle" style="width:25px;height:25px;" src="../img/'.$ppic.'"></h6>
+                      <h6 class="mb-0"><img class="rounded-circle" style="width:25px;height:25px;" src="../uploads/employees/'.$ppic.'"></h6>
                     </div>
                     <div class="col-sm-9 text-secondary"><b>
                       '.$resultl['fullname'].'</b>  
@@ -904,7 +904,7 @@ swal({text:"You cancel your time out!",icon:"warning"});
                     $fname =$resulty['fullname'] ;                        
                 echo ' <div class="row">
                     <div class="col-sm-1">
-                      <h6 class="mb-0"><img class="rounded-circle" style="width:25px;height:25px;" src="../img/'.$ppic.'"></h6>
+                      <h6 class="mb-0"><img class="rounded-circle" style="width:25px;height:25px;" src="../uploads/employees/'.$ppic.'"></h6>
                     </div>
                     <div class="col-sm-9 text-secondary"><b>
                      '.$fname.'</b><br>Schedule: '.$resulty['remarks'].'  
@@ -940,7 +940,7 @@ swal({text:"You cancel your time out!",icon:"warning"});
                     do { 
                 echo ' <div class="row">
                     <div class="col-sm-1">
-                      <h6 class="mb-0"><img class="rounded-circle" style="width:30px;height:30px;" src="../img/'.$ppic.'"></h6>
+                      <h6 class="mb-0"><img class="rounded-circle" style="width:30px;height:30px;" src="../uploads/employees/'.$ppic.'"></h6>
                     </div>
                     <div class="col-sm-9 text-secondary"><b>
                       '.$resultp['fullname'].'</b><br>Late: '.round($resultp['tot_late']*60).' Min/s 
