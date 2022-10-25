@@ -51,7 +51,7 @@
 <script type="text/javascript">
     
 
-function viewWfhModal(wfhdate,wfhtask,wfhoutput,wfhpercentage,wfhstats,attachment){
+function viewWfhModal(wfhdate,wfhtask,wfhoutput,wfhpercentage,wfhstats,rjrson,attachment){
    
         $('#viewWfhModal').modal('toggle');
         document.getElementById('wfhdates').value =  wfhdate;   
@@ -59,6 +59,7 @@ function viewWfhModal(wfhdate,wfhtask,wfhoutput,wfhpercentage,wfhstats,attachmen
         document.getElementById('wfhoutput').value =  wfhoutput;  
         document.getElementById('wfhpercentage').value =  wfhpercentage;  
         document.getElementById('wfhstats').value =  wfhstats;   
+        document.getElementById('rejectreason').value =  rjrson;   
         if(!attachment){
             $('#viewattachment').hide();
         }else{
@@ -201,7 +202,13 @@ function viewWfhModal(wfhdate,wfhtask,wfhoutput,wfhpercentage,wfhstats,attachmen
                                         <label class="control-label" for="wfhstats">Status</label>
                                         <input type="text" id="wfhstats" name="wfhstats" class="form-control" readonly>
                                     </div>
-                                </div>         
+                                </div> 
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <label class="control-label" for="rejectreason">Reject Reason</label>
+                                        <input type="text" id="rejectreason" name="rejectreason" class="form-control" readonly>
+                                    </div>
+                                </div>                                          
                             </div> <!-- form row closing -->
                     </fieldset> 
                                 <div class="modal-footer">

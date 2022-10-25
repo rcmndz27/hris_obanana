@@ -50,7 +50,7 @@
 <script type="text/javascript">
     
 
-        function viewWfhModal(wfhdate,wfhtask,wfhoutput,wfhoutput2,wfhpercentage,wfhstats,approver,attachment){
+        function viewWfhModal(wfhdate,wfhtask,wfhoutput,wfhoutput2,wfhpercentage,wfhstats,rjrson,approver,attachment){
    
         $('#viewWfhModal').modal('toggle');
         document.getElementById('wfhdates').value =  wfhdate;   
@@ -59,6 +59,7 @@
         document.getElementById('wfhoutput2').value =  wfhoutput2;  
         document.getElementById('wfhpercentage').value =  wfhpercentage;  
         document.getElementById('wfhstats').value =  wfhstats;  
+        document.getElementById('rejectreason').value =  rjrson;  
         document.getElementById('approver').value =  approver;   
         if(!attachment){
             $('#viewattachment').hide();
@@ -527,12 +528,18 @@ function timeOutModal(lvid,empcd,attid){
                                         <input type="text" id="wfhoutput2" name="wfhoutput2" class="form-control" readonly>                                        
                                     </div>
                                 </div>  
-                                <div class="col-lg-4">
+                                <div class="col-lg-2">
                                     <div class="form-group">
                                         <label class="control-label" for="Approver">Approver</label>
                                         <input type="text" id="approver" name="approver" class="form-control" readonly>                                        
                                     </div>
                                 </div>                                                                        
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <label class="control-label" for="rejectreason">Reject Reason</label>
+                                        <input type="text" id="rejectreason" name="rejectreason" class="form-control" readonly>
+                                    </div>
+                                </div>                                 
                             </div> <!-- form row closing -->
                     </fieldset> 
                                 <div class="modal-footer">

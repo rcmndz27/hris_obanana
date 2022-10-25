@@ -91,7 +91,8 @@ Class WfhApp{
                 $empcode = "'".$result['empcd']."'";
                 $attid = "'".$result['attid']."'";
                 $atch = "'".$result['attachment']."'";
-                $onclick = 'onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhpercentage.','.$wfhstats.','.$atch.')"';
+                $rjrson = "'".$result['reject_reason']."'";
+                $onclick = 'onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhpercentage.','.$wfhstats.','.$rjrson.','.$atch.')"';
                 echo "
                 <tr class='csor-pointer'>
                 <td ".$onclick.">" . date('F d, Y', strtotime($result['wfh_date']))."</td>
@@ -104,7 +105,7 @@ Class WfhApp{
                 <td ".$onclick." id='to".$result['wfhid']."'>".(isset($result['timeout']) ? date('h:i A', strtotime($result['timeout'])) : 'n/a') . "</td>
                 <td ".$onclick." id='st".$result['wfhid']."'>" . $result['stats']."</td>";
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhpercentage.','.$wfhstats.','.$atch.')" title="View Work From Home">
+                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhpercentage.','.$wfhstats.','.$rjrson.','.$atch.')" title="View Work From Home">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewWfhHistoryModal('.$wfhid.')" title="View Logs">
@@ -209,7 +210,8 @@ public function GetAllWfhRepHistory($date_from,$date_to,$empCode){
                 $empcode = "'".$result['empcd']."'";
                 $attid = "'".$result['attid']."'";
                 $atch = "'".$result['attachment']."'";
-                $onclick = 'onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhpercentage.','.$wfhstats.','.$atch.')"';
+                $rjrson = "'".$result['reject_reason']."'";
+                $onclick = 'onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhpercentage.','.$wfhstats.','.$rjrson.','.$atch.')"';
                 echo "
                 <tr class='csor-pointer'>
                 <td ".$onclick.">" . date('F d, Y', strtotime($result['wfh_date']))."</td>
@@ -222,7 +224,7 @@ public function GetAllWfhRepHistory($date_from,$date_to,$empCode){
                 <td ".$onclick." id='to".$result['wfhid']."'>".(isset($result['timeout']) ? date('h:i A', strtotime($result['timeout'])) : 'n/a') . "</td>
                 <td ".$onclick." id='st".$result['wfhid']."'>" . $result['stats']."</td>";
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhpercentage.','.$wfhstats.','.$atch.')" title="View Work From Home">
+                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhpercentage.','.$wfhstats.','.$rjrson.','.$atch.')" title="View Work From Home">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewWfhHistoryModal('.$wfhid.')" title="View Logs">
@@ -324,7 +326,8 @@ public function GetAllWfhRepHistory($date_from,$date_to,$empCode){
                 $empcode = "'".$result['empcd']."'";
                 $attid = "'".$result['attid']."'";
                 $atch = "'".$result['attachment']."'";
-                $onclick = 'onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhoutput2.','.$wfhpercentage.','.$wfhstats.','.$appr_over.','.$atch.')"';
+                $rjrson = "'".$result['reject_reason']."'";
+                $onclick = 'onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhoutput2.','.$wfhpercentage.','.$wfhstats.','.$rjrson.','.$appr_over.','.$atch.')"';
                 echo "
                 <tr class='csor-pointer'>
                 <td ".$onclick.">" . date('F d, Y', strtotime($result['wfh_date']))."</td>
@@ -337,7 +340,7 @@ public function GetAllWfhRepHistory($date_from,$date_to,$empCode){
                 <td ".$onclick." id='st".$result['wfhid']."'>" . $result['stats']."</td>";
                 if($result['stats'] == 'PENDING' and $result['wfh_date'] <> date('Y-m-d')){
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhoutput2.','.$wfhpercentage.','.$wfhstats.','.$appr_over.','.$atch.')" title="View Work From Home">
+                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhoutput2.','.$wfhpercentage.','.$wfhstats.','.$rjrson.','.$appr_over.','.$atch.')" title="View Work From Home">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewWfhHistoryModal('.$wfhid.')" title="View Logs">
@@ -349,7 +352,7 @@ public function GetAllWfhRepHistory($date_from,$date_to,$empCode){
                             </td>';
                 }else if($result['stats'] == 'PENDING'and $result['wfh_date'] == date('Y-m-d')){
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhoutput2.','.$wfhpercentage.','.$wfhstats.','.$appr_over.','.$atch.')" title="View Work From Home">
+                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhoutput2.','.$wfhpercentage.','.$wfhstats.','.$rjrson.','.$appr_over.','.$atch.')" title="View Work From Home">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewWfhHistoryModal('.$wfhid.')" title="View Logs">
@@ -380,7 +383,7 @@ public function GetAllWfhRepHistory($date_from,$date_to,$empCode){
 
                 }else if($result['stats'] == 'APPROVED'and $result['wfh_date'] == date('Y-m-d')){
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhoutput2.','.$wfhpercentage.','.$wfhstats.','.$appr_over.','.$atch.')" title="View Work From Home">
+                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhoutput2.','.$wfhpercentage.','.$wfhstats.','.$rjrson.','.$appr_over.','.$atch.')" title="View Work From Home">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewWfhHistoryModal('.$wfhid.')" title="View Logs">
@@ -410,7 +413,7 @@ public function GetAllWfhRepHistory($date_from,$date_to,$empCode){
                             }
                 }else if($result['stats'] == 'APPROVED' and $result['wfh_date'] <> date('Y-m-d') and !isset($result['timein']) and !isset($result['timeout'])){
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhoutput2.','.$wfhpercentage.','.$wfhstats.','.$appr_over.','.$atch.')" title="View Work From Home">
+                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhoutput2.','.$wfhpercentage.','.$wfhstats.','.$rjrson.','.$appr_over.','.$atch.')" title="View Work From Home">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewWfhHistoryModal('.$wfhid.')" title="View Logs">
@@ -422,7 +425,7 @@ public function GetAllWfhRepHistory($date_from,$date_to,$empCode){
 
                 }else if($result['stats'] == 'CANCELLED'){
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhoutput2.','.$wfhpercentage.','.$wfhstats.','.$appr_over.','.$atch.')" title="View Work From Home">
+                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhoutput2.','.$wfhpercentage.','.$wfhstats.','.$rjrson.','.$appr_over.','.$atch.')" title="View Work From Home">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewWfhHistoryModal('.$wfhid.')" title="View Logs">
@@ -431,7 +434,7 @@ public function GetAllWfhRepHistory($date_from,$date_to,$empCode){
                             </td>';
                 }else{
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhoutput2.','.$wfhpercentage.','.$wfhstats.','.$appr_over.','.$atch.')" title="View Work From Home">
+                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewWfhModal('.$wfhdate.','.$wfhtask.','.$wfhoutput.','.$wfhoutput2.','.$wfhpercentage.','.$wfhstats.','.$rjrson.','.$appr_over.','.$atch.')" title="View Work From Home">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewWfhHistoryModal('.$wfhid.')" title="View Logs">
