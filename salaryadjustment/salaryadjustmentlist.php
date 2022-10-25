@@ -24,7 +24,7 @@ Class SalaryAdjList{
 
         $query = "SELECT a.emp_code,lastname+', '+firstname as fullname,period_to,period_from,description,remarks,amount,
         inc_decr,salaryadj_id,b.emp_status from dbo.employee_salaryadj_management a left join employee_profile b
-        on a.emp_code = b.emp_code where b.emp_status = :empStatus ORDER by emp_status,period_from DESC ";
+        on a.emp_code = b.emp_code where b.emp_status = :empStatus ORDER by lastname,period_from ASC ";
         $param = array(":empStatus" => $empStatus);
         $stmt =$connL->prepare($query);
         $stmt->execute($param);
