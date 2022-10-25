@@ -66,7 +66,7 @@
                                 "<td>" . round($result['late'],2) . "</td>".
                                 "<td>" . round($result['undertime'],2) . "</td>".
                                 "<td>" . round($result['overtime'],2) . "</td>".
-                                "<td>" . $result['remarks']. "</td>".
+                                "<td>" . str_replace(';','<br>',$result['remarks']). "</td>".
                             "</tr>";
 
                     $totalWork += $result['workhours'];
