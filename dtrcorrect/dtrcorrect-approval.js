@@ -56,7 +56,7 @@ $(function(){
 
 
 
-    $(document).on('click','.btn btn-warning btn-sm',function(e){
+    $(document).on('click','.btnFwd',function(e){
 
         var prid = this.id;
         var apvdDtrc = 1;
@@ -141,6 +141,21 @@ $(function(){
         });//ajax
 
     });
+
+    
+    function CheckInput() {
+
+        var inputValues = [];
+
+        inputValues = [
+            
+            $('#rejectReason')
+            
+        ];
+
+        var result = (CheckInputValue(inputValues) === '0') ? true : false;
+        return result;
+    }
     
     $('#submit').click(function(e){
 
@@ -152,7 +167,7 @@ $(function(){
 
         param = JSON.stringify(param);
 
-
+        if (CheckInput() === true) {
                     swal({
                           title: "Are you sure?",
                           text: "You want to reject this dtr correction?",
@@ -194,6 +209,12 @@ $(function(){
                             swal({text:"You cancel the approval of dtr correction!",icon:"error"});
                           }
                 });
+
+
+                
+            } else{
+                swal({text:"Kindly fill up blank fields!",icon:"error"});
+            }
 
     });
 

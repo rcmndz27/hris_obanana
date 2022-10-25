@@ -388,11 +388,24 @@ swal({
 
     });
 
+    function CheckInput() {
+
+        var inputValues = [];
+
+        inputValues = [
+            
+            $('#remarks')
+            
+        ];
+
+        var result = (CheckInputValue(inputValues) === '0') ? true : false;
+        return result;
+    }
+
+
 
     $('.btnRemarks').click(function(e){
         e.preventDefault();
-
-        $('#remarksModal').modal('toggle');
 
         var rejecter =  $('#apr'+rowid).val();
         var apvL =  $('#apc'+rowid).val();
@@ -428,7 +441,9 @@ swal({
 
         param = JSON.stringify(param);
 
-          swal({
+        if (CheckInput() === true) {
+        
+        swal({
           title: "Are you sure?",
           text: "You want to reject this leave?",
           icon: "warning",
@@ -475,7 +490,13 @@ swal({
             document.getElementById("myDiv").style.display="none";
              swal({text:"You cancel the rejection !",icon:"error"});
           }
+          
         });
+
+
+    } else{
+        swal({text:"Kindly fill up blank fields!",icon:"error"});
+    }
 
 
     });
@@ -485,10 +506,6 @@ swal({
         e.preventDefault();
         $('#popUpModal').modal('toggle');
 
-            // $("#Attachment").hide();
-            // $("#LabelAttachment").hide();
-            // // $("#medicalfiles").hide();
-            // $("#AddAttachment").show();
             
         var options = document.getElementById("leaveType").options;
         for (var i = 0; i < options.length; i++) {

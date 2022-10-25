@@ -162,6 +162,22 @@ $(function(){
         });//ajax
 
     });
+
+
+    function CheckInput() {
+
+        var inputValues = [];
+
+        inputValues = [
+            
+            $('#rejectReason')
+            
+        ];
+
+        var result = (CheckInputValue(inputValues) === '0') ? true : false;
+        return result;
+    }
+
     
     $('#submit').click(function(e){
         e.preventDefault();
@@ -174,6 +190,8 @@ $(function(){
 
         param = JSON.stringify(param);
 
+                
+            if (CheckInput() === true) {
 
                     swal({
                           title: "Are you sure?",
@@ -211,12 +229,18 @@ $(function(){
                                         }
                                     });//ajax
 
-                          } else {
-                            document.getElementById("myDiv").style.display="none";
-                            swal({text:"You cancel the approval of work from home!",icon:"error"});
-                          }
-                });
+                    
 
+                                } else {
+                                    document.getElementById("myDiv").style.display="none";
+                                    swal({text:"You cancel the approval of work from home!",icon:"error"});
+                                }
+                            });
+
+                        } else{
+                            swal({text:"Kindly fill up blank fields!",icon:"error"});
+                        }
+            
     });
 
     $('#search').click(function(e){

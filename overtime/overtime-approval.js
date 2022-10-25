@@ -166,6 +166,23 @@ $(function(){
 
     });
     
+    
+    function CheckInput() {
+
+        var inputValues = [];
+
+        inputValues = [
+            
+            $('#rejectReason')
+            
+        ];
+
+        var result = (CheckInputValue(inputValues) === '0') ? true : false;
+        return result;
+    }
+
+
+    
     $('#submit').click(function(e){
         e.preventDefault();
 
@@ -176,7 +193,7 @@ $(function(){
         param = {"Action":"RejectOT",'rowid': rowid,'empId':empId, "rjctRsn": $('#rejectReason').val()};
         param = JSON.stringify(param);
 
-
+        if (CheckInput() === true) {
                         swal({
                           title: "Are you sure?",
                           text: "You want to reject this overtime?",
@@ -225,6 +242,10 @@ $(function(){
                           }
                         });
 
+
+                    } else{
+                        swal({text:"Kindly fill up blank fields!",icon:"error"});
+                    }                        
 
     });
 

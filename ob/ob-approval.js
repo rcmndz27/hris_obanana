@@ -80,7 +80,7 @@ $(function(){
 
     });
 
-    $(document).on('click','.btn btn-warning btn-sm',function(e){
+    $(document).on('click','.btnFwd',function(e){
 
         var prid = this.id;
         var apvdOb = 1;
@@ -170,6 +170,24 @@ $(function(){
         });//ajax
 
     });
+
+
+    
+    function CheckInput() {
+
+        var inputValues = [];
+
+        inputValues = [
+            
+            $('#rejectReason')
+            
+        ];
+
+        var result = (CheckInputValue(inputValues) === '0') ? true : false;
+        return result;
+    }
+
+
     
     $('#submit').click(function(e){
         e.preventDefault();
@@ -182,6 +200,8 @@ $(function(){
         param = {"Action":"RejectOB",'rowid': rowid,'empId':empId, "rjctRsn": $('#rejectReason').val()};
 
         param = JSON.stringify(param);
+
+        if (CheckInput() === true) {
 
                         swal({
                           title: "Are you sure?",
@@ -224,6 +244,11 @@ $(function(){
                             swal({text:"You cancel the rejection of official business!",icon:"error"});
                           }
                         });
+
+                    } else{
+                        swal({text:"Kindly fill up blank fields!",icon:"error"});
+                    }
+                                
 
 
     });
