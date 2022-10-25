@@ -78,7 +78,7 @@
                                 "<td>" . $sundertime."</td>".
                                 "<td>" . $sovertime."</td>".
                                 "<td>" . $result['wday'] . "</td>".
-                                "<td>" . $result['remarks'] . "</td>".
+                                "<td>" . str_replace(';','<br>',$result['remarks']). "</td>".
                                 "</tr>";
     
                         $totalWork += $result['workhours'];

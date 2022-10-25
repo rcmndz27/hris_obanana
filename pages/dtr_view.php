@@ -19,7 +19,6 @@
 <script src="<?= constant('NODE'); ?>xlsx/dist/xlsx.core.min.js"></script>
 <script src="<?= constant('NODE'); ?>file-saverjs/FileSaver.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
-<!-- <script src="<?= constant('NODE'); ?>tableexport/dist/js/tableexport.min.js"></script> -->
 <div id = "myDiv" style="display:none;" class="loader"></div>
 <div class="container">
     <div class="section-title">
