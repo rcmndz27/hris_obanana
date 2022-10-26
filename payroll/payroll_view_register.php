@@ -60,7 +60,7 @@
         <button type="button" id="search" class="btn btn-danger mr-2" onmousedown="javascript:deletePayReg()">
             <i class="fas fa-backspace mr-1 text-white"></i> Delete                      
         </button> 
-        <button class='btn btn-primary' id='confirm' onclick='ConfirmPayRegView()'>
+        <button class='btn btn-success' id='confirm' onclick='ConfirmPayRegView()'>
           <i class='fas fa-check-square'></i> 
         Confirm Payroll Register
         </button>                                             
