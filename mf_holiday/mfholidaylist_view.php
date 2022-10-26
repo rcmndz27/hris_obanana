@@ -299,10 +299,8 @@ if(ht == 'Permanent'){
         var holidayterm = document.getElementById("hterm").value;
         if(holidayterm == 'Permanent'){
             var expired_date = null;
-            console.log('null');
         }else{
             var expired_date = document.getElementById("edate").value;
-            console.log('with date');
         }
         var status = document.getElementById("stts").value;       
 
