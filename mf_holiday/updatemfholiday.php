@@ -8,7 +8,7 @@ function UpdateMfholiday($rowid,$holidaydate,$holidaytype,$holidaydescs,$holiday
             $cmd = $connL->prepare("UPDATE dbo.mf_holiday SET 
                 holidaydate = :holidaydate,holidaytype = :holidaytype, 
                 holidaydescs = :holidaydescs,status = :status,
-                holidayterm = :holidayterm,expired_date = :expired_date,
+                holidayterm = :holidayterm,expired_date = :expired_date
                 where rowid = :rowid");
             $cmd->bindValue('rowid',$rowid);
             $cmd->bindValue('holidaydate',$holidaydate);

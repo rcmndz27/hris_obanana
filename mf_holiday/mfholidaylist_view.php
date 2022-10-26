@@ -258,14 +258,25 @@ for (i = 0; i < tr.length; i++) {
 $('#hterm').change(function(){
 
 var ht = $('#hterm').val();
-// var edt = document.getElementById('ed'+id).innerHTML;
+var edt = $('#edate').val();
+
 
 if(ht == 'Permanent'){
     $('#tempid').hide();
-    // document.getElementById('edate').value = document.getElementById('ed'+id).innerHTML;
+    if(edt == '1970-01-01'){
+        document.getElementById('edate').value = $('#hdate').val();
+    }else{
+        document.getElementById('edate').value = edt;
+    }
 }else{
     $('#tempid').show();
+    if(edt == '1970-01-01'){
+        document.getElementById('edate').value = $('#hdate').val();
+    }else{
+        document.getElementById('edate').value = edt;
+    }    
 }
+
 });
 
     function editMfholidayModal(id,edate){
@@ -276,7 +287,7 @@ if(ht == 'Permanent'){
         document.getElementById('htype').value =  document.getElementById('ht'+id).innerHTML;  
         document.getElementById('hdescs').value =  document.getElementById('hn'+id).innerHTML;  
         document.getElementById('hterm').value =  document.getElementById('htr'+id).innerHTML;  
-        document.getElementById('edate').value =  document.getElementById('ed'+id).innerHTML
+        document.getElementById('edate').value =  document.getElementById('ed'+id).innerHTML;
 
         var ht = $('#hterm').val();
 
@@ -298,13 +309,11 @@ if(ht == 'Permanent'){
         var holidaydescs = document.getElementById("hdescs").value;
         var holidayterm = document.getElementById("hterm").value;
         if(holidayterm == 'Permanent'){
-            var expired_date = null;
+            var expired_date = document.getElementById("hdate").value;;
         }else{
             var expired_date = document.getElementById("edate").value;
         }
         var status = document.getElementById("stts").value;       
-
-        return false;
 
                         swal({
                           title: "Are you sure?",
@@ -323,7 +332,7 @@ if(ht == 'Permanent'){
                                         holidaydate: holidaydate ,
                                         holidaytype: holidaytype ,
                                         holidaydescs: holidaydescs ,
-                                        holidayterm: holidaydescs ,
+                                        holidayterm: holidayterm ,
                                         expired_date: expired_date ,
                                         status: status                                       
                                     },
@@ -338,6 +347,7 @@ if(ht == 'Permanent'){
                                                  document.getElementById('hd'+rowid).innerHTML = holidaydate;
                                                  document.getElementById('ht'+rowid).innerHTML = holidaytype;
                                                  document.getElementById('hn'+rowid).innerHTML = holidaydescs;
+                                                 document.getElementById('htr'+rowid).innerHTML = holidayterm;
                                                  document.getElementById('st'+rowid).innerHTML = status;
                                             });  
                                 });
