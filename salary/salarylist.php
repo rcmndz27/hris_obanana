@@ -21,7 +21,7 @@ Class SalaryList{
         <tbody>';
 
         $query = "SELECT s.emp_code,s.bank_type,s.bank_no,s.bank_no,s.pay_rate,s.amount,s.status,lastname+', '+firstname as fullname from employee_salary_management s left join employee_profile e on s.emp_code = e.emp_code
-        where e.emp_status = :empStatus order by lastname asc";
+        where e.emp_status = :empStatus and s.status = 'Active' order by lastname asc";
         $param = array(":empStatus" => $empStatus);
         $stmt =$connL->prepare($query);
         $stmt->execute($param);
