@@ -31,6 +31,7 @@ Class MfholidayList{
                 <th>Holiday Date</th>
                 <th>Holiday Type</th>
                 <th>Holiday Name</th>
+                <th>Holiday Term</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
@@ -47,14 +48,17 @@ Class MfholidayList{
             do { 
                 $rowd = "'".$result['rowid']."'";
                 $ddt = date('Y-m-d', strtotime($result['holidaydate']));
+                $edt = "'".date('Y-m-d', strtotime($result['expired_date']))."'";
                 echo '
                 <tr>
                 <td id="hd'.$result['rowid'].'">'.$ddt.'</td>
                 <td id="ht'.$result['rowid'].'">'.$result['holidaytype'].'</td>
                 <td id="hn'.$result['rowid'].'">'.$result['holidaydescs'].'</td>
+                <td id="htr'.$result['rowid'].'">'.$result['holidayterm'].'</td>
+                <td id="ed'.$result['rowid'].'" hidden>'.date('Y-m-d', strtotime($result['expired_date'])).'</td>
                 <td id="st'.$result['rowid'].'">'.$result['status'].'</td>';
                 echo'<td><button type="button" class="btn btn-info btn-sm" 
-                onclick="editMfholidayModal('.$rowd.')">
+                onclick="editMfholidayModal('.$rowd.','.$edt.')">
                                 <i class="fas fa-edit"></i> UPDATE
                             </button></td>';
                 

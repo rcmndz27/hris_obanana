@@ -78,20 +78,14 @@
                                 </legend>
                              </div>
                         <div class="form-row">
-                                <div class="col-lg-7">
+                                <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="control-label" for="descs">Holiday Name<span class="req">*</span></label>
                                         <input type="text" class="form-control inputtext" name="holidaydescs"
                                             id="holidaydescs" placeholder="Holiday Name....." > 
                                     </div>
                                 </div>                            
-                                <div class="col-lg-5">
-                                    <div class="form-group">
-                                        <label class="control-label" for="code">Holiday Date<span class="req">*</span></label>
-                                        <input type="date" id="holidaydate" name="holidaydate" class="form-control">
-                                    </div>
-                                </div> 
-                                <div class="col-lg-7">
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label" for="status">Holiday Type<span class="req">*</span></label>
                                         <select type="select" class="form-select inputtext" id="holidaytype" name="holidaytype" >
@@ -99,7 +93,29 @@
                                             <option value="Special Holiday">Special Holiday</option>
                                         </select>    
                                     </div>
+                                </div>   
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="pstatus">Holiday Term<span class="req">*</span></label>
+                                        <select type="select" class="form-select inputtext" id="holidayterm" name="holidayterm" >
+                                            <option value="Permanent">Permanent</option>
+                                            <option value="Temporary">Temporary</option>
+                                        </select>    
+                                    </div>
                                 </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="code">Holiday Date<span class="req">*</span></label>
+                                        <input type="date" id="holidaydate" name="holidaydate" class="form-control">
+                                    </div>
+                                </div>                                                                                                  
+                              <div class="col-lg-6" id="temp_id">
+                                  <div class="form-group">
+                                        <label class="control-label" for="code">Expiration Date<span class="req">*</span></label>
+                                        <input type="date" id="expired_date" name="expired_date" class="form-control">
+                                    </div>
+                                </div>  
+                                                                                            
                                 <input type="text" name="eMplogName" id="eMplogName" value="<?php echo $empName ?>" hidden>
                             </div> <!-- form row closing -->
                     </fieldset> 
@@ -132,20 +148,14 @@
                                 </legend>
                              </div>
                         <div class="form-row">
-                                <div class="col-lg-7">
+                                <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="control-label" for="descs">Holiday Name<span class="req">*</span></label>
                                         <input type="text" class="form-control inputtext" name="hdescs"
                                             id="hdescs" placeholder="Holiday Name....." > 
                                     </div>
-                                </div>                            
-                                <div class="col-lg-5">
-                                    <div class="form-group">
-                                        <label class="control-label" for="code">Holiday Date<span class="req">*</span></label>
-                                        <input type="date" id="hdate" name="hdate" class="form-control">
-                                    </div>
                                 </div> 
-                                <div class="col-lg-7">
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label" for="status">Holiday Type<span class="req">*</span></label>
                                         <select type="select" class="form-select inputtext" id="htype" name="htype" >
@@ -153,8 +163,29 @@
                                             <option value="Special Holiday">Special Holiday</option>
                                         </select>    
                                     </div>
-                                </div>                                                            
-                                <div class="col-lg-5">
+                                </div>   
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="hterm">Holiday Term<span class="req">*</span></label>
+                                        <select type="select" class="form-select inputtext" id="hterm" name="hterm" >
+                                            <option value="Permanent">Permanent</option>
+                                            <option value="Temporary">Temporary</option>
+                                        </select>    
+                                    </div>
+                                </div>                                                                                              
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="hdate">Holiday Date<span class="req">*</span></label>
+                                        <input type="date" id="hdate" name="hdate" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6" id="tempid">
+                                  <div class="form-group">
+                                        <label class="control-label" for="edate">Expiration Date<span class="req">*</span></label>
+                                        <input type="date" id="edate"edatename="edate" class="form-control">
+                                    </div>
+                                </div>                                                                                          
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label" for="status">Status<span class="req">*</span></label>
                                         <select type="select" class="form-select inputtext" id="stts" name="stts" >
@@ -183,6 +214,27 @@
 
 <script>
 
+$('#expired_date').change(function(){
+
+if($('#expired_date').val() < $('#holidaydate').val()){
+
+    swal({text:"Expired date must be greater than date from!",icon:"error"});
+
+    var input2 = document.getElementById('expired_date');
+    input2.value = '';               
+}
+});
+
+
+$('#holidaydate').change(function(){
+
+if($('#holidaydate').val() > $('#expired_date').val()){
+    var input2 = document.getElementById('expired_date');
+    document.getElementById("expired_date").min = $('#holidaydate').val();
+    input2.value = '';
+}
+});
+
 function myFunction() {
   var input, filter, table, tr, td, i, txtValue;
   input = document.getElementById("myInput");
@@ -203,14 +255,36 @@ for (i = 0; i < tr.length; i++) {
  }
 }
 
-    function editMfholidayModal(id){
+$('#hterm').change(function(){
+
+var ht = $('#hterm').val();
+// var edt = document.getElementById('ed'+id).innerHTML;
+
+if(ht == 'Permanent'){
+    $('#tempid').hide();
+    // document.getElementById('edate').value = document.getElementById('ed'+id).innerHTML;
+}else{
+    $('#tempid').show();
+}
+});
+
+    function editMfholidayModal(id,edate){
           
         $('#updateMfhol').modal('toggle'); 
         document.getElementById('rowd').value =  id;   
         document.getElementById('hdate').value =  document.getElementById('hd'+id).innerHTML;   
         document.getElementById('htype').value =  document.getElementById('ht'+id).innerHTML;  
         document.getElementById('hdescs').value =  document.getElementById('hn'+id).innerHTML;  
-        document.getElementById('stts').value =  document.getElementById('st'+id).innerHTML;  
+        document.getElementById('hterm').value =  document.getElementById('htr'+id).innerHTML;  
+        document.getElementById('edate').value =  document.getElementById('ed'+id).innerHTML
+
+        var ht = $('#hterm').val();
+
+        if(ht == 'Permanent'){
+            $('#tempid').hide();
+        }else{
+            $('#tempid').show();
+        }
     }
 
 
@@ -222,8 +296,17 @@ for (i = 0; i < tr.length; i++) {
         var holidaydate = document.getElementById("hdate").value;
         var holidaytype = document.getElementById("htype").value;
         var holidaydescs = document.getElementById("hdescs").value;
+        var holidayterm = document.getElementById("hterm").value;
+        if(holidayterm == 'Permanent'){
+            var expired_date = null;
+            console.log('null');
+        }else{
+            var expired_date = document.getElementById("edate").value;
+            console.log('with date');
+        }
         var status = document.getElementById("stts").value;       
 
+        return false;
 
                         swal({
                           title: "Are you sure?",
@@ -242,6 +325,8 @@ for (i = 0; i < tr.length; i++) {
                                         holidaydate: holidaydate ,
                                         holidaytype: holidaytype ,
                                         holidaydescs: holidaydescs ,
+                                        holidayterm: holidaydescs ,
+                                        expired_date: expired_date ,
                                         status: status                                       
                                     },
                                     function(data) { 
