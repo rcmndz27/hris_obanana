@@ -142,76 +142,208 @@ $(function(){
 
     LoadLeaveList();
 
+$(document).on('click','#btnAppAll',function(e){
+
+var chid = document.getElementsByName('cba[]');
+var val_id = "";
+for (var i=0, n=chid.length;i<n;i++) 
+{
+    if (chid[i].checked) 
+    {
+        val_id += ","+chid[i].value;
+    }
+}
+if (val_id) val_id = val_id.substring(1);
+
+
+    rowid = JSON.parse("[" + val_id + "]");
+    empcode = $('#empcode').val() ;
+    
+    param = {
+        "Action":"ApproveAllLeave",
+        "empcode": empcode,
+        "rowid": rowid
+    };
+    
+  
+    param = JSON.stringify(param);
+
+    
+    swal({
+        title: "Are you sure?",
+        text: "You want to approve these leaves?",
+        icon: "success",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((approveLeave) => {
+          document.getElementById("myDiv").style.display="block";
+        if (approveLeave) {
+          $.ajax({
+              type: "POST",
+              url: "../leave/leaveApprovalProcess.php",
+              data: {data:param} ,
+              success: function (data){
+                  console.log("success: "+ data);
+                  swal({
+                      title: "Approved!", 
+                      text: "Successfully approved leaves!", 
+                      type: "success",
+                      icon: "success",
+                  }).then(function() {
+                        location.reload();
+                  });
+              },
+              error: function (data){
+                  console.log("error: "+ data);    
+              }
+          });
+      } else {
+          document.getElementById("myDiv").style.display="none";
+          swal({text:"You cancel the approval of leaves!",icon:"error"});
+      }
+      });    
+    
+    
+    })
+    
 $(document).on('click','.btnApproved',function(e){
 
-empId = this.id;
-rowid = $('.btnApproved').val() ;
-empcode = $('#empcode').val() ;
-dateFrom = $(this).closest('tr').find('td:eq(1)').text();
-leaveType = $(this).closest('tr').find('td:eq(2)').text();
-approvedDays = $(this).closest('tr').find("td:eq(6) input").val();
-
-var approver =  $('#apr'+rowid).val();
-var apvL =  $('#apc'+rowid).val();
-var fillv = $('#alertleave').val();
-var upfillv = fillv-apvL;
-
-
-param = {
-    "Action":"ApproveLeave",
-    'employee': empId,
-    'curLeaveType': leaveType,
-    "curApproved": apvL,
-    "curDateFrom": dateFrom,
-    "curDateTo": dateFrom,
-    "approver": approver,
-    "empcode": empcode,
-    "rowid": rowid
-};
-
-
-param = JSON.stringify(param);
-
-
-swal({
-  title: "Are you sure?",
-  text: "You want to approve this leave?",
-  icon: "success",
-  buttons: true,
-  dangerMode: true,
-})
-.then((approveLeave) => {
-    document.getElementById("myDiv").style.display="block";
-  if (approveLeave) {
-    $.ajax({
-        type: "POST",
-        url: "../leave/leaveApprovalProcess.php",
-        data: {data:param} ,
-        success: function (data){
-            console.log("success: "+ data);
-            swal({
-                title: "Approved!", 
-                text: "Successfully approved leave!", 
-                type: "success",
-                icon: "success",
-            }).then(function() {
-                document.getElementById("myDiv").style.display="none";
-                document.getElementById(empcode).innerHTML = upfillv;
-                document.getElementById('alertleave').value = upfillv;
-                document.querySelector('#clv'+rowid).remove();
-            });
-        },
-        error: function (data){
-            console.log("error: "+ data);    
-        }
+    empId = this.id;
+    rowid = $('.btnApproved').val() ;
+    empcode = $('#empcode').val() ;
+    dateFrom = $(this).closest('tr').find('td:eq(2)').text();
+    leaveType = $(this).closest('tr').find('td:eq(3)').text();
+    approvedDays = $(this).closest('tr').find("td:eq(7) input").val();
+    
+    var approver =  $('#apr'+rowid).val();
+    var apvL =  $('#apc'+rowid).val();
+    var fillv = $('#alertleave').val();
+    var upfillv = fillv-apvL;
+    
+    
+    param = {
+        "Action":"ApproveLeave",
+        'employee': empId,
+        'curLeaveType': leaveType,
+        "curApproved": apvL,
+        "curDateFrom": dateFrom,
+        "curDateTo": dateFrom,
+        "approver": approver,
+        "empcode": empcode,
+        "rowid": rowid
+    };
+    
+    
+    param = JSON.stringify(param);
+    
+    
+    swal({
+      title: "Are you sure?",
+      text: "You want to approve this leave?",
+      icon: "success",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((approveLeave) => {
+        document.getElementById("myDiv").style.display="block";
+      if (approveLeave) {
+        $.ajax({
+            type: "POST",
+            url: "../leave/leaveApprovalProcess.php",
+            data: {data:param} ,
+            success: function (data){
+                console.log("success: "+ data);
+                swal({
+                    title: "Approved!", 
+                    text: "Successfully approved leave!", 
+                    type: "success",
+                    icon: "success",
+                }).then(function() {
+                    document.getElementById("myDiv").style.display="none";
+                    document.getElementById(empcode).innerHTML = upfillv;
+                    document.getElementById('alertleave').value = upfillv;
+                    document.querySelector('#clv'+rowid).remove();
+                });
+            },
+            error: function (data){
+                console.log("error: "+ data);    
+            }
+        });
+    } else {
+        document.getElementById("myDiv").style.display="none";
+        swal({text:"You cancel the approval of leave!",icon:"error"});
+    }
     });
-} else {
-    document.getElementById("myDiv").style.display="none";
-    swal({text:"You cancel the approval of leave!",icon:"error"});
-}
-});
+    
+    });  
 
-});
+
+    
+$(document).on('click','#btnFwdAll',function(e){
+
+    var chid = document.getElementsByName('cba[]');
+    var val_id = "";
+    for (var i=0, n=chid.length;i<n;i++) 
+    {
+        if (chid[i].checked) 
+        {
+            val_id += ","+chid[i].value;
+        }
+    }
+    if (val_id) val_id = val_id.substring(1);
+    
+    
+        rowid = JSON.parse("[" + val_id + "]");
+        empcode = $('#empcode').val() ;
+        
+        param = {
+            "Action":"FwdLeaveAll",
+            "empcode": empcode,
+            "rowid": rowid
+        };
+        
+      
+        param = JSON.stringify(param);
+    
+        
+        swal({
+            title: "Are you sure?",
+            text: "You want to forward these leaves to Sir. Francis Calumba?",
+            icon: "success",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((approveLeave) => {
+              document.getElementById("myDiv").style.display="block";
+            if (approveLeave) {
+              $.ajax({
+                  type: "POST",
+                  url: "../leave/leaveApprovalProcess.php",
+                  data: {data:param} ,
+                  success: function (data){
+                      console.log("success: "+ data);
+                      swal({
+                          title: "Approved!", 
+                          text: "Successfully forwarded leaves!", 
+                          type: "success",
+                          icon: "success",
+                      }).then(function() {
+                            location.reload();
+                      });
+                  },
+                  error: function (data){
+                      console.log("error: "+ data);    
+                  }
+              });
+          } else {
+              document.getElementById("myDiv").style.display="none";
+              swal({text:"You cancel the forwarding of leaves!",icon:"error"});
+          }
+          });    
+        
+        
+        })
 
 $(document).on('click','.btnFwd',function(e){
 
@@ -234,10 +366,6 @@ $(document).on('click','.btnFwd',function(e){
         "approver": approver,
         "empcode": empcode
     };
-
-
-// console.log(param);
-// return false;
 
 param = JSON.stringify(param);
 
@@ -305,9 +433,6 @@ swal({
             "logEmpCode":logEmpCode,
             "employee": empCode
         };
-
-        // console.log(param);
-        // return false;
 
         param = JSON.stringify(param);
         
@@ -378,7 +503,6 @@ swal({
         dateFrom = $(this).closest('tr').find('td:eq(1)').text();
         dateTo = $(this).closest('tr').find('td:eq(1)').text();
         leaveType = $(this).closest('tr').find('td:eq(2)').text();
-        // rejecter = $(this).closest('tr').find('td:eq(5)').text();
         rejecteddDays = $(this).closest('tr').find("td:eq(6) input").val();
 
         $('#remarksModal').modal('toggle');
@@ -387,6 +511,34 @@ swal({
     
 
     });
+
+
+    
+    $(document).on('click','#btnRejectdAll',function(e){
+
+
+        var chid = document.getElementsByName('cba[]');
+        var val_id = "";
+        for (var i=0, n=chid.length;i<n;i++) 
+        {
+            if (chid[i].checked) 
+            {
+                val_id += ","+chid[i].value;
+            }
+        }
+        if (val_id) val_id = val_id.substring(1);
+        
+        
+        rowid = JSON.parse("[" + val_id + "]");
+        empcode = $('#empcode').val() ;
+
+        $('#remarksModal').modal('toggle');
+
+        btnAccessed = 'RejectAll';
+    
+
+    });
+
 
     function CheckInput() {
 
@@ -427,6 +579,15 @@ swal({
                 "remarks": $('#remarks').val()
             };
 
+        }else if(btnAccessed === "RejectAll"){
+
+            param = {
+                "Action":"RejectLeaveAll",
+                "rowid": rowid,
+                "empcode": empcode,
+                "remarks": $('#remarks').val()
+            };
+
         }else{
 
             param = {
@@ -441,11 +602,14 @@ swal({
 
         param = JSON.stringify(param);
 
+        // console.log(param);
+        // return false;
+
         if (CheckInput() === true) {
         
         swal({
           title: "Are you sure?",
-          text: "You want to reject this leave?",
+          text: "You want to reject this leave/s?",
           icon: "warning",
           buttons: true,
           dangerMode: true,
@@ -466,6 +630,7 @@ swal({
                                     type: "success",
                                     icon: "success",
                                     }).then(function() {
+                                        console.log("success: "+ data);
                                         document.getElementById("myDiv").style.display="none";
                                         $('#remarksModal').modal('hide');
                                         $('#remarksModal').on('hidden.bs.modal', function (e) {

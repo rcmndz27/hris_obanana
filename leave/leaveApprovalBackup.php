@@ -349,9 +349,9 @@ require '../vendor/autoload.php';
 
         if($leavetype === 'Vacation Leave without Pay' || $leavetype === 'Vacation Leave' || $leavetype === 'Bereavement Leave' || $leavetype === 'Emergency Leave'){
             $column = 'earned_vl = ';
-        }else if(leavetype === 'Sick Leave without Pay' || $leavetype === 'Sick Leave' ){
+        }else if($leavetype === 'Sick Leave without Pay' || $leavetype === 'Sick Leave' ){
             $column = 'earned_sl = ';
-        }else if(leavetype === 'Floating Leave'){
+        }else if($leavetype === 'Floating Leave'){
             $column = 'earned_fl = ';
         }
 

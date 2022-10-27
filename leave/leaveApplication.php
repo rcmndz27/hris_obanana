@@ -34,14 +34,14 @@ Class LeaveApplication{
         $resultpf = $stmtpf->fetch();
 
         $queryps = "SELECT count(actl_cnt) as cnt_ps from tr_leave where approved = 1 and emp_code  = :empCode 
-        and leavetype in ('Sick Leave')";
+        and leavetype in ('Sick Leave','Sick Leave without Pay')";
         $stmtps =$connL->prepare($queryps);
         $paramps = array(":empCode" => $this->employeeCode);
         $stmtps->execute($paramps);
         $resultps = $stmtps->fetch();
 
         $querypv = "SELECT count(actl_cnt) as cnt_pv from tr_leave where approved = 1 and emp_code  = :empCode 
-        and leavetype in ('Vacation Leave','Emergency Leave')";
+        and leavetype in ('Vacation Leave','Emergency Leave','Vacation Leave without Pay')";
         $stmtpv =$connL->prepare($querypv);
         $parampv = array(":empCode" => $this->employeeCode);
         $stmtpv->execute($parampv);
