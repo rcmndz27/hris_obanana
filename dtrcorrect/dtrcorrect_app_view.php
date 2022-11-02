@@ -127,6 +127,8 @@ swal({
 
 </script>
 <link rel="stylesheet" type="text/css" href="../dtrcorrect/dtrc_view.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 <script type='text/javascript' src='../dtrcorrect/dtrcorrect_app.js'></script>
 <script type='text/javascript' src='../js/validator.js'></script>
 <script src="../dtrcorrect/moment2.min.js"></script>
@@ -388,6 +390,13 @@ swal({
 </div><!-- container closing -->
 
 <script type="text/javascript">
+
+$(document).ready( function () {
+    $('#dtrcorrectList').DataTable({
+        pageLength : 5,
+        lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']]
+    });
+} );    
 
 
     $('#dtrc_date').change(function(){

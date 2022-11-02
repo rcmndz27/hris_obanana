@@ -224,26 +224,7 @@ Class ObApp{
     public function GetObAppHistory(){
         global $connL;
 
-        echo '
-        <div class="form-row">  
-                    <div class="col-lg-1">
-                        <select class="form-select" name="state" id="maxRows">
-                             <option value="5000">ALL</option>
-                             <option value="5">5</option>
-                             <option value="10">10</option>
-                             <option value="15">15</option>
-                             <option value="20">20</option>
-                             <option value="50">50</option>
-                             <option value="70">70</option>
-                             <option value="100">100</option>
-                        </select> 
-                </div>         
-                <div class="col-lg-8">
-                </div>                               
-                <div class="col-lg-3">        
-                    <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for official business.." title="Type in official business details"> 
-                        </div>                     
-                </div>          
+        echo '      
         <table id="obList" class="table table-sm">
         <thead>
             <tr>
@@ -293,22 +274,22 @@ Class ObApp{
                 <td '.$onclick.' id="st'.$result['rowdy'].'">' . $result['stats'] . '</td>';
                 if($result['stats'] == 'PENDING' || $result['stats'] == 'APPROVED'){
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewObModal('.$obdestination.','.$obdate.','.$obtime.','.$obpurpose.','.$obpercmp.','.$stats.','.$appr_over.','.$atch.')" title="View Official Business">
+                <td><button type="button" class="btn btn-info btn-sm btn-sm mb-1" onclick="viewObModal('.$obdestination.','.$obdate.','.$obtime.','.$obpurpose.','.$obpercmp.','.$stats.','.$appr_over.','.$atch.')" title="View Official Business">
                                 <i class="fas fa-binoculars"></i>
                             </button>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="viewObHistoryModal('.$obid.')" title="View Logs">
+                            <button type="button" class="btn btn-warning btn-sm mb-1" onclick="viewObHistoryModal('.$obid.')" title="View Logs">
                                 <i class="fas fa-history"></i>
                             </button>                         
-                            <button type="button" id="clv'.$result['rowdy'].'" class="btn btn-danger btn-sm" onclick="cancelOb('.$obid.','.$empcode.')" title="Cancel Official Business">
+                            <button type="button" id="clv'.$result['rowdy'].'" class="btn btn-danger btn-sm mb-1" onclick="cancelOb('.$obid.','.$empcode.')" title="Cancel Official Business">
                                 <i class="fas fa-ban"></i>
                             </button>
                             </td>';
                 }else{
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm btn-sm" onclick="viewObModal('.$obdestination.','.$obdate.','.$obtime.','.$obpurpose.','.$obpercmp.','.$stats.','.$appr_over.','.$atch.')" title="View Official Business">
+                <td><button type="button" class="btn btn-info btn-sm btn-sm btn-sm mb-1" onclick="viewObModal('.$obdestination.','.$obdate.','.$obtime.','.$obpurpose.','.$obpercmp.','.$stats.','.$appr_over.','.$atch.')" title="View Official Business">
                                 <i class="fas fa-binoculars"></i>
                             </button>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="viewObHistoryModal('.$obid.')" title="View Logs">
+                            <button type="button" class="btn btn-warning btn-sm mb-1" onclick="viewObHistoryModal('.$obid.')" title="View Logs">
                                 <i class="fas fa-history"></i>
                             </button>                      
                             </td>';
@@ -319,22 +300,9 @@ Class ObApp{
             echo '</tr></tbody>';
 
         }else { 
-            echo '<tfoot><tr><td colspan="9" class="text-center">No Results Found</td></tr></tfoot>'; 
+            echo '<tfoot></tfoot>'; 
         }
-        echo '</table>
-        <div class="pagination-container">
-        <nav>
-          <ul class="pagination">
-            
-            <li data-page="prev" >
-                <span> << <span class="sr-only">(current)</span></span></li>
-    
-          <li data-page="next" id="prev">
-                  <span> >> <span class="sr-only">(current)</span></span>
-            </li>
-          </ul>
-        </nav>
-      </div>        ';
+        echo '</table>';
     }
 
     public function InsertAppliedObApp($empCode,$empReportingTo,$ob_time,$ob_destination,$ob_purpose,$ob_percmp, 

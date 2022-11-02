@@ -148,6 +148,8 @@
     }
 </script>
 <link rel="stylesheet" type="text/css" href="../ob/ob_view.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 <script type='text/javascript' src='../ob/ob_app.js'></script>
 <script type='text/javascript' src='../js/validator.js'></script>
 <script src="../ob/moment2.min.js"></script>
@@ -398,6 +400,14 @@
 
 <script type="text/javascript">
 
+$(document).ready( function () {
+    $('#obList').DataTable({
+        pageLength : 5,
+        lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']]
+    });
+} );    
+
+
 
         function CheckInput() {
 
@@ -513,8 +523,8 @@ $('#Submit').click(function(){
                 
                 param = JSON.stringify(param);
 
-                console.log(param);
-                return false;
+                // console.log(param);
+                // return false;
 
                             swal({
                               title: "Are you sure?",

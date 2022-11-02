@@ -131,9 +131,14 @@ $(function(){
             data: {data:param} ,
             success: function (data){
                 // console.log("success: "+ data);
-                $("#employeedtrcDetailList").remove();
-                $("#dtrcDetails").append(data);
-                // location.reload();
+                $('#employeedtrcDetailList').remove();
+                $('#employeedtrcDetailList_wrapper').remove();
+                $('#dtrcDetails').append(data);
+                $('#employeedtrcDetailList').DataTable({
+                    pageLength : 5,
+                    lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']]
+                });                
+                                
             },
             error: function (data){
                 // console.log("error: "+ data);	

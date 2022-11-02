@@ -73,6 +73,7 @@ require '../vendor/autoload.php';
                             <th>Time-In</th>
                             <th>Time-Out </th>
                             <th>Reason</th>
+                            <th hidden>Reporting</th>
                             <th>Action</th>
                         </tr>
                     </thead>

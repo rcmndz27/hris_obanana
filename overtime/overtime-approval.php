@@ -72,6 +72,7 @@ require '../vendor/autoload.php';
                             <th>Plan OT</th>
                             <th>OT Rendered</th>
                             <th>OT Approved</th>
+                            <th hidden>OT Approved</th>
                             <th>Action</th>
                         </tr>
                     </thead>

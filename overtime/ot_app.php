@@ -95,7 +95,7 @@ Class OtApp{
                 <td>' . $result['remarks'] . '</td>
                 <td id="st'.$result['ot_rowid'].'">' . $result['stats'] . '</td>';
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewOtModal('.$otdate.','.$ottype.','.$otstartdtime.','.$otenddtime.','.$remark.','.$otreqhrs.','.$otrenhrs.','.$rejectreason.','.$stats.')" title="View Overtime">
+                <td><button type="button" class="btn btn-info btn-sm onclick="viewOtModal('.$otdate.','.$ottype.','.$otstartdtime.','.$otenddtime.','.$remark.','.$otreqhrs.','.$otrenhrs.','.$rejectreason.','.$stats.')" title="View Overtime">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewOtHistoryModal('.$otid.')" title="View Logs">
@@ -108,7 +108,7 @@ Class OtApp{
             echo '</tr></tbody>';
 
         }else { 
-            echo '<tfoot><tr><td colspan="10" class="text-center">No Results Found</td></tr></tfoot>'; 
+            echo '<tfoot></tfoot>'; 
         }
         echo '</table>
         <div class="pagination-container">
@@ -202,7 +202,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
                 <td>' . $result['remarks'] . '</td>
                 <td id="st'.$result['ot_rowid'].'">' . $result['stats'] . '</td>';
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewOtModal('.$otdate.','.$ottype.','.$otstartdtime.','.$otenddtime.','.$remark.','.$otreqhrs.','.$otrenhrs.','.$rejectreason.','.$stats.')" title="View Overtime">
+                <td><button type="button" class="btn btn-info btn-sm onclick="viewOtModal('.$otdate.','.$ottype.','.$otstartdtime.','.$otenddtime.','.$remark.','.$otreqhrs.','.$otrenhrs.','.$rejectreason.','.$stats.')" title="View Overtime">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewOtHistoryModal('.$otid.')" title="View Logs">
@@ -215,7 +215,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
             echo '</tr></tbody>';
 
         }else { 
-            echo '<tfoot><tr><td colspan="10" class="text-center">No Results Found</td></tr></tfoot>'; 
+            echo '<tfoot></tfoot>'; 
         }
         echo '</table>
         <div class="pagination-container">
@@ -236,26 +236,7 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
     public function GetOtAppHistory(){
         global $connL;
 
-        echo '
-        <div class="form-row">  
-                    <div class="col-lg-1">
-                        <select class="form-select" name="state" id="maxRows">
-                             <option value="5000">ALL</option>
-                             <option value="5">5</option>
-                             <option value="10">10</option>
-                             <option value="15">15</option>
-                             <option value="35">35</option>
-                             <option value="50">50</option>
-                             <option value="70">70</option>
-                             <option value="100">100</option>
-                        </select> 
-                </div>         
-                <div class="col-lg-8">
-                </div>                               
-                <div class="col-lg-3">        
-                    <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for overtime.." title="Type in overtime details"> 
-                        </div>                     
-                </div>                  
+        echo '                 
         <table id="otList" class="table table-sm">
         <thead>
             <tr>
@@ -319,10 +300,10 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
             <td '.$onclick.' id="st'.$result['rowdy'].'">' . $result['stats'] . '</td>';
                 if($result['stats'] == 'PENDING' || $result['stats'] == 'APPROVED'){
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewOtModal('.$otdate.','.$ottype.','.$otstartdtime.','.$otenddtime.','.$remark.','.$otreqhrs.','.$otrenhrs.','.$rejectreason.','.$stats.','.$appr_over.','.$atch.')" title="View Overtime">
+                <td><button type="button" class="btn btn-info btn-sm" onclick="viewOtModal('.$otdate.','.$ottype.','.$otstartdtime.','.$otenddtime.','.$remark.','.$otreqhrs.','.$otrenhrs.','.$rejectreason.','.$stats.','.$appr_over.','.$atch.')" title="View Overtime">
                                 <i class="fas fa-binoculars"></i>
                             </button>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="viewOtHistoryModal('.$otid.')" title="View Logs">
+                            <button type="button" class="btn btn-warning btn-sm mb-1" onclick="viewOtHistoryModal('.$otid.')" title="View Logs">
                                 <i class="fas fa-history"></i>
                             </button>                           
                             <button type="button" id="clv'.$result['rowdy'].'" class="btn btn-danger btn-sm" onclick="cancelOvertime('.$otid.','.$empcode.')" title="Cancel Overtime">
@@ -331,10 +312,10 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
                             </td>';
                 }else{
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewOtModal('.$otdate.','.$ottype.','.$otstartdtime.','.$otenddtime.','.$remark.','.$otreqhrs.','.$otrenhrs.','.$rejectreason.','.$stats.','.$appr_over.','.$atch.')" title="View Overtime">
+                <td><button type="button" class="btn btn-info btn-sm onclick="viewOtModal('.$otdate.','.$ottype.','.$otstartdtime.','.$otenddtime.','.$remark.','.$otreqhrs.','.$otrenhrs.','.$rejectreason.','.$stats.','.$appr_over.','.$atch.')" title="View Overtime">
                                 <i class="fas fa-binoculars"></i>
                             </button>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="viewOtHistoryModal('.$otid.')" title="View Logs">
+                            <button type="button" class="btn btn-warning btn-sm mb-1" onclick="viewOtHistoryModal('.$otid.')" title="View Logs">
                                 <i class="fas fa-history"></i>
                             </button>                        
                             </td>';
@@ -345,22 +326,9 @@ public function GetAllOtRepHistory($date_from,$date_to,$empCode){
             echo '</tr></tbody>';
 
         }else { 
-            echo '<tfoot><tr><td colspan="10" class="text-center">No Results Found</td></tr></tfoot>'; 
+            echo '<tfoot></tfoot>'; 
         }
-        echo '</table>
-        <div class="pagination-container">
-        <nav>
-          <ul class="pagination">
-            
-            <li data-page="prev" >
-                <span> << <span class="sr-only">(current)</span></span></li>
-    
-          <li data-page="next" id="prev">
-                  <span> >> <span class="sr-only">(current)</span></span>
-            </li>
-          </ul>
-        </nav>
-      </div>';
+        echo '</table>';
     }
 
     public function InsertAppliedOtApp($empCode,$empReportingTo,$otDate,$otStartDtime,$otEndDtime,$remarks,$e_req,$n_req,$e_appr,$n_appr,$attachment){

@@ -72,6 +72,7 @@ require '../vendor/autoload.php';
                             <th>Purpose</th>
                             <th>Person/Company to See</th>
                             <th hidden>OB Days</th>
+                            <th hidden>Reporting</th>
                             <th>Action</th>
                         </tr>
                     </thead>

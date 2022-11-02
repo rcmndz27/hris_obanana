@@ -53,13 +53,15 @@ require '../vendor/autoload.php';
 
         echo '<table id="employeeLeaveList" class="table table-striped table-sm">
             <thead>
-                <tr>
-                    <th colspan="8" class="text-center">List of Pending Leave Request</th>';
-        echo '</tr>
-                <tr>
-                <button id="btnAppAll" class="btn btn-success btn-sm mr-2 mb-1"><i class="fas fa-check"></i></button>
-                <button id="btnRejectdAll" class="btn btn-danger btn-sm mr-2 mb-1"><i class="fas fa-times"></i></button>
-                <button class="btn btn-info btn-sm mr-2 mb-1" ><i class="fas fa-arrow-right"></i></button>
+            <tr>
+                <th colspan="2" class="text-center">
+                    <button id="btnAppAll" class="btn btn-success btn-sm mr-2"><i class="fas fa-check"></i></button>
+                    <button id="btnRejectdAll" class="btn btn-danger btn-sm mr-2"><i class="fas fa-times"></i></button>
+                    <button class="btn btn-info btn-sm mr-2" ><i class="fas fa-arrow-right"></i></button>
+                </th>
+                <th colspan="5" class="text-center">List of Pending Leave Request</th>';
+    echo '</tr>
+            <tr>
                 <th><input type="checkbox" id="selectAll" name="selectAll" /></th>
                     <th>Date Filed</th>
                     <th>Leave Date</th>
@@ -138,8 +140,8 @@ require '../vendor/autoload.php';
         echo '<table id="leaveSummaryList" class="table table-striped table-sm">
             <thead>
                 <tr>
-                    <th colspan="4"></th>
-                    <th colspan="3w" class="text-center">Balance</th>
+                    <th colspan="2"></th>
+                    <th colspan="3" class="text-center">Balance</th>
                 </tr>
                 <tr>
                     <th class="text-center">Employee</th>
@@ -196,10 +198,11 @@ require '../vendor/autoload.php';
         <table id="dtrList" class="table table-striped table-sm">
         <thead>
             <tr>
-                <th colspan="9" class ="text-center">History</th>
+                <th colspan="10" class ="text-center">History</th>
             </tr>
             <tr>
                 <th>Date Filed</th>
+                <th>Employee</th>
                 <th>Leave Type</th>
                 <th>Date From</th>
                 <th>Date To</th>
@@ -212,7 +215,7 @@ require '../vendor/autoload.php';
         </thead>
         <tbody>';
 
-        $query = 'SELECT datefiled, leave_desc, leavetype, date_from, date_to, actl_cnt, app_days, approved, emp_code, rowid, remarks FROM dbo.tr_leave where emp_code = :emp_code ORDER BY datefiled DESC, leavetype ';
+        $query = 'SELECT datefiled,employee,leave_desc, leavetype, date_from, date_to, actl_cnt, app_days, approved, emp_code, rowid, remarks FROM dbo.tr_leave where emp_code = :emp_code ORDER BY datefiled DESC, leavetype ';
         $stmt =$connL->prepare($query);
         $param = array(":emp_code" => $employee);
         $stmt->execute($param);
@@ -222,6 +225,7 @@ require '../vendor/autoload.php';
             do { 
                 echo '<tr>
                         <td>' . date('m-d-Y', strtotime($result['datefiled'])) . '</td>
+                        <td>' . $result['employee'] . '</td>
                         <td>' . $result['leavetype'] . '</td>
                         <td>' . date('m-d-Y', strtotime($result['date_from'])) . '</td>
                         <td>' . date('m-d-Y', strtotime($result['date_to'])) . '</td>

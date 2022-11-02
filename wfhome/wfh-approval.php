@@ -75,6 +75,7 @@ require '../vendor/autoload.php';
                             <th>Task</th>
                             <th>Expected Output</th>
                             <th>Percentage %</th>
+                            <th hidden>reporting</th>
                             <th>Action</th>
                         </tr>
                     </thead>

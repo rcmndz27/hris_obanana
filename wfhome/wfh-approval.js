@@ -152,9 +152,14 @@ $(function(){
             data: {data:param} ,
             success: function (data){
                 // console.log("success: "+ data);
-                $("#employeeWfhDetailList").remove();
-                $("#wfhDetails").append(data);
-                // location.reload();
+                $('#employeeWfhDetailList').remove();
+                $('#employeeWfhDetailList_wrapper').remove();
+                $('#wfhDetails').append(data);
+                $('#employeeWfhDetailList').DataTable({
+                    pageLength : 5,
+                    lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']]
+                });
+
             },
             error: function (data){
                 // console.log("error: "+ data);	

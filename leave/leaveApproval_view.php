@@ -20,6 +20,8 @@
     }
 ?>
 <link rel="stylesheet" type="text/css" href="../leave/leaveapp.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 <script type='text/javascript' src='../leave/leaveApplication.js'></script>
 <script type='text/javascript' src='../js/validator.js'></script>
 <div class="container">
@@ -76,12 +78,5 @@
     </div>
 </div>
 
-
-
 <?php  include('../_footer.php');?>
 
-<!-- <script type="text/javascript">
-    $(document).ready(function(){
-
-});
-</script> -->

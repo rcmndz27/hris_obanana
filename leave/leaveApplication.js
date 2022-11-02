@@ -443,13 +443,24 @@ swal({
             success: function (data){
                 // console.log("success: "+ data);
                 $('#employeeLeaveList').remove();
+                $('#employeeLeaveList_wrapper').remove();
                 $('#summaryList').append(data);
+                $('#employeeLeaveList').DataTable({
+                    pageLength : 5,
+                    lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']]
+                });
             },
             error: function (data){
-                // console.log("error: "+ data);	
+                console.log("error: "+ data);	
             }
         });//ajax
+
+
+
+
     });
+
+
 
     $(document).on('click','.btnViewing',function(e){
         e.preventDefault();
@@ -469,9 +480,14 @@ swal({
                 var summaryList = document.getElementById("dtrList");
                     if(summaryList){
                          $('#dtrList').remove();
+                         $('#dtrList_wrapper').remove();
                 
                     }else{
                         $('#summaryList').append(data);
+                        $('#dtrList').DataTable({
+                            pageLength : 5,
+                            lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']]
+                        });
                     }
               
             },
@@ -479,6 +495,8 @@ swal({
                 // console.log("error: "+ data);	
             }
         });//ajax
+
+
     });
     
     $(document).on('click','.btnVoid',function(e){
@@ -927,4 +945,7 @@ swal({
                 // console.log("error: "+ data);	
             }
         });//ajax
+
+ 
+        
     });

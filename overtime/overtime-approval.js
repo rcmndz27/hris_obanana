@@ -155,8 +155,13 @@ $(function(){
             data: {data:param} ,
             success: function (data){
                 // console.log("success: "+ data);
-                $("#employeeOTDetailList").remove();
-                $("#otDetails").append(data);
+                $('#employeeOTDetailList').remove();
+                $('#employeeOTDetailList_wrapper').remove();
+                $('#otDetails').append(data);
+                $('#employeeOTDetailList').DataTable({
+                    pageLength : 5,
+                    lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']]
+                });                
                 // location.reload();
             },
             error: function (data){

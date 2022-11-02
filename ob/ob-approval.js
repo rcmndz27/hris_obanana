@@ -160,8 +160,14 @@ $(function(){
             data: {data:param} ,
             success: function (data){
                 // console.log("success: "+ data);
-                $("#employeeOBDetailList").remove();
-                $("#obDetails").append(data);
+                $('#employeeOBDetailList').remove();
+                $('#employeeOBDetailList_wrapper').remove();
+                $('#obDetails').append(data);
+                $('#employeeOBDetailList').DataTable({
+                    pageLength : 5,
+                    lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']]
+                });                
+                
                 // location.reload();
             },
             error: function (data){

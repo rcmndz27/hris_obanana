@@ -240,7 +240,7 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
             echo '</tr></tbody>';
 
         }else { 
-            echo '<tfoot><tr><td colspan="10" class="text-center">No Results Found</td></tr></tfoot>'; 
+            echo '<tfoot></tfoot>'; 
         }
         echo '</table>
         <div class="pagination-container">
@@ -346,7 +346,7 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
             echo '</tr></tbody>';
 
         }else { 
-            echo '<tfoot><tr><td colspan="10" class="text-center">No Results Found</td></tr></tfoot>'; 
+            echo '<tfoot></tfoot>'; 
         }
         echo '</table>
         <div class="pagination-container">
@@ -369,27 +369,7 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
         
         global $connL;
 
-        echo '
-        <div class="form-row">  
-                    <div class="col-lg-1">
-                        <select class="form-select" name="state" id="maxRows">
-                             <option value="5000">ALL</option>
-                             <option value="1">1</option>
-                             <option value="5">5</option>
-                             <option value="10">10</option>
-                             <option value="15">15</option>
-                             <option value="20">20</option>
-                             <option value="50">50</option>
-                             <option value="70">70</option>
-                             <option value="100">100</option>
-                        </select> 
-                </div>         
-                <div class="col-lg-8">
-                </div>                               
-                <div class="col-lg-3">        
-                    <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for leave.." title="Type in leave details"> 
-                </div>                     
-        </div>         
+        echo '       
         <table id="leaveList" class="table table-sm">
         <thead>
             <tr>
@@ -410,7 +390,7 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                     when   approved = 4 then 'CANCELLED' ELSE 'N/A' END) as approved,b.firstname+' '+b.lastname as approver,medicalfile 
                     FROM dbo.tr_leave a left join employee_profile b
                     on a.approval = b.emp_code
-                    where a.emp_code = :emp_code ORDER BY date_from DESC, leavetype";
+                    where a.emp_code = :emp_code ORDER BY a.date_from DESC";
         $param = array(':emp_code' => $this->employeeCode);
         $stmt =$connL->prepare($query);
         $stmt->execute($param);
@@ -470,22 +450,9 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
             echo '</tr></tbody>';
 
         }else { 
-            echo '<tfoot><tr><td colspan="10" class="text-center">No Results Found</td></tr></tfoot>'; 
+            echo '<tfoot></tfoot>'; 
         }
-        echo '</table>
-        <div class="pagination-container">
-        <nav>
-          <ul class="pagination">
-            
-            <li data-page="prev" >
-                <span> << <span class="sr-only">(current)</span></span></li>
-    
-          <li data-page="next" id="prev">
-                  <span> >> <span class="sr-only">(current)</span></span>
-            </li>
-          </ul>
-        </nav>
-      </div>        ';
+        echo '</table>';
     }
 
     public function GetNumberOfDays($dateFrom,$dateTo) {
