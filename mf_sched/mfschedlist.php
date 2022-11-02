@@ -69,7 +69,8 @@ Class MfschedList{
                 <td id="wed'.$r['sched_id'].'"><small>'.$wedday.'<small></td>
                 <td id="thu'.$r['sched_id'].'"><small>'.$thuday.'<small></td>
                 <td id="fri'.$r['sched_id'].'"><small>'.$friday.'<small></td>
-                <td id="sat'.$r['sched_id'].'"><small>'.$satday.'<small></td>';
+                <td id="sat'.$r['sched_id'].'"><small>'.$satday.'<small></td>
+                <td id="stts'.$r['sched_id'].'" hidden>'.$r['status'].'</td>';
                 echo'<td><button type="button" class="btn btn-info btn-sm" onclick="editMfschedModal('.$schedid.')" title="Edit/Update"><i class="fas fa-edit"></i>
                         </button>
                         </td>';
