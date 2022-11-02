@@ -386,10 +386,10 @@
                 </div>
         <div class="modal-body">
             <div class="main-body">
-        <fieldset class="fieldset-border">
+<fieldset class="fieldset-border">
           <div class="modal-body">
               <div class="row">
-                <input type="text" name="empcode" id="empcode" value="<?php echo $empCode ?>" hidden>
+                <input type="text" name="rowd" id="rowd" hidden>
                 <div class='col-md-12 form-group'>
                   Schedule Name
                   <input type="text" name='schedule_name' id='schedule_name' class="form-control" placeholder="Schedule Name/Type" required>
