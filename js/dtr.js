@@ -34,7 +34,6 @@ $(function(){
                 // console.log("success: "+ data);
                     $('#dtrList').remove();
                     $('#dtrList_wrapper').remove();
-                    // $('#btnExport').remove();
                     $('#dtrViewList').append(data);
                     $('#dtrList').DataTable({
                         pageLength : 12,
@@ -55,15 +54,6 @@ $(function(){
                                 extend: 'pdf',
                                 title: 'My Attendance from '+dfrom+' to '+dto,
                                 text: '<img class="btnExcel" src="../img/expdf.png" title="Export to PDF">',
-                                init: function(api, node, config) {
-                                    $(node).removeClass('dt-button')
-                                 },
-                                 className: 'btn bg-transparent'
-                            },
-                            {
-                                extend: 'print',
-                                title: 'My Attendance from '+dfrom+' to '+dto,
-                                text: '<img class="btnExcel" src="../img/print.png" title="Print Attendance">',
                                 init: function(api, node, config) {
                                     $(node).removeClass('dt-button')
                                  },

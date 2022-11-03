@@ -47,15 +47,6 @@ $('#search').click(function(e){
                                     $(node).removeClass('dt-button')
                                  },
                                  className: 'btn bg-transparent'
-                            },
-                            {
-                                extend: 'print',
-                                title: 'Attendance'+empc,
-                                text: '<img class="btnExcel" src="../img/print.png" title="Print Attendance">',
-                                init: function(api, node, config) {
-                                    $(node).removeClass('dt-button')
-                                 },
-                                 className: 'btn bg-transparent'
                             }
                         ]                        
                     });  
