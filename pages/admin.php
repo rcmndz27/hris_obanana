@@ -687,12 +687,12 @@ swal({text:"You cancel your time out!",icon:"warning"});
 
            <div class="row">  
     <!-- All Act Emp-->
-    <div class="col-xl-2 col-md-6 mb-4">
+    <div class="col-xl-2 col-md-6 mb-2">
         <div class="card border-left-primary shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-capitalize mb-1">EMPLOYEE HANDBOOK
+                        <div class="text-xs font-weight-bold text-primary text-capitalize mb-1">Employee Handbook
                             <?php echo date("Y") ?> </div>
                             <div class="row no-gutters align-items-center">
                                 <a href="../uploads/COD_HANDBOOK.pdf" target="_blank">
@@ -711,7 +711,7 @@ swal({text:"You cancel your time out!",icon:"warning"});
         </div>                        
 
            <!--Total Work Days-->
-        <div class="col-xl-2 col-md-6 mb-4">
+        <div class="col-xl-2 col-md-6 mb-2">
             <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -733,7 +733,7 @@ swal({text:"You cancel your time out!",icon:"warning"});
     </div>
 
               <!--Total OT-->
-            <div class="col-xl-2 col-md-6 mb-4">
+            <div class="col-xl-2 col-md-6 mb-2">
             <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -755,7 +755,7 @@ swal({text:"You cancel your time out!",icon:"warning"});
     </div>
 
         <!--UNDERTIME-->
-        <div class="col-xl-2 col-md-6 mb-4">
+        <div class="col-xl-2 col-md-6 mb-2">
             <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -777,7 +777,7 @@ swal({text:"You cancel your time out!",icon:"warning"});
     </div>
 
     <!--Male-->
-    <div class="col-xl-2 col-md-6 mb-4">
+    <div class="col-xl-2 col-md-6 mb-2">
         <div class="card border-left-info shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
@@ -799,7 +799,7 @@ swal({text:"You cancel your time out!",icon:"warning"});
 </div>
 
 <!-- time in -->
-<div class="col-xl-2 col-md-6 mb-4">
+<div class="col-xl-2 col-md-6 mb-2">
     <div class="card border-left-warning shadow h-100 py-2">
         <div class="card-body">
             <div class="row no-gutters align-items-center">
@@ -859,11 +859,11 @@ swal({text:"You cancel your time out!",icon:"warning"});
 <div class="row">
 
 
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card shadow mb-4">
+    <div class="col-xl-3 col-md-6 mb-2">
+        <div class="card shadow mb-2">
             <!-- Card Header - Dropdown -->
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">NO TIME-IN : <?php echo strtoupper(date("F d, Y")) ?> <i class="fas fa-clock"></i></h6>
+            <h6 class="m-0 font-weight-bold text-primary">No Time-In : <?php echo date("F d, Y") ?> <i class="fas fa-clock"></i></h6>
         </div>
         <!-- Card Body -->
 
@@ -888,11 +888,11 @@ swal({text:"You cancel your time out!",icon:"warning"});
         </div>
     </div>      
 
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card shadow mb-4">
+    <div class="col-xl-3 col-md-6 mb-2">
+        <div class="card shadow mb-2">
             <!-- Card Header - Dropdown -->
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">SCHEDULE TODAY: <?php echo strtoupper(date("F d, Y")) ?> <i class="fas fa-calendar"></i>  </h6>
+            <h6 class="m-0 font-weight-bold text-primary">Schedule Today: <?php echo date("F d, Y") ?> <i class="fas fa-calendar"></i>  </h6>
         </div>
         <!-- Card Body -->
 
@@ -925,11 +925,11 @@ swal({text:"You cancel your time out!",icon:"warning"});
         </div>
         </div>
     </div>
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card shadow mb-4">
+    <div class="col-xl-3 col-md-6 mb-2">
+        <div class="card shadow mb-2">
             <!-- Card Header - Dropdown -->
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">TOTAL LATES : <?php echo strtoupper(date("M Y")) ?> <i class="fas fa-calendar"></i>  </h6>
+            <h6 class="m-0 font-weight-bold text-primary">Total Lates : <?php echo date("F Y") ?> <i class="fas fa-calendar"></i>  </h6>
         </div>
         <!-- Card Body -->
         <div class="card-body cdbody">
@@ -963,11 +963,11 @@ swal({text:"You cancel your time out!",icon:"warning"});
     </div>
   
 
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card shadow mb-4">
+    <div class="col-xl-3 col-md-6 mb-2">
+        <div class="card shadow mb-2">
             <!-- Card Header - Dropdown -->
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">BIRTHDAY CELEBRANTS : <?php echo strtoupper(date("M Y")) ?>  <i class="fas fa-birthday-cake"></i>  </h6>
+            <h6 class="m-0 font-weight-bold text-primary">Birthday Celebrants : <?php echo date("M Y") ?>  <i class="fas fa-birthday-cake"></i>  </h6>
         </div>
         <!-- Card Body -->
 
@@ -1025,10 +1025,10 @@ swal({text:"You cancel your time out!",icon:"warning"});
     </div>
 
 <div class="col-md-3">
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-2">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">ANNOUNCEMENTS <?php echo strtoupper(date("Y")) ?> <i class="fas fa-paste"></i></h6>
-            <button class="btn btn-primary btn-sm"  id="addAncmnt"><i class="fas fa-plus-circle"></i> Announcement</button>
+            <h6 class="m-0 font-weight-bold text-primary">Announcements <?php echo date("Y") ?> <i class="fas fa-paste"></i></h6>
+            <button class="btn btn-primary btn-sm"  id="addAncmnt"><i class="fas fa-plus-circle"></i> Add Memo</button>
         </div>
         <div class="card-body cdbody">
               <?php  
@@ -1059,9 +1059,9 @@ swal({text:"You cancel your time out!",icon:"warning"});
 </div>  
 
 <div class="col-md-3">
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-2">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">NO. OF EMPLOYEES PER LEVEL <i class="fas fa-users"></i></h6>
+            <h6 class="m-0 font-weight-bold text-primary">Number of Employees per Level <i class="fas fa-users"></i></h6>
         </div>
 <div class="table-responsive mb-3 mb-md-0 mt-3">
   <table class="table table-borderless report-table">
@@ -1107,9 +1107,9 @@ swal({text:"You cancel your time out!",icon:"warning"});
 </div>   
 
 <div class="col-md-3">
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-2">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">NO. OF EMPLOYEES PER STATUS <i class="fas fa-users"></i></h6>
+            <h6 class="m-0 font-weight-bold text-primary">Number of Employee per Status <i class="fas fa-users"></i></h6>
         </div>
 <div class="table-responsive mb-3 mb-md-0 mt-3">
   <table class="table table-borderless report-table">

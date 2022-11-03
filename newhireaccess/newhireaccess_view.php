@@ -157,7 +157,8 @@
                 <i class="fas fa-search-plus"></i> Generate                      
                 </button> 
                 
-                <a href="../newhireaccess/newemployee_entry.php" class="text-light" target="_blank"><button type="button" id="search" class="btn btn-primary mr-2" ><i class="fas fa-user mr-2"></i>Add User</button></a>                    
+                <a href="../newhireaccess/newemployee_entry.php" class="text-light" target="_blank"><button type="button" id="search" class="btn btn-primary mr-2" >
+                    <i class="fas fa-user mr-2"></i>Add Employee</button></a>                    
                         
             </div>                                           
         </div>
@@ -498,27 +499,6 @@
 
     });
 
-function myFunction() {
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("allEmpList");
-  tr = table.getElementsByTagName("tr");
-for (i = 0; i < tr.length; i++) {
-   td = tr[i].getElementsByTagName("td");
-    if(td.length > 0){ // to avoid th
-       if (td[0].innerHTML.toUpperCase().indexOf(filter) > -1 || td[1].innerHTML.toUpperCase().indexOf(filter) > -1 
-        || td[2].innerHTML.toUpperCase().indexOf(filter) > -1  || td[3].innerHTML.toUpperCase().indexOf(filter) > -1 
-        || td[4].innerHTML.toUpperCase().indexOf(filter) > -1  || td[5].innerHTML.toUpperCase().indexOf(filter) > -1 
-        || td[6].innerHTML.toUpperCase().indexOf(filter) > -1  ) {
-         tr[i].style.display = "";
-       } else {
-         tr[i].style.display = "none";
-       }
-
-    }
- }
-}
 
     function onlyNumberKey(evt) {
           

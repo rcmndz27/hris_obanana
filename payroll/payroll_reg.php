@@ -5,7 +5,7 @@ class PayrollRegApplication {
     function GetPayrollRegList(){
 
            
-            global $connL;
+global $connL;
 
 $query = "SELECT *,a.emp_code as empcd,
 COALESCE((b.tot_overtime_reg * (((month_pay * 12) / 313)/8) * 1.25),0) as tot_overtime_regamt,
@@ -37,130 +37,113 @@ $stmt =$connL->prepare($query);
 $stmt->execute();
 $r = $stmt->fetch();  
 
+echo "
+<table id='payrollRegList' class='table table-sm'>
+    <thead>
+        <tr>
+            <th colspan='88' class='paytop'>Payroll Register View</th>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <th>Code</th>
+            <th>Bank Account#</th>
+            <th>Bank</th>
+            <th>Position</th>
+            <th>Employment Status</th>
+            <th>Company</th>
+            <th>Department </th>
+            <th>Location</th>
+            <th>Date Hired</th>
+            <th>Cut-off From</th>
+            <th>Cut-off To</th>
+            <th>Monthly Rate</th>
+            <th>Daily Rate</th>
+            <th>Semi-Monthly Rate</th>
+            <th>Absences</th>
+            <th> Lates </th>
+            <th> Undertime </th>
+            <th> Salary Adjustment (Days)</th>
+            <th> Salary Adjustment (Hrs)</th>
+            <th>Regular Overtime (Hrs)</th>
+            <th>Regular Night Differential (Hrs)</th>
+            <th>Regular Night Differential OT (Hrs)</th> 
+            <th>Regular Holiday (Hrs)</th>
+            <th>Regular Holiday Overtime (Hrs)</th>
+            <th>Regular Holiday Night Differential (Hrs)</th>
+            <th>Regular Holiday Night Differential Overtime (Hrs)</th>
+            <th>Special Holiday (Hrs)</th> 
+            <th>Special Holiday Overtime (Hrs)</th> 
+            <th>Special Holiday Night Differential (Hrs)</th> 
+            <th>Special Holiday Night Differential Overtime (Hrs)</th> 
+            <th>Rest Day (Hrs)</th>
+            <th>Rest Day Overtime (Hrs)</th>
+            <th>Rest Day Night Differential (Hrs)</th>
+            <th>Rest Day Night Differential Overtime (Hrs)</th>
+            <th>Rest Day Regular Holiday Overtime (Hrs)</th>
+            <th>Rest Day Regular Holiday Night Differential (Hrs)</th>
+            <th>Rest Day Regular Holiday Night Differential Overtime (Hrs)</th>
+            <th>Rest Day Special Holiday Overtime (Hrs)</th>
+            <th>Rest Day Special Holiday Night Differential (Hrs)</th>
+            <th>Rest Day Special Holiday Night Differential Overtime (Hrs)</th>                        
+            <th> Total Overtime </th>
+            <th> Meal Allowance </th>
+            <th> Salary Allowance </th>
+            <th> Out of Town Allowance </th>
+            <th> Incentives Allowance </th>
+            <th> Relocation Allowance </th>
+            <th> Discretionary Allowance </th>
+            <th> Transportation Allowance</th>
+            <th> Load Allowance </th>
+            <th> Sick Leave</th>
+            <th> Vacation Leave </th>   
+            <th> Sick Leave No Pay</th>
+            <th> Vacation Leave No Pay</th>  
+            <th> Work From Home </th>
+            <th> Official Business </th>                                            
+            <th> Grosspay </th>
+            <th> Total Taxable </th>
+            <th> Withholding Tax </th>
+            <th> SSS EE </th>
+            <th> SSS MPF EE </th>
+            <th> PHIC EE </th>
+            <th> hdmf EE </th>
+            <th> hdmf Salary Loan </th>
+            <th> hdmf Calamity Loan </th>
+            <th> SSS Salary Loan </th>
+            <th> SSS Calamity Loan </th>
+            <th> Salary Deduction (Taxable)</th>
+            <th> Salary Deduction (Non-Taxable)</th>
+            <th> Salary Loan </th>
+            <th> Company Loan </th>
+            <th> OMHAS </th>
+            <th> COOP CBU </th>
+            <th> COOP Regular Loan </th>
+            <th> COOP MESCCO </th>
+            <th> Uploan </th>
+            <th> Others</th>
+            <th> Total Deduction</th>
+            <th> Netpay </th>
+            <th> SSS ER </th>
+            <th> SSS MPF ER </th>
+            <th> SSS EC </th>
+            <th> PHIC ER </th>
+            <th> hdmf ER </th> 
+            <th> TIN No. </th>
+            <th> Philhealth No. </th>
+            <th> Pagibig No. </th>
+            <th> SSS No. </th>                            
+        </tr>
+    </thead>
+    <tbody>";
 
-            echo "
-        <div class='form-row'>  
-                    <div class='col-lg-1'>
-                        <select class='form-select' name='state' id='maxRows'>
-                             <option value='5000'>ALL</option>
-                             <option value='5'>5</option>
-                             <option value='10'>10</option>
-                             <option value='15'>15</option>
-                             <option value='20'>20</option>
-                             <option value='50'>50</option>
-                             <option value='70'>70</option>
-                             <option value='100'>100</option>
-                        </select> 
-                </div>         
-                <div class='col-lg-8'>
-                </div>                               
-                <div class='col-lg-3'>        
-                    <input type='text' id='myInput' class='form-control' onkeyup='myFunction()' placeholder='Search for employee payroll..' title='Type in employee details'> 
-                        </div>                     
-                </div>   
-            <table id='payrollRegList' class='table table-striped table-sm'>
-                <thead>
-                    <tr>
-                        <th colspan='67' class='paytop'>Payroll Register View</th>
-                    </tr>
-                    <tr>
-                        <th>Name</th>
-                        <th>Code</th>
-                        <th>Bank Account#</th>
-                        <th>Bank</th>
-                        <th>Position</th>
-                        <th>Employment Status</th>
-                        <th>Company</th>
-                        <th>Department </th>
-                        <th>Location</th>
-                        <th>Date Hired</th>
-                        <th>Cut-off From</th>
-                        <th>Cut-off To</th>
-                        <th>Monthly Rate</th>
-                        <th>Daily Rate</th>
-                        <th>Semi-Monthly Rate</th>
-                        <th>Absences</th>
-                        <th> Lates </th>
-                        <th> Undertime </th>
-                        <th> Salary Adjustment (Days)</th>
-                        <th> Salary Adjustment (Hrs)</th>
-                        <th>Regular Overtime (Hrs)</th>
-                        <th>Regular Night Differential (Hrs)</th>
-                        <th>Regular Night Differential OT (Hrs)</th> 
-                        <th>Regular Holiday (Hrs)</th>
-                        <th>Regular Holiday Overtime (Hrs)</th>
-                        <th>Regular Holiday Night Differential (Hrs)</th>
-                        <th>Regular Holiday Night Differential Overtime (Hrs)</th>
-                        <th>Special Holiday (Hrs)</th> 
-                        <th>Special Holiday Overtime (Hrs)</th> 
-                        <th>Special Holiday Night Differential (Hrs)</th> 
-                        <th>Special Holiday Night Differential Overtime (Hrs)</th> 
-                        <th>Rest Day (Hrs)</th>
-                        <th>Rest Day Overtime (Hrs)</th>
-                        <th>Rest Day Night Differential (Hrs)</th>
-                        <th>Rest Day Night Differential Overtime (Hrs)</th>
-                        <th>Rest Day Regular Holiday Overtime (Hrs)</th>
-                        <th>Rest Day Regular Holiday Night Differential (Hrs)</th>
-                        <th>Rest Day Regular Holiday Night Differential Overtime (Hrs)</th>
-                        <th>Rest Day Special Holiday Overtime (Hrs)</th>
-                        <th>Rest Day Special Holiday Night Differential (Hrs)</th>
-                        <th>Rest Day Special Holiday Night Differential Overtime (Hrs)</th>                        
-                        <th> Total Overtime </th>
-                        <th> Meal Allowance </th>
-                        <th> Salary Allowance </th>
-                        <th> Out of Town Allowance </th>
-                        <th> Incentives Allowance </th>
-                        <th> Relocation Allowance </th>
-                        <th> Discretionary Allowance </th>
-                        <th> Transportation Allowance</th>
-                        <th> Load Allowance </th>
-                        <th> Sick Leave</th>
-                        <th> Vacation Leave </th>   
-                        <th> Sick Leave No Pay</th>
-                        <th> Vacation Leave No Pay</th>  
-                        <th> Work From Home </th>
-                        <th> Official Business </th>                                            
-                        <th> Grosspay </th>
-                        <th> Total Taxable </th>
-                        <th> Withholding Tax </th>
-                        <th> SSS EE </th>
-                        <th> SSS MPF EE </th>
-                        <th> PHIC EE </th>
-                        <th> hdmf EE </th>
-                        <th> hdmf Salary Loan </th>
-                        <th> hdmf Calamity Loan </th>
-                        <th> SSS Salary Loan </th>
-                        <th> SSS Calamity Loan </th>
-                        <th> Salary Deduction (Taxable)</th>
-                        <th> Salary Deduction (Non-Taxable)</th>
-                        <th> Salary Loan </th>
-                        <th> Company Loan </th>
-                        <th> OMHAS </th>
-                        <th> COOP CBU </th>
-                        <th> COOP Regular Loan </th>
-                        <th> COOP MESCCO </th>
-                        <th> Uploan </th>
-                        <th> Others</th>
-                        <th> Total Deduction</th>
-                        <th> Netpay </th>
-                        <th> SSS ER </th>
-                        <th> SSS MPF ER </th>
-                        <th> SSS EC </th>
-                        <th> PHIC ER </th>
-                        <th> hdmf ER </th> 
-                        <th> TIN No. </th>
-                        <th> Philhealth No. </th>
-                        <th> Pagibig No. </th>
-                        <th> SSS No. </th>                            
-                    </tr>
-                </thead>
-                <tbody>";
-
-                 if($r){
-                    do {
+     if($r){
+        do {
 
 $absences = ($r['absences'] <> '0') ?  $r['absences'] : 0 ;
 $late = ($r['late'] <> '0') ?  $r['late'] : 0 ;
+$month_pay = ($r['month_pay'] <> '0') ?  $r['month_pay'] : 0 ;
+$daily_pay = ($r['daily_pay'] <> '0') ?  $r['daily_pay'] : 0 ;
+$semi_month_pay = ($r['semi_month_pay'] <> '0') ?  $r['semi_month_pay'] : 0 ;
 $undertime = ($r['undertime'] <> '0') ?  $r['undertime'] : 0 ;
 $total_adjstmenthrs = ($r['total_adjstmenthrs'] <> '0') ?  $r['total_adjstmenthrs'] : 0 ;
 $salary_adjustment = ($r['salary_adjustment'] <> '0') ?  $r['salary_adjustment'] : 0 ;
@@ -230,108 +213,110 @@ $sss_ec = ($r['sss_ec'] <> '0') ?  $r['sss_ec'] : 0 ;
 $phic_er = ($r['phic_er'] <> '0') ?  $r['phic_er'] : 0 ;
 $hdmf_er = ($r['hdmf_er'] <> '0') ?  $r['hdmf_er'] : 0 ;
 
-    echo "<tr>".
-    "<td>" . $r['name'] . "</td>".
-    "<td>" . $r['empcd'] . "</td>".
-    "<td>" . $r['bank_acctno'] . "</td>".
-    "<td>" . $r['bank'] . "</td>".
-    "<td>" . $r['position'] . "</td>".
-    "<td>" . $r['emp_status'] . "</td>".
-    "<td>" . $r['company'] . "</td>".
-    "<td>" . $r['department'] . "</td>".
-    "<td>" . $r['location'] . "</td>".
-    "<td>" . date('m/d/y', strtotime($r['date_hired'])) . "</td>".
-    "<td>" . date('m/d/y', strtotime($r['date_from'])) . "</td>".
-    "<td>" . date('m/d/y', strtotime($r['date_to'])) . "</td>".
-    "<td>" . $r['month_pay']. "</td>".
-    "<td>" . $r['daily_pay']. "</td>".
-    "<td>" . $r['semi_month_pay']. "</td>".
-    "<td>" . $absences. "</td>".
-    "<td>" . $late. "</td>".
-    "<td>" . $undertime. "</td>".
-    "<td>" . $total_adjstmenthrs. "</td>".
-    "<td>" . $salary_adjustment. "</td>".
-    "<td>" . $tot_overtime_regamt. "</td>".
-    "<td>" . $night_differentialamt. "</td>".
-    "<td>" . $night_differential_otamt. "</td>".
-    "<td>" . $tot_regholidayamt. "</td>".
-    "<td>" . $tot_overtime_regholidayamt. "</td>".
-    "<td>" . $tot_regholiday_nightdiffamt. "</td>".
-    "<td>" . $tot_overtime_regholiday_nightdiffamt. "</td>".
-    "<td>" . $tot_spholidayamt. "</td>".
-    "<td>" . $tot_overtime_spholidayamt. "</td>".
-    "<td>" . $tot_spholiday_nightdiffamt. "</td>".
-    "<td>" . $tot_overtime_spholiday_nightdiffamt. "</td>".
-    "<td>" . $tot_restamt. "</td>".
-    "<td>" . $tot_overtime_restamt. "</td>".
-    "<td>" . $night_differential_restamt. "</td>".
-    "<td>" . $night_differential_ot_restamt. "</td>".
-    "<td>" . $tot_overtime_rest_regholidayamt. "</td>".
-    "<td>" . $night_differential_rest_regholidayamt. "</td>".
-    "<td>" . $tot_overtime_night_diff_rest_regholidayamt. "</td>".
-    "<td>" . $tot_overtime_sprestholidayamt. "</td>".
-    "<td>" . $tot_sprestholiday_nightdiffamt. "</td>".
-    "<td>" . $tot_overtime_sprestholiday_nightdiffamt. "</td>".    
-    "<td>" . $overtime. "</td>".
-    "<td>" . $meal_allowance. "</td>".
-    "<td>" . $salary_allowance. "</td>".
-    "<td>" . $oot_allowance. "</td>".
-    "<td>" . $inc_allowance. "</td>".
-    "<td>" . $rel_allowance. "</td>"                                   .
-    "<td>" . $disc_allowance. "</td>".
-    "<td>" . $trans_allowance. "</td>".
-    "<td>" . $load_allowance. "</td>".
-    "<td>" . $sick_leave. "</td>".
-    "<td>" . $vacation_leave. "</td>". 
-    "<td>" . $sick_leave_nopay. "</td>".
-    "<td>" . $vacation_leave_nopay. "</td>".   
-    "<td>" . $wfhome. "</td>".
-    "<td>" . $offbusiness. "</td>".                                     
-    "<td>" . $gross_pay. "</td>".
-    "<td>" . $total_taxable. "</td>".
-    "<td>" . $witholding_tax. "</td>".
-    "<td>" . $sss_regee. "</td>".
-    "<td>" . $sss_mpfee. "</td>".
-    "<td>" . $phic_ee. "</td>".
-    "<td>" . $hdmf_ee. "</td>".
-    "<td>" . $hdmf_sal_loan. "</td>".
-    "<td>" . $hdmf_cal_loan. "</td>".
-    "<td>" . $sss_sal_loan. "</td>".
-    "<td>" . $sss_cal_loan. "</td>".
-    "<td>" . $sal_ded_tax. "</td>".
-    "<td>" . $sal_ded_nontax. "</td>".
-    "<td>" . $sal_loan. "</td>".
-    "<td>" . $com_loan. "</td>".
-    "<td>" . $omhas. "</td>".
-    "<td>" . $coop_cbu. "</td>".
-    "<td>" . $coop_reg_loan. "</td>".
-    "<td>" . $coop_messco. "</td>".
-    "<td>" . $uploan. "</td>".
-    "<td>" . $others. "</td>".
-    "<td>" . $total_deduction. "</td>".
-    "<td>" . $netpay. "</td>".
-    "<td>" . $sss_reg_er. "</td>".
-    "<td>" . $sss_mpf_er. "</td>".
-    "<td>" . $sss_ec. "</td>".
-    "<td>" . $phic_er. "</td>".
-    "<td>" . $hdmf_er. "</td>".
-    "<td>" . $r['tin_no']. "</td>".
-    "<td>" . $r['phil_no']. "</td>".
-    "<td>" . $r['pagibig_no']. "</td>".
-    "<td>" . $r['sss_no']. "</td>".    
-    "</tr>";
-    } while($r = $stmt->fetch(PDO::FETCH_ASSOC));
-    echo"</tbody><tfoot>".
-    "</tr><tr>".
-    "<td colspan='67' class='paytop'>".
-    "</td>".
-    "</tr></tfoot>";    
+echo "<tr>".
+"<td>" . $r['name'] . "</td>".
+"<td>" . $r['empcd'] . "</td>".
+"<td>" . $r['bank_acctno'] . "</td>".
+"<td>" . $r['bank'] . "</td>".
+"<td>" . $r['position'] . "</td>".
+"<td>" . $r['emp_status'] . "</td>".
+"<td>" . $r['company'] . "</td>".
+"<td>" . $r['department'] . "</td>".
+"<td>" . $r['location'] . "</td>".
+"<td>" . date('m/d/y', strtotime($r['date_hired'])) . "</td>".
+"<td>" . date('m/d/y', strtotime($r['date_from'])) . "</td>".
+"<td>" . date('m/d/y', strtotime($r['date_to'])) . "</td>".
+"<td>" . $month_pay. "</td>".
+"<td>" . $daily_pay. "</td>".
+"<td>" . $semi_month_pay. "</td>".
+"<td>" . $absences. "</td>".
+"<td>" . $late. "</td>".
+"<td>" . $undertime. "</td>".
+"<td>" . $total_adjstmenthrs. "</td>".
+"<td>" . $salary_adjustment. "</td>".
+"<td>" . $tot_overtime_regamt. "</td>".
+"<td>" . $night_differentialamt. "</td>".
+"<td>" . $night_differential_otamt. "</td>".
+"<td>" . $tot_regholidayamt. "</td>".
+"<td>" . $tot_overtime_regholidayamt. "</td>".
+"<td>" . $tot_regholiday_nightdiffamt. "</td>".
+"<td>" . $tot_overtime_regholiday_nightdiffamt. "</td>".
+"<td>" . $tot_spholidayamt. "</td>".
+"<td>" . $tot_overtime_spholidayamt. "</td>".
+"<td>" . $tot_spholiday_nightdiffamt. "</td>".
+"<td>" . $tot_overtime_spholiday_nightdiffamt. "</td>".
+"<td>" . $tot_restamt. "</td>".
+"<td>" . $tot_overtime_restamt. "</td>".
+"<td>" . $night_differential_restamt. "</td>".
+"<td>" . $night_differential_ot_restamt. "</td>".
+"<td>" . $tot_overtime_rest_regholidayamt. "</td>".
+"<td>" . $night_differential_rest_regholidayamt. "</td>".
+"<td>" . $tot_overtime_night_diff_rest_regholidayamt. "</td>".
+"<td>" . $tot_overtime_sprestholidayamt. "</td>".
+"<td>" . $tot_sprestholiday_nightdiffamt. "</td>".
+"<td>" . $tot_overtime_sprestholiday_nightdiffamt. "</td>".    
+"<td>" . $overtime. "</td>".
+"<td>" . $meal_allowance. "</td>".
+"<td>" . $salary_allowance. "</td>".
+"<td>" . $oot_allowance. "</td>".
+"<td>" . $inc_allowance. "</td>".
+"<td>" . $rel_allowance. "</td>"                                   .
+"<td>" . $disc_allowance. "</td>".
+"<td>" . $trans_allowance. "</td>".
+"<td>" . $load_allowance. "</td>".
+"<td>" . $sick_leave. "</td>".
+"<td>" . $vacation_leave. "</td>". 
+"<td>" . $sick_leave_nopay. "</td>".
+"<td>" . $vacation_leave_nopay. "</td>".   
+"<td>" . $wfhome. "</td>".
+"<td>" . $offbusiness. "</td>".                                     
+"<td>" . $gross_pay. "</td>".
+"<td>" . $total_taxable. "</td>".
+"<td>" . $witholding_tax. "</td>".
+"<td>" . $sss_regee. "</td>".
+"<td>" . $sss_mpfee. "</td>".
+"<td>" . $phic_ee. "</td>".
+"<td>" . $hdmf_ee. "</td>".
+"<td>" . $hdmf_sal_loan. "</td>".
+"<td>" . $hdmf_cal_loan. "</td>".
+"<td>" . $sss_sal_loan. "</td>".
+"<td>" . $sss_cal_loan. "</td>".
+"<td>" . $sal_ded_tax. "</td>".
+"<td>" . $sal_ded_nontax. "</td>".
+"<td>" . $sal_loan. "</td>".
+"<td>" . $com_loan. "</td>".
+"<td>" . $omhas. "</td>".
+"<td>" . $coop_cbu. "</td>".
+"<td>" . $coop_reg_loan. "</td>".
+"<td>" . $coop_messco. "</td>".
+"<td>" . $uploan. "</td>".
+"<td>" . $others. "</td>".
+"<td>" . $total_deduction. "</td>".
+"<td>" . $netpay. "</td>".
+"<td>" . $sss_reg_er. "</td>".
+"<td>" . $sss_mpf_er. "</td>".
+"<td>" . $sss_ec. "</td>".
+"<td>" . $phic_er. "</td>".
+"<td>" . $hdmf_er. "</td>".
+"<td>" . $r['tin_no']. "</td>".
+"<td>" . $r['phil_no']. "</td>".
+"<td>" . $r['pagibig_no']. "</td>".
+"<td>" . $r['sss_no']. "</td>".    
+"</tr>";
+} while($r = $stmt->fetch(PDO::FETCH_ASSOC));
+echo"</tbody><tfoot>".
+"</tr><tr>".
+"<td colspan='88' class='paytop'>".
+"</td>".
+"</tr></tfoot>";    
 
-    }else { 
-        echo '<tfoot><tr><td colspan="67" class="paytop">No Results Found</td></tr></tfoot>'; 
-    }
+}else { 
+echo '<tfoot></tfoot>'; 
+}
 
-    echo"</table>"; 
+echo"</table>"; 
+
+
 
     }
 

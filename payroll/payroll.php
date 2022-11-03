@@ -251,7 +251,7 @@ onclick="editAttModal('.$empn.','.$badgeno.','.$rwd.')" title="Edit Attendance">
 
 
     }else { 
-        echo '<tfoot><tr><td colspan="21" class="paytop">No Results Found</td></tr></tfoot>'; 
+        echo '<tfoot></tfoot>'; 
     }
 
     echo"</table>"; 

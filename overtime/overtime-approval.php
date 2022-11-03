@@ -107,7 +107,7 @@ require '../vendor/autoload.php';
                 } while($result = $stmt->fetch());
                 echo "</tbody>";
             }else{
-                echo '<tfoot><tr><td colspan="6" class="text-center">No Results Found</td></tr></tfoot>'; 
+                echo '<tfoot></tfoot>'; 
             }
 
             echo "</table>";
@@ -472,7 +472,7 @@ require '../vendor/autoload.php';
                 echo '</tbody>';
     
             }else { 
-                echo '<tfoot><tr><td colspan="8" class="text-center">No Results Found</td></tr></tfoot>'; 
+                echo '<tfoot></tfoot>'; 
             }
             echo '</table>';
         } 

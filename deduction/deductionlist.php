@@ -12,7 +12,9 @@ Class DeductionList{
                 <th>Employee Code</th>
                 <th>Employee Name</th>
                 <th>Deduction Name</th>
+                <th hidden>Period Cutoff</th>
                 <th>Period Cutoff</th>
+                <th hidden>Deduction Amount</th>
                 <th>Deduction Amount</th>
                 <th>Effectivity Date</th>
                 <th>End Date</th>
@@ -67,22 +69,10 @@ Class DeductionList{
             echo '</tr></tbody>';
 
         }else { 
-            echo '<tfoot><tr><td colspan="8" class="text-center">No Results Found</td></tr></tfoot>'; 
+            echo '<tfoot></tfoot>'; 
         }
         echo '</table>
-        <div class="pagination-container">
-        <nav>
-          <ul class="pagination">
-            
-            <li data-page="prev" >
-                <span> << <span class="sr-only">(current)</span></span></li>
-    
-          <li data-page="next" id="prev">
-                  <span> >> <span class="sr-only">(current)</span></span>
-            </li>
-          </ul>
-        </nav>
-      </div>         ';
+                 ';
     }
 
 

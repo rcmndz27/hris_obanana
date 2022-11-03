@@ -14,6 +14,7 @@ Class SalaryList{
                 <th>Account No.</th>
                 <th>Pay Type</th>
                 <th>Pay Rate</th>
+                <th hidden>Amount/th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
@@ -55,22 +56,9 @@ Class SalaryList{
             echo '</tr></tbody>';
 
         }else { 
-            echo '<tfoot><tr><td colspan="6" class="text-center">No Results Found</td></tr></tfoot>'; 
+            echo '<tfoot></tfoot>'; 
         }
-        echo '</table>
-        <div class="pagination-container">
-        <nav>
-          <ul class="pagination">
-            
-            <li data-page="prev" >
-                <span> << <span class="sr-only">(current)</span></span></li>
-    
-          <li data-page="next" id="prev">
-                  <span> >> <span class="sr-only">(current)</span></span>
-            </li>
-          </ul>
-        </nav>
-      </div> ';
+        echo '</table>';
     }
 
 

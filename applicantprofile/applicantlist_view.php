@@ -538,7 +538,7 @@
                                 document.getElementById('st'+rowid).innerHTML = status;
 
                             if(status == 'Active'){
-                                document.getElementById('upd'+rowid).innerHTML = '<button type="button" class="uptv" onclick="updateEntryModal('+rowid+','+appname+')"><i class="fas fa-edit"></i> UPDATE</button>';
+                                document.getElementById('upd'+rowid).innerHTML = '<button type="button" class="uptv" onclick="updateEntryModal('+rowid+','+appname+')"><i class="fas fa-edit"></i> Update</button>';
                             }else{
                                 document.getElementById('upd'+rowid).innerHTML = '<button type="button" class="btn btn-info btn-sm" onclick="verifyEntryModal('+rowid+','+appname+')"><i class="fas fa-user-check"></i> VERIFY</button>'; 
                             }

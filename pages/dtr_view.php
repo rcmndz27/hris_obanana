@@ -38,7 +38,7 @@
                 </i>My Attendance</b></li>
             </ol>
           </nav>
-    <div class="form-row pt-3">
+    <div class="form-row mb-3">
             <input type="text" name="empCode" id="empCode" value="<?php $empCode ?>" hidden>
                 <label class="control-label pad" for="dateFrom">From:</label>
             <div class="col-md-2">

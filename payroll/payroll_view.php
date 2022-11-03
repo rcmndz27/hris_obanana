@@ -1,6 +1,5 @@
 <?php
 
-
 session_start();
 
 if (empty($_SESSION['userid']))
@@ -723,42 +722,42 @@ aria-hidden="true">
                 },
                 function(data) { 
             
-                    $("#contents").html(data).show();
-                    $('#payrollList').DataTable({
-                        pageLength : 12,
-                        lengthMenu: [[12, 24, 36, -1], [12, 24, 36, 'All']],
-                        dom: 'Bfrtip',
-                        buttons: [
-                            'pageLength',
-                            {
-                                extend: 'excel',
-                                title: 'Timekeeping from'+dates[0]+' to '+dates[1], 
-                                text: '<img class="btnExcel" src="../img/excel.png" title="Export to Excel">',
-                                init: function(api, node, config) {
-                                    $(node).removeClass('dt-button')
-                                 },
-                                 className: 'btn bg-transparent btn-sm'
-                            },
-                            {
-                                extend: 'pdf',
-                                title: 'Timekeeping from'+dates[0]+' to '+dates[1], 
-                                text: '<img class="btnExcel" src="../img/expdf.png" title="Export to PDF">',
-                                init: function(api, node, config) {
-                                    $(node).removeClass('dt-button')
-                                 },
-                                 className: 'btn bg-transparent'
-                            },
-                            {
-                                extend: 'print',
-                                title: 'Timekeeping from'+dates[0]+' to '+dates[1], 
-                                text: '<img class="btnExcel" src="../img/print.png" title="Print Attendance">',
-                                init: function(api, node, config) {
-                                    $(node).removeClass('dt-button')
-                                 },
-                                 className: 'btn bg-transparent'
-                            }
-                        ]                        
-                    }); 
+                $("#contents").html(data).show();
+                $('#payrollList').DataTable({
+                    pageLength : 12,
+                    lengthMenu: [[12, 24, 36, -1], [12, 24, 36, 'All']],
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'pageLength',
+                        {
+                            extend: 'excel',
+                            title: 'Timekeeping from'+dates[0]+' to '+dates[1], 
+                            text: '<img class="btnExcel" src="../img/excel.png" title="Export to Excel">',
+                            init: function(api, node, config) {
+                                $(node).removeClass('dt-button')
+                                },
+                                className: 'btn bg-transparent btn-sm'
+                        },
+                        {
+                            extend: 'pdf',
+                            title: 'Timekeeping from'+dates[0]+' to '+dates[1], 
+                            text: '<img class="btnExcel" src="../img/expdf.png" title="Export to PDF">',
+                            init: function(api, node, config) {
+                                $(node).removeClass('dt-button')
+                                },
+                                className: 'btn bg-transparent'
+                        },
+                        {
+                            extend: 'print',
+                            title: 'Timekeeping from'+dates[0]+' to '+dates[1], 
+                            text: '<img class="btnExcel" src="../img/print.png" title="Print Attendance">',
+                            init: function(api, node, config) {
+                                $(node).removeClass('dt-button')
+                                },
+                                className: 'btn bg-transparent'
+                        }
+                    ]                        
+                }); 
                     document.getElementById("myDiv").style.display="none"; 
                 }
                 );
