@@ -41,7 +41,7 @@ Class LeaveApplication{
         $resultps = $stmtps->fetch();
 
         $querypv = "SELECT count(actl_cnt) as cnt_pv from tr_leave where approved = 1 and emp_code  = :empCode 
-        and leavetype in ('Vacation Leave','Emergency Leave','Vacation Leave without Pay')";
+        and leavetype in ('Vacation Leave','Emergency Leave','Vacation Leave without Pay','Bereavement Leave')";
         $stmtpv =$connL->prepare($querypv);
         $parampv = array(":empCode" => $this->employeeCode);
         $stmtpv->execute($parampv);
@@ -321,7 +321,7 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                     when   approved = 4 then 'CANCELLED' ELSE 'N/A' END) as approved,b.firstname+' '+b.lastname as approver,medicalfile 
                     FROM dbo.tr_leave a left join employee_profile b
                     on a.approval = b.emp_code
-                    where a.emp_code = :emp_code ORDER BY a.date_from DESC";
+                    where a.emp_code = :emp_code ORDER BY a.datefiled DESC";
         $param = array(':emp_code' => $this->employeeCode);
         $stmt =$connL->prepare($query);
         $stmt->execute($param);
