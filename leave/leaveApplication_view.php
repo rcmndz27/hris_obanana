@@ -124,26 +124,6 @@
         );
     }
 
-        function myFunction() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("leaveList");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td");
-        if(td.length > 0){ // to avoid th
-        if (td[0].innerHTML.toUpperCase().indexOf(filter) > -1 || td[1].innerHTML.toUpperCase().indexOf(filter) > -1 
-        || td[2].innerHTML.toUpperCase().indexOf(filter) > -1  || td[3].innerHTML.toUpperCase().indexOf(filter) > -1 
-        || td[4].innerHTML.toUpperCase().indexOf(filter) > -1 ) {
-        tr[i].style.display = "";
-        } else {
-        tr[i].style.display = "none";
-            }
-        }
-        }
-    }
-
 function cancelLeave(lvid,empcd)
 {
 
@@ -659,12 +639,12 @@ function cancelLeave(lvid,empcd)
 $(document).ready( function () {
     $('#leaveList').DataTable({
         pageLength : 5,
-        lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']]
+        lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
+        sorting : [ [0,'DESC'] ]
     });
 } );    
 
    var allhaftday = 1;
-
 
     function CheckInput() {
 

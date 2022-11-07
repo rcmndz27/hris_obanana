@@ -304,6 +304,7 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
         <table id="leaveList" class="table table-sm">
         <thead>
             <tr>
+                <th hidden>Rowid</th>
                 <th>Leave Date</th>
                 <th>Leave Type</th>
                 <th>Description</th>
@@ -321,7 +322,7 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                     when   approved = 4 then 'CANCELLED' ELSE 'N/A' END) as approved,b.firstname+' '+b.lastname as approver,medicalfile 
                     FROM dbo.tr_leave a left join employee_profile b
                     on a.approval = b.emp_code
-                    where a.emp_code = :emp_code ORDER BY a.datefiled DESC";
+                    where a.emp_code = :emp_code";
         $param = array(':emp_code' => $this->employeeCode);
         $stmt =$connL->prepare($query);
         $stmt->execute($param);
@@ -347,6 +348,7 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                 $onclick = 'onclick="viewLeaveModal('.$datefl.','.$leavedesc.','.$leavetyp.','.$datefr.','.$dateto.','.$remark.','.$appdays.','.$appr_oved.','.$actlcnt.','.$appr_over.','.$medicalfile.')"';
                 echo '
                 <tr class="csor-pointer" >
+                <td  id="rd'.$result['rowid'].'" hidden>' .$result['date_from']. '</td>
                 <td '.$onclick.'  id="ld'.$result['rowid'].'">' . date('F d, Y', strtotime($result['date_from'])) . '</td>
                 <td '.$onclick.' id="lt'.$result['rowid'].'">' . $result['leavetype'] . '</td>
                 <td '.$onclick.' id="ds'.$result['rowid'].'">' . $result['leave_desc']. '</td>
