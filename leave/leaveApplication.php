@@ -202,7 +202,7 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                 <td id="lc'.$result['lv_rowid'].'">' . $result['actl_cnt'] . '</td>
                 <td id="st'.$result['lv_rowid'].'">' . $result['approved'] . '</td>';
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewLeaveModal('.$datefl.','.$leavedesc.','.$leavetyp.','.$datefr.','.$dateto.','.$remark.','.$appdays.','.$appr_oved.','.$actlcnt.')" title="View Leave">
+                <td><button type="button" class="btn btn-info btn-sm mb-1" onclick="viewLeaveModal('.$datefl.','.$leavedesc.','.$leavetyp.','.$datefr.','.$dateto.','.$remark.','.$appdays.','.$appr_oved.','.$actlcnt.')" title="View Leave">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewLeaveHistoryModal('.$leaveid.')" title="View Logs">
@@ -275,7 +275,7 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                 <td id="lc'.$result['lv_rowid'].'">' . $result['actl_cnt'] . '</td>
                 <td id="st'.$result['lv_rowid'].'">' . $result['approved'] . '</td>';
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewLeaveModal('.$datefl.','.$leavedesc.','.$leavetyp.','.$datefr.','.$dateto.','.$remark.','.$appdays.','.$appr_oved.','.$actlcnt.')" title="View Leave">
+                <td><button type="button" class="btn btn-info btn-sm mb-1" onclick="viewLeaveModal('.$datefl.','.$leavedesc.','.$leavetyp.','.$datefr.','.$dateto.','.$remark.','.$appdays.','.$appr_oved.','.$actlcnt.')" title="View Leave">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewLeaveHistoryModal('.$leaveid.')" title="View Logs">
@@ -357,7 +357,7 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
     
                 if($result['approved'] == 'PENDING' || $result['approved'] == 'APPROVED'){
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewLeaveModal('.$datefl.','.$leavedesc.','.$leavetyp.','.$datefr.','.$dateto.','.$remark.','.$appdays.','.$appr_oved.','.$actlcnt.','.$appr_over.','.$medicalfile.')" title="View Leave">
+                <td><button type="button" class="btn btn-info btn-sm mb-1" onclick="viewLeaveModal('.$datefl.','.$leavedesc.','.$leavetyp.','.$datefr.','.$dateto.','.$remark.','.$appdays.','.$appr_oved.','.$actlcnt.','.$appr_over.','.$medicalfile.')" title="View Leave">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewLeaveHistoryModal('.$leaveid.')" title="View Logs">
@@ -369,7 +369,7 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                             </td>';
                 }else{
                 echo'
-                <td><button type="button" class="btn btn-info btn-sm btn-sm" onclick="viewLeaveModal('.$datefl.','.$leavedesc.','.$leavetyp.','.$datefr.','.$dateto.','.$remark.','.$appdays.','.$appr_oved.','.$actlcnt.','.$appr_over.','.$medicalfile.')" title="View Leave">
+                <td><button type="button" class="btn btn-info btn-sm mb-1" onclick="viewLeaveModal('.$datefl.','.$leavedesc.','.$leavetyp.','.$datefr.','.$dateto.','.$remark.','.$appdays.','.$appr_oved.','.$actlcnt.','.$appr_over.','.$medicalfile.')" title="View Leave">
                                 <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" onclick="viewLeaveHistoryModal('.$leaveid.')" title="View Logs">
