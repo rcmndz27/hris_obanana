@@ -198,6 +198,7 @@ $('#allMfpyrollcoList').DataTable({
       pageLength : 12,
       lengthMenu: [[12, 24, 36, -1], [12, 24, 36, 'All']],
       dom: 'Bfrtip',
+      sorting : [ [0,'DESC'] ],
       buttons: [
           'pageLength',
           {
