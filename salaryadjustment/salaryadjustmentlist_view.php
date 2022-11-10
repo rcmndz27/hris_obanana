@@ -114,7 +114,7 @@
                                     <div class="form-group">
                                         <label class="control-label" for="period_cutoff">Period Cutoff<span class="req">*</span>
                                         </label>
-                                        <?php $dd->GenerateDropDown("ddcutoff", $mf->GetCutoffSalAdj("saladj")); ?>
+                                        <?php $dd->GenerateDisabledDropDown("ddcutoff", $mf->GetCutoffSalAdj("saladj")); ?>
                                     </div>
                                 </div> 
                                 <div class="col-lg-2">
@@ -190,7 +190,7 @@
                                     <div class="form-group">
                                         <label class="control-label" for="ddcut">Period Cutoff<span class="req">*</span>
                                         </label>
-                                        <?php $dd->GenerateDropDown("ddcut", $mf->GetCutoffSalAdj("saladj")); ?>
+                                        <?php $dd->GenerateDisabledDropDown("ddcut", $mf->GetCutoffSalAdj("saladj")); ?>
                                     </div>
                                 </div> 
                                 <div class="col-lg-2">

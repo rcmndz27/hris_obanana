@@ -197,7 +197,7 @@
 
                
 
-                $sql = $connL->prepare(@"select location,period_from,period_to from att_summary group by location,period_from,period_to");
+                $sql = $connL->prepare(@"select location,period_from,period_to from att_summary group by location,period_from,period_to ORDER by period_from DESC");
                 $sql->execute();
 
                 if ($type == "saladj")
