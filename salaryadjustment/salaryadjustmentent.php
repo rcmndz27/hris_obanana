@@ -6,9 +6,9 @@ public function InsertSalaryAdjEnt($eMplogName,$emp_code,$description,$period_fr
     {
         global $connL;
 
-            $query = "INSERT INTO employee_salaryadj_management (emp_code,description,period_from,period_to,inc_decr,amount,remarks,audituser,auditdate) 
+            $query = "INSERT INTO employee_salaryadj_management (emp_code,description,period_from,period_to,inc_decr,amount,remarks,status,audituser,auditdate) 
 
-                VALUES(:emp_code,:description,:period_from,:period_to,:inc_decr,:amount,:remarks,:audituser,:auditdate)";
+                VALUES(:emp_code,:description,:period_from,:period_to,:inc_decr,:amount,:remarks,:status,:audituser,:auditdate)";
     
                 $stmt =$connL->prepare($query);
 
@@ -20,6 +20,7 @@ public function InsertSalaryAdjEnt($eMplogName,$emp_code,$description,$period_fr
                     ":inc_decr"=> $inc_decr,
                     ":amount"=> $amount,
                     ":remarks"=> $remarks,
+                    ":status"=> 'Active',
                     ":audituser" => $eMplogName,
                     ":auditdate"=>date('m-d-Y H:i:s')                                          
                 );

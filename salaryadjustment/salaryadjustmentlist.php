@@ -23,7 +23,7 @@ Class SalaryAdjList{
         <tbody>';
 
         $query = "SELECT a.emp_code,lastname+', '+firstname as fullname,period_to,period_from,description,remarks,amount,
-        inc_decr,salaryadj_id,b.emp_status from dbo.employee_salaryadj_management a left join employee_profile b
+        inc_decr,salaryadj_id,b.emp_status,a.status from dbo.employee_salaryadj_management a left join employee_profile b
         on a.emp_code = b.emp_code where b.emp_status = :empStatus and a.status = 'Active' ORDER by period_from DESC ";
         $param = array(":empStatus" => $empStatus);
         $stmt =$connL->prepare($query);
@@ -42,6 +42,7 @@ Class SalaryAdjList{
                 $remark = "'".$result['remarks']."'";   
                 $incdecr = "'".$result['inc_decr']."'";     
                 $salaryadjid = "'".$result['salaryadj_id']."'"; 
+                $stts = "'".$result['status']."'"; 
                 $onclick = 'onclick="editSalAdjModal('.$empcd.','.$percutoff.','.$descript.','.$amnt.','.$remark.','.$incdecr.','.$salaryadjid.')"';              
                 echo '
                 <tr class="csor-pointer">
@@ -52,7 +53,7 @@ Class SalaryAdjList{
                 <td '.$onclick.'>' . round($result['amount'],2).'</td>                
                 <td '.$onclick.'>' . $result['remarks']. '</td>
                 <td '.$onclick.'>' . $result['emp_status']. '</td>';
-                echo'<td><button type="button" class="btn btn-info btn-sm" title="Edit/Update" onclick="editSalAdjModal('.$empcd.','.$percutoff.','.$descript.','.$amnt.','.$remark.','.$incdecr.','.$salaryadjid.')">
+                echo'<td><button type="button" class="btn btn-info btn-sm" title="Edit/Update" onclick="editSalAdjModal('.$empcd.','.$percutoff.','.$descript.','.$amnt.','.$remark.','.$incdecr.','.$salaryadjid.','.$stts.')">
                                 <i class="fas fa-edit"></i>
                             </button></td>';
                 
@@ -65,20 +66,7 @@ Class SalaryAdjList{
         }else { 
             echo '<tfoot></tfoot>'; 
         }
-        echo '</table>
-                <div class="pagination-container">
-                        <nav>
-                          <ul class="pagination">
-                            
-                            <li data-page="prev" >
-                                <span> << <span class="sr-only">(current)</span></span></li>
-                    
-                          <li data-page="next" id="prev">
-                                  <span> >> <span class="sr-only">(current)</span></span>
-                            </li>
-                          </ul>
-                        </nav>
-                      </div>        ';
+        echo '</table>';
     }
 
 

@@ -1,7 +1,7 @@
 <?php 
 
 
-function UpdateSalaryAdj($emp_code,$period_from,$period_to,$description,$inc_decr,$amount,$remarks,$saladjid)
+function UpdateSalaryAdj($emp_code,$period_from,$period_to,$description,$inc_decr,$amount,$remarks,$saladjid,$status)
     {
             global $connL;
 
@@ -11,7 +11,8 @@ function UpdateSalaryAdj($emp_code,$period_from,$period_to,$description,$inc_dec
                 description = :description,
                 inc_decr = :inc_decr,
                 amount = :amount,  
-                remarks = :remarks
+                remarks = :remarks,
+                status = :status
              where emp_code = :emp_code and salaryadj_id = :saladjid");
             $cmd->bindValue('emp_code',$emp_code);
             $cmd->bindValue('period_from',$period_from);
@@ -21,6 +22,7 @@ function UpdateSalaryAdj($emp_code,$period_from,$period_to,$description,$inc_dec
             $cmd->bindValue('amount',$amount);
             $cmd->bindValue('remarks',$remarks);
             $cmd->bindValue('saladjid',$saladjid);
+            $cmd->bindValue('status',$status);
             $cmd->execute();
     }
 

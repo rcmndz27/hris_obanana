@@ -27,9 +27,17 @@
     }    
 ?>
 <link rel="stylesheet" href="../salaryadjustment/salaryadjustmentent.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
+<script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+<script type="text/javascript"  src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript"  src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script type="text/javascript"  src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
 <script type="text/javascript" src="../salaryadjustment/salaryadjustment_ent.js"></script>
 <script type='text/javascript' src='../js/validator.js'></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <body onload="javascript:generateEmpStatus();">
 <div class="container">
     <div class="section-title">
@@ -42,7 +50,7 @@
               <li class="breadcrumb-item active font-weight-bold" aria-current="page"><i class='fas fa-money-bill-wave fa-fw mr-1'> </i>Salary Adjustment Management List</li>
             </ol>
           </nav>
-    <div class="form-row">
+    <div class="form-row mb-3">
         <div class='col-sm-1'>
             <label for="payroll_period" class="col-form-label pad">Status:</label>
         </div>
@@ -59,22 +67,7 @@
               <i class="fas fa-search-plus"></i> Generate                      
             </button>  
         <button type="button" class="btn btn-warning" id="salaryAdjEntry"><i class="fas fa-plus-circle"></i> Add New Salary Adjustment </button>                                              
-        </div>
-      <div class="col-md-1">
-            <select class="form-select" name="state" id="maxRows">
-                <option value="5000">ALL</option>                
-                 <option value="5">5</option>
-                 <option value="10">10</option>
-                 <option value="15">15</option>
-                 <option value="20">20</option>
-                 <option value="50">50</option>
-                 <option value="70">70</option>
-                 <option value="100">100</option>
-            </select> 
-        </div>          
-        <div class='col-md-4' >     
-            <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for employee salary..." title="Type in employee name">
-        </div>                                              
+        </div>                                            
     </div>  
 
     <div class="pt-1">
@@ -222,7 +215,16 @@
                                         <label class="control-label" for="remark">Remarks<span class="req">*</span></label>
                                         <input class="form-control" type="text"  id="remark" name="remark" placeholder="Remarks....">
                                     </div>
-                                </div>                                                                                  
+                                </div>  
+                                <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="stts">Status<span class="req">*</span></label>
+                                    <select type="select" class="form-select" id="stts" name="stts" >
+                                        <option value="Active">Active</option>
+                                        <option value="Inactive">Inactive</option>
+                                    </select>                                    
+                                </div>
+                            </div>                                                                                                                
                         </div> <!-- form row closing -->
                     </fieldset> 
 
@@ -243,6 +245,7 @@
 <script type="text/javascript">
 
 
+
      function generateEmpStatus()
     {
         document.getElementById("myDiv").style.display="block";
@@ -257,22 +260,10 @@
             },
             function(data) { 
                 $("#contents").html(data).show();
-                $("#allSalaryAdjList").tableExport({
-                    headers: true,
-                    footers: true,
-                    formats: ['xlsx'],
-                    filename: 'id',
-                    bootstrap: false,
-                    exportButtons: true,
-                    position: 'top',
-                    ignoreRows: null,
-                    ignoreCols: null,
-                    trimWhitespace: true,
-                    RTL: false,
-                    sheetname: 'SalaryAdjustmentEmployees'
-                });
-            $(".fa-file-export").remove();
-            $(".btn btn-primary").prepend('<i class="fas fa-file-export"></i>');      
+                $('#allSalaryAdjList').DataTable({
+                    pageLength : 5,
+                    lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']]
+                });     
                 document.getElementById("myDiv").style.display="none"; 
             }
             );
@@ -291,7 +282,7 @@
 
 
 
-    function editSalAdjModal(empcd,percutoff,descrip,amnts,rremark,inc,saladjid){
+    function editSalAdjModal(empcd,percutoff,descrip,amnts,rremark,inc,saladjid,stts){
           
         $('#updateSalAdj').modal('toggle');
 
@@ -309,7 +300,8 @@
 
         document.getElementById('remark').value =  rremark;
         document.getElementById('inc_de').value =  inc;  
-        document.getElementById('saladjid').value =  saladjid;          
+        document.getElementById('saladjid').value =  saladjid; 
+        document.getElementById('stts').value =  stts;          
                             
     }
 
@@ -328,56 +320,58 @@
         var amount = document.getElementById("amnt").value;
         var inc_decr = document.getElementById("inc_de").value;
         var remarks = document.getElementById("remark").value;  
-        var saladjid = document.getElementById("saladjid").value;  
+        var saladjid = document.getElementById("saladjid").value;
+        var status = document.getElementById("stts").value;  
 
 
         // console.log(saladjid);
         // return false;        
 
-        $('#contents').html('');
+$('#contents').html('');
 
-                        swal({
-                          title: "Are you sure?",
-                          text: "You want to update this employee salary adjustment details?",
-                          icon: "success",
-                          buttons: true,
-                          dangerMode: true,
-                        })
-                        .then((updateSlAdj) => {
-                          if (updateSlAdj) {
-                                $.post (
-                                    url,
-                                    {
-                                        action: 1,
-                                        emp_code: emp_code ,
-                                        period_from: period_from,
-                                        period_to: period_to,
-                                        description: description,
-                                        amount: amount,
-                                        inc_decr: inc_decr,               
-                                        remarks: remarks,
-                                        saladjid: saladjid 
-                                        
-                                    },
-                                    function(data) { 
-                                        swal({
-                                        title: "Success!", 
-                                        text: "Successfully updated employee salary adjustment detailss!", 
-                                        type: "success",
-                                        icon: "success",
-                                        }).then(function() {
-                                            location.href = '../salaryadjustment/salaryadjustmentlist_view.php';
-                                        });
+            swal({
+                title: "Are you sure?",
+                text: "You want to update this employee salary adjustment details?",
+                icon: "success",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((updateSlAdj) => {
+                if (updateSlAdj) {
+                    $.post (
+                        url,
+                        {
+                            action: 1,
+                            emp_code: emp_code ,
+                            period_from: period_from,
+                            period_to: period_to,
+                            description: description,
+                            amount: amount,
+                            inc_decr: inc_decr,               
+                            remarks: remarks,
+                            saladjid: saladjid,
+                            status: status 
+                            
+                        },
+                        function(data) { 
+                            swal({
+                            title: "Success!", 
+                            text: "Successfully updated employee salary adjustment detailss!", 
+                            type: "success",
+                            icon: "success",
+                            }).then(function() {
+                                location.href = '../salaryadjustment/salaryadjustmentlist_view.php';
+                            });
 
-                                }
-                                );
+                    }
+                    );
 
-                          } else {
-                            swal({text:"You cancel the updating of employee salary adjustment details!",icon:"error"});
-                          }
-                        });
-   
+                } else {
+                swal({text:"You cancel the updating of employee salary adjustment details!",icon:"error"});
                 }
+            });
+
+    }
     
 function myFunction() {
   var input, filter, table, tr, td, i, txtValue;
