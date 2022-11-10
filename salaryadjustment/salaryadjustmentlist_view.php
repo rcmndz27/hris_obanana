@@ -114,7 +114,7 @@
                                     <div class="form-group">
                                         <label class="control-label" for="period_cutoff">Period Cutoff<span class="req">*</span>
                                         </label>
-                                        <?php $dd->GenerateDisabledDropDown("ddcutoff", $mf->GetCutoffSalAdj("saladj")); ?>
+                                        <?php $dd->GenerateDisabledDropDown("ddcutoff", $mf->GetAllCutoffCO("payrollco")); ?>
                                     </div>
                                 </div> 
                                 <div class="col-lg-2">
@@ -154,7 +154,7 @@
             </div> <!-- modal dialog closing -->
         </div><!-- modal fade closing -->
 
-    <div class="modal fade" id="updateSalAdj" tabindex="-1" role="dialog" aria-labelledby="informationModalTitle"
+    <div class="modal fade" id="updatepayrollco" tabindex="-1" role="dialog" aria-labelledby="informationModalTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -175,7 +175,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="control-label" for="empcode">Employee Code<span class="req">*</span></label>
-                                        <input type="text" class="form-control" name="saladjid" id="saladjid" hidden>
+                                        <input type="text" class="form-control" name="payrollcoid" id="payrollcoid" hidden>
                                         <input type="text" class="form-control" name="empcode" id="empcode" readonly>
                                     </div>
                                 </div> 
@@ -190,7 +190,7 @@
                                     <div class="form-group">
                                         <label class="control-label" for="ddcut">Period Cutoff<span class="req">*</span>
                                         </label>
-                                        <?php $dd->GenerateDisabledDropDown("ddcut", $mf->GetCutoffSalAdj("saladj")); ?>
+                                        <?php $dd->GenerateDisabledDropDown("ddcut", $mf->GetAllCutoffCO("payrollco")); ?>
                                     </div>
                                 </div> 
                                 <div class="col-lg-2">
@@ -230,7 +230,7 @@
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Cancel</button>
-                                    <button type="button" class="btn btn-success" onclick="updateSalAdj()" ><i class="fas fa-check-circle"></i> Submit</button>
+                                    <button type="button" class="btn btn-success" onclick="updatepayrollco()" ><i class="fas fa-check-circle"></i> Submit</button>
                                 </div> 
                         </div> <!-- main body closing -->
                     </div> <!-- modal body closing -->
@@ -282,9 +282,9 @@
 
 
 
-    function editSalAdjModal(empcd,percutoff,descrip,amnts,rremark,inc,saladjid,stts){
+    function editpayrollcoModal(empcd,percutoff,descrip,amnts,rremark,inc,payrollcoid,stts){
           
-        $('#updateSalAdj').modal('toggle');
+        $('#updatepayrollco').modal('toggle');
 
         var hidful = document.getElementById('empcode');
         hidful.value =  empcd;   
@@ -300,13 +300,13 @@
 
         document.getElementById('remark').value =  rremark;
         document.getElementById('inc_de').value =  inc;  
-        document.getElementById('saladjid').value =  saladjid; 
+        document.getElementById('payrollcoid').value =  payrollcoid; 
         document.getElementById('stts').value =  stts;          
                             
     }
 
 
-     function updateSalAdj()
+     function updatepayrollco()
     {
 
         $("body").css("cursor", "progress");
@@ -320,11 +320,11 @@
         var amount = document.getElementById("amnt").value;
         var inc_decr = document.getElementById("inc_de").value;
         var remarks = document.getElementById("remark").value;  
-        var saladjid = document.getElementById("saladjid").value;
+        var payrollcoid = document.getElementById("payrollcoid").value;
         var status = document.getElementById("stts").value;  
 
 
-        // console.log(saladjid);
+        // console.log(payrollcoid);
         // return false;        
 
 $('#contents').html('');
@@ -349,7 +349,7 @@ $('#contents').html('');
                             amount: amount,
                             inc_decr: inc_decr,               
                             remarks: remarks,
-                            saladjid: saladjid,
+                            payrollcoid: payrollcoid,
                             status: status 
                             
                         },
