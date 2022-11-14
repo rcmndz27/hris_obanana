@@ -54,7 +54,7 @@ Class SalaryAdjList{
                 <td '.$onclick.'>' . round($result['amount'],2).'</td>                
                 <td '.$onclick.'>' . $result['remarks']. '</td>
                 <td '.$onclick.'>' . $result['emp_status']. '</td>';
-                echo'<td><button type="button" class="btn btn-info btn-sm" title="Edit/Update" onclick="editSalAdjModal('.$empcd.','.$percutoff.','.$descript.','.$amnt.','.$remark.','.$incdecr.','.$salaryadjid.','.$stts.')">
+                echo'<td><button type="button" class="btn btn-info btn-sm" title="Edit/Update" onclick="editpayrollcoModal('.$empcd.','.$percutoff.','.$descript.','.$amnt.','.$remark.','.$incdecr.','.$salaryadjid.','.$stts.')">
                                 <i class="fas fa-edit"></i>
                             </button></td>';
                 

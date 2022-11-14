@@ -286,18 +286,10 @@
           
         $('#updatepayrollco').modal('toggle');
 
-        var hidful = document.getElementById('empcode');
-        hidful.value =  empcd;   
-
-        var bnkt = document.getElementById('ddcut');
-        bnkt.value =  percutoff;  
-
-        var bno = document.getElementById('descript');
-        bno.value =  descrip;  
-
-        var pyrte = document.getElementById('amnt');
-        pyrte.value =  amnts;  
-
+        document.getElementById('empcode').value =  empcd;   
+        document.getElementById('ddcut').value =  percutoff;  
+        document.getElementById('descript').value =  descrip;  
+        document.getElementById('amnt').value =  amnts;  
         document.getElementById('remark').value =  rremark;
         document.getElementById('inc_de').value =  inc;  
         document.getElementById('payrollcoid').value =  payrollcoid; 
