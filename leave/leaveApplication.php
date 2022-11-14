@@ -195,7 +195,6 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                 $empcode = "'".$result['emp_code']."'";
                 echo '
                 <tr>
-                <tr>
                 <td id="ld'.$result['lv_rowid'].'">' . date('F d,Y', strtotime($result['date_from'])) . '</td>
                 <td>' . $result['fullname'] . '</td>
                 <td id="lt'.$result['lv_rowid'].'">' . $result['leavetype'] . '</td>
@@ -206,7 +205,7 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                 <td><button type="button" class="btn btn-info btn-sm mb-1" onclick="viewLeaveModal('.$datefl.','.$leavedesc.','.$leavetyp.','.$datefr.','.$dateto.','.$remark.','.$appdays.','.$appr_oved.','.$actlcnt.')" title="View Leave">
                                 <i class="fas fa-binoculars"></i>
                             </button>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="viewLeaveHistoryModal('.$leaveid.')" title="View Logs">
+                            <button type="button" class="btn btn-warning btn-sm mb-1" onclick="viewLeaveHistoryModal('.$leaveid.')" title="View Logs">
                                 <i class="fas fa-history"></i>
                             </button>                        
                             </td>';
@@ -279,7 +278,7 @@ public function GetAllLeaveHistory($date_from,$date_to,$status){
                 <td><button type="button" class="btn btn-info btn-sm mb-1" onclick="viewLeaveModal('.$datefl.','.$leavedesc.','.$leavetyp.','.$datefr.','.$dateto.','.$remark.','.$appdays.','.$appr_oved.','.$actlcnt.')" title="View Leave">
                                 <i class="fas fa-binoculars"></i>
                             </button>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="viewLeaveHistoryModal('.$leaveid.')" title="View Logs">
+                            <button type="button" class="btn btn-warning btn-sm mb-1" onclick="viewLeaveHistoryModal('.$leaveid.')" title="View Logs">
                                 <i class="fas fa-history"></i>
                             </button>                        
                             </td>';
