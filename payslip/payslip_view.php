@@ -52,7 +52,7 @@ else
             </select>
             <label class="control-label pad" for="dateTo">Payroll Period::</label>
             <div class="col-md-3">
-                    <?php $dd->GenerateDropDown("ddcutoff", $mf->GetTKList("tkview")); ?>
+                    <?php $dd->GenerateSingleDropDown("ddcutoff", $mf->GetAllCutoffCO("payrollco")); ?>
             </div>
             <div class="col-md-2">
                 <button type="button" id="search" class="btn btn-warning" onclick="genePayrl()" ><i class="fas fa-search-plus mr-1"></i>Generate                    
