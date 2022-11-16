@@ -92,7 +92,7 @@ else
         $('#expdf').show();
         document.getElementById("myDiv").style.display="block";
         var url = "../payslip/payslips_process.php";
-        var cutoff = $('#ddcutoff').children("option:selected").val();
+        var cutoff = $('#ddcutoff').find(":selected").text();
         var dates = cutoff.split(" - ");
         var empCode = $('#empCode').children("option:selected").val();
 
@@ -112,7 +112,7 @@ else
 
     function generatePDF() {
 
-            var cutoff = $('#ddcutoff').children("option:selected").val();
+            var cutoff = $('#ddcutoff').find(":selected").text();
             var dates = cutoff.split(" - ");
             html2canvas(document.getElementById('payslipsList'), {
             onrendered: function (canvas) {
