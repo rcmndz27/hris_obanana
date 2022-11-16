@@ -38,6 +38,7 @@ $(function(){
                     $('#dtrList').DataTable({
                         pageLength : 12,
                         lengthMenu: [[12, 24, 36, -1], [12, 24, 36, 'All']],
+                        sorting : [ [0,'DESC'] ],
                         dom: 'Bfrtip',
                         buttons: [
                             'pageLength',
