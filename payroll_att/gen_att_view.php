@@ -89,7 +89,7 @@ else
                                 </div>
                                 <div class="col-lg-7">
                                     <div class="form-group">
-                                        <?php $dd->GenerateDropDown("ungenpco", $mf->GetAllCutoffCO("payrollco")); ?>
+                                        <?php $dd->GenerateDropDown("ungenpco", $mf->GetUnGenPayrollCutoff("ungenpco")); ?>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
